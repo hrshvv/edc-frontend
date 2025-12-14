@@ -56,8 +56,87 @@ const Events = () => {
     },
   ];
 
+  const event4Gallery = [
+    {
+      id: 1,
+      image:
+        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1765715252/1000028361_ozaax3.jpg',
+    },
+    {
+      id: 2,
+      image:
+        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1765715252/_storage_emulated_0_DCIM_Camera_IMG_20251103_143212_jtlivr.jpg',
+    },
+    {
+      id: 3,
+      image:
+        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1765715251/IMG_20251103_144121_hpblfo.jpg',
+    },
+    // Add more images here
+  ];
+
+  const event5Gallery = [
+    {
+      id: 1,
+      image:
+        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1765716082/DSC_0267_1_wdba99.jpg',
+    },
+    {
+      id: 2,
+      image:
+        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1765716088/DSC_0259_1_daky5n.jpg',
+    },
+    {
+      id: 3,
+      image:
+        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1765716094/DSC_0269_1_s1aqyd.jpg',
+    },
+    {
+      id: 4,
+      image:
+        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1765716262/DSC_0256_2_r7ydrv.jpg',
+    },
+    // Add more images here
+  ];
+
   // Past events with detailed information
   const pastEvents = [
+    {
+      id: 5,
+      title: 'LinkedIn Workshop',
+      description:
+        'The LinkedIn Workshop was an interactive session aimed at helping first-year students build a strong and professional digital presence. The workshop focused on optimizing LinkedIn profiles, understanding personal branding, and using the platform effectively for networking and career growth. Students learned how to showcase their skills, experiences, and achievements in a way that attracts recruiters and opportunities. Overall, the session provided practical guidance to confidently step into the professional world with a well-crafted LinkedIn profile.',
+      image:
+        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1765714638/Screenshot_2025-12-14_174705_rcvjzy.png',
+      date: '2025-11-19',
+      location: 'AB-3 Room-501',
+      attendees: '50+',
+      category: 'Event',
+      highlights: [
+        'LinkedIn profile building basics',
+        'Personal branding tips',
+        'Creating a strong digital presence',
+        'Career-focused networking skills',
+      ],
+    },
+    {
+      id: 4,
+      title: 'Expext Talk',
+      description:
+        "The Expert Talk on Stock Market, Finance, and Investing was an insightful session designed to help students understand the basics of investing and navigate the volatility of financial markets with confidence. The speaker shared practical knowledge on how the stock market works, explained key financial concepts in a simple way, and discussed effective strategies for making informed investment decisions. The session focused on developing a disciplined mindset, managing risks, and understanding market trends, making it especially useful for beginners who want to start their investing journey. Overall, the talk empowered students with financial awareness and a clearer perspective on smart investing in today's dynamic market.",
+      image:
+        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1765714147/Screenshot_2025-12-14_173753_fgjulh.png',
+      date: '2025-11-03',
+      location: 'AB-3 Room-113',
+      attendees: '50+',
+      category: 'Networking',
+      highlights: [
+        'Basics of stock market and investing',
+        'Understanding market ups and downs',
+        'Smart investing tips for beginners',
+        'Long-term wealth mindset',
+      ],
+    },
     {
       id: 1,
       title: 'EDCxEureka! Road to Enterprise 2025',
@@ -90,7 +169,7 @@ const Events = () => {
       winner: null,
       category: 'Networking',
       highlights: [
-        'Introduction to EDC’s vision, mission, and yearly activities.',
+        "Introduction to EDC's vision, mission, and yearly activities.",
         'Inspiring talks encouraging students to explore entrepreneurship.',
         'Interaction between new members and the EDC core team.',
         'Conducted on 5th August 2025 at 2 PM in MPH',
@@ -206,8 +285,11 @@ const Events = () => {
                         {event.description}
                       </p>
 
-                      {/* Infinite Moving Cards for events 1 and 2 */}
-                      {(event.id === 1 || event.id === 2) && (
+                      {/* Infinite Moving Cards for events 1, 2, 4, and 5 */}
+                      {(event.id === 1 ||
+                        event.id === 2 ||
+                        event.id === 4 ||
+                        event.id === 5) && (
                         <div className="mb-8 sm:mb-10 md:mb-12 -mx-8 sm:-mx-12 md:-mx-16 lg:-mx-20 xl:-mx-24 2xl:-mx-32">
                           <div className="text-center mb-4 sm:mb-6 px-8 sm:px-12 md:px-16 lg:px-20 xl:px-24 2xl:px-32">
                             <h4 className="text-lg sm:text-xl font-semibold text-white">
@@ -217,7 +299,13 @@ const Events = () => {
                           <div className="h-[15rem] sm:h-[18rem] md:h-[20rem] w-full rounded-md flex flex-col antialiased bg-black items-center justify-center relative overflow-hidden">
                             <InfiniteMovingCards
                               items={
-                                event.id === 1 ? event1Gallery : event2Gallery
+                                event.id === 1
+                                  ? event1Gallery
+                                  : event.id === 2
+                                    ? event2Gallery
+                                    : event.id === 4
+                                      ? event4Gallery
+                                      : event5Gallery
                               }
                               direction="right"
                               speed="slow"
