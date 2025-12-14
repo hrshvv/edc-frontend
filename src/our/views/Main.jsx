@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Spotlight } from '@/components/ui/spotlight';
 import { FlipWords } from '@/components/ui/flip-words';
@@ -38,6 +39,7 @@ import { MdDesignServices, MdEvent, MdCampaign } from 'react-icons/md';
 
 const Main = () => {
   const [isShopPopupOpen, setIsShopPopupOpen] = useState(false);
+  const navigate = useNavigate();
 
   const scrollToTimeline = () => {
     const timelineSection = document.querySelector('#timeline-section');
@@ -549,74 +551,7 @@ const Main = () => {
 
           {/* Events Cards */}
           <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-6 xl:gap-8 max-w-7xl mx-auto">
-            <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
-              <TiltedCard
-                imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1759080883/Recruitment_20250918_114625_0000_vaz5rz.png"
-                altText="EDC Recruitment Drive 2025"
-                captionText="EDC Recruitment Drive 2025"
-                containerHeight="400px"
-                containerWidth="100%"
-                imageHeight="400px"
-                imageWidth="100%"
-                rotateAmplitude={8}
-                scaleOnHover={1.1}
-                showMobileWarning={false}
-                showTooltip={true}
-                displayOverlayContent={true}
-              />
-            </div>
-
-            <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
-              <TiltedCard
-                imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1759080881/EDC_JSS_UNI_nviwol.png"
-                altText="Group Discussion"
-                captionText="Group Discussion"
-                containerHeight="400px"
-                containerWidth="100%"
-                imageHeight="400px"
-                imageWidth="100%"
-                rotateAmplitude={8}
-                scaleOnHover={1.1}
-                showMobileWarning={false}
-                showTooltip={true}
-                displayOverlayContent={true}
-              />
-            </div>
-
-            <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
-              <TiltedCard
-                imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1759080883/WhatsApp_Image_2025-09-28_at_22.00.24_4f14c6fe_sazknc.jpg"
-                altText="EDCxEureka"
-                captionText="EDCxEureka"
-                containerHeight="400px"
-                containerWidth="100%"
-                imageHeight="400px"
-                imageWidth="100%"
-                rotateAmplitude={8}
-                scaleOnHover={1.1}
-                showMobileWarning={false}
-                showTooltip={true}
-                displayOverlayContent={true}
-              />
-            </div>
-
-            <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
-              <TiltedCard
-                imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1759080882/WhatsApp_Image_2025-09-28_at_22.01.37_a5399f7c_w0jn1f.jpg"
-                altText="Orientation Program 2025"
-                captionText="Orientation Program 2025"
-                containerHeight="400px"
-                containerWidth="100%"
-                imageHeight="400px"
-                imageWidth="100%"
-                rotateAmplitude={8}
-                scaleOnHover={1.1}
-                showMobileWarning={false}
-                showTooltip={true}
-                displayOverlayContent={true}
-              />
-            </div>
-
+            {/* 1. LinkedIn Workshop */}
             <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
               <TiltedCard
                 imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1765714638/Screenshot_2025-12-14_174705_rcvjzy.png"
@@ -631,14 +566,92 @@ const Main = () => {
                 showMobileWarning={false}
                 showTooltip={true}
                 displayOverlayContent={true}
+                onClick={() => navigate('/events#event-5')}
               />
             </div>
 
+            {/* 2. Expert Talk */}
             <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
               <TiltedCard
                 imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1765714147/Screenshot_2025-12-14_173753_fgjulh.png"
                 altText="Expert Talk"
                 captionText="Expert Talk"
+                containerHeight="400px"
+                containerWidth="100%"
+                imageHeight="400px"
+                imageWidth="100%"
+                rotateAmplitude={8}
+                scaleOnHover={1.1}
+                showMobileWarning={false}
+                showTooltip={true}
+                displayOverlayContent={true}
+                onClick={() => navigate('/events#event-4')}
+              />
+            </div>
+
+            {/* 3. EDCxEureka! Road to Enterprise 2025 */}
+            <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
+              <TiltedCard
+                imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1759080883/WhatsApp_Image_2025-09-28_at_22.00.24_4f14c6fe_sazknc.jpg"
+                altText="EDCxEureka"
+                captionText="EDCxEureka"
+                containerHeight="400px"
+                containerWidth="100%"
+                imageHeight="400px"
+                imageWidth="100%"
+                rotateAmplitude={8}
+                scaleOnHover={1.1}
+                showMobileWarning={false}
+                showTooltip={true}
+                displayOverlayContent={true}
+                onClick={() => navigate('/events#event-1')}
+              />
+            </div>
+
+            {/* 4. Orientation Programme 2025 */}
+            <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
+              <TiltedCard
+                imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1759080882/WhatsApp_Image_2025-09-28_at_22.01.37_a5399f7c_w0jn1f.jpg"
+                altText="Orientation Program 2025"
+                captionText="Orientation Program 2025"
+                containerHeight="400px"
+                containerWidth="100%"
+                imageHeight="400px"
+                imageWidth="100%"
+                rotateAmplitude={8}
+                scaleOnHover={1.1}
+                showMobileWarning={false}
+                showTooltip={true}
+                displayOverlayContent={true}
+                onClick={() => navigate('/events#event-2')}
+              />
+            </div>
+
+            {/* 5. Group Discussion */}
+            <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
+              <TiltedCard
+                imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1759080881/EDC_JSS_UNI_nviwol.png"
+                altText="Group Discussion"
+                captionText="Group Discussion"
+                containerHeight="400px"
+                containerWidth="100%"
+                imageHeight="400px"
+                imageWidth="100%"
+                rotateAmplitude={8}
+                scaleOnHover={1.1}
+                showMobileWarning={false}
+                showTooltip={true}
+                displayOverlayContent={true}
+                onClick={() => navigate('/events#event-3')}
+              />
+            </div>
+
+            {/* 6. Recruitment Drive */}
+            <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
+              <TiltedCard
+                imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1759080883/Recruitment_20250918_114625_0000_vaz5rz.png"
+                altText="EDC Recruitment Drive 2025"
+                captionText="EDC Recruitment Drive 2025"
                 containerHeight="400px"
                 containerWidth="100%"
                 imageHeight="400px"

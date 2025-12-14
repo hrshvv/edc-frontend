@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Footer from '../components/Footer';
 import PixelCard from '../../components/PixelCard';
 import { InfiniteMovingCards } from '../../components/ui/infinite-moving-cards';
@@ -206,6 +207,33 @@ const Events = () => {
     });
   };
 
+  const location = useLocation();
+
+  // Scroll to specific event when hash is present in URL
+  useEffect(() => {
+    if (location.hash) {
+      const eventId = location.hash.replace('#event-', '');
+      const eventElement = document.getElementById(`event-${eventId}`);
+      if (eventElement) {
+        // Delay to ensure page is rendered and ScrollToTop has finished
+        setTimeout(() => {
+          const offset = 100; // Offset for navbar
+          const elementPosition = eventElement.offsetTop - offset;
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth',
+          });
+          // Add a highlight effect
+          eventElement.style.transition = 'box-shadow 0.3s ease';
+          eventElement.style.boxShadow = '0 0 30px rgba(5, 177, 222, 0.5)';
+          setTimeout(() => {
+            eventElement.style.boxShadow = '';
+          }, 2000);
+        }, 300);
+      }
+    }
+  }, [location.hash]);
+
   return (
     <div className="min-h-screen bg-white dark:bg-black pt-16 sm:pt-20">
       {/* Hero Section */}
@@ -245,7 +273,7 @@ const Events = () => {
           {/* Past Events Grid */}
           <div className="space-y-8 sm:space-y-12 md:space-y-16">
             {pastEvents.map((event, index) => (
-              <div key={event.id}>
+              <div key={event.id} id={`event-${event.id}`}>
                 <div className="flex justify-center">
                   {/* Event Details */}
                   <div className="w-full max-w-4xl">
