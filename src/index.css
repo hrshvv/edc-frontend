@@ -154,3 +154,13 @@ body {
     bottom: 1.5rem;
   }
 }
+
+/* Hide scrollbar for image scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
