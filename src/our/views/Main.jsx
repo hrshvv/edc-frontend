@@ -10,6 +10,7 @@ import {
 import Footer from '../components/Footer';
 import TiltedCard from '@/components/TiltedCard';
 import AestheticCard from '@/components/AestheticCard';
+import ImageScroll from '@/components/ImageScroll';
 
 import {
   FaCode,
@@ -53,7 +54,7 @@ const Main = () => {
   return (
     <div>
       {/* Spotlight Section */}
-      <div className="relative flex min-h-screen-mobile w-full overflow-hidden rounded-md bg-white dark:bg-black antialiased items-center justify-center px-2 sm:px-4">
+      <div className="relative flex min-h-[70vh] sm:min-h-[85vh] md:min-h-screen w-full overflow-hidden rounded-md bg-white dark:bg-black antialiased items-center justify-center px-2 sm:px-4">
         <div
           className={cn(
             'pointer-events-none absolute inset-0 [background-size:20px_20px] sm:[background-size:30px_30px] md:[background-size:40px_40px] select-none',
@@ -102,6 +103,22 @@ const Main = () => {
           </button>
         </div>
       </div>
+
+      {/* Image Scroll Section */}
+      <ImageScroll
+        images={[
+          {
+            src: '/images/1.jpg',
+            alt: 'Image 1',
+            caption: '',
+          },
+          {
+            src: '/images/2.png',
+            alt: 'Image 2',
+            caption: '',
+          },
+        ]}
+      />
 
       {/* Timeline Section */}
       <div
