@@ -548,7 +548,7 @@ const Main = () => {
           </div>
 
           {/* Events Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-6 xl:gap-8 justify-items-center max-w-7xl mx-auto">
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-6 xl:gap-8 max-w-7xl mx-auto">
             <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
               <TiltedCard
                 imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1759080883/Recruitment_20250918_114625_0000_vaz5rz.png"
@@ -605,6 +605,40 @@ const Main = () => {
                 imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1759080882/WhatsApp_Image_2025-09-28_at_22.01.37_a5399f7c_w0jn1f.jpg"
                 altText="Orientation Program 2025"
                 captionText="Orientation Program 2025"
+                containerHeight="400px"
+                containerWidth="100%"
+                imageHeight="400px"
+                imageWidth="100%"
+                rotateAmplitude={8}
+                scaleOnHover={1.1}
+                showMobileWarning={false}
+                showTooltip={true}
+                displayOverlayContent={true}
+              />
+            </div>
+
+            <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
+              <TiltedCard
+                imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1765714638/Screenshot_2025-12-14_174705_rcvjzy.png"
+                altText="LinkedIn Workshop"
+                captionText="LinkedIn Workshop"
+                containerHeight="400px"
+                containerWidth="100%"
+                imageHeight="400px"
+                imageWidth="100%"
+                rotateAmplitude={8}
+                scaleOnHover={1.1}
+                showMobileWarning={false}
+                showTooltip={true}
+                displayOverlayContent={true}
+              />
+            </div>
+
+            <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
+              <TiltedCard
+                imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1765714147/Screenshot_2025-12-14_173753_fgjulh.png"
+                altText="Expert Talk"
+                captionText="Expert Talk"
                 containerHeight="400px"
                 containerWidth="100%"
                 imageHeight="400px"
