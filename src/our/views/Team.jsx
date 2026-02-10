@@ -65,7 +65,7 @@ const Team = () => {
       name: 'Utkarsh Srivastava',
       role: 'Technical Team Head',
       image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1757105141/Utkarsh_Srivastava_ahasfc.jpg',
+        'https://res.cloudinary.com/dpphtbawg/image/upload/v1770752268/utkarsh-srivastava_dh0rfz.jpg',
       department: 'Technical Team',
       instagram: 'https://www.instagram.com/utkarshsri1139/',
       linkedin: 'https://www.linkedin.com/in/utkarshsri1139/',
@@ -95,7 +95,7 @@ const Team = () => {
       name: 'Sahal Parvez',
       role: 'Outreach Team Head',
       image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1758477686/parvez_zzfiz9.jpg',
+        'https://res.cloudinary.com/dpphtbawg/image/upload/v1770752688/sahal_profile_ljwo5g.png',
       department: 'Outreach Team',
       instagram: '',
       linkedin: '',
