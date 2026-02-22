@@ -20,6 +20,8 @@ function App() {
           <Route path="/team" element={<Team />} />
           <Route path="/events" element={<Events />} />
           <Route path="/about" element={<About />} />
+          <Route path="/test" element={<div>test route</div>} />
+          
         </Routes>
       </div>
     </Router>
