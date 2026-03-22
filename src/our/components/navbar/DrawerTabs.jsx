@@ -11,8 +11,9 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer';
 import { Button } from '@/components/ui/button';
-import { MenuIcon, X, Home, Users2, CalendarDays, Info } from 'lucide-react';
+import { MenuIcon, X, Home, Users2, CalendarDays, Info, Rocket } from 'lucide-react';
 import Logo from './Logo';
+import UpcomingEventButton from './UpcomingEventButton';
 
 const navButtonBase =
   'justify-start w-full h-11 px-3 rounded-lg transition-all hover:translate-x-0.5 hover:bg-accent/60 hover:text-accent-foreground';
@@ -51,6 +52,7 @@ const DrawerTabs = () => {
               </Button>
             </Link>
           </DrawerClose>
+
           <DrawerClose asChild>
             <Link to="/events">
               <Button variant="ghost" className={navButtonBase}>
@@ -65,7 +67,30 @@ const DrawerTabs = () => {
               </Button>
             </Link>
           </DrawerClose>
+          <DrawerClose asChild>
+            <Button
+              className="mt-2 w-full bg-[#05B1DE] hover:bg-[#04a0c7] text-white font-semibold py-6 rounded-xl transition-all duration-300 shadow-[0_0_15px_#05B1DE/20] hover:shadow-[0_0_20px_#05B1DE/40]"
+              onClick={() => {
+                const footer = document.getElementById('footer');
+                if (footer) {
+                  footer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  setTimeout(() => {
+                    const socialLinks = document.querySelectorAll('.social-link');
+                    socialLinks.forEach((link, idx) => {
+                      setTimeout(() => {
+                        link.classList.add('highlight-social');
+                        setTimeout(() => link.classList.remove('highlight-social'), 1000);
+                      }, idx * 200);
+                    });
+                  }, 500);
+                }
+              }}
+            >
+              Connect with us
+            </Button>
+          </DrawerClose>
         </div>
+
 
         <DrawerFooter className="px-4 pb-4">
           <DrawerClose className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background/70 hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 has-[>svg]:px-3">

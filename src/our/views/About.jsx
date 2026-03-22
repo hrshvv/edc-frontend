@@ -1,18 +1,8 @@
 import React from 'react';
-import { FlipWords } from '../../components/ui/flip-words';
 import { CardSpotlight } from '@/components/ui/card-spotlight';
 import Footer from '../components/Footer';
 
 const About = () => {
-  const words = [
-    'Innovation',
-    'Creativity',
-    'Entrepreneurship',
-    'Growth',
-    'Success',
-    'Future',
-  ];
-
   return (
     <div className="min-h-screen bg-white dark:bg-black">
       {/* Hero Section with Speaker/Audience Background */}

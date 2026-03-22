@@ -42,6 +42,8 @@ body {
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --success: hsl(142.1 70.6% 45.3%);
+  --success-foreground: hsl(0 0% 100%);
 }
 
 /* Base styles */
@@ -166,4 +168,30 @@ body {
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+@theme inline {
+  --animate-flip: flip 6s infinite steps(2, end);
+  --animate-rotate: rotate 3s linear infinite both;
+  --color-success-foreground: var(----success-foreground);
+  --color-success: var(----success);
+  @keyframes flip {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes rotate {
+    to {
+      transform: rotate(90deg);
+    }
+  }
+  --animate-shadanim: shadanim 15s linear infinite;
+  @keyframes shadanim {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 100% 100%;
+    }
+  }
 }
