@@ -17,6 +17,7 @@
     "@radix-ui/react-slot": "^1.2.4",
     "@react-three/fiber": "^9.0.0-alpha.8",
     "@tailwindcss/vite": "^4.1.11",
+    "axios": "^1.13.6",
     "canvas-confetti": "^1.9.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -36,7 +37,8 @@
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.11",
     "three": "^0.179.1",
-    "vaul": "^1.1.2"
+    "vaul": "^1.1.2",
+    "zustand": "^5.0.12"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
