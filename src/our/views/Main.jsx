@@ -593,7 +593,7 @@ const Main = () => {
                 showMobileWarning={false}
                 showTooltip={true}
                 displayOverlayContent={true}
-                onClick={() => navigate('/events#event-5')}
+                onClick={() => navigate('/events/linkedin-workshop')}
               />
             </div>
 
@@ -612,7 +612,7 @@ const Main = () => {
                 showMobileWarning={false}
                 showTooltip={true}
                 displayOverlayContent={true}
-                onClick={() => navigate('/events#event-4')}
+                onClick={() => navigate('/events/expert-talk')}
               />
             </div>
 
@@ -631,7 +631,7 @@ const Main = () => {
                 showMobileWarning={false}
                 showTooltip={true}
                 displayOverlayContent={true}
-                onClick={() => navigate('/events#event-1')}
+                onClick={() => navigate('/events/eureka-road-to-enterprise-2025')}
               />
             </div>
 
@@ -650,7 +650,7 @@ const Main = () => {
                 showMobileWarning={false}
                 showTooltip={true}
                 displayOverlayContent={true}
-                onClick={() => navigate('/events#event-2')}
+                onClick={() => navigate('/events/orientation-programme-2025')}
               />
             </div>
 
@@ -669,7 +669,7 @@ const Main = () => {
                 showMobileWarning={false}
                 showTooltip={true}
                 displayOverlayContent={true}
-                onClick={() => navigate('/events#event-3')}
+                onClick={() => navigate('/events/group-discussion')}
               />
             </div>
 

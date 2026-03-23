@@ -1,463 +1,375 @@
-import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import Footer from '../components/Footer';
-import PixelCard from '../../components/PixelCard';
-import { InfiniteMovingCards } from '../../components/ui/infinite-moving-cards';
+import { eventsData, formatDate, getCategoryColor } from '../data/eventsData';
 
-const Events = () => {
-  // Event gallery images for each event
-  const event1Gallery = [
-    {
-      id: 1,
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1759387732/IMG_5645_nibiiw.jpg',
-    },
-    {
-      id: 2,
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1759387730/IMG_5637_k7kyxu.jpg',
-    },
-    {
-      id: 3,
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1759387729/IMG_4329_ro2uaf.jpg',
-    },
-    {
-      id: 4,
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1759387727/IMG_4289_zezr74.jpg',
-    },
-    {
-      id: 5,
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1759387727/IMG_4300_yxfszd.jpg',
-    },
-  ];
+// Event Card Component
+const EventCard = ({ event, index }) => {
+  const navigate = useNavigate();
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const cardRef = useRef(null);
+  const colors = getCategoryColor(event.category);
 
-  const event2Gallery = [
-    {
-      id: 1,
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1759396434/20250805_145633_etlf36.jpg',
-    },
-    {
-      id: 2,
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1759396434/20250805_143104_plm2v0.jpg',
-    },
-    {
-      id: 3,
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1759396434/20250805_142633_fkc2dh.jpg',
-    },
-    {
-      id: 4,
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1758992936/WhatsApp_Image_2025-09-27_at_20.01.31_04f0779d_jwq8kg.png',
-    },
-  ];
-
-  const event4Gallery = [
-    {
-      id: 1,
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1765715252/1000028361_ozaax3.jpg',
-    },
-    {
-      id: 2,
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1765715252/_storage_emulated_0_DCIM_Camera_IMG_20251103_143212_jtlivr.jpg',
-    },
-    {
-      id: 3,
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1765715251/IMG_20251103_144121_hpblfo.jpg',
-    },
-    // Add more images here
-  ];
-
-  const event5Gallery = [
-    {
-      id: 1,
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1765716082/DSC_0267_1_wdba99.jpg',
-    },
-    {
-      id: 2,
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1765716088/DSC_0259_1_daky5n.jpg',
-    },
-    {
-      id: 3,
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1765716094/DSC_0269_1_s1aqyd.jpg',
-    },
-    {
-      id: 4,
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1765716262/DSC_0256_2_r7ydrv.jpg',
-    },
-    // Add more images here
-  ];
-
-  // Past events with detailed information
-  const pastEvents = [
-    {
-      id: 5,
-      title: 'LinkedIn Workshop',
-      description:
-        'The LinkedIn Workshop was an interactive session aimed at helping first-year students build a strong and professional digital presence. The workshop focused on optimizing LinkedIn profiles, understanding personal branding, and using the platform effectively for networking and career growth. Students learned how to showcase their skills, experiences, and achievements in a way that attracts recruiters and opportunities. Overall, the session provided practical guidance to confidently step into the professional world with a well-crafted LinkedIn profile.',
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1765714638/Screenshot_2025-12-14_174705_rcvjzy.png',
-      date: '2025-11-19',
-      location: 'AB-3 Room-501',
-      attendees: '50+',
-      category: 'Event',
-      highlights: [
-        'LinkedIn profile building basics',
-        'Personal branding tips',
-        'Creating a strong digital presence',
-        'Career-focused networking skills',
-      ],
-    },
-    {
-      id: 4,
-      title: 'Expext Talk',
-      description:
-        "The Expert Talk on Stock Market, Finance, and Investing was an insightful session designed to help students understand the basics of investing and navigate the volatility of financial markets with confidence. The speaker shared practical knowledge on how the stock market works, explained key financial concepts in a simple way, and discussed effective strategies for making informed investment decisions. The session focused on developing a disciplined mindset, managing risks, and understanding market trends, making it especially useful for beginners who want to start their investing journey. Overall, the talk empowered students with financial awareness and a clearer perspective on smart investing in today's dynamic market.",
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1765714147/Screenshot_2025-12-14_173753_fgjulh.png',
-      date: '2025-11-03',
-      location: 'AB-3 Room-113',
-      attendees: '50+',
-      category: 'Networking',
-      highlights: [
-        'Basics of stock market and investing',
-        'Understanding market ups and downs',
-        'Smart investing tips for beginners',
-        'Long-term wealth mindset',
-      ],
-    },
-    {
-      id: 1,
-      title: 'EDCxEureka! Road to Enterprise 2025',
-      description:
-        'Eureka! Road to Enterprise 2025, organized under the National Entrepreneurship Challenge 2025 by E-Cell IIT Bombay, was successfully conducted at JSS University, Noida. The event served as a dynamic platform for aspiring innovators and entrepreneurs to pitch their ideas, gain mentorship, and take the first step toward building impactful startups. It inspired participants to think big, step up, and make their ideas heard.',
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1759080883/WhatsApp_Image_2025-09-28_at_22.00.24_4f14c6fe_sazknc.jpg',
-      date: '2025-08-20',
-      location: 'AB-3 Room-113',
-      attendees: '80+',
-      winner: '🥇 Team Legoal <br/>🥈 Team Cronoz <br/>🥉 Team Zenminds',
-      category: 'Competition',
-      highlights: [
-        'Students pitched their innovative startup ideas.',
-        'Interactive discussions on entrepreneurship and innovation.',
-        'Collaboration with E-Cell IIT Bombay under NEC 2025.',
-        'Top ideas received recognition and valuable feedback.',
-      ],
-    },
-    {
-      id: 2,
-      title: 'Orientation Programme 2025',
-      description:
-        'The EDC Orientation Programme marked the beginning of a new entrepreneurial journey for the students of JSS University, Noida. The session introduced freshers to the vision, initiatives, and opportunities provided by the Entrepreneurship Development Cell (EDC), inspiring them to take their first step into the world of startups and innovation.',
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1759080882/WhatsApp_Image_2025-09-28_at_22.01.37_a5399f7c_w0jn1f.jpg',
-      date: '2025-08-05',
-      location: 'MPH',
-      attendees: '150+',
-      winner: null,
-      category: 'Networking',
-      highlights: [
-        "Introduction to EDC's vision, mission, and yearly activities.",
-        'Inspiring talks encouraging students to explore entrepreneurship.',
-        'Interaction between new members and the EDC core team.',
-        'Conducted on 5th August 2025 at 2 PM in MPH',
-      ],
-    },
-    {
-      id: 3,
-      title: 'Group Discussion',
-      description:
-        'The Group Discussion organized by EDC JSSUNI under the National Entrepreneurship Challenge 2025 provided a platform for students to express their views on Entrepreneurship Problems on Campus. It encouraged open dialogue, critical thinking, and teamwork among participants while promoting entrepreneurial awareness within the university.',
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1759080881/EDC_JSS_UNI_nviwol.png',
-      date: '2025-09-14',
-      location: 'Online',
-      attendees: 10,
-      winner: null,
-      category: 'Networking',
-      highlights: [
-        'Insightful discussion on challenges faced by student entrepreneurs.',
-        'Active participation from students across different departments.',
-        'Conducted online on 14th September 2025 at 9:00 PM.',
-        'Top participants received appreciation for their valuable inputs',
-      ],
-    },
-  ];
-
-  // Format date for display
-  const formatDate = dateString => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
+  const handleClick = () => {
+    navigate(`/events/${event.slug}`);
   };
 
-  const location = useLocation();
+  return (
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="group cursor-pointer"
+      onClick={handleClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div
+        className="relative rounded-2xl overflow-hidden transition-all duration-500"
+        style={{
+          background: 'linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: isHovered
+            ? '0 25px 60px -12px rgba(5, 177, 222, 0.25), 0 0 40px -10px rgba(5, 177, 222, 0.15)'
+            : '0 4px 24px -4px rgba(0, 0, 0, 0.3)',
+          transform: isHovered ? 'translateY(-8px)' : 'translateY(0)',
+        }}
+      >
+        {/* Poster Image with blurred background fill */}
+        <div className="relative overflow-hidden aspect-[4/3]">
+          {/* Blurred background fill — scaled up poster to fill gaps */}
+          <img
+            src={event.poster}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover scale-110"
+            style={{ filter: 'blur(25px) brightness(0.4) saturate(1.3)', opacity: imageLoaded ? 1 : 0 }}
+          />
+          {/* Dark overlay on blurred bg */}
+          <div className="absolute inset-0 bg-black/30" />
 
-  // Scroll to specific event when hash is present in URL
-  useEffect(() => {
-    if (location.hash) {
-      const eventId = location.hash.replace('#event-', '');
-      const eventElement = document.getElementById(`event-${eventId}`);
-      if (eventElement) {
-        // Delay to ensure page is rendered and ScrollToTop has finished
-        setTimeout(() => {
-          const offset = 100; // Offset for navbar
-          const elementPosition = eventElement.offsetTop - offset;
-          window.scrollTo({
-            top: elementPosition,
-            behavior: 'smooth',
-          });
-          // Add a highlight effect
-          eventElement.style.transition = 'box-shadow 0.3s ease';
-          eventElement.style.boxShadow = '0 0 30px rgba(5, 177, 222, 0.5)';
-          setTimeout(() => {
-            eventElement.style.boxShadow = '';
-          }, 2000);
-        }, 300);
-      }
-    }
-  }, [location.hash]);
+          {/* Skeleton loader */}
+          {!imageLoaded && (
+            <div className="absolute inset-0 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 animate-pulse" />
+          )}
+
+          {/* Actual poster — contained, centered */}
+          <div className="relative flex items-center justify-center w-full h-full p-3 z-10">
+            <img
+              src={event.poster}
+              alt={event.title}
+              className="max-w-full max-h-full rounded-lg transition-transform duration-700 ease-out"
+              style={{
+                objectFit: 'contain',
+                transform: isHovered ? 'scale(1.04)' : 'scale(1)',
+                opacity: imageLoaded ? 1 : 0,
+              }}
+              onLoad={() => setImageLoaded(true)}
+              loading="lazy"
+            />
+          </div>
+
+          {/* Category badge */}
+          <div
+            className="absolute top-3 left-3 z-20 px-3 py-1 rounded-full text-xs font-semibold tracking-wide backdrop-blur-md transition-all duration-300"
+            style={{
+              background: colors.bg,
+              color: colors.text,
+              border: `1px solid ${colors.border}`,
+              backdropFilter: 'blur(12px)',
+            }}
+          >
+            {event.category}
+          </div>
+
+          {/* Gallery indicator */}
+          {event.gallery && event.gallery.length > 0 && (
+            <div
+              className="absolute top-3 right-3 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium backdrop-blur-md"
+              style={{
+                background: 'rgba(255,255,255,0.1)',
+                border: '1px solid rgba(255,255,255,0.15)',
+                color: 'rgba(255,255,255,0.8)',
+              }}
+            >
+              <svg
+                className="w-3.5 h-3.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+              {event.gallery.length}
+            </div>
+          )}
+        </div>
+
+        {/* Card Body */}
+        <div className="p-5 pt-4">
+          {/* Title + date */}
+          <div className="flex items-center gap-2 mb-2">
+            <svg
+              className="w-3.5 h-3.5 text-gray-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
+            </svg>
+            <span className="text-xs text-gray-500 font-medium">
+              {formatDate(event.date)}
+            </span>
+          </div>
+          <h3
+            className="text-lg sm:text-xl font-bold text-white leading-tight mb-2 transition-colors duration-300"
+            style={{
+              color: isHovered ? '#05B1DE' : '#fff',
+            }}
+          >
+            {event.title}
+          </h3>
+          <p className="text-sm text-gray-400 leading-relaxed mb-4 line-clamp-2">
+            {event.shortDescription}
+          </p>
+
+          {/* Stats Row */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              {/* Attendees */}
+              <div className="flex items-center gap-1.5">
+                <svg
+                  className="w-4 h-4 text-[#05B1DE]"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+                <span className="text-xs text-gray-400 font-medium">
+                  {event.attendees}
+                </span>
+              </div>
+
+              {/* Location */}
+              <div className="flex items-center gap-1.5">
+                <svg
+                  className="w-4 h-4 text-[#05B1DE]"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+                <span className="text-xs text-gray-400 font-medium">
+                  {event.location}
+                </span>
+              </div>
+            </div>
+
+            {/* Arrow */}
+            <div
+              className="flex items-center justify-center w-8 h-8 rounded-full transition-all duration-300"
+              style={{
+                background: isHovered
+                  ? 'rgba(5, 177, 222, 0.2)'
+                  : 'rgba(255,255,255,0.05)',
+                border: isHovered
+                  ? '1px solid rgba(5, 177, 222, 0.4)'
+                  : '1px solid rgba(255,255,255,0.1)',
+              }}
+            >
+              <svg
+                className="w-4 h-4 transition-all duration-300"
+                style={{
+                  color: isHovered ? '#05B1DE' : 'rgba(255,255,255,0.4)',
+                  transform: isHovered ? 'translateX(2px)' : 'translateX(0)',
+                }}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        {/* Hover glow border effect */}
+        <div
+          className="absolute inset-0 rounded-2xl pointer-events-none transition-opacity duration-500"
+          style={{
+            opacity: isHovered ? 1 : 0,
+            border: '1px solid rgba(5, 177, 222, 0.3)',
+            boxShadow: 'inset 0 0 30px rgba(5, 177, 222, 0.05)',
+          }}
+        />
+      </div>
+    </motion.div>
+  );
+};
+
+// Category Filter Pill
+const FilterPill = ({ label, active, onClick }) => (
+  <button
+    onClick={onClick}
+    className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer"
+    style={{
+      background: active
+        ? 'linear-gradient(135deg, #05B1DE 0%, #0490b5 100%)'
+        : 'rgba(255,255,255,0.05)',
+      color: active ? '#fff' : 'rgba(255,255,255,0.5)',
+      border: active
+        ? '1px solid rgba(5, 177, 222, 0.5)'
+        : '1px solid rgba(255,255,255,0.1)',
+      boxShadow: active
+        ? '0 4px 20px -4px rgba(5, 177, 222, 0.4)'
+        : 'none',
+    }}
+  >
+    {label}
+  </button>
+);
+
+const categories = ['All', ...new Set(eventsData.map(e => e.category))];
+
+const Events = () => {
+  const [activeFilter, setActiveFilter] = useState('All');
+
+  const filteredEvents =
+    activeFilter === 'All'
+      ? eventsData
+      : eventsData.filter(e => e.category === activeFilter);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black pt-16 sm:pt-20">
+    <div className="min-h-screen bg-black pt-16 sm:pt-20">
       {/* Hero Section */}
-      <div className="container mx-auto px-4 py-6 sm:py-8 md:py-10 text-center relative">
-        <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 md:mb-8">
-          Our <span className="text-[#05B1DE] dark:text-[#05B1DE]">Events</span>
-        </h1>
-        <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8 sm:mb-10 md:mb-12 px-2">
-          Join us for exciting workshops, competitions, and networking events
-          designed to fuel your entrepreneurial journey
-        </p>
-      </div>
+      <div className="relative overflow-hidden">
+        {/* Ambient glow */}
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] pointer-events-none"
+          style={{
+            background:
+              'radial-gradient(ellipse at center, rgba(5, 177, 222, 0.08) 0%, transparent 70%)',
+          }}
+        />
 
-      {/* Hero to Events Barrier */}
-      <div className="py-6 sm:py-8 flex justify-center">
-        <div className="relative group">
-          {/* Main gradient line with glow effect */}
-          <div className="w-64 sm:w-80 md:w-96 lg:w-300 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div className="container mx-auto px-4 py-12 sm:py-16 md:py-20 text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-5 tracking-tight">
+              Our{' '}
+              <span
+                style={{
+                  background:
+                    'linear-gradient(135deg, #05B1DE 0%, #06d6ff 50%, #05B1DE 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                Events
+              </span>
+            </h1>
+            <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+              Explore our workshops, competitions, and networking sessions
+              crafted to fuel your entrepreneurial journey
+            </p>
+          </motion.div>
 
-          {/* Center diamond with gradient */}
-          <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-5 h-5 sm:w-6 sm:h-6 bg-[#05B1DE] rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full"></div>
-          </div>
-
-          {/* Decorative dots */}
-          <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 -translate-x-6 sm:-translate-x-8 w-1 h-1 bg-blue-400 rounded-full opacity-40 group-hover:opacity-80 transition-opacity duration-300"></div>
-          <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 translate-x-6 sm:translate-x-8 w-1 h-1 bg-purple-400 rounded-full opacity-40 group-hover:opacity-80 transition-opacity duration-300"></div>
-
-          {/* Subtle glow effect */}
-          <div className="absolute -top-3 sm:-top-4 left-1/2 transform -translate-x-1/2 w-10 sm:w-12 h-6 sm:h-8 bg-[#05B1DE]/20 rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        </div>
-      </div>
-
-      {/* Events Section */}
-      <div className="py-8 sm:py-12 md:py-16 bg-black">
-        <div className="container mx-auto px-4">
-          {/* Past Events Grid */}
-          <div className="space-y-8 sm:space-y-12 md:space-y-16">
-            {pastEvents.map((event, index) => (
-              <div key={event.id} id={`event-${event.id}`}>
-                <div className="flex justify-center">
-                  {/* Event Details */}
-                  <div className="w-full max-w-4xl">
-                    <div className="max-w-4xl mx-auto">
-                      {/* 1. Heading */}
-                      <div className="text-center mb-8 sm:mb-10 md:mb-12">
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 mb-4">
-                          <span className="px-3 py-1 bg-[#05B1DE] text-white text-sm font-semibold rounded-full">
-                            {event.category}
-                          </span>
-                          <span className="text-sm text-gray-500 dark:text-gray-400">
-                            {formatDate(event.date)}
-                          </span>
-                        </div>
-
-                        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 sm:mb-4 flex items-center justify-center gap-2 sm:gap-3">
-                          <span className="text-[#05B1DE] text-lg sm:text-xl md:text-2xl lg:text-3xl">
-                            •
-                          </span>
-                          {event.title}
-                        </h3>
-                      </div>
-
-                      {/* 2. Pixel Card */}
-                      <div className="flex justify-center mb-8 sm:mb-10 md:mb-12">
-                        <PixelCard variant="cyan" size="lg" imageSize="xl">
-                          <img
-                            src={event.image}
-                            alt={event.title}
-                            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-cover rounded-2xl shadow-2xl transition-transform duration-500 group-hover:scale-105 z-10"
-                          />
-                        </PixelCard>
-                      </div>
-
-                      {/* 3. Description */}
-                      <p className="text-gray-300 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
-                        {event.description}
-                      </p>
-
-                      {/* Infinite Moving Cards for events 1, 2, 4, and 5 */}
-                      {(event.id === 1 ||
-                        event.id === 2 ||
-                        event.id === 4 ||
-                        event.id === 5) && (
-                        <div className="mb-8 sm:mb-10 md:mb-12 -mx-8 sm:-mx-12 md:-mx-16 lg:-mx-20 xl:-mx-24 2xl:-mx-32">
-                          <div className="text-center mb-4 sm:mb-6 px-8 sm:px-12 md:px-16 lg:px-20 xl:px-24 2xl:px-32">
-                            <h4 className="text-lg sm:text-xl font-semibold text-white">
-                              Glimpse of the Event
-                            </h4>
-                          </div>
-                          <div className="h-[15rem] sm:h-[18rem] md:h-[20rem] w-full rounded-md flex flex-col antialiased bg-black items-center justify-center relative overflow-hidden">
-                            <InfiniteMovingCards
-                              items={
-                                event.id === 1
-                                  ? event1Gallery
-                                  : event.id === 2
-                                    ? event2Gallery
-                                    : event.id === 4
-                                      ? event4Gallery
-                                      : event5Gallery
-                              }
-                              direction="right"
-                              speed="slow"
-                            />
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Event Stats */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
-                        <div className="bg-gray-800 p-3 sm:p-4 rounded-lg shadow-sm">
-                          <div className="text-xl sm:text-2xl font-bold text-blue-400">
-                            {event.attendees}
-                          </div>
-                          <div className="text-xs sm:text-sm text-gray-300">
-                            Attendees
-                          </div>
-                        </div>
-                        <div className="bg-gray-800 p-3 sm:p-4 rounded-lg shadow-sm">
-                          <div className="text-lg sm:text-xl md:text-2xl font-bold text-green-400 truncate">
-                            {event.location.split(',')[0]}
-                          </div>
-                          <div className="text-xs sm:text-sm text-gray-300">
-                            Location
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Event Highlights */}
-                      <div className="mb-4 sm:mb-6">
-                        <h4 className="font-semibold text-white mb-2 sm:mb-3 text-sm sm:text-base">
-                          Event Highlights
-                        </h4>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                          {event.highlights.map((highlight, idx) => (
-                            <div
-                              key={idx}
-                              className="flex items-center text-xs sm:text-sm text-gray-300"
-                            >
-                              <svg
-                                className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-green-500 flex-shrink-0"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M5 13l4 4L19 7"
-                                />
-                              </svg>
-                              {highlight}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Winner Badge for Competition */}
-                      {event.winner && (
-                        <div className="mb-4 sm:mb-6">
-                          <div className="bg-gray-800 text-white p-4 sm:p-6 rounded-2xl shadow-xl border border-gray-700">
-                            <div className="flex items-center mb-3 sm:mb-4">
-                              <div className="bg-white/20 p-2 rounded-full mr-3">
-                                <svg
-                                  className="w-5 h-5 sm:w-6 sm:h-6"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-                                  />
-                                </svg>
-                              </div>
-                              <h4 className="text-lg sm:text-xl font-bold text-white">
-                                Competition Winners
-                              </h4>
-                            </div>
-                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-white/20">
-                              <div className="text-center">
-                                <span
-                                  className="text-base sm:text-lg font-semibold leading-relaxed"
-                                  dangerouslySetInnerHTML={{
-                                    __html: event.winner,
-                                  }}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Event Barrier/Divider */}
-                {index < pastEvents.length - 1 && (
-                  <div className="mt-12 sm:mt-16 md:mt-20 mb-8 sm:mb-10 md:mb-12 flex justify-center">
-                    <div className="relative group">
-                      {/* Main gradient line with glow effect */}
-                      <div className="w-64 sm:w-80 md:w-96 lg:w-300 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                      {/* Center diamond with gradient */}
-                      <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-5 h-5 sm:w-6 sm:h-6 bg-[#05B1DE] rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full"></div>
-                      </div>
-
-                      {/* Decorative dots */}
-                      <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 -translate-x-6 sm:-translate-x-8 w-1 h-1 bg-blue-400 rounded-full opacity-40 group-hover:opacity-80 transition-opacity duration-300"></div>
-                      <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 translate-x-6 sm:translate-x-8 w-1 h-1 bg-purple-400 rounded-full opacity-40 group-hover:opacity-80 transition-opacity duration-300"></div>
-
-                      {/* Subtle glow effect */}
-                      <div className="absolute -top-3 sm:-top-4 left-1/2 transform -translate-x-1/2 w-10 sm:w-12 h-6 sm:h-8 bg-[#05B1DE]/20 rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                  </div>
-                )}
-              </div>
+          {/* Category Filters */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-wrap justify-center gap-3 mt-10"
+          >
+            {categories.map(cat => (
+              <FilterPill
+                key={cat}
+                label={cat}
+                active={activeFilter === cat}
+                onClick={() => setActiveFilter(cat)}
+              />
             ))}
-          </div>
+          </motion.div>
         </div>
+      </div>
+
+      {/* Subtle divider */}
+      <div className="flex justify-center py-4">
+        <div
+          className="w-48 h-px"
+          style={{
+            background:
+              'linear-gradient(to right, transparent, rgba(5, 177, 222, 0.3), transparent)',
+          }}
+        />
+      </div>
+
+      {/* Events Grid */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeFilter}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+          >
+            {filteredEvents.map((event, index) => (
+              <EventCard key={event.id} event={event} index={index} />
+            ))}
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Empty state */}
+        {filteredEvents.length === 0 && (
+          <div className="text-center py-20">
+            <p className="text-gray-500 text-lg">
+              No events found in this category.
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Footer */}
