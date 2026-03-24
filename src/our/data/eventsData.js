@@ -1,6 +1,58 @@
 // Centralized events data for both listing and detail pages
 export const eventsData = [
   {
+    id: 6,
+    slug: 'pixel-x',
+    title: 'PIXEL X – The Digital Poster Making Competition',
+    shortDescription:
+      'A digital design competition under the theme "Local to Global", fostering creativity and entrepreneurial excellence.',
+    description:
+      'PIXEL X, conducted under the theme “Local to Global”, was organized by the Entrepreneurship Development Cell, JSS University, Noida. The event encouraged creativity and entrepreneurial thinking through digital design. It was successfully executed by the EDC Design Team, with the constant support of EDC members, and under the guidance of our Faculty Coordinators, Dr. Nishi Sharma and Dr. Ashima Shrivastav. We also extend our sincere gratitude to Dr. Jagdish R. S., Dean – Student Welfare & Academic Coordinator, for his encouragement and support towards student-driven initiatives.',
+    poster:
+      'https://res.cloudinary.com/dh8cqlngr/image/upload/v1774386653/pixelx_sfznix.png',
+    date: '2026-03-24',
+    location: 'Online',
+    attendees: '40+',
+    category: 'Competition',
+    winner: '🥇 Gaurav Kumar – IT (First Year) <br/>🥈 Aayush Chaturvedi – CSE (First Year) <br/>🥉 Avni Gaur – AIML (First Year)',
+    highlights: [
+      'Theme: “Local to Global”',
+      'Encouraged creativity and entrepreneurial thinking',
+      'Organized by the EDC Design Team',
+      'Recognized innovative digital design submissions',
+    ],
+    gallery: [
+      {
+        id: 1,
+        image:
+          'https://res.cloudinary.com/dh8cqlngr/image/upload/v1774387140/result1a_ztgbzw.png',
+      }
+    ],
+  },
+  {
+    id: 7,
+    slug: 'ui-ux-workshop',
+    title: 'UI/UX Workshop',
+    shortDescription:
+      'A hands-on session focused on building intuitive, user-centered digital experiences and design thinking.',
+    description:
+      "Great design isn’t just about aesthetics, it’s about experience. EDC JSSUN is excited to host a UI/UX Workshop focused on building intuitive, user-centered digital experiences. Whether you're a beginner or looking to refine your design thinking, this session is for you. Seats are limited. Register soon!",
+    poster:
+      'https://res.cloudinary.com/dh8cqlngr/image/upload/v1774387556/10160695-abfd-4065-b05f-04825a49a52e.png',
+    date: '2026-02-18',
+    location: 'AB-3 503',
+    attendees: '50+',
+    category: 'Workshop',
+    winner: null,
+    highlights: [
+      'Building intuitive, user-centered digital experiences',
+      'Refining design thinking skills',
+      'Focus on both aesthetics and user experience',
+      'Perfect for both beginners and experienced designers',
+    ],
+    gallery: [],
+  },
+  {
     id: 5,
     slug: 'linkedin-workshop',
     title: 'LinkedIn Workshop',
