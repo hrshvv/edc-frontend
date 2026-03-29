@@ -29,9 +29,9 @@ const FloatingParticle = ({ delay, size, x, duration }) => (
 );
 
 /* ──────────────────── Glowing Vertical Stripe ──────────────────── */
-const PurpleCurtain = ({ left, opacity, width, delay }) => (
+const PurpleCurtain = ({ left, opacity, width, delay, className }) => (
   <div
-    className="absolute top-0 h-full pointer-events-none"
+    className={cn("absolute top-0 h-full pointer-events-none", className)}
     style={{
       left: `${left}%`,
       width: `${width}px`,
@@ -178,7 +178,7 @@ const FoundersPit = () => {
         }
       `}</style>
 
-      <div className="w-full min-h-screen bg-[#000000] text-white overflow-hidden">
+      <div className="w-full min-h-screen bg-[#000000] text-white overflow-hidden pb-24 sm:pb-0">
 
         {/* ══════════ HERO SECTION ══════════ */}
         <div
@@ -188,14 +188,14 @@ const FoundersPit = () => {
           {/* Grid background */}
           <div className="absolute inset-0 fp-grid-bg pointer-events-none" />
 
-          {/* Purple curtain stripes (Figma inspired) */}
-          <PurpleCurtain left={8} opacity={0.15} width={3} delay={0} />
-          <PurpleCurtain left={18} opacity={0.1} width={2} delay={0.5} />
-          <PurpleCurtain left={32} opacity={0.2} width={4} delay={1} />
-          <PurpleCurtain left={50} opacity={0.12} width={3} delay={1.5} />
-          <PurpleCurtain left={68} opacity={0.18} width={3} delay={0.8} />
-          <PurpleCurtain left={82} opacity={0.1} width={2} delay={1.2} />
-          <PurpleCurtain left={92} opacity={0.15} width={3} delay={0.3} />
+           {/* Purple curtain stripes (Figma inspired) */}
+           <PurpleCurtain left={8} opacity={0.15} width={3} delay={0} className="hidden lg:block" />
+           <PurpleCurtain left={18} opacity={0.1} width={2} delay={0.5} className="hidden sm:block" />
+           <PurpleCurtain left={32} opacity={0.2} width={4} delay={1} />
+           <PurpleCurtain left={50} opacity={0.12} width={3} delay={1.5} className="hidden md:block" />
+           <PurpleCurtain left={68} opacity={0.18} width={3} delay={0.8} />
+           <PurpleCurtain left={82} opacity={0.1} width={2} delay={1.2} className="hidden sm:block" />
+           <PurpleCurtain left={92} opacity={0.15} width={3} delay={0.3} className="hidden lg:block" />
 
           {/* LightRays (purple tinted) */}
           <div className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-60">
@@ -268,12 +268,12 @@ const FoundersPit = () => {
                 <img
                   src="https://res.cloudinary.com/dh8cqlngr/image/upload/v1774820657/Founder_s_Pit_kvfeqt.png"
                   alt="Logo Icon"
-                  className="relative w-20 sm:w-28 md:w-32 h-auto drop-shadow-[0_0_15px_rgba(215,118,255,0.4)] hover:scale-110 transition-transform duration-500 ease-out"
+                  className="relative w-16 sm:w-28 md:w-32 h-auto drop-shadow-[0_0_15px_rgba(215,118,255,0.4)] hover:scale-110 transition-transform duration-500 ease-out"
                 />
               </div>
 
               {/* Restructured Text Title (Main Focus) */}
-              <h1 className="fp-title font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tighter leading-[0.85] text-center filter drop-shadow-[0_10px_30px_rgba(94,12,159,0.3)]">
+              <h1 className="fp-title font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tighter leading-[0.85] text-center filter drop-shadow-[0_10px_30px_rgba(94,12,159,0.3)]">
                 FOUNDER'S
                 <br />
                 <span className="text-white/90">PIT</span>
@@ -292,34 +292,32 @@ const FoundersPit = () => {
 
             {/* Sleek Information Strip */}
             <div
-              className="flex flex-wrap justify-center items-center gap-4 sm:gap-8 mb-8"
+              className="grid grid-cols-2 md:flex md:flex-wrap justify-center items-center gap-3 sm:gap-8 mb-8"
               style={{ animation: 'fadeSlideUp 0.8s ease-out 0.3s both' }}
             >
-              <div className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-[#1B002B]/30 border border-[#7B2FBE]/10 backdrop-blur-sm group hover:border-[#7B2FBE]/40 transition-all duration-300">
+              <div className="flex items-center gap-3 px-4 sm:px-5 py-3 rounded-2xl bg-[#1B002B]/30 border border-[#7B2FBE]/10 backdrop-blur-sm group hover:border-[#7B2FBE]/40 transition-all duration-300">
                 <Calendar className="size-4 text-[#D776FF]" />
                 <div className="text-left">
                   <span className="block text-[8px] uppercase tracking-wider text-white/30">Date</span>
-                  <span className="text-xs sm:text-sm font-bold text-white/90">{eventDetails.date}</span>
+                  <span className="text-[10px] sm:text-sm font-bold text-white/90">{eventDetails.date}</span>
                 </div>
               </div>
 
-              <div className="hidden sm:block w-px h-8 bg-[#7B2FBE]/20" />
-
-              <div className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-[#1B002B]/30 border border-[#7B2FBE]/10 backdrop-blur-sm group hover:border-[#7B2FBE]/40 transition-all duration-300">
+              <div className="flex items-center gap-3 px-4 sm:px-5 py-3 rounded-2xl bg-[#1B002B]/30 border border-[#7B2FBE]/10 backdrop-blur-sm group hover:border-[#7B2FBE]/40 transition-all duration-300">
                 <MapPin className="size-4 text-[#D776FF]" />
                 <div className="text-left">
                   <span className="block text-[8px] uppercase tracking-wider text-white/30">Location</span>
-                  <span className="text-xs sm:text-sm font-bold text-white/90">{eventDetails.location}</span>
+                  <span className="text-[10px] sm:text-sm font-bold text-white/90">{eventDetails.location}</span>
                 </div>
               </div>
 
-              <div className="hidden sm:block w-px h-8 bg-[#7B2FBE]/20" />
+              <div className="hidden md:block w-px h-8 bg-[#7B2FBE]/20" />
 
-              <div className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-[#1B002B]/30 border border-[#7B2FBE]/10 backdrop-blur-sm group hover:border-[#7B2FBE]/40 transition-all duration-300">
+              <div className="col-span-2 flex justify-center md:col-auto md:flex items-center gap-3 px-4 sm:px-5 py-3 rounded-2xl bg-[#1B002B]/30 border border-[#7B2FBE]/10 backdrop-blur-sm group hover:border-[#7B2FBE]/40 transition-all duration-300">
                 <Users className="size-4 text-[#D776FF]" />
                 <div className="text-left">
                   <span className="block text-[8px] uppercase tracking-wider text-white/30">Format</span>
-                  <span className="text-xs sm:text-sm font-bold text-white/90">In-Person</span>
+                  <span className="text-[10px] sm:text-sm font-bold text-white/90">In-Person</span>
                 </div>
               </div>
             </div>
@@ -331,7 +329,7 @@ const FoundersPit = () => {
             >
               <Button
                 size="lg"
-                className="fp-btn-primary w-full sm:w-auto text-white font-bold text-sm sm:text-base px-10 py-7 rounded-full border-0 group"
+                className="fp-btn-primary w-full sm:w-auto text-white font-bold text-sm sm:text-base px-10 py-5 sm:py-7 rounded-full border-0 group"
                 onClick={() => setIsPopupOpen(true)}
               >
                 Register For Season 2026
@@ -340,7 +338,7 @@ const FoundersPit = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="w-full sm:w-auto border-2 border-[#7B2FBE]/30 text-[#D776FF] hover:bg-[#7B2FBE]/10 hover:border-[#D776FF]/60 font-semibold text-sm sm:text-base px-10 py-7 rounded-full transition-all duration-300 bg-transparent"
+                className="w-full sm:w-auto border-2 border-[#7B2FBE]/30 text-[#D776FF] hover:bg-[#7B2FBE]/10 hover:border-[#D776FF]/60 font-semibold text-sm sm:text-base px-10 py-5 sm:py-7 rounded-full transition-all duration-300 bg-transparent"
                 onClick={() => setIsPopupOpen(true)}
               >
                 View Agenda
@@ -467,20 +465,20 @@ const FoundersPit = () => {
                   </div>
                   <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">Founder's Pit</h3>
                   <p className="text-xs sm:text-sm text-[#D776FF]/60 tracking-[0.15em] uppercase mb-6">Season 2026</p>
-                  <div className="flex items-center justify-center gap-6">
+                  <div className="flex items-center justify-center gap-4 sm:gap-6">
                     <div className="text-center">
-                      <p className="text-2xl sm:text-3xl font-black fp-subtitle">24+</p>
-                      <p className="text-[10px] text-white/30 uppercase tracking-wider">Hours</p>
+                      <p className="text-xl sm:text-3xl font-black fp-subtitle">24+</p>
+                      <p className="text-[9px] text-white/30 uppercase tracking-wider">Hours</p>
                     </div>
-                    <div className="w-px h-8 bg-[#7B2FBE]/30" />
+                    <div className="w-px h-6 sm:h-8 bg-[#7B2FBE]/30" />
                     <div className="text-center">
-                      <p className="text-2xl sm:text-3xl font-black fp-subtitle">10+</p>
-                      <p className="text-[10px] text-white/30 uppercase tracking-wider">Mentors</p>
+                      <p className="text-xl sm:text-3xl font-black fp-subtitle">10+</p>
+                      <p className="text-[9px] text-white/30 uppercase tracking-wider">Mentors</p>
                     </div>
-                    <div className="w-px h-8 bg-[#7B2FBE]/30" />
+                    <div className="w-px h-6 sm:h-8 bg-[#7B2FBE]/30" />
                     <div className="text-center">
-                      <p className="text-2xl sm:text-3xl font-black fp-subtitle">∞</p>
-                      <p className="text-[10px] text-white/30 uppercase tracking-wider">Ideas</p>
+                      <p className="text-xl sm:text-3xl font-black fp-subtitle">∞</p>
+                      <p className="text-[9px] text-white/30 uppercase tracking-wider">Ideas</p>
                     </div>
                   </div>
                 </div>
