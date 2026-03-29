@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { cn } from '@/lib/utils';
 import { Spotlight } from '@/components/ui/spotlight';
 import { FlipWords } from '@/components/ui/flip-words';
@@ -72,7 +73,7 @@ const Main = () => {
         <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-12 sm:py-16 md:py-20">
           <div className="text-center">
             <div className="flex flex-col md:flex-row items-center justify-center gap-1 sm:gap-2 md:gap-3 mb-6 sm:mb-8 md:mb-10 text-center">
-              <p className="text-gray-800 dark:text-neutral-400 text-5xl sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight">
+              <p className="text-gray-800 dark:text-neutral-400 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight">
                 Build
               </p>
               <FlipWords
@@ -84,10 +85,10 @@ const Main = () => {
                   'Innovations',
                 ]}
                 duration={3000}
-                className="text-[#05B1DE] dark:text-[#05B1DE] text-5xl sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight"
+                className="text-[#05B1DE] dark:text-[#05B1DE] text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight"
               />
             </div>
-            <p className="text-gray-600 dark:text-neutral-400 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-normal px-4 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-gray-600 dark:text-neutral-400 text-[0.8rem] sm:text-sm md:text-base lg:text-lg xl:text-xl font-normal px-4 max-w-4xl mx-auto leading-relaxed">
               Shaping the future of innovation at JSS University through
               creativity, research, and transformative ideas that inspire
               progress.

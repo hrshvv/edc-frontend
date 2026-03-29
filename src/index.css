@@ -136,7 +136,7 @@ body {
 @media (max-width: 768px) {
   .swipe-down-button {
     position: absolute !important;
-    bottom: 6.5rem !important;
+    bottom: calc(5rem + max(0.75rem, env(safe-area-inset-bottom))) !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
     z-index: 30 !important;
