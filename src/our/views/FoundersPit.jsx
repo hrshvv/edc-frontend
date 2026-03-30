@@ -268,7 +268,7 @@ const FoundersPit = () => {
                 <img
                   src="https://res.cloudinary.com/dh8cqlngr/image/upload/v1774820657/Founder_s_Pit_kvfeqt.png"
                   alt="Logo Icon"
-                  className="relative w-16 sm:w-28 md:w-32 h-auto drop-shadow-[0_0_15px_rgba(215,118,255,0.4)] hover:scale-110 transition-transform duration-500 ease-out"
+                  className="relative w-40 sm:w-64 md:w-80 h-auto drop-shadow-[0_10px_30px_rgba(215,118,255,0.4)] hover:scale-105 transition-transform duration-500 ease-out"
                 />
               </div>
 
@@ -467,7 +467,7 @@ const FoundersPit = () => {
                   <p className="text-xs sm:text-sm text-[#D776FF]/60 tracking-[0.15em] uppercase mb-6">Season 2026</p>
                   <div className="flex items-center justify-center gap-4 sm:gap-6">
                     <div className="text-center">
-                      <p className="text-xl sm:text-3xl font-black fp-subtitle">24+</p>
+                      <p className="text-xl sm:text-3xl font-black fp-subtitle">10+</p>
                       <p className="text-[9px] text-white/30 uppercase tracking-wider">Hours</p>
                     </div>
                     <div className="w-px h-6 sm:h-8 bg-[#7B2FBE]/30" />

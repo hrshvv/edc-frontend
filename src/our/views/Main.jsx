@@ -70,11 +70,17 @@ const Main = () => {
         {/* Floating Gradient Orbs */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden select-none">
           {/* Primary orb - top right */}
-          <div className="animate-float-slow absolute -top-20 -right-20 sm:top-10 sm:right-10 md:top-20 md:right-20 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] rounded-full bg-gradient-to-br from-[#05B1DE]/30 to-cyan-400/10 animate-pulse-glow" />
+          <div className="animate-float-slow absolute -top-20 -right-20 sm:top-10 sm:right-10 md:top-20 md:right-20 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] pointer-events-none">
+            <div className="w-full h-full rounded-full bg-gradient-to-br from-[#05B1DE]/40 to-cyan-400/20 blur-[80px] animate-pulse-glow" />
+          </div>
           {/* Secondary orb - bottom left */}
-          <div className="animate-float-slow-reverse absolute -bottom-32 -left-32 sm:bottom-0 sm:left-0 w-[250px] h-[250px] sm:w-[350px] sm:h-[350px] md:w-[450px] md:h-[450px] rounded-full bg-gradient-to-tr from-purple-500/20 to-[#05B1DE]/10 animate-pulse-glow" style={{ animationDelay: '2s' }} />
+          <div className="animate-float-slow-reverse absolute -bottom-32 -left-32 sm:bottom-0 sm:left-0 w-[250px] h-[250px] sm:w-[350px] sm:h-[350px] md:w-[450px] md:h-[450px] pointer-events-none">
+            <div className="w-full h-full rounded-full bg-gradient-to-tr from-purple-500/30 to-[#05B1DE]/20 blur-[80px] animate-pulse-glow" style={{ animationDelay: '2s' }} />
+          </div>
           {/* Accent orb - center */}
-          <div className="animate-float-diagonal absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px] rounded-full bg-gradient-to-r from-[#05B1DE]/10 to-blue-600/5 animate-pulse-glow" style={{ animationDelay: '4s' }} />
+          <div className="animate-float-diagonal absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px] pointer-events-none">
+            <div className="w-full h-full rounded-full bg-gradient-to-r from-[#05B1DE]/20 to-blue-600/10 blur-[80px] animate-pulse-glow" style={{ animationDelay: '4s' }} />
+          </div>
         </div>
 
         {/* Spotlight */}
@@ -149,7 +155,7 @@ const Main = () => {
               <div className="grid grid-cols-4 gap-2 sm:gap-4 md:gap-6">
                 <div className="group text-center p-2 sm:p-3 md:p-4 rounded-xl sm:rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-[#05B1DE]/30 hover:bg-[#05B1DE]/5 transition-all duration-500 backdrop-blur-sm">
                   <p className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#05B1DE] mb-0.5 sm:mb-1 group-hover:scale-110 transition-transform duration-300">
-                    15+
+                    5+
                   </p>
                   <p className="text-[0.5rem] sm:text-[0.65rem] md:text-xs lg:text-sm text-gray-500 dark:text-neutral-500 font-medium uppercase tracking-wider">
                     Events Hosted
