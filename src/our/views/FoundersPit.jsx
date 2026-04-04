@@ -55,11 +55,11 @@ const HugeTimeline = () => {
     const height = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
     const rounds = [
-        { title: "The Qualifier", label: "ROUND 1", desc: "Short deck submission identifying a real problem. Ensure zero plagiarism. This is your first chance to prove your worth and enter the Pit.", icon: Target },
-        { title: "Strategic Bidding", label: "ROUND 2", desc: "Teams engage in a live auction using virtual capital to select their desired problem statements from a curated list. Resources are scarce, strategy is key.", icon: Zap },
-        { title: "Build the Startup", label: "ROUND 3", desc: "The core challenge. Develop a tangible product prototype, establish a viable business model, and map out your market strategy from scratch within an immense time crunch.", icon: TrendingUp },
-        { title: "Crisis Simulation", label: "ROUND 4", desc: "Just when you think you're settled, real-time disruptions hit. Teams must rapidly respond to unforeseen economic or operational crises and pivot their entire strategy on the fly.", icon: AlertTriangle },
-        { title: "The Final Pitch", label: "ROUND 5", desc: "Survive the gauntlet to reach the finale. Present your newly battle-tested startup and defend your decisions to an elite panel of industry judges.", icon: MessageCircle }
+        { title: "The Qualifier (ONLINE)", label: "ROUND 1", desc: "Short deck submission identifying a real problem. Ensure zero plagiarism. This is your first chance to prove your worth and enter the Pit.", icon: Target },
+        { title: "Strategic Bidding (OFFLINE)", label: "ROUND 2", desc: "Teams engage in a live auction using virtual capital to select their desired problem statements from a curated list. Resources are scarce, strategy is key.", icon: Zap },
+        { title: "Build the Startup (OFFLINE)", label: "ROUND 3", desc: "The core challenge. Develop a tangible product prototype, establish a viable business model, and map out your market strategy from scratch within an immense time crunch.", icon: TrendingUp },
+        { title: "Crisis Simulation (OFFLINE)", label: "ROUND 4", desc: "Just when you think you're settled, real-time disruptions hit. Teams must rapidly respond to unforeseen economic or operational crises and pivot their entire strategy on the fly.", icon: AlertTriangle },
+        { title: "The Final Pitch (OFFLINE)", label: "ROUND 5", desc: "Survive the gauntlet to reach the finale. Present your newly battle-tested startup and defend your decisions to an elite panel of industry judges.", icon: MessageCircle }
     ];
 
     return (
@@ -286,9 +286,7 @@ const FoundersPit = () => {
             </div>
 
             <div className="mb-10" style={{ animation: 'fadeSlideUp 0.8s ease-out 0.2s both' }}>
-              <p className="fp-subtitle text-xs sm:text-sm md:text-base tracking-[0.3em] font-bold uppercase opacity-90 max-w-2xl mx-auto leading-relaxed mb-4">
-                Enter with a mindset, exit as a founder
-              </p>
+
               <p className="text-white/50 text-sm sm:text-base max-w-xl mx-auto">
                 A high-intensity startup simulation where ideas are tested, built, and battle-proven.
               </p>
@@ -299,7 +297,7 @@ const FoundersPit = () => {
                 Enter The Pit
                 <ArrowRight className="ml-2 size-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button size="lg" onClick={() => executeScroll("round-details")} variant="outline" className="w-full sm:w-auto border-2 border-[#7B2FBE]/30 text-[#D776FF] hover:bg-[#7B2FBE]/10 hover:border-[#D776FF]/60 font-semibold text-base px-10 py-7 rounded-full bg-transparent">
+              <Button size="lg" onClick={() => executeScroll("what-is-fp")} variant="outline" className="w-full sm:w-auto border-2 border-[#7B2FBE]/30 text-[#D776FF] hover:bg-[#7B2FBE]/10 hover:border-[#D776FF]/60 font-semibold text-base px-10 py-7 rounded-full bg-transparent">
                 View Details
               </Button>
             </div>
@@ -323,33 +321,33 @@ const FoundersPit = () => {
         </div>
 
         {/* 3. WHAT IS FOUNDER’S PIT ══════════ */}
-        <section className="relative py-20 sm:py-28 px-4 sm:px-6 overflow-hidden">
+        <section id="what-is-fp" className="relative py-20 sm:py-28 px-4 sm:px-6 overflow-hidden">
             <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(94,12,159,0.15) 0%, transparent 70%)', filter: 'blur(60px)' }} />
             <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                 <div>
-                   <h2 className="text-3xl sm:text-5xl font-black text-white mb-6 leading-tight">
+                   <h2 className="text-2xl sm:text-5xl font-black text-white mb-6 leading-tight">
                         Experience the Journey.<br/>
                         <span className="fp-subtitle">Build a Startup.</span>
                    </h2>
-                   <p className="text-white/60 text-lg leading-relaxed mb-8">
+                   <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8">
                        Founder's Pit is a fun and interactive competition where you step into the shoes of a real founder. You and your team will choose an everyday problem, build a viable business solution around it, learn how to adapt to changes, and finally present your idea to a panel of friendly judges.
                    </p>
                    <div className="flex flex-col gap-4">
-                       <div className="fp-card p-4 rounded-2xl flex items-center gap-4">
-                           <div className="size-10 rounded-xl bg-[#5E0C9F]/40 flex items-center justify-center shrink-0"><Target className="size-5 text-[#D776FF]"/></div>
-                           <div><h4 className="font-bold text-white text-lg">1. Choose a Problem</h4><p className="text-sm text-white/50">Use virtual currency to select a challenge you want to solve.</p></div>
+                       <div className="fp-card p-3 sm:p-4 rounded-2xl flex items-center gap-3 sm:gap-4">
+                           <div className="size-9 sm:size-10 rounded-xl bg-[#5E0C9F]/40 flex items-center justify-center shrink-0"><Target className="size-4 sm:size-5 text-[#D776FF]"/></div>
+                           <div><h4 className="font-bold text-white text-base sm:text-lg">1. Choose a Problem</h4><p className="text-sm text-white/50">Use virtual currency to select a challenge you want to solve.</p></div>
                        </div>
-                       <div className="fp-card p-4 rounded-2xl flex items-center gap-4">
-                           <div className="size-10 rounded-xl bg-[#5E0C9F]/40 flex items-center justify-center shrink-0"><Lightbulb className="size-5 text-[#D776FF]"/></div>
-                           <div><h4 className="font-bold text-white text-lg">2. Create a Solution</h4><p className="text-sm text-white/50">Work closely with your team to design a product and business plan.</p></div>
+                       <div className="fp-card p-3 sm:p-4 rounded-2xl flex items-center gap-3 sm:gap-4">
+                           <div className="size-9 sm:size-10 rounded-xl bg-[#5E0C9F]/40 flex items-center justify-center shrink-0"><Lightbulb className="size-4 sm:size-5 text-[#D776FF]"/></div>
+                           <div><h4 className="font-bold text-white text-base sm:text-lg">2. Create a Solution</h4><p className="text-sm text-white/50">Work closely with your team to design a product and business plan.</p></div>
                        </div>
-                       <div className="fp-card p-4 rounded-2xl flex items-center gap-4">
-                           <div className="size-10 rounded-xl bg-[#5E0C9F]/40 flex items-center justify-center shrink-0"><MessageCircle className="size-5 text-[#D776FF]"/></div>
-                           <div><h4 className="font-bold text-white text-lg">3. Pitch Your Idea</h4><p className="text-sm text-white/50">Present your complete startup to our judges and receive feedback.</p></div>
+                       <div className="fp-card p-3 sm:p-4 rounded-2xl flex items-center gap-3 sm:gap-4">
+                           <div className="size-9 sm:size-10 rounded-xl bg-[#5E0C9F]/40 flex items-center justify-center shrink-0"><MessageCircle className="size-4 sm:size-5 text-[#D776FF]"/></div>
+                           <div><h4 className="font-bold text-white text-base sm:text-lg">3. Pitch Your Idea</h4><p className="text-sm text-white/50">Present your complete startup to our judges and receive feedback.</p></div>
                        </div>
                    </div>
                 </div>
-                <div className="relative w-full aspect-square md:aspect-auto md:h-full min-h-[400px]">
+                <div className="relative w-full aspect-square md:aspect-auto md:h-full min-h-[300px] md:min-h-[400px]">
                     <div className="absolute inset-0 bg-gradient-to-br from-[#1B002B] to-[#3A036E] rounded-3xl fp-card overflow-hidden">
                         
                         {/* Background Grid & Glow */}
@@ -429,10 +427,10 @@ const FoundersPit = () => {
 
 
         {/* 4. WHO SHOULD ENTER ══════════ */}
-        <section className="py-20 px-4 sm:px-6 bg-[#0B0014] border-t border-[#7B2FBE]/10">
+        <section className="py-12 sm:py-20 px-4 sm:px-6 bg-[#0B0014] border-t border-[#7B2FBE]/10">
             <div className="max-w-6xl mx-auto text-center mb-16">
                 <span className="text-[#D776FF] font-bold tracking-[0.2em] uppercase text-xs">Eligibility Criteria</span>
-                <h2 className="text-3xl sm:text-4xl font-black text-white mt-2">Who belongs in <span className="fp-subtitle">The Pit?</span></h2>
+                <h2 className="text-2xl sm:text-4xl font-black text-white mt-2">Who belongs in <span className="fp-subtitle">The Pit?</span></h2>
             </div>
             <div className="max-w-4xl mx-auto grid sm:grid-cols-3 gap-6">
                 <div className="fp-card p-8 rounded-3xl text-center">
@@ -443,7 +441,7 @@ const FoundersPit = () => {
                 <div className="fp-card p-8 rounded-3xl text-center relative overflow-hidden group">
                     <div className="absolute inset-0 bg-gradient-to-t from-[#5E0C9F]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     <div className="mx-auto size-14 bg-[#1B002B] rounded-full flex items-center justify-center border border-[#7B2FBE]/30 mb-4 tracking-widest text-[#D776FF] font-bold">02</div>
-                    <h3 className="font-bold text-xl mb-2">Years 1 & 2</h3>
+                    <h3 className="font-bold text-xl mb-2">1st and 2nd year</h3>
                     <p className="text-sm text-white/50">Freshers with ideas & sophomores ready to execute.</p>
                 </div>
                 <div className="fp-card p-8 rounded-3xl text-center border-[#D776FF]/30">
@@ -459,7 +457,7 @@ const FoundersPit = () => {
             <div className="absolute inset-0 fp-grid-bg opacity-30"></div>
             <div className="max-w-6xl mx-auto w-full relative z-10">
                 <div className="text-center mb-16">
-                    <h2 className="text-3xl sm:text-5xl font-black text-white">The <span className="fp-subtitle">Experience Flow</span></h2>
+                    <h2 className="text-2xl sm:text-5xl font-black text-white">The <span className="fp-subtitle">Experience Flow</span></h2>
                 </div>
                 
                 <div className="grid md:grid-cols-3 gap-6 relative">
@@ -489,8 +487,11 @@ const FoundersPit = () => {
             <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-16">
                     <div className="inline-block px-4 py-1.5 rounded-full bg-[#D776FF]/10 text-[#D776FF] font-bold text-sm tracking-widest mb-6 border border-[#D776FF]/20">ROUND 1 ZOOM-IN</div>
-                    <h2 className="text-3xl sm:text-5xl font-black text-white mb-4">The Screening Stage</h2>
-                    <p className="text-white/60 text-lg">Format: Pitch Deck Submission <br/> Theme: Solving Everyday Campus Problems</p>
+                    <h2 className="text-2xl sm:text-5xl font-black text-white mb-4">The Screening Stage</h2>
+                    <p className="text-white/60 text-lg">Format: <b>Online</b> Pitch Deck Submission <br/> Theme: Solving Everyday Campus Problems</p>
+                    <p className="text-[#D776FF]/80 text-sm mt-4 font-bold tracking-wide uppercase bg-[#D776FF]/5 inline-block px-4 py-1 rounded-full border border-[#D776FF]/20">
+                        Remaining rounds will be OFFLINE for qualified teams
+                    </p>
                 </div>
                 
                 <div className="fp-card rounded-3xl p-8 sm:p-12 mb-10 border-l-4 border-l-[#D776FF] bg-[#1B002B]/30">
@@ -519,11 +520,11 @@ const FoundersPit = () => {
                     <div>
                         <h4 className="text-[#D776FF] font-bold mb-3 text-xl">Submission Guidelines</h4>
                         <ul className="text-white/70 text-base list-disc pl-5 space-y-2">
-                            <li>Please use PPT/PPTX formats only (Max 20MB limit).</li>
+                            <li>Please use PDF/PPT/PPTX formats only (Max 10MB limit).</li>
                             <li>Avoid embedding videos or external links as core presentation content.</li>
                             <li>All submissions should be presented in English.</li>
                             <li>Ensure all work is original (purely AI-generated plans are not permitted).</li>
-                            <li>Please designate one team member to upload the final submission.</li>
+                            <li>Please designate team lead to upload the final submission.</li>
                         </ul>
                     </div>
                 </div>
@@ -534,8 +535,8 @@ const FoundersPit = () => {
         <section className="py-20 px-4 sm:px-6 relative">
             <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl font-black text-white">How You Are <span className="fp-subtitle">Evaluated</span></h2>
-                    <p className="text-white/50 mt-2">Each team is evaluated by a panel of multiple industry judges.</p>
+                    <h2 className="text-2xl sm:text-4xl font-black text-white">How You Are <span className="fp-subtitle">Evaluated</span></h2>
+                    <p className="text-white/50 mt-2 text-sm sm:text-base">Each team is evaluated by a panel of multiple industry judges.</p>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {[
@@ -592,7 +593,7 @@ const FoundersPit = () => {
                                     <Upload className="size-8 text-[#D776FF]" />
                                 </div>
                                 <p className="font-bold text-white mb-1">Click to browse or drag file here</p>
-                                <p className="text-xs text-white/40 mb-4">PPT / PPTX only (Max 20MB)</p>
+                                <p className="text-xs text-white/40 mb-4">PDF / PPT / PPTX only (Max 10MB)</p>
                                 <p className="text-[#D776FF] text-xs font-mono bg-[#D776FF]/10 px-3 py-1 rounded">Format: TeamName_FP2026.pptx</p>
                             </div>
                             <Button className="w-full fp-btn-primary py-6 text-lg font-bold rounded-xl mt-6 opacity-50 cursor-not-allowed">Submit Your Deck</Button>
@@ -624,14 +625,14 @@ const FoundersPit = () => {
         <section className="py-20 px-4 sm:px-6">
             <div className="max-w-3xl mx-auto">
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl font-black text-white">Frequently Asked <span className="fp-subtitle">Questions</span></h2>
+                    <h2 className="text-2xl font-black text-white">Frequently Asked <span className="fp-subtitle">Questions</span></h2>
                 </div>
                 <div className="space-y-4">
                     {[
                         { q: "Can I participate individually?", a: "No. Founder's Pit requires teamwork. You must form a team of 2 to 4 members." },
                         { q: "What happens if we submit more than 3 slides?", a: "Your team will be immediately disqualified. Following constraints is part of the challenge." },
                         { q: "Can we submit multiple times?", a: "If you submit multiple times, only the latest submission before the deadline will be considered." },
-                        { q: "What happens after Round 1?", a: "Shortlisted teams will advance to the offline prototyping and pitching rounds. Details will be shared with the qualified teams." }
+                        { q: "What happens after Round 1?", a: "Shortlisted teams who survive the online screening will be invited to the campus for the remaining offline rounds, including the bidding, building, and final pitch. Only qualified teams will participate in the offline event day." }
                     ].map((faq, i) => (
                         <div key={i} className="fp-card rounded-2xl overflow-hidden cursor-pointer" onClick={() => setActiveFaq(activeFaq === i ? null : i)}>
                             <div className="p-5 flex justify-between items-center">
@@ -651,7 +652,7 @@ const FoundersPit = () => {
 
         {/* ══════════ POPUP / DRAWER ══════════ */}
         <Drawer open={isPopupOpen} onOpenChange={setIsPopupOpen}>
-          <DrawerContent className="bg-[#0B0014]/95 backdrop-blur-xl border-t border-[#7B2FBE]/30 pb-12">
+          <DrawerContent className="bg-[#0B0014]/95 backdrop-blur-xl border-t border-[#7B2FBE]/30 pb-28 sm:pb-12">
             <div className="mx-auto w-full max-w-sm">
               <DrawerHeader className="flex flex-col items-center">
                 <div className="size-16 rounded-2xl bg-gradient-to-br from-[#5E0C9F] to-[#7B2FBE] flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(123,47,190,0.6)]">
