@@ -116,14 +116,62 @@ const HugeTimeline = () => {
     );
 };
 
+const REG_OPEN_AT = new Date('2026-04-06T00:00:00+05:30');
+const REG_CLOSE_AT = new Date('2026-04-12T23:59:59+05:30');
+const ROUND1_DEADLINE_AT = new Date('2026-04-12T23:59:59+05:30');
+const EVALUATION_START_AT = new Date('2026-04-12T00:00:00+05:30');
+const RESULTS_AT = null;
+
+const FP_TIMELINE = [
+  { title: 'Registration Opens', dateLabel: '06/04/2026', at: REG_OPEN_AT },
+  { title: 'Registration Closes', dateLabel: '12/04/2026', at: REG_CLOSE_AT },
+  { title: 'Round 1 Submission Deadline', dateLabel: '12/04/2026', at: ROUND1_DEADLINE_AT },
+  { title: 'Evaluation Period', dateLabel: 'Starts from 12/04/2026', at: EVALUATION_START_AT },
+  { title: 'Results Announcement', dateLabel: 'TBD', at: RESULTS_AT },
+  { title: 'Event Date', dateLabel: 'TBD', at: null },
+];
+
+const getEventPhase = (now) => {
+  if (now < REG_OPEN_AT) return 'pre_launch';
+  if (now <= REG_CLOSE_AT) return 'registration_open';
+  if (!RESULTS_AT) return 'evaluation';
+  if (now < RESULTS_AT) return 'evaluation';
+  return 'results';
+};
+
+const getCountdownTarget = (now) => {
+  if (now < REG_OPEN_AT) {
+    return { label: 'Registration Opens In', target: REG_OPEN_AT };
+  }
+  if (now <= REG_CLOSE_AT) {
+    return { label: 'Registration Closes In', target: REG_CLOSE_AT };
+  }
+  return null;
+};
+
+const formatCountdown = (diffMs) => {
+  const total = Math.max(0, Math.floor(diffMs / 1000));
+  const days = Math.floor(total / 86400);
+  const hours = Math.floor((total % 86400) / 3600);
+  const minutes = Math.floor((total % 3600) / 60);
+  const seconds = total % 60;
+  return { days, hours, minutes, seconds };
+};
+
 /* ──────────────────── Main Component ──────────────────── */
 const FoundersPit = () => {
-  // Phase logic: "pre_launch", "registration_open", "registration_closed", "evaluation", "results"
-  const [eventPhase, setEventPhase] = useState("pre_launch");
+  // Date-driven phases: "pre_launch", "registration_open", "evaluation", "results"
+  const [now, setNow] = useState(() => new Date());
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [activeFaq, setActiveFaq] = useState(null);
   const heroRef = useRef(null);
+
+  const eventPhase = getEventPhase(now);
+  const countdownConfig = getCountdownTarget(now);
+  const countdown = countdownConfig
+    ? formatCountdown(countdownConfig.target.getTime() - now.getTime())
+    : null;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -144,6 +192,13 @@ const FoundersPit = () => {
     };
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setNow(new Date());
+    }, 1000);
+    return () => window.clearInterval(timer);
   }, []);
 
   const executeScroll = (id) => {
@@ -305,7 +360,8 @@ const FoundersPit = () => {
             <div className="mt-6 pb-16" style={{ animation: 'fadeSlideUp 0.8s ease-out 0.5s both' }}>
                {eventPhase === "registration_open" && <p className="text-[#D776FF]/70 text-xs font-semibold uppercase tracking-wider animate-pulse">Registrations open for Round 1</p>}
                {eventPhase === "pre_launch" && <p className="text-[#D776FF]/70 text-xs font-semibold uppercase tracking-wider animate-pulse">Registrations Opening Soon</p>}
-               {eventPhase === "registration_closed" && <p className="text-[#D776FF]/70 text-xs font-semibold uppercase tracking-wider">Registrations Closed - Submissions Open</p>}
+              {eventPhase === "evaluation" && <p className="text-[#D776FF]/70 text-xs font-semibold uppercase tracking-wider">Registration closed - evaluation in progress</p>}
+              {eventPhase === "results" && <p className="text-[#D776FF]/70 text-xs font-semibold uppercase tracking-wider">Round 1 results announced</p>}
             </div>
           </div>
 
@@ -320,6 +376,97 @@ const FoundersPit = () => {
           </div>
         </div>
 
+        {/* 2.5 TIMELINE + COUNTDOWN ══════════ */}
+        <section className="relative py-16 sm:py-24 px-4 sm:px-6 bg-[#05000A] border-t border-[#7B2FBE]/20">
+          <div className="absolute inset-0 fp-grid-bg opacity-20 pointer-events-none" />
+          <div className="max-w-6xl mx-auto relative z-10">
+            <div className="text-center mb-12">
+              <span className="text-[#D776FF] font-bold tracking-[0.2em] uppercase text-xs">Battle Timeline</span>
+              <h2 className="text-3xl sm:text-5xl font-black text-white mt-3">Plan. Build. <span className="fp-subtitle">Execute.</span></h2>
+              <p className="text-white/55 mt-4 max-w-2xl mx-auto">Track every critical deadline and stay ahead of the competition clock.</p>
+            </div>
+
+            <div className="fp-card rounded-3xl p-6 sm:p-8 mb-8 border border-[#D776FF]/30 bg-[#120021]/70">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+                <div>
+                  <p className="text-[#D776FF] text-xs uppercase tracking-[0.2em] font-bold">Live Countdown</p>
+                  <h3 className="text-2xl sm:text-3xl font-black text-white mt-2">
+                    {countdownConfig ? countdownConfig.label : 'Registration Window Closed'}
+                  </h3>
+                </div>
+                <div className="flex items-stretch gap-2 sm:gap-3">
+                  {countdown ? (
+                    [
+                      { key: 'days', value: countdown.days, label: 'Days' },
+                      { key: 'hours', value: countdown.hours, label: 'Hours' },
+                      { key: 'minutes', value: countdown.minutes, label: 'Minutes' },
+                      { key: 'seconds', value: countdown.seconds, label: 'Seconds' },
+                    ].map((unit) => (
+                      <div key={unit.key} className="min-w-[72px] sm:min-w-[82px] px-3 py-3 rounded-2xl bg-[#1B002B]/70 border border-[#7B2FBE]/40 text-center">
+                        <p className="text-2xl sm:text-3xl font-black text-white tabular-nums">{String(unit.value).padStart(2, '0')}</p>
+                        <p className="text-[10px] sm:text-xs uppercase tracking-wider text-[#D776FF]/80 font-semibold">{unit.label}</p>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="px-5 py-4 rounded-2xl bg-[#1B002B]/70 border border-[#7B2FBE]/40 text-white/70 font-semibold text-sm">
+                      Countdown completed. Evaluation and results updates are now active.
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-5">
+              {FP_TIMELINE.map((item, index) => {
+                const isCompleted = item.at ? now >= item.at : false;
+                const isActive = item.at && countdownConfig && item.at.getTime() === countdownConfig.target.getTime();
+
+                return (
+                  <div
+                    key={item.title}
+                    className={cn(
+                      'relative rounded-2xl p-5 sm:p-6 border transition-all duration-300 overflow-hidden',
+                      isActive
+                        ? 'bg-[#2A0043]/80 border-[#D776FF]/70 shadow-[0_0_30px_rgba(215,118,255,0.2)]'
+                        : isCompleted
+                        ? 'bg-[#130022]/70 border-[#7B2FBE]/40'
+                        : 'bg-[#0D0017]/70 border-[#7B2FBE]/25'
+                    )}
+                  >
+                    <div className="absolute right-4 top-4">
+                      {isActive ? (
+                        <span className="text-[10px] uppercase tracking-widest bg-[#D776FF]/20 text-[#D776FF] px-2 py-1 rounded-full font-bold">Live</span>
+                      ) : isCompleted ? (
+                        <span className="text-[10px] uppercase tracking-widest bg-[#5E0C9F]/30 text-[#D8B6FF] px-2 py-1 rounded-full font-bold">Completed</span>
+                      ) : (
+                        <span className="text-[10px] uppercase tracking-widest bg-[#1B002B] text-white/50 px-2 py-1 rounded-full font-bold">Upcoming</span>
+                      )}
+                    </div>
+
+                    <div className="flex items-start gap-4 pr-16">
+                      <div className={cn(
+                        'size-11 rounded-xl flex items-center justify-center border shrink-0',
+                        isActive
+                          ? 'bg-[#D776FF]/20 border-[#D776FF]/70 text-[#EAC7FF]'
+                          : isCompleted
+                          ? 'bg-[#5E0C9F]/25 border-[#7B2FBE]/50 text-[#D8B6FF]'
+                          : 'bg-[#1B002B]/50 border-[#7B2FBE]/30 text-[#B988DE]'
+                      )}>
+                        <Calendar className="size-5" />
+                      </div>
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.2em] text-[#D776FF]/80 font-bold">Milestone {String(index + 1).padStart(2, '0')}</p>
+                        <h3 className="text-lg sm:text-xl font-bold text-white mt-1">{item.title}</h3>
+                        <p className="text-white/65 mt-2 text-sm sm:text-base">{item.dateLabel}</p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         {/* 3. WHAT IS FOUNDER’S PIT ══════════ */}
         <section id="what-is-fp" className="relative py-20 sm:py-28 px-4 sm:px-6 overflow-hidden">
             <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(94,12,159,0.15) 0%, transparent 70%)', filter: 'blur(60px)' }} />
@@ -330,20 +477,20 @@ const FoundersPit = () => {
                         <span className="fp-subtitle">Build a Startup.</span>
                    </h2>
                    <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8">
-                       Founder's Pit is a fun and interactive competition where you step into the shoes of a real founder. You and your team will choose an everyday problem, build a viable business solution around it, learn how to adapt to changes, and finally present your idea to a panel of friendly judges.
+                       Founder’s Pit 2026 is a high-energy, one-day startup simulation by the Entrepreneurship Development Cell (EDC), JSS University Noida. Participants step into the role of founders identifying real-world problems, building viable solutions, adapting to dynamic challenges, and pitching their ideas to a panel of judges in a fast-paced, competitive environment.
                    </p>
                    <div className="flex flex-col gap-4">
                        <div className="fp-card p-3 sm:p-4 rounded-2xl flex items-center gap-3 sm:gap-4">
                            <div className="size-9 sm:size-10 rounded-xl bg-[#5E0C9F]/40 flex items-center justify-center shrink-0"><Target className="size-4 sm:size-5 text-[#D776FF]"/></div>
-                           <div><h4 className="font-bold text-white text-base sm:text-lg">1. Choose a Problem</h4><p className="text-sm text-white/50">Use virtual currency to select a challenge you want to solve.</p></div>
+                           <div><h4 className="font-bold text-white text-base sm:text-lg">THE BID</h4><p className="text-sm text-white/50">Strategically compete using virtual currency to win the problem statement you want to solve.</p></div>
                        </div>
                        <div className="fp-card p-3 sm:p-4 rounded-2xl flex items-center gap-3 sm:gap-4">
                            <div className="size-9 sm:size-10 rounded-xl bg-[#5E0C9F]/40 flex items-center justify-center shrink-0"><Lightbulb className="size-4 sm:size-5 text-[#D776FF]"/></div>
-                           <div><h4 className="font-bold text-white text-base sm:text-lg">2. Create a Solution</h4><p className="text-sm text-white/50">Work closely with your team to design a product and business plan.</p></div>
+                           <div><h4 className="font-bold text-white text-base sm:text-lg">THE BUILD</h4><p className="text-sm text-white/50">Design your product, craft a revenue model, and navigate unexpected challenges thrown your way.</p></div>
                        </div>
                        <div className="fp-card p-3 sm:p-4 rounded-2xl flex items-center gap-3 sm:gap-4">
                            <div className="size-9 sm:size-10 rounded-xl bg-[#5E0C9F]/40 flex items-center justify-center shrink-0"><MessageCircle className="size-4 sm:size-5 text-[#D776FF]"/></div>
-                           <div><h4 className="font-bold text-white text-base sm:text-lg">3. Pitch Your Idea</h4><p className="text-sm text-white/50">Present your complete startup to our judges and receive feedback.</p></div>
+                           <div><h4 className="font-bold text-white text-base sm:text-lg">THE PITCH</h4><p className="text-sm text-white/50">Present your battle-tested startup to a panel of expert judges.</p></div>
                        </div>
                    </div>
                 </div>
@@ -575,28 +722,10 @@ const FoundersPit = () => {
                             </div>
                             <h2 className="text-3xl font-black text-white mb-4">Team <span className="fp-subtitle">Registration</span></h2>
                             <p className="text-white/60 mb-8 max-w-md mx-auto text-lg">Assemble your squad of 2-4 members. The battlefield awaits.</p>
-                            <Button onClick={() => window.open('https://unstop.com', '_blank')} className="fp-btn-primary px-10 py-7 text-lg font-black rounded-full w-full sm:w-auto">
+                            <Button onClick={() => window.open('https://events.edcjssun.com/', '_blank')} className="fp-btn-primary px-10 py-7 text-lg font-black rounded-full w-full sm:w-auto">
                                 Proceed to Register
                                 <ArrowRight className="ml-2 size-5 inline-block" />
                             </Button>
-                        </div>
-                    )}
-
-                    {eventPhase === "registration_closed" && (
-                        <div>
-                            <div className="text-center mb-8">
-                                <h2 className="text-3xl font-black text-white mb-2">Round 1 <span className="fp-subtitle">Submission</span></h2>
-                                <p className="text-white/50 text-sm">Upload your 3-slide pitch deck.</p>
-                            </div>
-                            <div className="border-2 border-dashed border-[#7B2FBE]/50 rounded-3xl p-10 flex flex-col items-center justify-center bg-[#000000]/30 hover:bg-[#1B002B]/40 transition-colors cursor-pointer group">
-                                <div className="size-16 rounded-full bg-[#5E0C9F]/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                                    <Upload className="size-8 text-[#D776FF]" />
-                                </div>
-                                <p className="font-bold text-white mb-1">Click to browse or drag file here</p>
-                                <p className="text-xs text-white/40 mb-4">PDF / PPT / PPTX only (Max 10MB)</p>
-                                <p className="text-[#D776FF] text-xs font-mono bg-[#D776FF]/10 px-3 py-1 rounded">Format: TeamName_FP2026.pptx</p>
-                            </div>
-                            <Button className="w-full fp-btn-primary py-6 text-lg font-bold rounded-xl mt-6 opacity-50 cursor-not-allowed">Submit Your Deck</Button>
                         </div>
                     )}
 
