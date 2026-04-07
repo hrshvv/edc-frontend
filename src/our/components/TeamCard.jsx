@@ -6,12 +6,11 @@ import {
 } from '@/components/ui/popover';
 import {
   IoLogoGithub,
-  IoLogoInstagram,
   IoLogoLinkedin,
   IoShareSocialSharp,
 } from 'react-icons/io5';
 import { Button } from '@/components/ui/button';
-const TeamCard = ({ name, role, image, instagram, linkedin, github }) => {
+const TeamCard = ({ name, role, image, linkedin, github }) => {
   return (
     <div className="bg-white rounded-3xl overflow-hidden w-full max-w-64 min-h-80 relative group">
       <div className="w-full h-80 overflow-hidden">
@@ -49,16 +48,7 @@ const TeamCard = ({ name, role, image, instagram, linkedin, github }) => {
                   <div>
                     <p className="font-semibold">Socials</p>
                     <div className="flex flex-wrap gap-1">
-                      {instagram && (
-                        <Button
-                          variant="outline"
-                          size="icon"
-                          className="text-[18px]"
-                          onClick={() => window.open(instagram, '_blank')}
-                        >
-                          <IoLogoInstagram />
-                        </Button>
-                      )}
+
                       {linkedin && (
                         <Button
                           variant="outline"

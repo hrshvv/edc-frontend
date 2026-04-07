@@ -210,7 +210,7 @@ const FoundersPit = () => {
 
   const handleHeroCta = () => {
     if (eventPhase === "registration_open") {
-      window.open('https://events.edcjssun.com/', '_blank');
+      window.open('https://events.edcjssun.com/events/founders-pit-2026', '_blank');
       return;
     }
     executeScroll("battle-timeline");
@@ -809,7 +809,7 @@ const FoundersPit = () => {
                             </div>
                             <h2 className="text-3xl font-black text-white mb-4">Team <span className="fp-subtitle">Registration</span></h2>
                             <p className="text-white/60 mb-8 max-w-md mx-auto text-lg">Assemble your squad of 2-4 members. The battlefield awaits.</p>
-                            <Button onClick={() => window.open('https://events.edcjssun.com/', '_blank')} className="fp-btn-primary px-10 py-7 text-lg font-black rounded-full w-full sm:w-auto">
+                            <Button onClick={() => window.open('https://events.edcjssun.com/events/founders-pit-2026', '_blank')} className="fp-btn-primary px-10 py-7 text-lg font-black rounded-full w-full sm:w-auto">
                                 Proceed to Register
                                 <ArrowRight className="ml-2 size-5 inline-block" />
                             </Button>

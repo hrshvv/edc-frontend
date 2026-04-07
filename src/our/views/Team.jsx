@@ -23,7 +23,6 @@ const Team = () => {
       role: 'Faculty Coordinator',
       image:
         'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1760033447/1747474363758_srqubg.jpg',
-      instagram: '',
       linkedin: 'https://www.linkedin.com/in/dr-nishi-sharma-8aab36159/',
       github: '',
     },
@@ -32,7 +31,6 @@ const Team = () => {
       role: 'Faculty Coordinator',
       image:
         'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1760033446/1655353630059_aovzf3.jpg',
-      instagram: '',
       linkedin: 'https://www.linkedin.com/in/dr-ashima-srivastava-215295135/',
       github: '',
     },
@@ -620,7 +618,6 @@ const Team = () => {
               name={member.name}
               role={member.role}
               image={member.image}
-              instagram={member.instagram}
               linkedin={member.linkedin}
               github={member.github}
             />
