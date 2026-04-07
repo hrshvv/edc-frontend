@@ -486,10 +486,10 @@ const Team = () => {
     },
     {
       name: 'Mritunjay Tiwari',
-      role: 'Media and Networking Team Member',
+      role: 'Social Media Team Member',
       image:
         'https://res.cloudinary.com/dumzfcdvx/image/upload/IMG_5842_-_Nihal_Tiwari_lcntgi',
-      department: 'Media and Networking Team',
+      department: 'Social Media Team',
       instagram: '',
       linkedin:
         'https://www.linkedin.com/in/mrityunjay-tiwari-6a8914399?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
@@ -497,10 +497,10 @@ const Team = () => {
     },
     {
       name: 'Rounak Sheera',
-      role: 'Media and Networking Team Member',
+      role: 'Social Media Team Member',
       image:
         'https://res.cloudinary.com/dumzfcdvx/image/upload/IMG_20260206_174906_-_rounak_sheera_nbe5az',
-      department: 'Media and Networking Team',
+      department: 'Social Media Team',
       instagram: '',
       linkedin:
         'https://www.linkedin.com/in/rounak-sheera-b96ba337a?utm_source=share_via&utm_content=profile&utm_medium=member_android',
@@ -508,10 +508,10 @@ const Team = () => {
     },
     {
       name: 'Arshita Soni',
-      role: 'Media and Networking Team Member',
+      role: 'Social Media Team Member',
       image:
         'https://res.cloudinary.com/dumzfcdvx/image/upload/a72dd94d-d44c-46c4-af6a-660efbfc071a_-_Arshita_Soni_avtyne',
-      department: 'Media and Networking Team',
+      department: 'Social Media Team',
       instagram: 'https://www.instagram.com/_ar.shitaa?igsh=MW05N253cnNxMjBvaA%3D%3D&utm_source=qr',
       linkedin:
         'https://www.linkedin.com/in/arshita-soni-083896380?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
@@ -626,6 +626,7 @@ const Team = () => {
     { label: 'Content & Docs', value: 'Content and Documentation Team' },
     { label: 'Liaisoning Team', value: 'Liaisoning Team' },
     { label: 'Events & Training', value: 'Events and Training Team' },
+    { label: 'Social Media', value: 'Media & Networking Team' },
     { label: 'Marketing Team', value: 'Marketing Team' },
     { label: 'Media & Networking', value: 'Media and Networking Team' },
   ];

@@ -272,6 +272,17 @@ const Team = () => {
 
     //1ST YEAR
     {
+      name: 'Alabhya Mehrotra',
+      role: 'Design Team Member',
+      image:
+        'https://res.cloudinary.com/dumzfcdvx/image/upload/IMG-20260217-WA0016_-_Alabhya_Mehrotra_uqd1hi',
+      department: 'Design Team',
+      instagram: ' ',
+      linkedin:
+        'https://www.linkedin.com/in/alabhya-mehrotra-5525a4370',
+      github: '', year: 1
+    },
+    {
       name: 'Shriti Gupta',
       role: 'Content and Documentation Team Member',
       image:
@@ -283,45 +294,69 @@ const Team = () => {
       github: 'https://github.com/shritigupta007-alt', year: 1
     },
     {
-      name: 'Tanushi Sharma',
-      role: 'Content and Documentation Team Member',
+      name: 'Aveeshi Kapil',
+      role: 'Marketing Team Member',
       image:
-        'https://res.cloudinary.com/dumzfcdvx/image/upload/Screenshot_2026-02-14-23-09-35-86_6012fa4d4ddec268fc5c7112cbb265e7_-_Tanushi_Sharma_ruz3v5',
-      department: 'Content and Documentation Team',
+        'https://res.cloudinary.com/dumzfcdvx/image/upload/IMG-20251204-WA0116_1_-_Aveeshi_Kapil_jgczvo',
+      department: 'Marketing Team',
+      instagram: '',
+      linkedin:
+        'https://www.linkedin.com/in/aveeshi-k-a9519a370/',
+      github: 'https://github.com/vizzie97', year: 1
+    },
+    {
+      name: 'Shree Vatsa Pandey',
+      role: 'Marketing Team Member',
+      image:
+        'https://res.cloudinary.com/dumzfcdvx/image/upload/IMG-20250914-WA0002_1_-_SHREE_gknqvz',
+      department: 'Marketing Team',
       instagram: '',
       linkedin:
         '',
       github: '', year: 1
     },
     {
-      name: 'Bhargav Wariyal',
-      role: 'Content and Documentation Team Member',
+      name: 'Shubham Verma',
+      role: 'Technical Team Member',
       image:
-        'https://res.cloudinary.com/dumzfcdvx/image/upload/17710879106835359238193069224458_-_Bhargav_Wariyal_xasyh4',
-      department: 'Content and Documentation Team',
+        'https://res.cloudinary.com/dumzfcdvx/image/upload/IMG_7963_-_Shubham_Verma_tgtz8o',
+      department: 'Technical Team',
       instagram: '',
       linkedin:
-        'https://www.linkedin.com/in/bhargav-wariyal-609a4834b?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+        'https://www.linkedin.com/in/its-me-shubham-verma?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
+      github: 'https://github.com/shubhamverma-devx', year: 1
+    },
+    {
+      name: 'Harshpreet Kaur',
+      role: 'Liaisoning Team Member',
+      image:
+        'https://res.cloudinary.com/dumzfcdvx/image/upload/IMG-20250913-WA0135_-_Harshpreet_Kaur_reom6d',
+      department: 'Liaisoning Team',
+      instagram: '',
+      linkedin:
+        'https://www.linkedin.com/in/harshpreet-kaur-480889375?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       github: '', year: 1
     },
     {
-      name: 'Samiya Shaikh',
-      role: 'Content and Documentation Team Member',
-      image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/q_auto/f_auto/v1775582181/IMG-20260208-WA0016_-_Samiya_shaikh_unznao.jpg',
-      department: 'Content and Documentation Team',
+      name: 'Mritunjay Tiwari',
+      role: 'Social Media Team Member',
+      image:
+        'https://res.cloudinary.com/dumzfcdvx/image/upload/IMG_5842_-_Nihal_Tiwari_lcntgi',
+      department: 'Social Media Team',
       instagram: '',
-      linkedin: 'https://www.linkedin.com/in/samiya-shaikh-700275353/',
+      linkedin:
+        'https://www.linkedin.com/in/mrityunjay-tiwari-6a8914399?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
       github: '', year: 1
     },
     {
-      name: 'Alabhya Mehrotra',
-      role: 'Design Team Member',
+      name: 'Varuni Kalra',
+      role: 'Liaisoning Team Member',
       image:
-        'https://res.cloudinary.com/dumzfcdvx/image/upload/IMG-20260217-WA0016_-_Alabhya_Mehrotra_uqd1hi',
-      department: 'Design Team',
-      instagram: ' ',
+        'https://res.cloudinary.com/dumzfcdvx/image/upload/20251206_140218_-_Varuni_Kalra_jerfh4',
+      department: 'Liaisoning Team',
+      instagram: '',
       linkedin:
-        'https://www.linkedin.com/in/alabhya-mehrotra-5525a4370',
+        'https://www.linkedin.com/in/varuni-kalra-721146379?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       github: '', year: 1
     },
     {
@@ -347,61 +382,58 @@ const Team = () => {
       github: 'https://github.com/janvee-core03', year: 1
     },
     {
-      name: 'Lakshita Rawat',
-      role: 'Design Team Member',
-      image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/q_auto/f_auto/v1775582234/image_-_Lakshita_ckaotj.jpg',
-      department: 'Design Team',
-      instagram: '',
-      linkedin: 'https://www.linkedin.com/in/lakshitarawat/',
-      github: 'https://github.com/lakshita-rawat', year: 1
-    },
-    {
-      name: 'Poorva Sanan',
-      role: 'Design Team Member',
-      image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/q_auto/f_auto/v1775582234/IMG_20260213_205444_-_Poorva_Sanan_qh5qpw.jpg',
-      department: 'Design Team',
-      instagram: '',
-      linkedin: 'https://www.linkedin.com/in/poorva-sanan-b3098136b/',
-      github: '', year: 1
-    },
-    {
-      name: 'Aayushi Pandey',
-      role: 'Events and Training Team Member',
-      image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/q_auto/f_auto/v1775581917/Screenshot_20240612_190043_Drive_-_Aayushi_Pandey_oqj6v3.jpg',
-      department: 'Events and Training Team',
-      instagram: '',
-      linkedin: 'https://www.linkedin.com/in/aayushi-pandey-7251bb376/',
-      github: '', year: 1
-    },
-    {
-      name: 'Samir',
-      role: 'Events and Training Team Member',
-      image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/q_auto/f_auto/v1775582233/IMG_20260213_205015_-_SAMIR_ger40e.jpg',
-      department: 'Events and Training Team',
-      instagram: '',
-      linkedin: 'https://www.linkedin.com/in/samir-roy-896878320/',
-      github: '', year: 1
-    },
-    {
-      name: 'Harshpreet Kaur',
-      role: 'Liaisoning Team Member',
+      name: 'Tanushi Sharma',
+      role: 'Content and Documentation Team Member',
       image:
-        'https://res.cloudinary.com/dumzfcdvx/image/upload/IMG-20250913-WA0135_-_Harshpreet_Kaur_reom6d',
-      department: 'Liaisoning Team',
+        'https://res.cloudinary.com/dumzfcdvx/image/upload/Screenshot_2026-02-14-23-09-35-86_6012fa4d4ddec268fc5c7112cbb265e7_-_Tanushi_Sharma_ruz3v5',
+      department: 'Content and Documentation Team',
       instagram: '',
       linkedin:
-        'https://www.linkedin.com/in/harshpreet-kaur-480889375?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+        '',
       github: '', year: 1
     },
     {
-      name: 'Varuni Kalra',
-      role: 'Liaisoning Team Member',
+      name: 'Bhargav Wariyal',
+      role: 'Content and Documentation Team Member',
       image:
-        'https://res.cloudinary.com/dumzfcdvx/image/upload/20251206_140218_-_Varuni_Kalra_jerfh4',
-      department: 'Liaisoning Team',
+        'https://res.cloudinary.com/dumzfcdvx/image/upload/17710879106835359238193069224458_-_Bhargav_Wariyal_xasyh4',
+      department: 'Content and Documentation Team',
       instagram: '',
       linkedin:
-        'https://www.linkedin.com/in/varuni-kalra-721146379?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+        'https://www.linkedin.com/in/bhargav-wariyal-609a4834b?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+      github: '', year: 1
+    },
+    {
+      name: 'Rounak Sheera',
+      role: 'Social Media Team Member',
+      image:
+        'https://res.cloudinary.com/dumzfcdvx/image/upload/IMG_20260206_174906_-_rounak_sheera_nbe5az',
+      department: 'Social Media Team',
+      instagram: '',
+      linkedin:
+        'https://www.linkedin.com/in/rounak-sheera-b96ba337a?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+      github: '', year: 1
+    },
+    {
+      name: 'Arshita Soni',
+      role: 'Social Media Team Member',
+      image:
+        'https://res.cloudinary.com/dumzfcdvx/image/upload/a72dd94d-d44c-46c4-af6a-660efbfc071a_-_Arshita_Soni_avtyne',
+      department: 'Social Media Team',
+      instagram: 'https://www.instagram.com/_ar.shitaa?igsh=MW05N253cnNxMjBvaA%3D%3D&utm_source=qr',
+      linkedin:
+        'https://www.linkedin.com/in/arshita-soni-083896380?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
+      github: 'https://share.google/qUZNBl9JCQIHU8VdC', year: 1
+    },
+    {
+      name: 'Khushi Pandey',
+      role: 'Outreach Team Member',
+      image:
+        'https://res.cloudinary.com/dumzfcdvx/image/upload/IMG_20250722_165850_752_-_Khushi_Pandey_hlsyks',
+      department: 'Outreach Team',
+      instagram: 'https://www.instagram.com/def_not_haaapppyyyy?igsh=MXRieXY3Z3Jna2xybw==',
+      linkedin:
+        'https://www.linkedin.com/in/khushipandey04?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
       github: '', year: 1
     },
     {
@@ -416,35 +448,6 @@ const Team = () => {
       github: '', year: 1
     },
     {
-      name: 'Purti Jain',
-      role: 'Liaisoning Team Member',
-      image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/q_auto/f_auto/v1775581750/IMG_20260205_183739533_-_Purti_Jain_fyxnjw.jpg',
-      department: 'Liaisoning Team',
-      instagram: '',
-      linkedin: 'https://www.linkedin.com/in/purti-jain-91292337b/',
-      github: '', year: 1
-    },
-    {
-      name: 'Navya Vishwakarma',
-      role: 'Liaisoning Team Member',
-      image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/q_auto/f_auto/v1775582228/IMG_20260213_125318_-_Navya_Vishwakarma_zolvse.jpg',
-      department: 'Liaisoning Team',
-      instagram: '',
-      linkedin: 'https://www.linkedin.com/in/navya-vishwakarma/',
-      github: 'https://github.com/navyavishwakarma', year: 1
-    },
-    {
-      name: 'Aveeshi Kapil',
-      role: 'Marketing Team Member',
-      image:
-        'https://res.cloudinary.com/dumzfcdvx/image/upload/IMG-20251204-WA0116_1_-_Aveeshi_Kapil_jgczvo',
-      department: 'Marketing Team',
-      instagram: '',
-      linkedin:
-        'https://www.linkedin.com/in/aveeshi-k-a9519a370/',
-      github: 'https://github.com/vizzie97', year: 1
-    },
-    {
       name: 'Raghavi Shivhare',
       role: 'Marketing Team Member',
       image:
@@ -456,15 +459,69 @@ const Team = () => {
       github: 'https://github.com/raghavishivhare-jpg', year: 1
     },
     {
-      name: 'Khushi Pandey',
-      role: 'Outreach Team Member',
+      name: 'Vaishnavi Negi',
+      role: 'Technical Team Member',
       image:
-        'https://res.cloudinary.com/dumzfcdvx/image/upload/IMG_20250722_165850_752_-_Khushi_Pandey_hlsyks',
-      department: 'Outreach Team',
-      instagram: 'https://www.instagram.com/def_not_haaapppyyyy?igsh=MXRieXY3Z3Jna2xybw==',
+        'https://res.cloudinary.com/dumzfcdvx/image/upload/e_contrast:level_-18;type_sigmoidal/WhatsApp_Image_2026-03-22_at_16.31.09_ncagay.jpg',
+      department: 'Technical Team',
+      instagram: 'https://www.instagram.com/__negii23__?igsh=OWtoamt0Znp6cnEw',
       linkedin:
-        'https://www.linkedin.com/in/khushipandey04?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+        'https://www.linkedin.com/in/vaishnavinegii',
+      github: 'https://github.com/negiigit', year: 1
+    },
+    {
+      name: 'Purti Jain',
+      role: 'Liaisoning Team Member',
+      image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/q_auto/f_auto/v1775581750/IMG_20260205_183739533_-_Purti_Jain_fyxnjw.jpg',
+      department: 'Liaisoning Team',
+      instagram: '',
+      linkedin: 'https://www.linkedin.com/in/purti-jain-91292337b/',
       github: '', year: 1
+    },
+    {
+      name: 'Rishabh Kumar',
+      role: 'Technical Team Member',
+      image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/q_auto/f_auto/v1775581819/RI_PHOTO_-_Rishabh_Kumar_pnubta.jpg',
+      department: 'Technical Team',
+      instagram: '',
+      linkedin: 'https://www.linkedin.com/in/rishabh-k-ab7596378/',
+      github: '', year: 1
+    },
+    {
+      name: 'Aayushi Pandey',
+      role: 'Events and Training Team Member',
+      image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/q_auto/f_auto/v1775581917/Screenshot_20240612_190043_Drive_-_Aayushi_Pandey_oqj6v3.jpg',
+      department: 'Events and Training Team',
+      instagram: '',
+      linkedin: 'https://www.linkedin.com/in/aayushi-pandey-7251bb376/',
+      github: '', year: 1
+    },
+    {
+      name: 'Samiya Shaikh',
+      role: 'Content and Documentation Team Member',
+      image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/q_auto/f_auto/v1775582181/IMG-20260208-WA0016_-_Samiya_shaikh_unznao.jpg',
+      department: 'Content and Documentation Team',
+      instagram: '',
+      linkedin: 'https://www.linkedin.com/in/samiya-shaikh-700275353/',
+      github: '', year: 1
+    },
+    {
+      name: 'Aditya Singh',
+      role: 'Technical Team Member',
+      image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/q_auto/f_auto/v1775582221/IMG_20260201_134720_-_aditya_mpqqvk.jpg',
+      department: 'Technical Team',
+      instagram: '',
+      linkedin: 'https://www.linkedin.com/in/aditya-singh-a95785278/',
+      github: 'https://github.com/ryzenforsale', year: 1
+    },
+    {
+      name: 'Navya Vishwakarma',
+      role: 'Liaisoning Team Member',
+      image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/q_auto/f_auto/v1775582228/IMG_20260213_125318_-_Navya_Vishwakarma_zolvse.jpg',
+      department: 'Liaisoning Team',
+      instagram: '',
+      linkedin: 'https://www.linkedin.com/in/navya-vishwakarma/',
+      github: 'https://github.com/navyavishwakarma', year: 1
     },
     {
       name: 'Shivanshi Srivastava',
@@ -485,77 +542,31 @@ const Team = () => {
       github: '', year: 1
     },
     {
-      name: 'Mritunjay Tiwari',
-      role: 'Media and Networking Team Member',
-      image:
-        'https://res.cloudinary.com/dumzfcdvx/image/upload/IMG_5842_-_Nihal_Tiwari_lcntgi',
-      department: 'Media and Networking Team',
+      name: 'Lakshita Rawat',
+      role: 'Design Team Member',
+      image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/q_auto/f_auto/v1775582234/image_-_Lakshita_ckaotj.jpg',
+      department: 'Design Team',
       instagram: '',
-      linkedin:
-        'https://www.linkedin.com/in/mrityunjay-tiwari-6a8914399?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
+      linkedin: 'https://www.linkedin.com/in/lakshitarawat/',
+      github: 'https://github.com/lakshita-rawat', year: 1
+    },
+    {
+      name: 'Poorva Sanan',
+      role: 'Design Team Member',
+      image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/q_auto/f_auto/v1775582234/IMG_20260213_205444_-_Poorva_Sanan_qh5qpw.jpg',
+      department: 'Design Team',
+      instagram: '',
+      linkedin: 'https://www.linkedin.com/in/poorva-sanan-b3098136b/',
       github: '', year: 1
     },
     {
-      name: 'Rounak Sheera',
-      role: 'Media and Networking Team Member',
-      image:
-        'https://res.cloudinary.com/dumzfcdvx/image/upload/IMG_20260206_174906_-_rounak_sheera_nbe5az',
-      department: 'Media and Networking Team',
+      name: 'Samir',
+      role: 'Events and Training Team Member',
+      image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/q_auto/f_auto/v1775582233/IMG_20260213_205015_-_SAMIR_ger40e.jpg',
+      department: 'Events and Training Team',
       instagram: '',
-      linkedin:
-        'https://www.linkedin.com/in/rounak-sheera-b96ba337a?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+      linkedin: 'https://www.linkedin.com/in/samir-roy-896878320/',
       github: '', year: 1
-    },
-    {
-      name: 'Arshita Soni',
-      role: 'Media and Networking Team Member',
-      image:
-        'https://res.cloudinary.com/dumzfcdvx/image/upload/a72dd94d-d44c-46c4-af6a-660efbfc071a_-_Arshita_Soni_avtyne',
-      department: 'Media and Networking Team',
-      instagram: 'https://www.instagram.com/_ar.shitaa?igsh=MW05N253cnNxMjBvaA%3D%3D&utm_source=qr',
-      linkedin:
-        'https://www.linkedin.com/in/arshita-soni-083896380?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
-      github: 'https://share.google/qUZNBl9JCQIHU8VdC', year: 1
-    },
-    {
-      name: 'Shubham Verma',
-      role: 'Technical Team Member',
-      image:
-        'https://res.cloudinary.com/dumzfcdvx/image/upload/IMG_7963_-_Shubham_Verma_tgtz8o',
-      department: 'Technical Team',
-      instagram: '',
-      linkedin:
-        'https://www.linkedin.com/in/its-me-shubham-verma?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
-      github: 'https://github.com/shubhamverma-devx', year: 1
-    },
-    {
-      name: 'Vaishnavi Negi',
-      role: 'Technical Team Member',
-      image:
-        'https://res.cloudinary.com/dumzfcdvx/image/upload/e_contrast:level_-18;type_sigmoidal/WhatsApp_Image_2026-03-22_at_16.31.09_ncagay.jpg',
-      department: 'Technical Team',
-      instagram: 'https://www.instagram.com/__negii23__?igsh=OWtoamt0Znp6cnEw',
-      linkedin:
-        'https://www.linkedin.com/in/vaishnavinegii',
-      github: 'https://github.com/negiigit', year: 1
-    },
-    {
-      name: 'Rishabh Kumar',
-      role: 'Technical Team Member',
-      image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/q_auto/f_auto/v1775581819/RI_PHOTO_-_Rishabh_Kumar_pnubta.jpg',
-      department: 'Technical Team',
-      instagram: '',
-      linkedin: 'https://www.linkedin.com/in/rishabh-k-ab7596378/',
-      github: '', year: 1
-    },
-    {
-      name: 'Aditya Singh',
-      role: 'Technical Team Member',
-      image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/q_auto/f_auto/v1775582221/IMG_20260201_134720_-_aditya_mpqqvk.jpg',
-      department: 'Technical Team',
-      instagram: '',
-      linkedin: 'https://www.linkedin.com/in/aditya-singh-a95785278/',
-      github: 'https://github.com/ryzenforsale', year: 1
     },
     {
       name: 'Anshika Gupta',
@@ -626,6 +637,7 @@ const Team = () => {
     { label: 'Content & Docs', value: 'Content and Documentation Team' },
     { label: 'Liaisoning Team', value: 'Liaisoning Team' },
     { label: 'Events & Training', value: 'Events and Training Team' },
+    { label: 'Social Media', value: 'Social Media Team' },
     { label: 'Marketing Team', value: 'Marketing Team' },
     { label: 'Media & Networking', value: 'Media and Networking Team' },
   ];
