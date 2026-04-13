@@ -117,16 +117,16 @@ const HugeTimeline = () => {
 };
 
 const REG_OPEN_AT = new Date('2026-04-06T00:00:00+05:30');
-const REG_CLOSE_AT = new Date('2026-04-12T23:59:59+05:30');
-const ROUND1_DEADLINE_AT = new Date('2026-04-12T23:59:59+05:30');
-const EVALUATION_START_AT = new Date('2026-04-12T00:00:00+05:30');
+const REG_CLOSE_AT = new Date('2026-04-13T23:59:59+05:30');
+const ROUND1_DEADLINE_AT = new Date('2026-04-14T11:59:00+05:30');
+const EVALUATION_START_AT = new Date('2026-04-14T12:00:00+05:30');
 const RESULTS_AT = null;
 
 const FP_TIMELINE = [
   { title: 'Registration Opens', dateLabel: '06/04/2026', at: REG_OPEN_AT },
-  { title: 'Registration Closes', dateLabel: '12/04/2026', at: REG_CLOSE_AT },
-  { title: 'Round 1 Submission Deadline', dateLabel: '12/04/2026', at: ROUND1_DEADLINE_AT },
-  { title: 'Evaluation Period', dateLabel: 'Starts from 12/04/2026', at: EVALUATION_START_AT },
+  { title: 'Registration Closes', dateLabel: '13/04/2026 (11:59 PM)', at: REG_CLOSE_AT },
+  { title: 'PPT Submission Deadline', dateLabel: '14/04/2026 (11:59 AM)', at: ROUND1_DEADLINE_AT },
+  { title: 'Evaluation Period', dateLabel: 'Starts from 14/04/2026', at: EVALUATION_START_AT },
   { title: 'Results Announcement', dateLabel: 'TBD', at: RESULTS_AT },
   { title: 'Event Date', dateLabel: '18/04/2026', at: new Date('2026-04-18T00:00:00+05:30') },
   { title: 'Venue', dateLabel: 'AB-3, Campus', at: new Date('2026-04-18T00:00:00+05:30') },
