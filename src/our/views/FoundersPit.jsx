@@ -121,6 +121,7 @@ const REG_CLOSE_AT = new Date('2026-04-13T23:59:59+05:30');
 const ROUND1_DEADLINE_AT = new Date('2026-04-14T11:59:00+05:30');
 const EVALUATION_START_AT = new Date('2026-04-14T12:00:00+05:30');
 const RESULTS_AT = new Date('2026-04-15T00:00:00+05:30');
+const EVENT_DAY_AT = new Date('2026-04-18T00:00:00+05:30');
 const FP_LOGIN_URL = 'https://events.edcjssun.com/login';
 
 const FP_TIMELINE = [
@@ -129,8 +130,8 @@ const FP_TIMELINE = [
   { title: 'PPT Submission Deadline', dateLabel: '14/04/2026 (11:59 AM)', at: ROUND1_DEADLINE_AT },
   { title: 'Evaluation Period', dateLabel: 'Starts from 14/04/2026', at: EVALUATION_START_AT },
   { title: 'Results Announcement', dateLabel: '15/04/2026', at: RESULTS_AT },
-  { title: 'Event Date', dateLabel: '18/04/2026', at: new Date('2026-04-18T00:00:00+05:30') },
-  { title: 'Venue', dateLabel: 'AB-3, Campus', at: new Date('2026-04-18T00:00:00+05:30') },
+  { title: 'Event Date', dateLabel: '18/04/2026', at: EVENT_DAY_AT },
+  { title: 'Venue', dateLabel: 'AB-3, Campus', at: EVENT_DAY_AT },
 ];
 
 const getEventPhase = (now) => {
@@ -147,6 +148,9 @@ const getCountdownTarget = (now) => {
   }
   if (now <= REG_CLOSE_AT) {
     return { label: 'Registration Closes In', target: REG_CLOSE_AT };
+  }
+  if (now < EVENT_DAY_AT) {
+    return { label: 'Event Day Starts In', target: EVENT_DAY_AT };
   }
   return null;
 };
@@ -404,7 +408,7 @@ const FoundersPit = () => {
                 <div>
                   <p className="text-[#D776FF] text-xs uppercase tracking-[0.2em] font-bold">Live Countdown</p>
                   <h3 className="text-2xl sm:text-3xl font-black text-white mt-2">
-                    {countdownConfig ? countdownConfig.label : 'Registration Window Closed'}
+                    {countdownConfig ? countdownConfig.label : 'Event Day Is Live'}
                   </h3>
                 </div>
                 <div className="flex items-stretch gap-2 sm:gap-3">
@@ -422,7 +426,7 @@ const FoundersPit = () => {
                     ))
                   ) : (
                     <div className="px-5 py-4 rounded-2xl bg-[#1B002B]/70 border border-[#7B2FBE]/40 text-white/70 font-semibold text-sm">
-                      Countdown completed. Evaluation and results updates are now active.
+                      Countdown completed. Event day has arrived.
                     </div>
                   )}
                 </div>
