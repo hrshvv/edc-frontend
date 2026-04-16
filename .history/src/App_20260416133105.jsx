@@ -24,7 +24,6 @@ function App() {
           <Route path="/team" element={<Team />} />
           <Route path="/events" element={<Events />} />
           <Route path="/events/:slug" element={<EventDetail />} />
-          <Route path="/founders-pit/live" element={<Live />} />
           <Route path="/live" element={<Live />} />
           <Route path="/founders-pit" element={<FoundersPit />} />
           <Route path="/about" element={<About />} />

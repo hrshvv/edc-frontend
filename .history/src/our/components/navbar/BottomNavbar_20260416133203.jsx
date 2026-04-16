@@ -16,7 +16,7 @@ const navItems = [
   { label: 'Home', href: '/', icon: FiHome },
   { label: 'Team', href: '/team', icon: FiUsers },
   { label: 'Events', href: '/events', icon: FiCalendar },
-  { label: 'Live', href: '/founders-pit/live', icon: FiRadio },
+  { label: 'Live', href: '/live', icon: FiRadio },
   { label: 'About', href: '/about', icon: FiInfo },
   { label: 'FP', href: '/founders-pit', icon: Rocket },
 ];

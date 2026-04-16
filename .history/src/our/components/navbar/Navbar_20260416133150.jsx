@@ -13,7 +13,7 @@ import { FiHome, FiUsers, FiCalendar, FiInfo, FiRadio } from 'react-icons/fi';
 export default function Navbar() {
 	const scrolled = useScroll(10);
 	const location = useLocation();
-	const isFoundersPit = location.pathname.startsWith('/founders-pit');
+	const isFoundersPit = location.pathname === '/founders-pit';
 	const primaryColor = isFoundersPit ? '#7B2FBE' : '#05B1DE';
 	const primaryHover = isFoundersPit ? '#5E0C9F' : '#04a0c7';
 
@@ -21,7 +21,7 @@ export default function Navbar() {
 		{ label: 'Home', href: '/', icon: FiHome },
 		{ label: 'Team', href: '/team', icon: FiUsers },
 		{ label: 'Events', href: '/events', icon: FiCalendar },
-		{ label: 'Live', href: '/founders-pit/live', icon: FiRadio },
+		{ label: 'Live', href: '/live', icon: FiRadio },
 		{ label: 'About', href: '/about', icon: FiInfo },
 	];
 
