@@ -172,7 +172,7 @@ export default function Live() {
 
   return (
     <div className="min-h-screen bg-[#000000] text-white">
-      <section className="relative overflow-hidden px-4 pb-14 pt-22 md:px-6 md:pt-24">
+      <section className="relative overflow-hidden px-4 pb-14 pt-30 md:px-6 md:pt-35">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(215,118,255,0.2),transparent_34%),radial-gradient(circle_at_80%_8%,rgba(94,12,159,0.26),transparent_30%),linear-gradient(to_bottom,rgba(0,0,0,0.95),rgba(5,0,10,1))]" />
           <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(123,47,190,0.13)_1px,transparent_1px),linear-gradient(90deg,rgba(123,47,190,0.13)_1px,transparent_1px)] [background-size:34px_34px]" />

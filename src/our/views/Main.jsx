@@ -155,7 +155,7 @@ const Main = () => {
               <div className="grid grid-cols-4 gap-2 sm:gap-4 md:gap-6">
                 <div className="group text-center p-2 sm:p-3 md:p-4 rounded-xl sm:rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-[#05B1DE]/30 hover:bg-[#05B1DE]/5 transition-all duration-500 backdrop-blur-sm">
                   <p className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#05B1DE] mb-0.5 sm:mb-1 group-hover:scale-110 transition-transform duration-300">
-                    5+
+                    8+
                   </p>
                   <p className="text-[0.5rem] sm:text-[0.65rem] md:text-xs lg:text-sm text-gray-500 dark:text-neutral-500 font-medium uppercase tracking-wider">
                     Events Hosted
@@ -171,7 +171,7 @@ const Main = () => {
                 </div>
                 <div className="group text-center p-2 sm:p-3 md:p-4 rounded-xl sm:rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-[#05B1DE]/30 hover:bg-[#05B1DE]/5 transition-all duration-500 backdrop-blur-sm">
                   <p className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#05B1DE] mb-0.5 sm:mb-1 group-hover:scale-110 transition-transform duration-300">
-                    500+
+                    1500+
                   </p>
                   <p className="text-[0.5rem] sm:text-[0.65rem] md:text-xs lg:text-sm text-gray-500 dark:text-neutral-500 font-medium uppercase tracking-wider">
                     Students Reached
