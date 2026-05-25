@@ -40,6 +40,36 @@ const Team = () => {
   const teamData = [
     //2ND YEAR
     {
+      name: 'Sahal Parvez',
+      role: 'President',
+      image:
+        'https://res.cloudinary.com/dpphtbawg/image/upload/v1770752688/sahal_profile_ljwo5g.png',
+      department: 'Core Team',
+      instagram: '',
+      linkedin: '',
+      github: '', year: 2
+    },
+    {
+      name: 'Utkarsh Srivastava',
+      role: 'Vice-President',
+      image:
+        'https://res.cloudinary.com/dpphtbawg/image/upload/v1770752268/utkarsh-srivastava_dh0rfz.jpg',
+      department: 'Core Team',
+      instagram: 'https://www.instagram.com/utkarshsri1139/',
+      linkedin: 'https://www.linkedin.com/in/utkarshsri1139/',
+      github: 'https://github.com/UtkarshSrivastava1139', year: 2
+    },
+    {
+      name: 'Krish Chaudhary',
+      role: 'CTC',
+      image:
+        'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1758477584/krish-ch_bjzl2n.jpg',
+      department: 'Core Team',
+      instagram: 'https://instagram.com/krisc.w',
+      linkedin: 'https://www.linkedin.com/in/krish-choudhary-72a176317',
+      github: '', year: 2
+    },
+    {
       name: 'Sameer Singla',
       role: 'Joint Secretary',
       image:
@@ -61,28 +91,8 @@ const Team = () => {
       github: 'https://github.com/Aditya-ai204', year: 2
     },
     {
-      name: 'Utkarsh Srivastava',
-      role: 'Technical Team Head',
-      image:
-        'https://res.cloudinary.com/dpphtbawg/image/upload/v1770752268/utkarsh-srivastava_dh0rfz.jpg',
-      department: 'Technical Team',
-      instagram: 'https://www.instagram.com/utkarshsri1139/',
-      linkedin: 'https://www.linkedin.com/in/utkarshsri1139/',
-      github: 'https://github.com/UtkarshSrivastava1139', year: 2
-    },
-    {
-      name: 'Harsh Verma',
-      role: 'Technical Team Member',
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1757105138/1000010180_g496qx.jpg',
-      department: 'Technical Team',
-      instagram: 'https://www.instagram.com/_hrrsh/',
-      linkedin: 'https://www.linkedin.com/in/harsh-verma-156234325/',
-      github: 'https://github.com/hrshvv', year: 2
-    },
-    {
       name: 'Ujjwal Kaushik',
-      role: 'Technical Team Member',
+      role: 'Technical Team Lead',
       image:
         'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1757105141/Ujjwal_Kaushik_qqlfwq.jpg',
       department: 'Technical Team',
@@ -91,10 +101,31 @@ const Team = () => {
       github: 'https://github.com/Ujjwal-Qubit', year: 2
     },
     {
-      name: 'Sahal Parvez',
-      role: 'Outreach Team Head',
+      name: 'Harsh Verma',
+      role: 'Technical Team Co-Lead',
       image:
-        'https://res.cloudinary.com/dpphtbawg/image/upload/v1770752688/sahal_profile_ljwo5g.png',
+        'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1757105138/1000010180_g496qx.jpg',
+      department: 'Technical Team',
+      instagram: 'https://www.instagram.com/_hrrsh/',
+      linkedin: 'https://www.linkedin.com/in/harsh-verma-156234325/',
+      github: 'https://github.com/hrshvv', year: 2
+    },
+    {
+      name: 'Aryan Singh',
+      role: 'Outreach Team Lead',
+      image:
+        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1758552749/aryan-singh_katof2.jpg',
+      department: 'Outreach Team',
+      instagram: 'https://instagram.com/_aryan_gulia ',
+      linkedin:
+        'https://www.linkedin.com/in/aryan-singh-2a2a53385?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+      github: '', year: 2
+    },
+    {
+      name: 'Garvit Garg',
+      role: 'Outreach Team Co-Lead',
+      image:
+        'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1758478100/garvit-garg_hzyg7d.jpg',
       department: 'Outreach Team',
       instagram: '',
       linkedin: '',
@@ -102,7 +133,7 @@ const Team = () => {
     },
     {
       name: 'Kartikay Varshney',
-      role: 'Design Team Head',
+      role: 'Design Team Lead',
       image:
         'https://res.cloudinary.com/dh8cqlngr/image/upload/v1758553718/kartikay-varshney_lyarqq.jpg',
       department: 'Design Team',
@@ -110,19 +141,10 @@ const Team = () => {
       linkedin: 'https://www.linkedin.com/in/kartikey-varshney-23175133a',
       github: '', year: 2
     },
-    {
-      name: 'Krish Chaudhary',
-      role: 'Design Team Member',
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1758477584/krish-ch_bjzl2n.jpg',
-      department: 'Design Team',
-      instagram: 'https://instagram.com/krisc.w',
-      linkedin: 'https://www.linkedin.com/in/krish-choudhary-72a176317',
-      github: '', year: 2
-    },
+    
     {
       name: 'Daarim',
-      role: 'Design Team Member',
+      role: 'Design Team Executive Member',
       image:
         'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1757105139/Daarim_wxbs4h.jpg',
       department: 'Design Team',
@@ -131,19 +153,8 @@ const Team = () => {
       github: 'https://github.com/Daarim1214', year: 2
     },
     {
-      name: 'Aryan Singh',
-      role: 'Design Team Member',
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/v1758552749/aryan-singh_katof2.jpg',
-      department: 'Design Team',
-      instagram: 'https://instagram.com/_aryan_gulia ',
-      linkedin:
-        'https://www.linkedin.com/in/aryan-singh-2a2a53385?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
-      github: '', year: 2
-    },
-    {
       name: 'Kalyani Chaunwal',
-      role: 'Content and Documentation Team Head',
+      role: 'Content and Documentation Team Lead',
       image:
         'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1757105140/Kalyani_m8spfn.jpg',
       department: 'Content and Documentation Team',
@@ -151,9 +162,18 @@ const Team = () => {
       linkedin: 'https://www.linkedin.com/in/kalyani-chaunwal-a8801b273/',
       github: '', year: 2
     },
+        {
+      name: 'Yash Gupta',
+      role: 'Content and Documentation Team Co-Lead',
+      image:'',
+      department: 'Content and Documentation Team',
+      instagram:'',
+      linkedin: '',
+      github: '', year: 2
+    },
     {
       name: 'Panna Tyagi',
-      role: 'Liaisoning Team Head',
+      role: 'Liaisoning Team Lead',
       image:
         'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1757105140/20250514_121810_wrahh6.jpg',
       department: 'Liaisoning Team',
@@ -164,7 +184,7 @@ const Team = () => {
     },
     {
       name: 'Daksh Goyal',
-      role: 'Liaisoning Team Member',
+      role: 'Liaisoning Team Executive Member',
       image:
         'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1758477946/daksh-goyal_o3qfce.png',
       department: 'Liaisoning Team',
@@ -175,7 +195,7 @@ const Team = () => {
     },
     {
       name: 'Parth Gahlot',
-      role: 'Liaisoning Team Member',
+      role: 'Liaisoning Team Executive Member',
       image:
         'https://res.cloudinary.com/dh8cqlngr/image/upload/v1758921675/part-gahlot_rgotzo.jpg',
       department: 'Liaisoning Team',
@@ -185,7 +205,7 @@ const Team = () => {
     },
     {
       name: 'Luv Mangla',
-      role: 'Marketing Team Head',
+      role: 'Marketing Team Lead',
       image:
         'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1757105141/LM_toe4zm.jpg',
       department: 'Marketing Team',
@@ -195,7 +215,7 @@ const Team = () => {
     },
     {
       name: 'Isha',
-      role: 'Marketing Team Member',
+      role: 'Marketing Team Co-Lead',
       image:
         'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1757105140/IMG_1323_gfjhut.jpg',
       department: 'Marketing Team',
@@ -206,24 +226,35 @@ const Team = () => {
       github: '', year: 2
     },
     {
-      name: 'Garvit Garg',
-      role: 'Marketing Team Member',
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1758478100/garvit-garg_hzyg7d.jpg',
-      department: 'Marketing Team',
-      instagram: '',
-      linkedin: '',
-      github: '', year: 2
-    },
-    {
       name: 'Aaish Zaidi',
-      role: 'Events and Training Team Head',
+      role: 'Events and Training Team Lead',
       image:
         'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1758478100/aaish-zaidi_wsi1to.jpg',
       department: 'Events and Training Team',
       instagram: 'https://instagram.com/aaish_7_zaidi',
       linkedin:
         'https://www.linkedin.com/in/aaish-abbas-zaidi-574082312?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+      github: '', year: 2
+    },
+    {
+      name: 'Shashank Sahu',
+      role: 'Events and Training Team Co-Lead',
+      image:
+        'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1757105140/IMG_20241215_200355_826_lqudce.webp',
+      department: 'Events and Training Team',
+      instagram: 'https://instagram.com/i.m.shashank_01',
+      linkedin: 'http://www.linkedin.com/in/shashank-sahu-985845312',
+      github: 'https://github.com/Shashanksahu01', year: 2
+    },
+    {
+      name: 'Anushka Srivastava',
+      role: 'Events and Training Team Executive Member',
+      image:
+        'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1757105138/Anushka_Srivastava_pdyof8.jpg',
+      department: 'Events and Training Team',
+      instagram: 'https://instagram.com/Anushka.a_28',
+      linkedin:
+        'https://www.linkedin.com/in/anushka-ashish-213787373?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
       github: '', year: 2
     },
     {
@@ -237,29 +268,8 @@ const Team = () => {
       github: '', year: 2
     },
     {
-      name: 'Shashank Sahu',
-      role: 'Events and Training Team Member',
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1757105140/IMG_20241215_200355_826_lqudce.webp',
-      department: 'Events and Training Team',
-      instagram: 'https://instagram.com/i.m.shashank_01',
-      linkedin: 'http://www.linkedin.com/in/shashank-sahu-985845312',
-      github: 'https://github.com/Shashanksahu01', year: 2
-    },
-    {
-      name: 'Anushka Srivastava',
-      role: 'Events and Training Team Member',
-      image:
-        'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1757105138/Anushka_Srivastava_pdyof8.jpg',
-      department: 'Events and Training Team',
-      instagram: 'https://instagram.com/Anushka.a_28',
-      linkedin:
-        'https://www.linkedin.com/in/anushka-ashish-213787373?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
-      github: '', year: 2
-    },
-    {
       name: 'Lavanya Singh',
-      role: 'Media and Networking Team Member',
+      role: 'Media and Networking Team Lead',
       image:
         'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1757105141/Lavanya_Singh_xv5dih.jpg',
       department: 'Media and Networking Team',
@@ -631,15 +641,15 @@ const Team = () => {
   ];
 
   return (
-    <div className="space-y-8 pt-32 bg-white dark:bg-black min-h-screen">
+    <div className="space-y-8 pt-36 bg-white dark:bg-black min-h-screen">
 
       {/* Filter Buttons */}
-      <div className="flex flex-wrap gap-2 px-2 justify-center">
+      <div className="flex flex-wrap gap-4 px-8 py-8 justify-center">
         {filters.map(({ label, value }) => (
           <Button
             key={value}
             variant={activeFilter === value ? 'default' : 'outline'}
-            className={`text-xs px-2 py-1.5 h-auto min-h-[32px] flex items-center justify-center whitespace-nowrap transition-all duration-200 ${activeFilter === value
+            className={`text-sm px-5 py-2.5 h-auto min-h-[44px] flex items-center justify-center whitespace-nowrap transition-all duration-200 ${activeFilter === value
               ? 'bg-[#05B1DE] text-white hover:bg-[#05B1DE]/90'
               : 'hover:bg-[#05B1DE]/10'
               }`}
