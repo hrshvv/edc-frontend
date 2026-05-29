@@ -24,7 +24,6 @@
 // ============================================================
 
 const teamData = [
-  // ─────── CORE TEAM ───────
   {
     name: 'Sahal Parvez',
     role: 'President',
@@ -42,7 +41,7 @@ const teamData = [
     role: 'Vice - President',
     department: 'Core Team',
     year: 2,
-    branch: 'BRANCH_TBD',
+    branch: 'CSE-DS',
     image: 'https://res.cloudinary.com/dpphtbawg/image/upload/v1770752268/utkarsh-srivastava_dh0rfz.jpg',
     linkedin: 'https://www.linkedin.com/in/utkarshsri1139/',
     github: 'https://github.com/UtkarshSrivastava1139',
@@ -66,7 +65,7 @@ const teamData = [
     role: 'Joint Secretary',
     department: 'Core Team',
     year: 2,
-    branch: 'BRANCH_TBD',
+    branch: 'CSE-DS',
     image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1758553253/Sameer_singla_-min_tmbxss.jpg',
     linkedin: 'https://linkedin.com/in/sameer-singla-1b7247348',
     github: 'https://github.com/alicoder123411',
@@ -85,8 +84,6 @@ const teamData = [
     instagram: 'https://instagram.com/aditya_agarwal_2024',
     quote: 'Great.',
   },
-
-  // ─────── TECHNICAL TEAM ───────
   {
     name: 'Ujjwal Kaushik',
     role: 'Technical Team Lead',
@@ -104,7 +101,7 @@ const teamData = [
     role: 'Technical Team Co-Lead',
     department: 'Technical Team',
     year: 2,
-    branch: 'BRANCH_TBD',
+    branch: 'IT',
     image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1757105138/1000010180_g496qx.jpg',
     linkedin: 'https://www.linkedin.com/in/harsh-verma-156234325/',
     github: 'https://github.com/hrshvv',
@@ -171,8 +168,6 @@ const teamData = [
     instagram: '',
     quote: 'It\'s crazy, innit?',
   },
-
-  // ─────── OUTREACH TEAM ───────
   {
     name: 'Aryan Singh',
     role: 'Outreach Team Lead',
@@ -233,8 +228,6 @@ const teamData = [
     instagram: 'https://www.instagram.com/shivanshi_1507',
     quote: 'EDC has honestly been a mix of learning, networking, last-minute chaos and surprisingly fun memories. Met some really driven people, picked up skills outside the classroom and realized execution matters way more than perfect planning.',
   },
-
-  // ─────── DESIGN TEAM ───────
   {
     name: 'Kartikey Varshney',
     role: 'Design Team Lead',
@@ -343,8 +336,6 @@ const teamData = [
     instagram: 'http://instagram.com/mauli.05/',
     quote: 'Being surrounded by so many talented members of EDC inspires me to be creative and innovative .',
   },
-
-  // ─────── CONTENT AND DOCUMENTATION TEAM ───────
   {
     name: 'Kalyani Chaunwal',
     role: 'Content and Documentation Team Lead',
@@ -417,20 +408,6 @@ const teamData = [
     instagram: '',
     quote: 'Excited to be part of EDC.',
   },
-
-  // ─────── LIAISONING TEAM ───────
-  {
-    name: 'Daksh Goyal',
-    role: 'Liaisoning Team Member',
-    department: 'Liaisoning Team',
-    year: 2,
-    branch: 'BRANCH_TBD',
-    image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1758477946/daksh-goyal_o3qfce.png',
-    linkedin: 'https://www.linkedin.com/in/daksh-goyal-334830324',
-    github: '',
-    instagram: 'https://instagram.com/daksh._.goyal7',
-    quote: 'Excited to be part of EDC.',
-  },
   {
     name: 'Panna Tyagi',
     role: 'Liaisoning Team Lead',
@@ -444,11 +421,23 @@ const teamData = [
     quote: 'Thought I’d probably end up in debates, MUNs, or giving dramatic speeches somewhere… not negotiating, coordinating, following up on calls, and surviving on “just one more meeting” as the Liaisoning Head. 😭 Joined EDC only to explore because entrepreneurship and I were honestly strangers at first. But now somehow this chaotic little world of brainstorming sessions, event rushes, random stress, loud laughs, and people becoming family turned into my favourite part of college life. Came here to learn a few things and accidentally got emotionally attached instead.',
   },
   {
-    name: 'Parth Gahlot',
-    role: 'Liaisoning Team Member',
+    name: 'Daksh Goyal',
+    role: 'Liaisoning Team Executive Member',
     department: 'Liaisoning Team',
     year: 2,
-    branch: 'BRANCH_TBD',
+    branch: 'CSE-AIML',
+    image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1758477946/daksh-goyal_o3qfce.png',
+    linkedin: 'https://www.linkedin.com/in/daksh-goyal-334830324',
+    github: '',
+    instagram: 'https://instagram.com/daksh._.goyal7',
+    quote: 'Excited to be part of EDC.',
+  },
+  {
+    name: 'Parth Gahlot',
+    role: 'Liaisoning Team Executive Member',
+    department: 'Liaisoning Team',
+    year: 2,
+    branch: 'CSE-AIML',
     image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/v1758921675/part-gahlot_rgotzo.jpg',
     linkedin: '',
     github: '',
@@ -515,8 +504,6 @@ const teamData = [
     instagram: '',
     quote: 'Somewhere between deadlines and laughter, EDC became my favourite part of college , not just a society, but a whole collection of memories, growth and wonderful people!!',
   },
-
-  // ─────── MARKETING TEAM ───────
   {
     name: 'Luv Mangla',
     role: 'Marketing Team Lead',
@@ -577,14 +564,12 @@ const teamData = [
     instagram: '',
     quote: 'My experience with EDC has been insightful, motivating, and full of learning opportunities.',
   },
-
-  // ─────── EVENTS AND TRAINING TEAM ───────
   {
     name: 'Aaish Zaidi',
     role: 'Events and Training Team Lead',
     department: 'Events and Training Team',
     year: 2,
-    branch: 'BRANCH_TBD',
+    branch: 'CSE-DS',
     image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1758478100/aaish-zaidi_wsi1to.jpg',
     linkedin: 'https://www.linkedin.com/in/aaish-abbas-zaidi-574082312',
     github: '',
@@ -592,8 +577,20 @@ const teamData = [
     quote: 'Excited to be part of EDC.',
   },
   {
+    name: 'Shashank Sahu',
+    role: 'Events and Training Team Co-Lead',
+    department: 'Events and Training Team',
+    year: 2,
+    branch: 'CSE',
+    image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1757105140/IMG_20241215_200355_826_lqudce.webp',
+    linkedin: 'http://www.linkedin.com/in/shashank-sahu-985845312',
+    github: 'https://github.com/Shashanksahu01',
+    instagram: 'https://instagram.com/i.m.shashank_01',
+    quote: 'Excited to be part of EDC.',
+  },
+  {
     name: 'Anushka Srivastava',
-    role: 'Events and Training Team Member',
+    role: 'Events and Training Team Executive Member',
     department: 'Events and Training Team',
     year: 2,
     branch: 'B.PHARMA',
@@ -605,7 +602,7 @@ const teamData = [
   },
   {
     name: 'Krish Bhardwaj',
-    role: 'Events and Training Team Member',
+    role: 'Events and Training Team Executive Member',
     department: 'Events and Training Team',
     year: 2,
     branch: 'CSE-DS',
@@ -613,18 +610,6 @@ const teamData = [
     linkedin: '',
     github: '',
     instagram: '',
-    quote: 'Excited to be part of EDC.',
-  },
-  {
-    name: 'Shashank Sahu',
-    role: 'Events and Training Team Member',
-    department: 'Events and Training Team',
-    year: 2,
-    branch: 'BRANCH_TBD',
-    image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/ar_4:5,c_fill,g_face/v1757105140/IMG_20241215_200355_826_lqudce.webp',
-    linkedin: 'http://www.linkedin.com/in/shashank-sahu-985845312',
-    github: 'https://github.com/Shashanksahu01',
-    instagram: 'https://instagram.com/i.m.shashank_01',
     quote: 'Excited to be part of EDC.',
   },
   {
@@ -663,8 +648,6 @@ const teamData = [
     instagram: 'https://www.instagram.com/samroy6010',
     quote: 'My experience in EDC at JSS University Noida has been truly enriching and inspiring. Being a part of EDC gave me the opportunity to learn beyond academics and understand the importance of teamwork, leadership, creativity, and communication. Throughout the event planning and coordination process, I gained practical exposure to managing responsibilities, handling challenges under pressure, and working together with different people to achieve a common goal. The environment was motivating and helped me improve my confidence as well as my problem solving skills. I also learned how proper planning, coordination, and dedication can turn an idea into a successful event. Overall, my journey with EDC has been a memorable learning experience that contributed positively to both my personal and professional growth.',
   },
-
-  // ─────── MEDIA AND NETWORKING TEAM ───────
   {
     name: 'Lavanya Singh',
     role: 'Media and Networking Team Lead',
@@ -713,7 +696,6 @@ const teamData = [
     instagram: '',
     quote: 'Excited to be part of EDC.',
   },
-
 ];
 
 export default teamData;
