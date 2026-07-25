@@ -43,34 +43,76 @@ const TeamCard = ({ name, role, image, linkedin, github, instagram, quote, year,
   };
 
   // ──────────────────────────────────────────────────────
-  // Role ke basis pe tag ka colour aur label decide karte hain
-  // Head waale tags purple, members waale tags subtle white
-  // Core team (President/Secretary) bhi alag colour
+  // Role ke basis pe tag ka colour aur label decide karte hain.
+  // Brand colors use kar rahe hain (site ke heading gradient
+  // aur faculty cards se match karne ke liye):
+  //   - Cyan #05B1DE  → primary brand color
+  //   - Purple #B585F0 → secondary brand color
+  //
+  // Hierarchy (top to bottom):
+  //   Core leadership (President/Secretary/CTC)  → cyan tag
+  //   Lead                                        → brand purple solid
+  //   Co-Lead                                     → brand purple lighter
+  //   Executive Member (2nd year, not lead)       → subtle cyan tint
+  //   Member (1st year)                           → subtle white
+  //
+  // IMPORTANT: Order of checks matters. Co-Lead must be checked
+  // BEFORE Lead (else "Co-Lead" will match the Lead check too).
+  // Same for Co-Head before Head.
   // ──────────────────────────────────────────────────────
   const getRoleTag = () => {
     const lower = role.toLowerCase();
+
+    // 1. Core leadership — distinct cyan tag (brand primary)
     if (lower.includes('secretary') || lower.includes('president') || lower.includes('ctc')) {
-      // Core leadership — distinct cyan tag
       return {
         label: role.replace(' Team', '').replace(' Head', ''),
         className: 'bg-[#05B1DE]/20 border-[#05B1DE]/40 text-[#7EE4F5]',
       };
     }
+
+    // 2. Co-Lead — brand purple lighter (check BEFORE Lead)
+    if (lower.includes('co-lead')) {
+      return {
+        label: 'Co-Lead',
+        className: 'bg-[#B585F0]/15 border-[#B585F0]/35 text-[#D9C1F7]',
+      };
+    }
+
+    // 3. Lead — brand purple solid
+    if (lower.includes('lead')) {
+      return {
+        label: 'Lead',
+        className: 'bg-[#B585F0]/25 border-[#B585F0]/55 text-[#E4D2FA]',
+      };
+    }
+
+    // 4. Co-Head — legacy support, brand purple lighter
     if (lower.includes('co-head')) {
-      // Department co-heads — purple tag
       return {
         label: 'Co-Head',
-        className: 'bg-purple-500/20 border-purple-400/40 text-purple-200',
+        className: 'bg-[#B585F0]/15 border-[#B585F0]/35 text-[#D9C1F7]',
       };
     }
+
+    // 5. Head — legacy support, brand purple solid
     if (lower.includes('head')) {
-      // Department heads — purple tag
       return {
         label: 'Head',
-        className: 'bg-purple-500/20 border-purple-400/40 text-purple-200',
+        className: 'bg-[#B585F0]/25 border-[#B585F0]/55 text-[#E4D2FA]',
       };
     }
-    // Regular members — subtle white tag
+
+    // 6. Executive Member — subtle cyan tint
+    //    (above 1st year Member but below Lead/Co-Lead in hierarchy)
+    if (lower.includes('executive')) {
+      return {
+        label: 'Executive Member',
+        className: 'bg-[#05B1DE]/10 border-[#05B1DE]/25 text-[#A5E0EF]',
+      };
+    }
+
+    // 7. Default: 1st year Members — subtle white tag
     return {
       label: 'Member',
       className: 'bg-white/10 border-white/20 text-white/90',

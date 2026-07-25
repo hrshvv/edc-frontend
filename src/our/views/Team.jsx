@@ -287,14 +287,14 @@ const Team = () => {
           }}
         />
 
-        {/* Eyebrow tag */}
-        <div className="relative z-10 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#05B1DE]/10 border border-[#05B1DE]/20 text-[11px] sm:text-xs text-[#05B1DE] font-semibold uppercase tracking-widest mb-5 sm:mb-7">
+        {/* Eyebrow tag — fade up animation on page load (matches Home/Events page entry) */}
+        <div className="animate-fade-up-delay-1 relative z-10 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#05B1DE]/10 border border-[#05B1DE]/20 text-[11px] sm:text-xs text-[#05B1DE] font-semibold uppercase tracking-widest mb-5 sm:mb-7">
           <span className="w-1.5 h-1.5 rounded-full bg-[#05B1DE] shadow-[0_0_8px_#05B1DE]" />
           The People Behind EDC
         </div>
 
-        {/* Main heading */}
-        <h1 className="relative z-10 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.05] mb-5 sm:mb-7">
+        {/* Main heading — fade up with stagger */}
+        <h1 className="animate-fade-up-delay-2 relative z-10 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.05] mb-5 sm:mb-7">
           Meet the team building
           <br />
           <span
@@ -307,13 +307,13 @@ const Team = () => {
           </span>
         </h1>
 
-        {/* Sub-text */}
-        <p className="relative z-10 text-base sm:text-lg md:text-xl text-white/65 max-w-2xl mx-auto leading-relaxed">
+        {/* Sub-text — fade up with stagger */}
+        <p className="animate-fade-up-delay-3 relative z-10 text-base sm:text-lg md:text-xl text-white/65 max-w-2xl mx-auto leading-relaxed">
           Faculty mentors, executive members, and associates working together across nine specialized teams.
         </p>
 
-        {/* Stats grid — 4 stats in a connected card */}
-        <div className="relative z-10 mt-10 sm:mt-12 md:mt-16 grid grid-cols-2 md:grid-cols-4 gap-0 max-w-4xl mx-auto border border-white/10 rounded-2xl overflow-hidden"
+        {/* Stats grid — 4 stats in a connected card, fades up last */}
+        <div className="animate-fade-up-delay-4 relative z-10 mt-10 sm:mt-12 md:mt-16 grid grid-cols-2 md:grid-cols-4 gap-0 max-w-4xl mx-auto border border-white/10 rounded-2xl overflow-hidden"
           style={{ background: 'linear-gradient(180deg, rgba(20,20,20,0.4), rgba(10,10,10,0.6))' }}
         >
           {/* Each stat — border-r on non-last, border-b on top row for mobile 2-col */}
