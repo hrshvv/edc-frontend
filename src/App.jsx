@@ -19,7 +19,7 @@ function App() {
       <div className="fixed top-0 left-1/2 -translate-x-1/2 z-50 md:w-[80%] w-full p-4">
         <Navbar />
       </div>
-      <div className="pb-20 md:pb-0">
+      <div className="pb-[calc(7rem+env(safe-area-inset-bottom))] md:pb-0">
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/team" element={<Team />} />

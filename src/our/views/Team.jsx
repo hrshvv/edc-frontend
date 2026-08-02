@@ -346,7 +346,7 @@ const Team = () => {
           justify-center) taaki saare screens pe balanced dikhe.
           Mobile pe bhi wrap, koi chip chhupega nahi, koi awkward
           single-chip-line nahi banegi kyunki center pe distribute hota hai. */}
-      <div className="sticky top-0 md:top-20 z-30 bg-black/85 backdrop-blur-xl border-y border-white/10">
+      <div className="sticky top-[4.5rem] md:top-20 z-30 bg-black/85 backdrop-blur-xl border-y border-white/10">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-3.5 flex flex-wrap items-center justify-center gap-2">
           {/* "Jump to" label */}
           <span className="text-[10px] text-white/45 font-bold uppercase tracking-widest whitespace-nowrap pr-3 border-r border-white/10 mr-1 hidden md:inline-block">

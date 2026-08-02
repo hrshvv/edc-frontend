@@ -66,6 +66,15 @@ body {
   color: var(--foreground);
 }
 
+/* Prevent oversized decorative elements (glows, orbs) from creating
+   horizontal scroll on small screens. `clip` avoids turning the root
+   into a scroll container (keeps position: sticky working). */
+html,
+body {
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
 @layer utilities {
   .scrollbar-hide {
     -ms-overflow-style: none;
