@@ -695,7 +695,26 @@ const Main = () => {
 
           {/* Events Cards */}
           <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-6 xl:gap-8 max-w-7xl mx-auto">
-            {/* 0. Pixel X */}
+            {/* 1. Founders Pit */}
+            <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
+              <TiltedCard
+                imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1779975031/Untitled_design_20260408_000754_0000_w6hkgu.png"
+                altText="Founder's Pit 2026"
+                captionText="Founder's Pit 2026"
+                containerHeight="400px"
+                containerWidth="100%"
+                imageHeight="400px"
+                imageWidth="100%"
+                rotateAmplitude={8}
+                scaleOnHover={1.1}
+                showMobileWarning={false}
+                showTooltip={true}
+                displayOverlayContent={true}
+                onClick={() => navigate('/founders-pit-event')}
+              />
+            </div>
+
+            {/* 2. Pixel X */}
             <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
               <TiltedCard
                 imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1774386653/pixelx_sfznix.png"
@@ -714,7 +733,7 @@ const Main = () => {
               />
             </div>
 
-            {/* 0. UI/UX Workshop */}
+            {/* 3. UI/UX Workshop */}
             <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
               <TiltedCard
                 imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1774387556/10160695-abfd-4065-b05f-04825a49a52e.png"
@@ -733,7 +752,7 @@ const Main = () => {
               />
             </div>
 
-            {/* 1. LinkedIn Workshop */}
+            {/* 4. LinkedIn Workshop */}
             <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
               <TiltedCard
                 imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1765714638/Screenshot_2025-12-14_174705_rcvjzy.png"
@@ -752,7 +771,7 @@ const Main = () => {
               />
             </div>
 
-            {/* 2. Expert Talk */}
+            {/* 5. Expert Talk */}
             <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
               <TiltedCard
                 imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1765714147/Screenshot_2025-12-14_173753_fgjulh.png"
@@ -771,7 +790,7 @@ const Main = () => {
               />
             </div>
 
-            {/* 3. EDCxEureka! Road to Enterprise 2025 */}
+            {/* 6. EDCxEureka! Road to Enterprise 2025 */}
             <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
               <TiltedCard
                 imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1759080883/WhatsApp_Image_2025-09-28_at_22.00.24_4f14c6fe_sazknc.jpg"
@@ -790,7 +809,7 @@ const Main = () => {
               />
             </div>
 
-            {/* 4. Orientation Programme 2025 */}
+            {/* 7. Orientation Programme 2025 */}
             <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
               <TiltedCard
                 imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1759080882/WhatsApp_Image_2025-09-28_at_22.01.37_a5399f7c_w0jn1f.jpg"
@@ -809,7 +828,7 @@ const Main = () => {
               />
             </div>
 
-            {/* 5. Group Discussion */}
+            {/* 8. Group Discussion */}
             <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
               <TiltedCard
                 imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1759080881/EDC_JSS_UNI_nviwol.png"
@@ -828,7 +847,7 @@ const Main = () => {
               />
             </div>
 
-            {/* 6. Recruitment Drive */}
+            {/* 9. Recruitment Drive */}
             <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
               <TiltedCard
                 imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1759080883/Recruitment_20250918_114625_0000_vaz5rz.png"
