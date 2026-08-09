@@ -17,12 +17,12 @@ export default function Navbar() {
 	const primaryHover = isFoundersPit ? '#5E0C9F' : '#04a0c7';
 
 	const links = [
-		{ label: 'Home', href: '/', icon: FiHome },
-		{ label: 'Team', href: '/team', icon: FiUsers },
-		{ label: 'Events', href: '/events', icon: FiCalendar },
-		{ label: 'About', href: '/about', icon: FiInfo },
-	];
-
+    { label: 'Home', href: '/', icon: FiHome },
+    { label: 'Team', href: '/team', icon: FiUsers },
+    { label: 'Events', href: '/events', icon: FiCalendar },
+    { label: 'Orientation', href: '/orientation', icon: FiRadio, highlight: true },
+    { label: 'About', href: '/about', icon: FiInfo },
+];
 
 
 	return (
@@ -55,21 +55,27 @@ export default function Navbar() {
 					</div>
 
 					{/* Desktop Center Links (Absolutely Centered) */}
-					<div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 xl:gap-4 z-10 w-max">
-						{links.map((link, i) => (
-							<Link key={i} to={link.href}>
-								<Button
-									variant="ghost"
-									className={cn(
-										"text-sm xl:text-base px-3 xl:px-4 font-medium hover:bg-transparent transition-colors duration-300",
-										isFoundersPit ? "hover:text-[#7B2FBE]" : "hover:text-[#05B1DE]"
-									)}
-								>
-									{link.label}
-								</Button>
-							</Link>
-						))}
-					</div>
+<div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 xl:gap-4 z-10 w-max">
+    {links.map((link, i) => (
+        <Link key={i} to={link.href} className="relative">
+            <Button
+                variant="ghost"
+                className={cn(
+                    "text-sm xl:text-base px-3 xl:px-4 font-medium hover:bg-transparent transition-colors duration-300",
+                    isFoundersPit ? "hover:text-[#7B2FBE]" : "hover:text-[#05B1DE]"
+                )}
+            >
+                {link.label}
+            </Button>
+            {link.highlight && (
+                <span className="absolute top-1 right-0 flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full rounded-full bg-[#05B1DE] opacity-75 animate-ping" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-[#05B1DE]" />
+                </span>
+            )}
+        </Link>
+    ))}
+</div>
 
 					{/* Right Section Buttons */}
 					<div className="flex items-center gap-2 z-10">

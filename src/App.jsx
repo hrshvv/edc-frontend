@@ -11,6 +11,7 @@ import FP_EventFlow from './our/views/FP_EventFlow';
 import About from './our/views/About';
 import Live from './our/views/Live';
 import ScrollToTop from './components/ScrollToTop';
+import Orientation from './our/views/Orientation';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/founders-pit" element={<FoundersPit />} />
           <Route path="/founders-pit-event" element={<FP_EventFlow />} />
           <Route path="/about" element={<About />} />
+          <Route path="/orientation" element={<Orientation />} />
         </Routes>
       </div>
       <BottomNavbar />
