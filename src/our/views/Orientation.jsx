@@ -179,7 +179,7 @@ const Orientation = () => {
           </p>
 
           <p className="text-[#05B1DE] text-sm sm:text-base font-medium mb-8">
-            🎯 Stick around till the end — there's a quiz where the top 3 scorers get direct entry to the PI round.
+            Stick around till the end — there's a quiz where the top 3 scorers get direct entry to the PI round.
           </p>
 
           <a
