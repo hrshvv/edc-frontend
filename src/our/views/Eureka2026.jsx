@@ -16,7 +16,9 @@ import {
   MapPin,
   Building2,
   CheckCircle2,
-  Info
+  Info,
+  Lightbulb,
+  TrendingUp
 } from 'lucide-react';
 
 const fadeInUp = {
