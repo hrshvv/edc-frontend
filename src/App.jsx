@@ -12,6 +12,7 @@ import About from './our/views/About';
 import Live from './our/views/Live';
 import ScrollToTop from './components/ScrollToTop';
 import Orientation from './our/views/Orientation';
+import Eureka2026 from './our/views/Eureka2026';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/founders-pit-event" element={<FP_EventFlow />} />
           <Route path="/about" element={<About />} />
           <Route path="/orientation" element={<Orientation />} />
+          <Route path="/eureka-2026" element={<Eureka2026 />} />
         </Routes>
       </div>
       <BottomNavbar />
