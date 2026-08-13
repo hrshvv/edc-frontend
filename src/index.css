@@ -7,6 +7,18 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+/* Eureka page font utilities */
+.eureka-page {
+  font-family: 'Space Grotesk', 'Inter', 'Poppins', sans-serif;
+}
+.eureka-heading {
+  font-family: 'Space Grotesk', 'Inter', 'Poppins', sans-serif;
+}
+.eureka-mono {
+  font-family: 'Space Mono', 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+
 /* CSS variables for dark theme (default) */
 :root {
   color-scheme: dark;
