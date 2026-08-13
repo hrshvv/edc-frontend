@@ -347,7 +347,7 @@ const Eureka2026 = () => {
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <a
-              href="https://linktr.ee/edcjssun"
+              href="https://events.edcjssun.com/events/eureka-2026"
               target="_blank"
               rel="noreferrer"
               className="group relative inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-bold text-white overflow-hidden transition-all duration-300 hover:scale-105 eureka-heading"
@@ -740,7 +740,7 @@ const Eureka2026 = () => {
                 </div>
                 <div className="p-8 space-y-7 bg-white/[0.02]">
                   {[
-                    { label: 'Final Date', value: '22 August 2026', icon: Calendar, highlight: false },
+                    { label: 'Final Date', value: '24 August 2026', icon: Calendar, highlight: false },
                     { label: 'Venue', value: 'Room 113, AB-3, JSS University Noida', icon: MapPin, highlight: false },
                     { label: 'Finalists', value: '20 Teams', icon: Users, highlight: false },
                     { label: 'Industry Jury', value: '4 Experts', icon: Star, highlight: false },
@@ -834,7 +834,7 @@ const Eureka2026 = () => {
             </motion.p>
             <motion.div variants={scaleIn}>
               <a
-                href="https://linktr.ee/edcjssun"
+                href="https://events.edcjssun.com/events/eureka-2026"
                 target="_blank"
                 rel="noreferrer"
                 className="group relative inline-flex items-center gap-3 px-12 py-5 rounded-full font-bold text-white text-lg overflow-hidden transition-all duration-300 hover:scale-105 eureka-heading"

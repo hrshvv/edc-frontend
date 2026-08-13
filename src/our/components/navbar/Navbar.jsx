@@ -129,20 +129,7 @@ export default function Navbar() {
 			<header className="md:hidden sticky top-0 z-50 w-full bg-background/95 backdrop-blur-md border-b border-border/50 shadow-sm h-14 px-4 flex items-center justify-between">
 				<Logo />
 
-				<div className="flex items-center gap-2">
-					<Link
-						to="/eureka-2026"
-						className={cn(
-							'px-2.5 py-1 rounded-full text-xs font-medium transition-colors duration-200',
-							'text-[#05B1DE] border border-[#05B1DE]/35',
-							'hover:bg-[#05B1DE]/8',
-							location.pathname === '/eureka-2026' && 'bg-[#05B1DE]/10 border-[#05B1DE]/60',
-						)}
-					>
-						Eureka
-					</Link>
-
-					<Button
+				<Button
 						size="sm"
 						className="text-white transition-colors duration-300"
 						style={{ backgroundColor: primaryColor }}
@@ -168,7 +155,6 @@ export default function Navbar() {
 					>
 						Connect
 					</Button>
-				</div>
 			</header>
 
 
