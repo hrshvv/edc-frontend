@@ -6,7 +6,7 @@ import { useScroll } from '@/components/use-scroll';
 import Logo from './Logo';
 
 // Icons
-import { FiHome, FiUsers, FiCalendar, FiInfo, FiRadio } from 'react-icons/fi';
+import { FiHome, FiUsers, FiCalendar, FiInfo } from 'react-icons/fi';
 
 
 export default function Navbar() {
@@ -20,8 +20,8 @@ export default function Navbar() {
     { label: 'Home', href: '/', icon: FiHome },
     { label: 'Team', href: '/team', icon: FiUsers },
     { label: 'Events', href: '/events', icon: FiCalendar },
-    { label: 'Orientation', href: '/orientation', icon: FiRadio, highlight: true },
     { label: 'About', href: '/about', icon: FiInfo },
+    { label: 'Eureka', href: '/eureka-2026', icon: null, highlight: true },
 ];
 
 
@@ -55,27 +55,39 @@ export default function Navbar() {
 					</div>
 
 					{/* Desktop Center Links (Absolutely Centered) */}
-<div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 xl:gap-4 z-10 w-max">
-    {links.map((link, i) => (
-        <Link key={i} to={link.href} className="relative">
-            <Button
-                variant="ghost"
-                className={cn(
-                    "text-sm xl:text-base px-3 xl:px-4 font-medium hover:bg-transparent transition-colors duration-300",
-                    isFoundersPit ? "hover:text-[#7B2FBE]" : "hover:text-[#05B1DE]"
-                )}
-            >
-                {link.label}
-            </Button>
-            {link.highlight && (
-                <span className="absolute top-1 right-0 flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full rounded-full bg-[#05B1DE] opacity-75 animate-ping" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-[#05B1DE]" />
-                </span>
-            )}
-        </Link>
-    ))}
-</div>
+					<div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 xl:gap-4 z-10 w-max">
+						{links.map((link, i) =>
+							link.highlight ? (
+								<Link key={i} to={link.href} className="ml-1">
+									<span
+										className={cn(
+											'inline-flex items-center px-3 py-1 rounded-full text-sm xl:text-base font-medium transition-colors duration-200',
+											'text-[#05B1DE] border border-[#05B1DE]/35',
+											'hover:bg-[#05B1DE]/8 hover:border-[#05B1DE]/55',
+											location.pathname === link.href &&
+												'bg-[#05B1DE]/10 border-[#05B1DE]/60',
+										)}
+									>
+										{link.label}
+									</span>
+								</Link>
+							) : (
+								<Link key={i} to={link.href} className="relative">
+									<Button
+										variant="ghost"
+										className={cn(
+											'text-sm xl:text-base px-3 xl:px-4 font-medium hover:bg-transparent transition-colors duration-300',
+											isFoundersPit ? 'hover:text-[#7B2FBE]' : 'hover:text-[#05B1DE]',
+											location.pathname === link.href &&
+												(isFoundersPit ? 'text-[#7B2FBE]' : 'text-[#05B1DE]'),
+										)}
+									>
+										{link.label}
+									</Button>
+								</Link>
+							),
+						)}
+					</div>
 
 					{/* Right Section Buttons */}
 					<div className="flex items-center gap-2 z-10">
@@ -117,32 +129,46 @@ export default function Navbar() {
 			<header className="md:hidden sticky top-0 z-50 w-full bg-background/95 backdrop-blur-md border-b border-border/50 shadow-sm h-14 px-4 flex items-center justify-between">
 				<Logo />
 
-				<Button
-					size="sm"
-					className="text-white transition-colors duration-300"
-					style={{ backgroundColor: primaryColor }}
-					onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = primaryHover; }}
-					onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = primaryColor; }}
-					onClick={() => {
-						const footer = document.getElementById('footer');
-						if (footer) {
-							footer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-							setTimeout(() => {
-								const socialLinks = document.querySelectorAll('.social-link');
-								socialLinks.forEach((link, index) => {
-									setTimeout(() => {
-										link.classList.add('highlight-social');
+				<div className="flex items-center gap-2">
+					<Link
+						to="/eureka-2026"
+						className={cn(
+							'px-2.5 py-1 rounded-full text-xs font-medium transition-colors duration-200',
+							'text-[#05B1DE] border border-[#05B1DE]/35',
+							'hover:bg-[#05B1DE]/8',
+							location.pathname === '/eureka-2026' && 'bg-[#05B1DE]/10 border-[#05B1DE]/60',
+						)}
+					>
+						Eureka
+					</Link>
+
+					<Button
+						size="sm"
+						className="text-white transition-colors duration-300"
+						style={{ backgroundColor: primaryColor }}
+						onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = primaryHover; }}
+						onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = primaryColor; }}
+						onClick={() => {
+							const footer = document.getElementById('footer');
+							if (footer) {
+								footer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+								setTimeout(() => {
+									const socialLinks = document.querySelectorAll('.social-link');
+									socialLinks.forEach((link, index) => {
 										setTimeout(() => {
-											link.classList.remove('highlight-social');
-										}, 1000);
-									}, index * 200);
-								});
-							}, 500);
-						}
-					}}
-				>
-					Connect
-				</Button>
+											link.classList.add('highlight-social');
+											setTimeout(() => {
+												link.classList.remove('highlight-social');
+											}, 1000);
+										}, index * 200);
+									});
+								}, 500);
+							}
+						}}
+					>
+						Connect
+					</Button>
+				</div>
 			</header>
 
 

@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Footer from '../components/Footer';
+import { getEventBySlug } from '../data/eventsData';
 import {
   Rocket,
   Target,
@@ -47,6 +48,10 @@ const staggerContainer = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.12 } }
 };
+const staggerChildrenOnly = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12 } }
+};
 const scaleIn = {
   hidden: { opacity: 0, scale: 0.85 },
   visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
@@ -80,6 +85,170 @@ const StatPill = ({ val, label, color = '#05B1DE' }) => (
   </motion.div>
 );
 
+const eureka2025Event = getEventBySlug('eureka-road-to-enterprise-2025');
+
+/* ─── Eureka 2025 Poster & Gallery ───────────────────────────── */
+const Eureka2025Media = ({ poster, gallery }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+
+  if (!poster && (!gallery || gallery.length === 0)) return null;
+
+  const openLightbox = (index) => {
+    setActiveIndex(index);
+    setLightboxOpen(true);
+  };
+
+  const goNext = () => setActiveIndex((prev) => (prev + 1) % gallery.length);
+  const goPrev = () => setActiveIndex((prev) => (prev - 1 + gallery.length) % gallery.length);
+
+  return (
+    <>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-80px' }}
+        variants={staggerContainer}
+        className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-3 items-start"
+      >
+        {poster && (
+          <motion.div variants={fadeInLeft}>
+            <GlowCard className="p-4 sm:p-5">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#05B1DE] mb-4 eureka-mono">Event Poster</p>
+              <div className="relative rounded-xl overflow-hidden flex items-center justify-center">
+                <img
+                  src={poster}
+                  alt=""
+                  aria-hidden="true"
+                  className="absolute inset-0 w-full h-full object-cover scale-110"
+                  style={{ filter: 'blur(30px) brightness(0.35) saturate(1.3)' }}
+                />
+                <div className="absolute inset-0 bg-black/25" />
+                <img
+                  src={poster}
+                  alt="Eureka! Road to Enterprise 2025 poster"
+                  className="relative z-10 max-w-full max-h-[280px] sm:max-h-[340px] object-contain rounded-lg"
+                />
+              </div>
+            </GlowCard>
+          </motion.div>
+        )}
+
+        {gallery?.length > 0 && (
+          <motion.div variants={fadeInRight} className="space-y-2">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#05B1DE] eureka-mono">Event Photos</p>
+            <GlowCard className="p-3 sm:p-4">
+              <button
+                type="button"
+                onClick={() => openLightbox(activeIndex)}
+                className="relative w-full overflow-hidden rounded-xl cursor-pointer group min-h-[180px] sm:min-h-[220px]"
+              >
+                <img
+                  src={gallery[activeIndex].image}
+                  alt=""
+                  aria-hidden="true"
+                  className="absolute inset-0 w-full h-full object-cover scale-110"
+                  style={{ filter: 'blur(30px) brightness(0.35) saturate(1.3)' }}
+                />
+                <div className="absolute inset-0 bg-black/20" />
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={activeIndex}
+                    initial={{ opacity: 0, scale: 1.03 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.97 }}
+                    transition={{ duration: 0.35 }}
+                    src={gallery[activeIndex].image}
+                    alt={`Eureka 2025 event photo ${activeIndex + 1}`}
+                    className="relative z-10 w-full h-auto max-h-[200px] sm:max-h-[260px] object-contain mx-auto"
+                  />
+                </AnimatePresence>
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/30 pointer-events-none">
+                  <span className="text-xs font-semibold text-white px-3 py-1.5 rounded-full bg-white/15 border border-white/20 backdrop-blur-sm">
+                    View full size
+                  </span>
+                </div>
+                <span className="absolute bottom-3 right-3 text-[10px] font-medium text-white px-2 py-1 rounded-full bg-black/60 border border-white/10 eureka-mono">
+                  {activeIndex + 1} / {gallery.length}
+                </span>
+              </button>
+            </GlowCard>
+
+            <div className="flex gap-2 overflow-x-auto pb-1">
+              {gallery.map((img, idx) => (
+                <button
+                  key={img.id}
+                  type="button"
+                  onClick={() => setActiveIndex(idx)}
+                  className="relative flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden transition-all duration-300"
+                  style={{
+                    border: activeIndex === idx ? '2px solid #05B1DE' : '2px solid rgba(255,255,255,0.08)',
+                    opacity: activeIndex === idx ? 1 : 0.55,
+                    transform: activeIndex === idx ? 'scale(1)' : 'scale(0.96)',
+                  }}
+                >
+                  <img src={img.image} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" loading="lazy" />
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </motion.div>
+
+      <AnimatePresence>
+        {lightboxOpen && gallery?.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] flex items-center justify-center bg-black/95 p-4"
+            onClick={() => setLightboxOpen(false)}
+          >
+            <button
+              type="button"
+              onClick={() => setLightboxOpen(false)}
+              className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/10 border border-white/20 text-white text-xl leading-none"
+              aria-label="Close gallery"
+            >
+              ×
+            </button>
+            {gallery.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); goPrev(); }}
+                  className="absolute left-4 sm:left-8 w-10 h-10 rounded-full bg-white/10 border border-white/20 text-white"
+                  aria-label="Previous photo"
+                >
+                  ‹
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); goNext(); }}
+                  className="absolute right-4 sm:right-8 w-10 h-10 rounded-full bg-white/10 border border-white/20 text-white"
+                  aria-label="Next photo"
+                >
+                  ›
+                </button>
+              </>
+            )}
+            <motion.img
+              key={activeIndex}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              src={gallery[activeIndex].image}
+              alt={`Eureka 2025 event photo ${activeIndex + 1}`}
+              className="max-w-full max-h-[85vh] object-contain rounded-lg"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
+
 /* ─── Main Component ─────────────────────────────────────────── */
 const Eureka2026 = () => {
   const heroRef = useRef(null);
@@ -100,11 +269,20 @@ const Eureka2026 = () => {
     document.head.appendChild(link);
   }, []);
 
+  const scrollToAbout = (e) => {
+    e.preventDefault();
+    const about = document.getElementById('about');
+    if (!about) return;
+    const offset = window.innerWidth >= 768 ? 100 : 72;
+    const top = about.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  };
+
   return (
     <div className="eureka-page bg-[#020008] min-h-screen text-neutral-200 selection:bg-[#05B1DE]/30 overflow-hidden">
 
       {/* ── HERO ───────────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative min-h-screen flex flex-col items-center justify-center pt-28 md:pt-36 pb-16 px-4 sm:px-6 overflow-hidden">
+      <section ref={heroRef} className="relative min-h-screen flex flex-col items-center justify-center pt-24 md:pt-30 pb-16 px-4 sm:px-6 overflow-hidden">
         {/* Layered background glows */}
         <div className="absolute inset-0 bg-[url('https://res.cloudinary.com/dftvt6ooo/image/upload/v1779895249/teamedc_compressed_pjduwe.jpg')] bg-cover bg-center opacity-[0.025] mix-blend-screen" />
         <motion.div style={{ y: heroY }} className="absolute inset-0 pointer-events-none">
@@ -180,8 +358,19 @@ const Eureka2026 = () => {
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
               </span>
             </a>
-            <a href="#about" className="inline-flex items-center gap-2 text-neutral-400 hover:text-white transition-colors duration-300 font-medium text-sm">
-              Learn more <ChevronDown className="w-4 h-4" />
+            <a
+              href="#about"
+              onClick={scrollToAbout}
+              className="inline-flex items-center gap-2 text-neutral-400 hover:text-white transition-colors duration-300 font-medium text-sm group"
+            >
+              Learn more
+              <motion.span
+                animate={{ y: [0, 4, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                className="group-hover:translate-y-0.5 transition-transform duration-300"
+              >
+                <ChevronDown className="w-4 h-4" />
+              </motion.span>
             </a>
           </motion.div>
 
@@ -204,7 +393,7 @@ const Eureka2026 = () => {
       </section>
 
       {/* ── WHAT IS EUREKA! 2026? ──────────────────────────────── */}
-      <section id="about" className="py-28 px-4 sm:px-6 relative">
+      <section id="about" className="py-28 px-4 sm:px-6 relative scroll-mt-20 md:scroll-mt-28">
         <div className="absolute inset-0 bg-gradient-to-b from-[#05B1DE]/3 via-transparent to-transparent pointer-events-none" />
         <div className="max-w-5xl mx-auto">
           <motion.div
@@ -345,7 +534,7 @@ const Eureka2026 = () => {
       </section>
 
       {/* ── EUREKA! 2025 HIGHLIGHTS ────────────────────────────── */}
-      <section className="py-28 px-4 sm:px-6 relative border-y border-white/5 overflow-hidden">
+      <section className="pt-24 pb-10 px-4 sm:px-6 relative border-y border-white/5 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#05B1DE]/5 via-transparent to-cyan-900/5 pointer-events-none" />
         <div className="absolute -left-40 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#05B1DE]/8 rounded-full blur-[120px] pointer-events-none" />
 
@@ -377,11 +566,34 @@ const Eureka2026 = () => {
             ].map((s, i) => <StatPill key={i} {...s} />)}
           </motion.div>
 
+          <Eureka2025Media poster={eureka2025Event?.poster} gallery={eureka2025Event?.gallery} />
+
+          {/* NEC Ranking Banner */}
+          <motion.div
+            initial="hidden" whileInView="visible" viewport={{ once: true }}
+            variants={fadeInUp}
+            className="relative p-6 sm:p-8 rounded-2xl border border-[#05B1DE]/25 overflow-hidden mb-5"
+            style={{ background: 'linear-gradient(135deg, rgba(5,177,222,0.08) 0%, rgba(6,182,212,0.04) 50%, rgba(5,177,222,0.08) 100%)' }}
+          >
+            <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-6 text-center sm:text-left">
+              <div className="w-16 h-16 rounded-2xl bg-[#05B1DE]/15 border border-[#05B1DE]/30 flex items-center justify-center flex-shrink-0">
+                <Star className="w-7 h-7 text-[#05B1DE]" />
+              </div>
+              <div>
+                <p className="text-white font-bold text-lg sm:text-xl leading-tight mb-1 eureka-heading">
+                  EDC JSSUN secured <span className="text-[#05B1DE] font-black">Rank #283</span> in the National Entrepreneurship Challenge
+                </p>
+                <p className="text-neutral-400 text-sm font-light">Among 5,000+ E-Cells across Asia — representing JSS University on a national platform.</p>
+              </div>
+            </div>
+          </motion.div>
+
           {/* Highlight Cards */}
           <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }}
-            variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10"
+            initial="visible"
+            animate="visible"
+            variants={staggerChildrenOnly}
+            className="grid grid-cols-1 md:grid-cols-3 gap-5"
           >
             {[
               { icon: Mic2, title: 'Live Pitching Round', desc: 'Shortlisted teams pitched live before a panel of industry professionals — ideas spanning FinTech, EdTech, HealthTech, and more.', tag: 'Round 2 — Offline', color: '#05B1DE' },
@@ -402,31 +614,11 @@ const Eureka2026 = () => {
               </motion.div>
             ))}
           </motion.div>
-
-          {/* NEC Ranking Banner */}
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true }}
-            variants={fadeInUp}
-            className="relative p-8 rounded-2xl border border-[#05B1DE]/25 overflow-hidden"
-            style={{ background: 'linear-gradient(135deg, rgba(5,177,222,0.08) 0%, rgba(6,182,212,0.04) 50%, rgba(5,177,222,0.08) 100%)' }}
-          >
-            <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-6 text-center sm:text-left">
-              <div className="w-16 h-16 rounded-2xl bg-[#05B1DE]/15 border border-[#05B1DE]/30 flex items-center justify-center flex-shrink-0">
-                <Star className="w-7 h-7 text-[#05B1DE]" />
-              </div>
-              <div>
-                <p className="text-white font-bold text-lg sm:text-xl leading-tight mb-1 eureka-heading">
-                  EDC JSSUN secured <span className="text-[#05B1DE] font-black">Rank #283</span> in the National Entrepreneurship Challenge
-                </p>
-                <p className="text-neutral-400 text-sm font-light">Among 5,000+ E-Cells across Asia — representing JSS University on a national platform.</p>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </section>
 
       {/* ── WHY PARTICIPATE? ───────────────────────────────────── */}
-      <section className="py-28 px-4 sm:px-6 relative">
+      <section className="pt-10 pb-24 px-4 sm:px-6 relative">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }}
