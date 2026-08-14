@@ -366,6 +366,31 @@ const Eureka2026 = () => {
             </a>
           </motion.div>
 
+          {/* Collaboration */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="mt-16 sm:mt-24 flex items-center justify-center w-full max-w-3xl mx-auto px-2"
+          >
+            <div className="flex-1 h-[1px] bg-gradient-to-r from-transparent to-white/20" />
+            
+            <div className="flex items-center gap-3 sm:gap-5 px-3 sm:px-5">
+              <span className="text-neutral-400 font-bold tracking-[0.2em] uppercase text-[10px] sm:text-xs eureka-mono whitespace-nowrap">
+                In Collaboration With
+              </span>
+              <div className="bg-[#f8fafc] rounded-xl p-2 sm:p-2.5 flex items-center justify-center h-10 sm:h-12 border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.05)]">
+                <img 
+                  src="https://res.cloudinary.com/dh8cqlngr/image/upload/v1786716299/su6p2yy67fgbvajqwk3e_q9ncp3.png" 
+                  alt="Partner Logo" 
+                  className="h-full w-auto object-contain"
+                />
+              </div>
+            </div>
+
+            <div className="flex-1 h-[1px] bg-gradient-to-l from-transparent to-white/20" />
+          </motion.div>
+
           {/* Scroll indicator */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -515,12 +540,27 @@ const Eureka2026 = () => {
             ))}
           </motion.div>
 
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="text-center">
-            <div className="inline-flex items-center gap-4 px-10 py-5 rounded-2xl border border-[#05B1DE]/25 bg-gradient-to-r from-[#05B1DE]/8 via-blue-900/10 to-[#05B1DE]/8">
-              <Trophy className="w-5 h-5 text-yellow-400" />
-              <span className="text-neutral-400 font-semibold uppercase tracking-widest text-sm eureka-mono">Total Prize Pool</span>
-              <span className="text-3xl font-black text-white eureka-heading">₹6,000</span>
-            </div>
+          <motion.div
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }}
+            variants={staggerContainer}
+            className="grid grid-cols-2 md:grid-cols-5 gap-4"
+          >
+            {[
+              { label: '6k+ Prize Pool', icon: Award, color: '#eab308' },
+              { label: 'Goodies', icon: Sparkles, color: '#05B1DE' },
+              { label: 'Certificates for all participants', icon: Medal, color: '#22d3ee' },
+              { label: 'Trophies for winning teams', icon: Trophy, color: '#eab308' },
+              { label: 'Post Event Mentorship Support via JSS STEP', icon: Lightbulb, color: '#05B1DE' }
+            ].map((perk, i) => (
+              <motion.div key={i} variants={fadeInUp} className={`${i === 4 ? 'col-span-2 md:col-span-1' : 'col-span-1'}`}>
+                <div className="flex flex-col items-center justify-center p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-white/15 transition-all duration-300 h-full text-center group">
+                  <div className="w-12 h-12 rounded-full mb-4 flex items-center justify-center transition-transform duration-300 group-hover:scale-110" style={{ backgroundColor: `${perk.color}15`, color: perk.color }}>
+                    <perk.icon className="w-6 h-6" />
+                  </div>
+                  <span className="text-sm font-semibold text-neutral-300 group-hover:text-white transition-colors">{perk.label}</span>
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
@@ -748,6 +788,21 @@ const Eureka2026 = () => {
                 </div>
               </div>
             </GlowCard>
+          </motion.div>
+
+          {/* Additional Section Graphic */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={fadeInUp}
+            className="mt-12 sm:mt-16 flex justify-center"
+          >
+            <img 
+              src="https://res.cloudinary.com/dh8cqlngr/image/upload/v1786716136/Group_369_pgo8fu.png" 
+              alt="Eureka 2026 Partners & Sponsors" 
+              className="w-full max-w-4xl object-contain rounded-xl opacity-90 hover:opacity-100 transition-opacity duration-300"
+            />
           </motion.div>
         </div>
       </section>
