@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FiHome, FiUsers, FiCalendar, FiInfo } from 'react-icons/fi';
+import { FiHome, FiUsers, FiCalendar, FiInfo, FiCompass } from 'react-icons/fi';
 import './BottomNavbar.css';
 
 /**
@@ -8,13 +8,13 @@ import './BottomNavbar.css';
  *
  * Visible only below 768px viewport width.
  * Fixed at the bottom of the screen with safe-area support.
- * 5 navigation items: Home, Team, Events, About, Founders Pit.
  */
 
 const navItems = [
   { label: 'Home', href: '/', icon: FiHome },
   { label: 'Team', href: '/team', icon: FiUsers },
   { label: 'Events', href: '/events', icon: FiCalendar },
+  { label: 'Orientation', href: '/orientation', icon: FiCompass, special: true },
   { label: 'About', href: '/about', icon: FiInfo },
 ];
 
@@ -34,7 +34,7 @@ export default function BottomNavbar() {
             <Link
               key={item.label}
               to={item.href}
-              className={`bottom-navbar-item${isActive ? ' active' : ''}`}
+              className={`bottom-navbar-item${isActive ? ' active' : ''}${item.special ? ' special-item' : ''}`}
               aria-current={isActive ? 'page' : undefined}
             >
               <span className="bottom-navbar-icon">

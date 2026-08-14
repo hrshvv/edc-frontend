@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button';
 import { MenuIcon, X, Home, Users2, CalendarDays, Info, Rocket } from 'lucide-react';
 import Logo from './Logo';
 import FoundersPitButton from './FoundersPitButton';
+import { MenuIcon, X, Home, Users2, CalendarDays, Info, Rocket, Compass } from 'lucide-react';
 
 const navButtonBase =
   'justify-start w-full h-11 px-3 rounded-lg transition-all hover:translate-x-0.5 hover:bg-accent/60 hover:text-accent-foreground';
@@ -59,6 +60,13 @@ const DrawerTabs = () => {
                 <CalendarDays className="mr-2 size-4" /> Events
               </Button>
             </Link>
+            <DrawerClose asChild>
+            <Link to="/orientation">
+              <Button variant="ghost" className={navButtonBase}>
+                <Compass className="mr-2 size-4" /> Orientation
+              </Button>
+            </Link>
+          </DrawerClose>
           </DrawerClose>
           <DrawerClose asChild>
             <Link to="/about">
