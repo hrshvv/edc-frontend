@@ -20,7 +20,20 @@ export const eventsData = [
       'Live crisis injection round',
       'Pitched to industry judges',
     ],
-    gallery: [],
+    gallery: [
+      {
+        id: 1,
+        image: "/images/Founder_s%20Pit.jpeg",
+      },
+      {
+        id: 2,
+        image: "/images/Founder_s%20Pit%20image%202.jpeg",
+      },
+      {
+        id: 3,
+        image: "/images/Founder_s%20Pit%20image%203.png",
+      },
+    ],
   },
   {
     id: 6,
@@ -72,7 +85,12 @@ export const eventsData = [
       'Focus on both aesthetics and user experience',
       'Perfect for both beginners and experienced designers',
     ],
-    gallery: [],
+    gallery: [
+      {
+        id: 1,
+        image: '/images/UI-UX_workshop.jpg',
+      },
+    ],
   },
   {
     id: 5,
@@ -203,6 +221,34 @@ export const eventsData = [
         id: 5,
         image:
           'https://res.cloudinary.com/dh8cqlngr/image/upload/v1759387727/IMG_4300_yxfszd.jpg',
+      },
+      {
+        id: 6,
+        image: '/images/eureka%20(1).jpeg',
+      },
+      {
+        id: 7,
+        image: '/images/eureka%20(2).jpeg',
+      },
+      {
+        id: 8,
+        image: '/images/eureka%20(3).jpeg',
+      },
+      {
+        id: 9,
+        image: '/images/eureka%20(1).png',
+      },
+      {
+        id: 10,
+        image: '/images/eureka%20(2).png',
+      },
+      {
+        id: 11,
+        image: '/images/eureka%20(3).png',
+      },
+      {
+        id: 12,
+        image: '/images/eureka%20(4).png',
       },
     ],
   },

@@ -558,6 +558,53 @@ const TheGauntlet = () => {
   );
 };
 
+/* ── PHOTO HIGHLIGHTS ───────────────────────────── */
+const PhotoHighlights = () => (
+  <section className="py-24 px-4 sm:px-6 relative overflow-hidden bg-gradient-to-b from-[#05000A] to-[#000000]">
+    <div className="absolute inset-0 fp-grid-bg opacity-10 pointer-events-none" />
+    <div className="max-w-5xl mx-auto relative z-10">
+      <div className="text-center mb-14">
+        <span className="text-[#D776FF] font-bold tracking-[0.2em] uppercase text-xs">The Pit in Action</span>
+        <h2 className="text-4xl sm:text-5xl font-black text-white mt-4">
+          Event <span className="fp-subtitle">Highlights</span>
+        </h2>
+        <p className="text-white/40 mt-4 max-w-xl mx-auto text-base">
+          A glimpse into the chaos, strategy, and energy of Founder's Pit 2026.
+        </p>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {[
+          { src: '/images/Founder_s%20Pit.jpeg', alt: "Founder's Pit 2026" },
+          { src: '/images/Founder_s%20Pit%20image%202.jpeg', alt: "Founder's Pit 2026 — pitching round" },
+          { src: '/images/Founder_s%20Pit%20image%203.png', alt: "Founder's Pit 2026 — UI/UX workshop" },
+        ].map((img, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.6, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+            className="group relative rounded-2xl overflow-hidden border border-[#7B2FBE]/20 hover:border-[#D776FF]/40 transition-all duration-500 aspect-[4/3]"
+            style={{ boxShadow: '0 0 0 1px rgba(123,47,190,0.1)' }}
+          >
+            <img src={img.src} alt="" aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover scale-110"
+              style={{ filter: 'blur(20px) brightness(0.3) saturate(1.4)' }}
+            />
+            <img src={img.src} alt={img.alt}
+              className="relative z-10 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 z-20 bg-gradient-to-t from-[#0A0014]/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"
+              style={{ boxShadow: 'inset 0 0 60px 0 rgba(215,118,255,0.12)' }}
+            />
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
 /* ── FOOTER ───────────────────────────────────────── */
 const Footer = () => (
   <footer className="py-10 px-4 bg-[#000000] border-t border-[#7B2FBE]/20 text-center">
@@ -644,6 +691,7 @@ export default function FP_EventPage() {
         <ParticipationReach />
         <JudgesMentors />
         <TheGauntlet />
+        <PhotoHighlights />
         <Footer />
       </div>
     </>

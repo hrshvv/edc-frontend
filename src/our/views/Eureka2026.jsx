@@ -28,7 +28,11 @@ import {
   Eye,
   Mic2,
   GraduationCap,
-  BarChart3
+  BarChart3,
+  Shield,
+  ChevronRight,
+  Phone,
+  Mail
 } from 'lucide-react';
 
 /* ─── Animation Variants ─────────────────────────────────────── */
@@ -249,6 +253,60 @@ const Eureka2025Media = ({ poster, gallery }) => {
   );
 };
 
+/* ─── Eureka Countdown ─────────────────────────────────────── */
+const EurekaCountdown = () => {
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+  useEffect(() => {
+    // Target Date: August 18, 2026 23:59:59 (Registration Deadline)
+    const targetDate = new Date('2026-08-18T23:59:59').getTime();
+    
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        clearInterval(interval);
+        return;
+      }
+
+      setTimeLeft({
+        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((distance % (1000 * 60)) / 1000)
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="flex flex-col items-center mt-8 mb-10">
+      <div className="flex justify-center gap-4">
+        {[
+          { label: 'Days', value: timeLeft.days },
+          { label: 'Hours', value: timeLeft.hours },
+          { label: 'Minutes', value: timeLeft.minutes },
+          { label: 'Seconds', value: timeLeft.seconds }
+        ].map((item, i) => (
+          <div key={i} className="flex flex-col items-center">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/[0.03] border border-[#05B1DE]/30 rounded-xl flex items-center justify-center shadow-[0_0_15px_rgba(5,177,222,0.15)] backdrop-blur-sm mb-2">
+              <span className="text-2xl sm:text-3xl font-black text-[#05B1DE] eureka-mono">
+                {item.value.toString().padStart(2, '0')}
+              </span>
+            </div>
+            <span className="text-[10px] sm:text-xs text-neutral-400 uppercase tracking-widest font-semibold">{item.label}</span>
+          </div>
+        ))}
+      </div>
+      <div className="mt-5 flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/5 bg-white/[0.02]">
+        <div className="w-1.5 h-1.5 rounded-full bg-[#05B1DE] animate-pulse" />
+        <span className="text-[10px] sm:text-xs text-neutral-400 uppercase tracking-widest font-semibold">Registration Closing</span>
+      </div>
+    </div>
+  );
+};
+
 /* ─── Main Component ─────────────────────────────────────────── */
 const Eureka2026 = () => {
   const heroRef = useRef(null);
@@ -324,7 +382,7 @@ const Eureka2026 = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-8 sm:mt-12 text-l sm:text-xl font-semibold text-white mb-5 tracking-tight eureka-heading"
+            className="mt-8 sm:mt-12 text-lg sm:text-xl font-semibold text-white mb-5 tracking-tight eureka-heading"
           >
             A two-round startup ideation and pitching competition by EDC JSS University Noida,
             in association with E-Cell IIT Bombay under NEC 2026.
@@ -379,11 +437,11 @@ const Eureka2026 = () => {
               <span className="text-neutral-400 font-bold tracking-[0.2em] uppercase text-[10px] sm:text-xs eureka-mono whitespace-nowrap">
                 In Collaboration With
               </span>
-              <div className="bg-[#f8fafc] rounded-xl p-2 sm:p-2.5 flex items-center justify-center h-10 sm:h-12 border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.05)]">
+              <div className="bg-[#f8fafc] rounded-xl p-1.5 sm:p-2.5 flex items-center justify-center h-12 sm:h-16 border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.05)]">
                 <img
                   src="https://res.cloudinary.com/dh8cqlngr/image/upload/v1786716299/su6p2yy67fgbvajqwk3e_q9ncp3.png"
                   alt="Partner Logo"
-                  className="h-full w-auto object-contain"
+                  className="h-full w-auto object-contain scale-[1.2]"
                 />
               </div>
             </div>
@@ -455,7 +513,7 @@ const Eureka2026 = () => {
                   ))}
                 </ul>
                 <div className="p-3.5 rounded-xl bg-[#05B1DE]/8 border border-[#05B1DE]/20 text-center">
-                  <p className="text-[#05B1DE] font-bold text-sm">🏆 Top 20 teams advance to the final</p>
+                  <p className="text-[#05B1DE] font-bold text-sm">Top 20 teams advance to the final</p>
                 </div>
               </GlowCard>
             </motion.div>
@@ -687,6 +745,42 @@ const Eureka2026 = () => {
               </motion.div>
             ))}
           </motion.div>
+
+          {/* Who should apply — merged subsection */}
+          <motion.div
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }}
+            variants={staggerContainer}
+            className="mt-14 pt-12 border-t border-white/5"
+          >
+            <motion.p variants={fadeInUp} className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#05B1DE] eureka-mono text-center mb-6">
+              This is for you if...
+            </motion.p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mb-10">
+              {[
+                'You have a startup or business idea',
+                "You've identified a real-world problem worth solving",
+                "You're building a prototype or MVP",
+                'You want to explore entrepreneurship',
+                'You want direct feedback from industry professionals',
+                'You have an idea that deserves to be heard',
+              ].map((item, i) => (
+                <motion.div key={i} variants={fadeInUp} className="group flex items-center gap-3 p-4 rounded-xl border border-white/6 bg-white/[0.02] hover:border-[#05B1DE]/25 hover:bg-[#05B1DE]/4 transition-all duration-300 cursor-default">
+                  <CheckCircle2 className="w-4 h-4 text-[#05B1DE] shrink-0 group-hover:scale-110 transition-transform duration-300" />
+                  <p className="text-neutral-300 font-medium text-xs leading-snug">{item}</p>
+                </motion.div>
+              ))}
+            </div>
+            <motion.div
+              variants={scaleIn}
+              className="relative p-8 sm:p-10 rounded-2xl border border-[#05B1DE]/20 overflow-hidden text-center"
+              style={{ background: 'linear-gradient(135deg, rgba(5,177,222,0.06) 0%, rgba(2,132,199,0.04) 100%)' }}
+            >
+              <div className="absolute top-4 left-6 text-8xl text-[#05B1DE]/10 font-black leading-none select-none" style={{ fontFamily: 'Georgia, serif' }}>&ldquo;</div>
+              <p className="relative text-xl sm:text-2xl font-semibold text-white italic leading-relaxed">
+                &ldquo;You don&apos;t need a perfect startup. You need a problem worth solving and the courage to pitch it.&rdquo;
+              </p>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
@@ -762,7 +856,7 @@ const Eureka2026 = () => {
                     { label: 'Organised By', value: 'EDC JSS University Noida' },
                     { label: 'In Association With', value: 'E-Cell IIT Bombay' },
                     { label: 'Format', value: 'Online Preliminary + Offline Final' },
-                    { label: 'Eligibility', value: 'JSS University, Noida Students' },
+                    { label: 'Eligibility', value: 'JSS University, Noida & JSSATEN Students' },
                   ].map((item, i) => (
                     <div key={i}>
                       <p className="text-[10px] text-neutral-600 uppercase tracking-[0.2em] mb-1 font-bold eureka-mono">{item.label}</p>
@@ -807,54 +901,441 @@ const Eureka2026 = () => {
         </div>
       </section>
 
-      {/* ── WHO SHOULD PARTICIPATE? ────────────────────────────── */}
+      {/* ── IMPORTANT DATES ─────────────────────────────────────── */}
       <section className="py-28 px-4 sm:px-6 relative border-t border-white/5">
-        <div className="max-w-4xl mx-auto">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#05B1DE]/3 via-transparent to-transparent pointer-events-none" />
+        <div className="max-w-5xl mx-auto">
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }}
             variants={staggerContainer} className="text-center mb-14"
           >
-            <SectionLabel>Who Should Join</SectionLabel>
+            <SectionLabel>Timeline</SectionLabel>
             <motion.h2 variants={fadeInUp} className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4 eureka-heading">
-              Is This <span className="text-[#05B1DE]">For You?</span>
+              Important <span className="text-[#05B1DE]">Dates</span>
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-neutral-400 text-lg font-light">Eureka! is for students who:</motion.p>
+            <motion.p variants={fadeInUp} className="text-neutral-400 text-lg font-light max-w-xl mx-auto">
+              Five milestones. Mark them all.
+            </motion.p>
+            <motion.div variants={fadeInUp}>
+              <EurekaCountdown />
+            </motion.div>
           </motion.div>
 
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }}
             variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-14"
+          >
+            {/* Desktop horizontal timeline */}
+            <div className="hidden lg:block relative mb-10">
+              <div className="absolute top-7 left-[5%] right-[5%] h-px bg-gradient-to-r from-transparent via-white/12 to-transparent" />
+              <div className="flex justify-between">
+                {[
+                  { label: 'Registration Opens', date: '14 Aug', year: '2026', note: 'Open Now', active: true },
+                  { label: 'Registration Deadline', date: '18 Aug', year: '2026', note: 'Last day to register', active: false },
+                  { label: 'Round 1 — Online Pitch', date: '20–22 Aug', year: '2026', note: 'Pre-qualifier', active: false },
+                  { label: 'Round 1 Results', date: '23 Aug', year: '2026', note: 'Shortlist announced', active: false },
+                  { label: 'Round 2 - Institutional Finale', date: '24 Aug', year: '2026', note: 'JSS University, Noida', active: false },
+                ].map((item, i) => (
+                  <div key={i} className="flex flex-col items-center w-[18%] group">
+                    <div
+                      className="w-14 h-14 rounded-full flex items-center justify-center border-2 bg-[#020008] z-10 relative mb-4 transition-all duration-300 group-hover:scale-105"
+                      style={{
+                        borderColor: item.active ? '#05B1DE' : 'rgba(255,255,255,0.12)',
+                        boxShadow: item.active ? '0 0 22px 0 rgba(5,177,222,0.4)' : 'none'
+                      }}
+                    >
+                      <Calendar className="w-5 h-5" style={{ color: item.active ? '#05B1DE' : '#4b5563' }} />
+                    </div>
+                    <p className="text-base font-black text-white text-center eureka-heading leading-tight mb-0.5">{item.date}</p>
+                    <p className="text-[9px] text-neutral-600 eureka-mono mb-2">{item.year}</p>
+                    <p className="text-[11px] font-semibold text-neutral-300 text-center leading-tight mb-1">{item.label}</p>
+                    <p className="text-[9px] font-light text-neutral-600 text-center eureka-mono">{item.note}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Mobile list */}
+            <div className="lg:hidden space-y-3 mb-8">
+              {[
+                { label: 'Registration Opens', date: '14 August 2026', note: 'Open Now', active: true },
+                { label: 'Registration Deadline', date: '18 August 2026', note: 'Last day to register', active: false },
+                { label: 'Round 1 — Online Pitch', date: '20–22 August 2026', note: 'Pre-qualifier round', active: false },
+                { label: 'Round 1 Results', date: '23 August 2026', note: 'Shortlist announced', active: false },
+                { label: 'Grand Finale — Offline Round', date: '24 August 2026', note: 'JSS University, Noida', active: false },
+              ].map((item, i) => (
+                <motion.div key={i} variants={fadeInUp}>
+                  <div
+                    className="flex items-center justify-between px-5 py-4 rounded-xl border bg-white/[0.02] transition-all duration-300"
+                    style={{ borderColor: item.active ? 'rgba(5,177,222,0.4)' : 'rgba(255,255,255,0.07)' }}
+                  >
+                    <div className="flex items-center gap-3">
+                      <Calendar className="w-4 h-4 shrink-0" style={{ color: item.active ? '#05B1DE' : '#4b5563' }} />
+                      <div>
+                        <p className="text-sm font-semibold text-white leading-tight">{item.label}</p>
+                        <p className="text-[10px] text-neutral-500 eureka-mono mt-0.5">{item.note}</p>
+                      </div>
+                    </div>
+                    <span className="text-xs font-bold eureka-mono whitespace-nowrap ml-4" style={{ color: item.active ? '#05B1DE' : '#6b7280' }}>
+                      {item.date}
+                    </span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Institutional round callout */}
+            <motion.div
+              variants={fadeInUp}
+              className="flex items-start gap-3 px-5 py-4 rounded-xl bg-[#05B1DE]/8 border border-[#05B1DE]/20"
+            >
+              <Info className="w-4 h-4 text-[#05B1DE] mt-0.5 shrink-0" />
+              <p className="text-xs text-[#05B1DE]/80 leading-relaxed font-light">
+                This event is the <strong className="text-[#05B1DE] font-semibold">Institutional Round</strong> for Eureka! 2026, organized by E-Cell IIT Bombay under the National Entrepreneurship Challenge (NEC 2026).
+              </p>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── REGISTRATION FLOW ──────────────────────────────────── */}
+      <section className="py-28 px-4 sm:px-6 relative border-t border-white/5">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_#05B1DE05_0%,_transparent_70%)] pointer-events-none" />
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }}
+            variants={staggerContainer} className="text-center mb-16"
+          >
+            <SectionLabel>How to Apply</SectionLabel>
+            <motion.h2 variants={fadeInUp} className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4 eureka-heading">
+              Registration <span className="text-[#05B1DE]">Flow</span>
+            </motion.h2>
+            <motion.p variants={fadeInUp} className="text-neutral-400 text-lg font-light">
+              Five steps from sign-up to the stage.
+            </motion.p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }}
+            variants={staggerContainer}
+          >
+            {/* Icon node row — desktop only */}
+            <div className="hidden lg:flex items-center justify-between relative mb-6 px-[10%]">
+              <div className="absolute inset-x-[10%] top-1/2 -translate-y-1/2 h-px bg-gradient-to-r from-[#05B1DE]/50 via-[#05B1DE]/25 to-[#05B1DE]/10" />
+              {[
+                { icon: Zap, color: '#05B1DE' },
+                { icon: Users, color: '#22d3ee' },
+                { icon: Globe, color: '#05B1DE' },
+                { icon: Lightbulb, color: '#22d3ee' },
+                { icon: Rocket, color: '#05B1DE' },
+              ].map((s, i) => (
+                <div
+                  key={i}
+                  className="relative z-10 w-14 h-14 rounded-full flex items-center justify-center border-2 bg-[#020008] transition-all duration-300"
+                  style={{ borderColor: s.color, boxShadow: `0 0 16px 0 ${s.color}35` }}
+                >
+                  <s.icon className="w-5 h-5" style={{ color: s.color }} />
+                </div>
+              ))}
+            </div>
+
+            {/* Cards */}
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 lg:gap-3">
+              {[
+                {
+                  step: '01',
+                  title: 'Create Your Account',
+                  desc: 'Sign up and create your participant account on the EDC portal.',
+                  icon: Zap,
+                  color: '#05B1DE',
+                  link: { label: 'events.edcjssun.com', href: 'https://events.edcjssun.com' }
+                },
+                {
+                  step: '02',
+                  title: 'Register Your Team',
+                  desc: 'Fill in your team and participant details to complete team registration.',
+                  icon: Users,
+                  color: '#22d3ee',
+                  link: null
+                },
+                {
+                  step: '03',
+                  title: 'Register on Eureka!',
+                  desc: 'Complete your registration on the IIT Bombay Eureka! Portal using the credentials below.',
+                  icon: Globe,
+                  color: '#05B1DE',
+                  link: { label: 'ecell.in/eureka', href: 'https://www.ecell.in/eureka/' },
+                  credentials: [
+                    { label: 'NEC ID', value: 'NEC2617482' },
+                    { label: 'CA ID', value: 'CA26IMWHR' },
+                  ]
+                },
+                {
+                  step: '04',
+                  title: 'Submit Your Idea',
+                  desc: 'Enter your Eureka! Team ID and submit your startup idea and PPT through the EDC portal.',
+                  icon: Lightbulb,
+                  color: '#22d3ee',
+                  link: null
+                },
+                {
+                  step: '05',
+                  title: 'Prepare to Pitch',
+                  desc: 'Once submitted, prepare for the Online Pitching Round. If shortlisted, present at the Final Offline Round at JSS University, Noida.',
+                  icon: Rocket,
+                  color: '#05B1DE',
+                  link: null,
+                  isFinal: true
+                }
+              ].map((item, i) => (
+                <motion.div key={i} variants={fadeInUp} className="group flex flex-col">
+                  {/* Mobile node */}
+                  <div className="lg:hidden flex items-center gap-3 mb-3">
+                    <div
+                      className="w-10 h-10 rounded-full shrink-0 flex items-center justify-center border-2 bg-[#020008]"
+                      style={{ borderColor: item.color, boxShadow: `0 0 10px 0 ${item.color}30` }}
+                    >
+                      <item.icon className="w-4 h-4" style={{ color: item.color }} />
+                    </div>
+                    <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-transparent" />
+                  </div>
+
+                  <GlowCard glowColor={item.color} className="p-5 flex-1 group-hover:-translate-y-1 transition-transform duration-300">
+                    <p className="text-[10px] font-black uppercase tracking-[0.25em] eureka-mono mb-3" style={{ color: item.color }}>
+                      Step {item.step}
+                    </p>
+                    <h3 className="text-sm font-bold text-white tracking-tight eureka-heading mb-2 leading-snug">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs text-neutral-400 leading-relaxed font-light mb-4">
+                      {item.desc}
+                    </p>
+
+                    {/* Credentials callout (Step 03) */}
+                    {item.credentials && (
+                      <div className="space-y-1.5 mb-4">
+                        {item.credentials.map((c, j) => (
+                          <div
+                            key={j}
+                            className="flex items-center justify-between px-3 py-2 rounded-lg bg-white/[0.04] border border-white/8"
+                          >
+                            <span className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest eureka-mono">{c.label}</span>
+                            <span className="text-xs font-bold text-white eureka-mono tracking-wide select-all">{c.value}</span>
+                          </div>
+                        ))}
+                        <p className="text-[10px] text-neutral-600 font-light pt-1 leading-relaxed">
+                          Instructions available on your participant dashboard.
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Final step banner */}
+                    {item.isFinal && (
+                      <div className="mb-4 px-3 py-2.5 rounded-lg bg-gradient-to-r from-[#05B1DE]/10 to-[#22d3ee]/8 border border-[#05B1DE]/20 text-center">
+                        <p className="text-[10px] font-bold text-[#05B1DE] uppercase tracking-widest eureka-mono">
+                          Register &rarr; Submit &rarr; Pitch
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Action link */}
+                    {item.link && (
+                      <a
+                        href={item.link.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1.5 text-[11px] font-bold group/link transition-colors duration-200"
+                        style={{ color: item.color }}
+                      >
+                        <ArrowRight className="w-3 h-3 group-hover/link:translate-x-0.5 transition-transform duration-200" />
+                        <span className="underline underline-offset-2 decoration-current/30 hover:decoration-current/80">
+                          {item.link.label}
+                        </span>
+                      </a>
+                    )}
+                  </GlowCard>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── GUIDELINES ─────────────────────────────────────────── */}
+      <section className="py-28 px-4 sm:px-6 relative border-t border-white/5">
+        <div className="absolute inset-0 bg-white/[0.012] pointer-events-none" />
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }}
+            variants={staggerContainer} className="text-center mb-14"
+          >
+            <SectionLabel>Participation Rules</SectionLabel>
+            <motion.h2 variants={fadeInUp} className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4 eureka-heading">
+              Guidelines &amp; <span className="text-[#05B1DE]">Rules</span>
+            </motion.h2>
+            <motion.p variants={fadeInUp} className="text-neutral-400 text-lg font-light max-w-xl mx-auto">
+              Read all guidelines carefully before registering.
+            </motion.p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }}
+            variants={staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
           >
             {[
-              'Have a startup or business idea',
-              'Have identified a real-world problem worth solving',
-              'Are building a prototype or MVP',
-              'Want to explore entrepreneurship',
-              'Want feedback from industry professionals',
-              'Have an idea they believe deserves to be heard',
-            ].map((item, i) => (
-              <motion.div key={i} variants={fadeInUp} className="group flex items-center gap-4 p-5 rounded-xl border border-white/6 bg-white/[0.02] hover:border-[#05B1DE]/25 hover:bg-[#05B1DE]/4 transition-all duration-300 cursor-default">
-                <div className="w-8 h-8 rounded-full bg-[#05B1DE]/15 border border-[#05B1DE]/25 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                  <CheckCircle2 className="w-4 h-4 text-[#05B1DE]" />
-                </div>
-                <p className="text-neutral-300 font-medium text-sm">{item}</p>
+              {
+                icon: Users,
+                color: '#05B1DE',
+                title: 'Eligibility & Team',
+                rules: [
+                  'Open to students of JSS University, Noida and JSSATEN across all streams.',
+                  'Participants may register individually or in teams of up to 4 members.',
+                ]
+              },
+              {
+                icon: Globe,
+                color: '#22d3ee',
+                title: 'Registration',
+                rules: [
+                  'Each team must first complete registration on the official Eureka! Portal.',
+                  'While registering, select "NEC" as source and enter NEC ID: NEC2617482.',
+                  'Provide accurate and complete information during registration.',
+                ]
+              },
+              {
+                icon: Presentation,
+                color: '#05B1DE',
+                title: 'Competition Format',
+                rules: [
+                  'Teams must submit an original startup or business idea developed by the participants.',
+                  'Round 1 consists of PPT submission and online pitching.',
+                  '20 teams will qualify for the Final Offline Round based on Round 1 evaluation.',
+                  'Finalists must pitch in person at JSS University, Noida.',
+                  'Each finalist team gets 5–7 minutes to pitch, followed by a Q&A session.',
+                ]
+              },
+              {
+                icon: BarChart3,
+                color: '#22d3ee',
+                title: 'Evaluation Criteria',
+                rules: [
+                  'Teams are evaluated on: innovation, problem-solution fit, market potential, business model, feasibility, scalability, and pitching ability.',
+                  'Progression to the Eureka! Zonal Round is subject to applicable NEC and Eureka! guidelines and selection criteria.',
+                ]
+              },
+              {
+                icon: Shield,
+                color: '#05B1DE',
+                title: 'Code of Conduct',
+                rules: [
+                  'The decision of the screening panel and jury is final and binding.',
+                  'Participants must comply with all applicable event, university, NEC, and Eureka! guidelines.',
+                  'Plagiarism, misrepresentation, or misconduct may result in immediate disqualification.',
+                ]
+              },
+            ].map((group, i) => (
+              <motion.div key={i} variants={fadeInUp} className={i === 4 ? 'md:col-span-2 lg:col-span-1' : ''}>
+                <GlowCard glowColor={group.color} className="p-7 h-full">
+                  {/* Header */}
+                  <div className="flex items-center gap-3 mb-5">
+                    <div
+                      className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                      style={{ backgroundColor: `${group.color}15`, border: `1px solid ${group.color}30` }}
+                    >
+                      <group.icon className="w-5 h-5" style={{ color: group.color }} />
+                    </div>
+                    <h3 className="text-sm font-bold text-white tracking-tight eureka-heading">{group.title}</h3>
+                  </div>
+                  {/* Rule list */}
+                  <ul className="space-y-3">
+                    {group.rules.map((rule, j) => (
+                      <li key={j} className="flex items-start gap-2.5">
+                        <ChevronRight
+                          className="w-3.5 h-3.5 mt-0.5 shrink-0"
+                          style={{ color: group.color }}
+                        />
+                        <span className="text-xs text-neutral-400 leading-relaxed font-light">{rule}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </GlowCard>
               </motion.div>
             ))}
           </motion.div>
 
-          {/* Quote Block */}
+          {/* Disclaimer strip */}
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }}
-            variants={scaleIn}
-            className="relative p-10 rounded-2xl border border-[#05B1DE]/20 overflow-hidden text-center"
-            style={{ background: 'linear-gradient(135deg, rgba(5,177,222,0.06) 0%, rgba(2,132,199,0.04) 100%)' }}
+            variants={fadeInUp}
+            className="mt-6 flex items-start gap-3 px-5 py-4 rounded-xl bg-white/[0.02] border border-white/8"
           >
-            <div className="absolute top-4 left-6 text-8xl text-[#05B1DE]/10 font-black leading-none select-none" style={{ fontFamily: 'Georgia, serif' }}>"</div>
-            <Info className="w-16 h-16 text-[#05B1DE]/8 absolute -bottom-3 -right-3 rotate-12" />
-            <p className="relative text-xl sm:text-2xl font-semibold text-white italic leading-relaxed">
-              "You don't need a perfect startup. You need a problem worth solving and the courage to pitch it."
+            <Info className="w-4 h-4 text-neutral-600 mt-0.5 shrink-0" />
+            <p className="text-xs text-neutral-600 font-light leading-relaxed">
+              By registering for Eureka! 2026, all participants agree to abide by the guidelines listed above as well as any additional rules communicated by EDC JSSUN, NEC, and E-Cell IIT Bombay. EDC JSSUN reserves the right to update or modify guidelines at any time.
             </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── CONTACT ─────────────────────────────────────────── */}
+      <section className="py-24 px-4 sm:px-6 relative border-t border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }}
+            variants={staggerContainer} className="text-center mb-12"
+          >
+            <SectionLabel>Get in Touch</SectionLabel>
+            <motion.h2 variants={fadeInUp} className="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3 eureka-heading">
+              Questions? <span className="text-[#05B1DE]">Reach Out.</span>
+            </motion.h2>
+            <motion.p variants={fadeInUp} className="text-neutral-400 text-base font-light">
+              Contact the EDC JSSUN team for any registration or event queries.
+            </motion.p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }}
+            variants={staggerContainer}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-5"
+          >
+            {[
+              { name: 'Sahal Parvez', role: 'President, EDC JSSUN', phone: '+91 78381 99084', email: 'edcjssun@gmail.com' },
+              { name: 'Utkarsh Srivastava', role: 'Vice-President, EDC JSSUN', phone: '+91 95800 01402', email: 'edcjssun@gmail.com' },
+            ].map((person, i) => (
+              <motion.div key={i} variants={fadeInUp}>
+                <GlowCard glowColor="#05B1DE" className="p-7 h-full">
+                  <div className="mb-5">
+                    <h3 className="text-lg font-bold text-white tracking-tight eureka-heading">{person.name}</h3>
+                    <p className="text-[11px] text-[#05B1DE] font-bold uppercase tracking-[0.2em] eureka-mono mt-1">{person.role}</p>
+                  </div>
+                  <div className="space-y-3">
+                    <a
+                      href={`tel:${person.phone.replace(/\s/g, '')}`}
+                      className="flex items-center gap-3 group/link"
+                    >
+                      <div className="w-9 h-9 rounded-lg bg-[#05B1DE]/10 border border-[#05B1DE]/20 flex items-center justify-center shrink-0 group-hover/link:bg-[#05B1DE]/20 transition-colors duration-200">
+                        <Phone className="w-3.5 h-3.5 text-[#05B1DE]" />
+                      </div>
+                      <span className="text-sm font-semibold text-neutral-400 group-hover/link:text-white transition-colors duration-200 eureka-mono tracking-wide">
+                        {person.phone}
+                      </span>
+                    </a>
+                    <a
+                      href={`mailto:${person.email}`}
+                      className="flex items-center gap-3 group/link"
+                    >
+                      <div className="w-9 h-9 rounded-lg bg-[#05B1DE]/10 border border-[#05B1DE]/20 flex items-center justify-center shrink-0 group-hover/link:bg-[#05B1DE]/20 transition-colors duration-200">
+                        <Mail className="w-3.5 h-3.5 text-[#05B1DE]" />
+                      </div>
+                      <span className="text-sm font-semibold text-neutral-400 group-hover/link:text-white transition-colors duration-200">
+                        {person.email}
+                      </span>
+                    </a>
+                  </div>
+                </GlowCard>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
