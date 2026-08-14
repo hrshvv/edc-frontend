@@ -374,15 +374,15 @@ const Eureka2026 = () => {
             className="mt-16 sm:mt-24 flex items-center justify-center w-full max-w-3xl mx-auto px-2"
           >
             <div className="flex-1 h-[1px] bg-gradient-to-r from-transparent to-white/20" />
-            
+
             <div className="flex items-center gap-3 sm:gap-5 px-3 sm:px-5">
               <span className="text-neutral-400 font-bold tracking-[0.2em] uppercase text-[10px] sm:text-xs eureka-mono whitespace-nowrap">
                 In Collaboration With
               </span>
               <div className="bg-[#f8fafc] rounded-xl p-2 sm:p-2.5 flex items-center justify-center h-10 sm:h-12 border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.05)]">
-                <img 
-                  src="https://res.cloudinary.com/dh8cqlngr/image/upload/v1786716299/su6p2yy67fgbvajqwk3e_q9ncp3.png" 
-                  alt="Partner Logo" 
+                <img
+                  src="https://res.cloudinary.com/dh8cqlngr/image/upload/v1786716299/su6p2yy67fgbvajqwk3e_q9ncp3.png"
+                  alt="Partner Logo"
                   className="h-full w-auto object-contain"
                 />
               </div>
@@ -592,7 +592,7 @@ const Eureka2026 = () => {
           >
             {[
               { val: '350+', label: 'Online Registrations', color: '#05B1DE' },
-              { val: '25+', label: 'Selected Teams', color: '#22d3ee' },
+              { val: '20+', label: 'Selected Teams', color: '#22d3ee' },
               { val: '80+', label: 'Offline Participants', color: '#05B1DE' },
               { val: '4+', label: 'Industry Experts', color: '#22d3ee' },
             ].map((s, i) => <StatPill key={i} {...s} />)}
@@ -798,9 +798,9 @@ const Eureka2026 = () => {
             variants={fadeInUp}
             className="mt-12 sm:mt-16 flex justify-center"
           >
-            <img 
-              src="https://res.cloudinary.com/dh8cqlngr/image/upload/v1786716136/Group_369_pgo8fu.png" 
-              alt="Eureka 2026 Partners & Sponsors" 
+            <img
+              src="https://res.cloudinary.com/dh8cqlngr/image/upload/v1786716136/Group_369_pgo8fu.png"
+              alt="Eureka 2026 Partners & Sponsors"
               className="w-full max-w-4xl object-contain rounded-xl opacity-90 hover:opacity-100 transition-opacity duration-300"
             />
           </motion.div>
