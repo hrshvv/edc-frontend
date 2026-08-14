@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Footer from '../components/Footer';
+import EurekaSponsors from '../components/EurekaSponsors';
 import { getEventBySlug } from '../data/eventsData';
 import {
   Rocket,
@@ -313,31 +314,25 @@ const Eureka2026 = () => {
             transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           >
             <img
-              src="https://res.cloudinary.com/dh8cqlngr/image/upload/v1786644656/eureka_3_-Photoroom_bnfaqm.png"
+              src="https://res.cloudinary.com/dh8cqlngr/image/upload/v1786704585/Group_368_nozfkc.png"
               alt="Eureka! 2026 - Road to Enterprise"
-              className="mx-auto w-[85%] max-w-[600px] drop-shadow-[0_0_60px_rgba(5,177,222,.5)] object-contain pointer-events-none select-none mb-8"
+              className="mx-auto w-[85%] max-w-[600px] drop-shadow-[0_0_60px_rgba(5,177,222,.5)] object-contain pointer-events-none select-none"
             />
           </motion.div>
+
+          <EurekaSponsors />
 
           {/* Tagline */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-xl sm:text-2xl font-semibold text-white mb-5 tracking-tight eureka-heading"
-          >
-            Turn Your Idea Into Your Next Big Opportunity
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-base sm:text-lg text-neutral-400 max-w-2xl mx-auto mb-10 leading-relaxed font-light"
+            className="text-l sm:text-xl font-semibold text-white mb-5 tracking-tight eureka-heading"
           >
             A two-round startup ideation and pitching competition by EDC JSS University Noida,
             in association with E-Cell IIT Bombay under NEC 2026.
           </motion.p>
+
 
           {/* CTAs */}
           <motion.div
