@@ -24,7 +24,7 @@ const XLogo = ({ className }) => (
 
 const Footer = () => {
   const location = useLocation();
-  const isFoundersPit = location.pathname === '/founders-pit';
+  const isFoundersPit = location.pathname.startsWith('/founders-pit-event');
   const primaryColor = isFoundersPit ? '#7B2FBE' : '#05B1DE';
   const primaryGradient = isFoundersPit ? 'from-[#7B2FBE] to-[#5E0C9F]' : 'from-[#05B1DE] to-[#04a0c7]';
   const textClass = isFoundersPit ? 'text-[#7B2FBE]' : 'text-[#05B1DE]';

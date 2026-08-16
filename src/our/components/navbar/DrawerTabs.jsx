@@ -68,6 +68,13 @@ const DrawerTabs = () => {
             </Link>
           </DrawerClose>
           <DrawerClose asChild>
+            <Link to="/live">
+              <Button variant="ghost" className={navButtonBase}>
+                <span className="mr-2 h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" /> Live
+              </Button>
+            </Link>
+          </DrawerClose>
+          <DrawerClose asChild>
             <Button
               className="mt-2 w-full bg-[#05B1DE] hover:bg-[#04a0c7] text-white font-semibold py-6 rounded-xl transition-all duration-300 shadow-[0_0_15px_#05B1DE/20] hover:shadow-[0_0_20px_#05B1DE/40]"
               onClick={() => {

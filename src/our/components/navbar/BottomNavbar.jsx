@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FiHome, FiUsers, FiCalendar, FiInfo, FiZap } from 'react-icons/fi';
+import { FiHome, FiUsers, FiCalendar, FiInfo, FiZap, FiRadio } from 'react-icons/fi';
 import './BottomNavbar.css';
 
 /**
@@ -16,6 +16,7 @@ const navItems = [
   { label: 'Events', href: '/events', icon: FiCalendar },
   { label: 'About', href: '/about', icon: FiInfo },
   { label: 'Eureka', href: '/eureka-2026', icon: FiZap, special: true },
+  { label: 'Live', href: '/live', icon: FiRadio, live: true },
 ];
 
 export default function BottomNavbar() {
@@ -37,8 +38,11 @@ export default function BottomNavbar() {
               className={`bottom-navbar-item${item.special ? ' special-item' : ''}${isActive ? ' active' : ''}`}
               aria-current={isActive ? 'page' : undefined}
             >
-              <span className="bottom-navbar-icon">
+              <span className="bottom-navbar-icon relative">
                 <item.icon />
+                {item.live && (
+                  <span className="absolute top-0.5 right-0.5 h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
+                )}
               </span>
               <span className="bottom-navbar-label">{item.label}</span>
             </Link>

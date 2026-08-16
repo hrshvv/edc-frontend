@@ -10,7 +10,7 @@ export function FoundersPitButton({
   const navigate = useNavigate()
 
   const handleClick = () => {
-    navigate('/founders-pit')
+    navigate('/founders-pit-event')
   }
 
   return (

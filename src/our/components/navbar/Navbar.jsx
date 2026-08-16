@@ -12,7 +12,7 @@ import { FiHome, FiUsers, FiCalendar, FiInfo } from 'react-icons/fi';
 export default function Navbar() {
 	const scrolled = useScroll(10);
 	const location = useLocation();
-	const isFoundersPit = location.pathname.startsWith('/founders-pit');
+	const isFoundersPit = location.pathname.startsWith('/founders-pit-event');
 	const primaryColor = isFoundersPit ? '#7B2FBE' : '#05B1DE';
 	const primaryHover = isFoundersPit ? '#5E0C9F' : '#04a0c7';
 
@@ -22,6 +22,7 @@ export default function Navbar() {
     { label: 'Events', href: '/events', icon: FiCalendar },
     { label: 'About', href: '/about', icon: FiInfo },
     { label: 'Eureka', href: '/eureka-2026', icon: null, highlight: true },
+    { label: 'Live', href: '/live', icon: null, isLive: true },
 ];
 
 
@@ -57,7 +58,22 @@ export default function Navbar() {
 					{/* Desktop Center Links (Absolutely Centered) */}
 					<div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 xl:gap-4 z-10 w-max">
 						{links.map((link, i) =>
-							link.highlight ? (
+							link.isLive ? (
+								<Link key={i} to={link.href} className="relative">
+									<Button
+										variant="ghost"
+										className={cn(
+											'text-sm xl:text-base px-3 xl:px-4 font-medium hover:bg-transparent transition-colors duration-300 flex items-center gap-1.5',
+											isFoundersPit ? 'hover:text-[#7B2FBE]' : 'hover:text-[#05B1DE]',
+											location.pathname === link.href &&
+												(isFoundersPit ? 'text-[#7B2FBE]' : 'text-[#05B1DE]'),
+										)}
+									>
+										<span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
+										{link.label}
+									</Button>
+								</Link>
+							) : link.highlight ? (
 								<Link key={i} to={link.href} className="ml-1">
 									<span
 										className={cn(

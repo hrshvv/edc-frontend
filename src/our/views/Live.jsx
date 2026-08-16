@@ -1,83 +1,63 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Footer from '../components/Footer';
+import { Calendar, Info, Clock, Rocket, AlertCircle } from 'lucide-react';
 
-const EVENT_DATE = '2026-04-18';
-
-const schedule = [
-  { title: 'Registration', start: '08:30', end: '09:00', phase: 'Round 1' },
-  { title: 'Inauguration and Briefing', start: '09:00', end: '10:15', phase: 'Round 1' },
-  { title: 'Strategic Bidding', start: '10:15', end: '11:15', phase: 'Round 2' },
-  { title: 'Building Phase I', start: '11:30', end: '13:00', phase: 'Round 3' },
-  { title: 'Mentoring Round', start: '13:00', end: '14:00', phase: 'Round 3' },
-  { title: 'Lunch Break', start: '14:00', end: '14:30', phase: 'Break' },
-  { title: 'Crisis Round and Building Phase 2', start: '14:30', end: '16:00', phase: 'Round 4' },
-  { title: 'Final Judging and Pitching', start: '16:00', end: '17:30', phase: 'Round 5' },
-  { title: 'Awards Ceremony', start: '17:30', end: '18:00', phase: 'Closing' },
+const milestones = [
+  { title: 'Registration Opens', date: '2026-08-14T00:00:00', displayDate: '14 Aug 2026', note: 'Portal open for submissions' },
+  { title: 'Registration Deadline', date: '2026-08-18T23:59:59', displayDate: '18 Aug 2026', note: 'Last day to register' },
+  { title: 'Round 1 — Online Pitch', date: '2026-08-20T09:00:00', displayDate: '20–22 Aug 2026', note: 'Pre-qualifier pitch' },
+  { title: 'Round 1 Results', date: '2026-08-23T18:00:00', displayDate: '23 Aug 2026', note: 'Shortlist announced' },
+  { title: 'Grand Finale — Offline Round', date: '2026-08-24T09:00:00', displayDate: '24 Aug 2026', note: 'JSS University, Noida' },
 ];
 
 const notices = [
-  { level: 'priority', text: 'Code freeze applies when final judging starts. Keep your final build ready.' },
-  { level: 'info', text: 'Teams should remain available near the pitching area during Round 5.' },
-  { level: 'update', text: 'This board updates every second and highlights the active phase live.' },
+  { level: 'priority', text: 'Registration deadline is strict. Make sure to complete your team registration before August 18.' },
+  { level: 'info', text: 'Institutional Round winners will advance to the Zonal Round under NEC (IIT Bombay).' },
+  { level: 'update', text: 'Offline Grand Finale will be hosted at JSS University, Noida on August 24, 2026.' },
 ];
-
-function timeToDate(baseDate, time) {
-  const [hours, minutes] = time.split(':').map(Number);
-  const d = new Date(baseDate);
-  d.setHours(hours, minutes, 0, 0);
-  return d;
-}
 
 function formatDuration(ms) {
   const totalSeconds = Math.max(0, Math.floor(ms / 1000));
-  const hours = Math.floor(totalSeconds / 3600).toString().padStart(2, '0');
-  const minutes = Math.floor((totalSeconds % 3600) / 60)
-    .toString()
-    .padStart(2, '0');
+  const days = Math.floor(totalSeconds / (3600 * 24));
+  const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600).toString().padStart(2, '0');
+  const minutes = Math.floor((totalSeconds % 3600) / 60).toString().padStart(2, '0');
   const seconds = (totalSeconds % 60).toString().padStart(2, '0');
+  
+  if (days > 0) {
+    return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }
   return `${hours}:${minutes}:${seconds}`;
-}
-
-function formatClock(date) {
-  return date.toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-  });
 }
 
 function phaseTone(status) {
   if (status === 'live') {
-    return 'text-[#E0A6FF] border-[#D776FF]/40 bg-[#7B2FBE]/20';
+    return 'text-[#E0F7FC] border-[#05B1DE]/40 bg-[#05B1DE]/20';
   }
 
   if (status === 'done') {
-    return 'text-zinc-400 border-[#3B1657]/70 bg-[#130321]/45';
+    return 'text-zinc-400 border-zinc-800 bg-zinc-900/40';
   }
 
-  return 'text-zinc-200 border-[#4C1C73]/70 bg-[#160628]/55';
+  return 'text-zinc-200 border-zinc-800/80 bg-zinc-900/60';
 }
 
 function noticeTone(level) {
   if (level === 'priority') {
-    return 'border-[#D776FF]/35 bg-[#7B2FBE]/20 text-[#F3DEFF]';
+    return 'border-[#05B1DE]/35 bg-[#05B1DE]/20 text-[#E0F7FC]';
   }
 
   if (level === 'update') {
-    return 'border-[#904EB0]/35 bg-[#5E0C9F]/20 text-[#EACBFF]';
+    return 'border-[#04a0c7]/35 bg-[#04a0c7]/20 text-[#E0F7FC]';
   }
 
-  return 'border-[#7B2FBE]/40 bg-[#3B1657]/25 text-[#E8D3FF]';
+  return 'border-[#05B1DE]/20 bg-[#05B1DE]/10 text-zinc-300';
 }
 
 export default function Live() {
   const [now, setNow] = useState(() => new Date());
 
   useEffect(() => {
-    document.documentElement.classList.add('founders-pit-theme');
-    return () => {
-      document.documentElement.classList.remove('founders-pit-theme');
-    };
+    document.title = 'Eureka! 2026 Live – Road to Enterprise | EDC JSSUN';
   }, []);
 
   useEffect(() => {
@@ -85,214 +65,130 @@ export default function Live() {
     return () => clearInterval(timer);
   }, []);
 
-  const eventDate = useMemo(() => {
-    const parsed = new Date(`${EVENT_DATE}T00:00:00`);
-    return Number.isNaN(parsed.getTime()) ? new Date() : parsed;
-  }, []);
+  // Find the next upcoming milestone
+  const nextMilestone = useMemo(() => {
+    return milestones.find(m => new Date(m.date) > now) || null;
+  }, [now]);
 
-  const liveWindowEnd = useMemo(() => {
-    const next = new Date(eventDate);
-    next.setDate(next.getDate() + 1);
-    return next;
-  }, [eventDate]);
+  // Find the index of the next milestone
+  const nextMilestoneIndex = useMemo(() => {
+    if (!nextMilestone) return milestones.length;
+    return milestones.findIndex(m => m.title === nextMilestone.title);
+  }, [nextMilestone]);
 
-  const isBeforeLiveDay = now < eventDate;
-  const isAfterLiveDay = now >= liveWindowEnd;
-  const isLiveDay = !isBeforeLiveDay && !isAfterLiveDay;
+  const countdownMs = useMemo(() => {
+    if (!nextMilestone) return 0;
+    return new Date(nextMilestone.date).getTime() - now.getTime();
+  }, [nextMilestone, now]);
 
-  const timeline = useMemo(
-    () =>
-      schedule.map((item) => ({
-        ...item,
-        startAt: timeToDate(eventDate, item.start),
-        endAt: timeToDate(eventDate, item.end),
-      })),
-    [eventDate]
-  );
+  const phaseHeader = nextMilestone 
+    ? `Upcoming: ${nextMilestone.title}` 
+    : 'Event concluded';
 
-  const dayStart = timeline[0]?.startAt;
-  const dayEnd = timeline[timeline.length - 1]?.endAt;
-  const currentItem =
-    isLiveDay
-      ? timeline.find((item) => now >= item.startAt && now < item.endAt) || null
-      : null;
-  const nextItem =
-    isLiveDay
-      ? timeline.find((item) => now < item.startAt) || null
-      : timeline[0] || null;
-  const eventStarted = isLiveDay && dayStart ? now >= dayStart : false;
-  const eventFinished = isLiveDay && dayEnd ? now >= dayEnd : false;
+  const mainHeadline = nextMilestone 
+    ? nextMilestone.title.toUpperCase() 
+    : 'CONCLUDED';
 
-  const countdownTarget = isBeforeLiveDay
-    ? eventDate
-    : isAfterLiveDay
-      ? null
-      : currentItem?.endAt || nextItem?.startAt || dayEnd;
-  const countdownMs = countdownTarget ? countdownTarget - now : 0;
-
-  const totalMs = dayStart && dayEnd ? dayEnd - dayStart : 0;
-  const elapsedMs = dayStart && dayEnd ? Math.min(Math.max(now - dayStart, 0), totalMs) : 0;
-  const progress = isBeforeLiveDay ? 0 : isAfterLiveDay ? 100 : totalMs > 0 ? (elapsedMs / totalMs) * 100 : 0;
-
-  const phaseHeader = isBeforeLiveDay
-    ? 'Live unlocks on 18 April'
-    : isAfterLiveDay
-      ? 'Live closed for the day'
-      : currentItem
-        ? `${currentItem.phase} in progress`
-        : !eventStarted
-          ? 'Event not started'
-          : eventFinished
-            ? 'Event concluded'
-            : 'Waiting for next phase';
-
-  const mainHeadline = isBeforeLiveDay
-    ? 'LIVE LOCKED'
-    : isAfterLiveDay
-      ? 'LIVE CLOSED'
-      : eventFinished
-        ? 'TIME IS UP'
-        : currentItem
-          ? currentItem.phase.toUpperCase()
-          : !eventStarted
-            ? 'STANDBY'
-            : 'NEXT PHASE INCOMING';
-
-  const subHeadline = isBeforeLiveDay
-    ? 'This portal activates only on 18 April 2026.'
-    : isAfterLiveDay
-      ? 'The live window has ended for this event day.'
-      : eventFinished
-        ? 'Code freeze activated. Prepare for demo.'
-        : currentItem
-          ? `${currentItem.title} is live now.`
-          : !eventStarted
-            ? 'Live system armed. Waiting for opening bell.'
-            : `Next: ${nextItem?.title || 'Upcoming phase'}`;
+  const subHeadline = nextMilestone 
+    ? `Scheduled for ${nextMilestone.displayDate}.` 
+    : 'All milestones for Eureka! 2026 are completed.';
 
   return (
-    <div className="min-h-screen bg-[#000000] text-white">
-      <section className="relative overflow-hidden px-4 pb-14 pt-30 md:px-6 md:pt-35">
+    <div className="eureka-page min-h-screen bg-[#020008] text-white">
+      <section className="relative overflow-hidden px-4 pb-20 pt-32 md:px-6 md:pt-36">
+        {/* Background Gradients */}
         <div className="pointer-events-none absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(215,118,255,0.2),transparent_34%),radial-gradient(circle_at_80%_8%,rgba(94,12,159,0.26),transparent_30%),linear-gradient(to_bottom,rgba(0,0,0,0.95),rgba(5,0,10,1))]" />
-          <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(123,47,190,0.13)_1px,transparent_1px),linear-gradient(90deg,rgba(123,47,190,0.13)_1px,transparent_1px)] [background-size:34px_34px]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(5,177,222,0.15),transparent_35%),radial-gradient(circle_at_80%_8%,rgba(4,160,199,0.2),transparent_30%),linear-gradient(to_bottom,rgba(2,0,8,0.95),rgba(1,1,2,1))]" />
+          <div className="absolute inset-0 opacity-15 [background-image:linear-gradient(rgba(5,177,222,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(5,177,222,0.1)_1px,transparent_1px)] [background-size:34px_34px]" />
         </div>
 
         <div className="relative mx-auto max-w-7xl">
-          <div className="mb-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#7B2FBE]/35 bg-[#0A0014]/80 px-4 py-3 backdrop-blur-md">
-            <div className="flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-zinc-400">
-              <span className="h-2 w-2 rounded-full bg-[#D776FF] shadow-[0_0_10px_rgba(215,118,255,0.95)]" />
-              Live system synced
+          {/* Synced Indicator */}
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#05B1DE]/30 bg-white/[0.02] px-4 py-3 backdrop-blur-md">
+            <div className="flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-zinc-400 eureka-mono">
+              <span className="h-2 w-2 rounded-full bg-[#05B1DE] shadow-[0_0_10px_rgba(5,177,222,0.95)] animate-pulse" />
+              Live System Synced
             </div>
-            <div className="text-xs uppercase tracking-[0.15em] text-[#D776FF]">Main portal</div>
+            <div className="text-xs uppercase tracking-[0.15em] text-[#05B1DE] eureka-mono">Eureka! 2026</div>
           </div>
 
-          <h1 className="mb-6 text-3xl font-black uppercase leading-tight tracking-[0.05em] text-transparent md:text-6xl md:leading-[1.05] bg-gradient-to-r from-white via-[#D776FF] to-[#E0A6FF] bg-clip-text">
-            Founders Pit Live 2026
+          {/* Heading */}
+          <h1 className="mb-8 text-3xl font-black uppercase leading-tight tracking-[0.05em] text-transparent md:text-6xl md:leading-[1.05] bg-gradient-to-r from-white via-[#05B1DE] to-[#67e8f9] bg-clip-text eureka-heading">
+            Eureka! 2026 Live Portal
           </h1>
 
-          <div className="grid gap-6 lg:grid-cols-[1.7fr_0.9fr]">
-            <div className="rounded-3xl border border-[#7B2FBE]/60 bg-[#060012]/90 p-4 shadow-[0_0_0_1px_rgba(123,47,190,0.2),0_24px_80px_rgba(0,0,0,0.7)] md:p-6">
-              <div className="rounded-full border border-[#D776FF]/40 bg-[#7B2FBE]/20 px-4 py-1 text-center text-[10px] font-semibold uppercase tracking-[0.3em] text-[#EACBFF] md:inline-flex">
-                {isBeforeLiveDay
-                  ? 'Mission locked'
-                  : isAfterLiveDay
-                    ? 'Mission archived'
-                    : eventFinished
-                      ? 'Mission concluded'
-                      : 'Mission in progress'}
+          <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
+            {/* Main Countdown & Info Card */}
+            <div className="rounded-3xl border border-[#05B1DE]/30 bg-white/[0.01] p-5 shadow-[0_0_50px_rgba(5,177,222,0.05)] backdrop-blur-md md:p-8">
+              <div className="rounded-full border border-[#05B1DE]/40 bg-[#05B1DE]/10 px-4 py-1.5 text-center text-xs font-semibold uppercase tracking-[0.25em] text-[#05B1DE] md:inline-flex eureka-mono">
+                {nextMilestone ? 'Event Status: Active' : 'Event Status: Concluded'}
               </div>
 
-              <div className="mt-8 rounded-2xl border border-[#904EB0]/30 bg-[#0B0318] px-4 py-8 text-center md:px-10 md:py-14">
-                <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">Current phase</p>
-                <h2 className={`mt-3 text-4xl font-black uppercase tracking-[0.04em] md:text-7xl ${eventFinished ? 'text-[#E0A6FF]' : 'text-[#D776FF]'}`}>
+              {/* Display Current Milestone Card */}
+              <div className="mt-8 rounded-2xl border border-[#05B1DE]/20 bg-white/[0.02] px-4 py-10 text-center md:px-10 md:py-14">
+                <p className="text-xs uppercase tracking-[0.2em] text-zinc-400 eureka-mono">Next Milestone</p>
+                <h2 className="mt-3 text-3xl font-black uppercase tracking-[0.04em] md:text-5xl text-[#05B1DE] eureka-heading">
                   {mainHeadline}
                 </h2>
-                <p className="mt-4 text-sm uppercase tracking-[0.2em] text-zinc-300 md:text-base">
+                <p className="mt-4 text-sm uppercase tracking-[0.15em] text-zinc-300 eureka-mono">
                   {subHeadline}
                 </p>
               </div>
 
-              <div className="mt-5 grid gap-3 md:grid-cols-2">
-
-                <div className="rounded-xl border border-[#7B2FBE]/25 bg-[#0A0218] p-3">
-                  <p className="text-[11px] uppercase tracking-[0.15em] text-zinc-500">Countdown</p>
-                  <p className={`mt-1 text-xl font-semibold ${eventFinished ? 'text-[#E0A6FF]' : 'text-[#EACBFF]'}`}>
-                    {isAfterLiveDay || countdownTarget === null ? '00:00:00' : formatDuration(countdownMs)}
+              {/* Countdown & Status Pill */}
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-5">
+                  <p className="text-[11px] uppercase tracking-[0.15em] text-neutral-400 eureka-mono flex items-center gap-1.5">
+                    <Clock className="w-3.5 h-3.5 text-[#05B1DE]" /> Countdown
+                  </p>
+                  <p className="mt-2 text-2xl font-bold tracking-tight text-[#05B1DE] eureka-mono">
+                    {nextMilestone ? formatDuration(countdownMs) : '00:00:00'}
                   </p>
                 </div>
-                <div className="rounded-xl border border-[#7B2FBE]/25 bg-[#0A0218] p-3">
-                  <p className="text-[11px] uppercase tracking-[0.15em] text-zinc-500">Phase status</p>
-                  <p className={`mt-1 text-sm font-semibold uppercase tracking-[0.15em] ${eventFinished ? 'text-[#E0A6FF]' : 'text-[#D776FF]'}`}>
+                <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-5">
+                  <p className="text-[11px] uppercase tracking-[0.15em] text-neutral-400 eureka-mono flex items-center gap-1.5">
+                    <Info className="w-3.5 h-3.5 text-[#05B1DE]" /> Portal Status
+                  </p>
+                  <p className="mt-2 text-sm font-semibold uppercase tracking-[0.15em] text-zinc-200 eureka-mono leading-relaxed">
                     {phaseHeader}
                   </p>
                 </div>
               </div>
-
-              {/* HIDE: Event Day Progress — structure preserved for reuse */}
-              <div className="mt-5 hidden">
-                <div className="mb-2 flex items-center justify-between text-[11px] uppercase tracking-[0.12em] text-zinc-500">
-                  <span>Whole day progress</span>
-                  <span>{Math.round(progress)}%</span>
-                </div>
-                <div className="h-2.5 overflow-hidden rounded-full bg-white/10">
-                  <div
-                    className="h-full bg-gradient-to-r from-[#5E0C9F] via-[#7B2FBE] to-[#D776FF] transition-all duration-700"
-                    style={{ width: `${progress}%` }}
-                  />
-                </div>
-              </div>
             </div>
 
-            <div className="space-y-5">
-              <div className="rounded-3xl border border-[#7B2FBE]/30 bg-[#0A0014]/85 p-5 backdrop-blur-md">
-                <p className="text-[11px] uppercase tracking-[0.16em] text-zinc-400">Current phase</p>
-                <h3 className={`mt-2 text-3xl font-black uppercase leading-tight ${eventFinished || isAfterLiveDay ? 'text-[#E0A6FF]' : 'text-[#D776FF]'}`}>
-                  {isBeforeLiveDay
-                    ? 'Live locked'
-                    : isAfterLiveDay
-                      ? 'Live closed'
-                      : eventFinished
-                        ? 'Event concluded'
-                        : currentItem
-                          ? currentItem.title
-                          : 'Awaiting launch'}
-                </h3>
-                <p className="mt-2 text-sm text-zinc-400">
-                  {isBeforeLiveDay
-                    ? 'Live tracking opens on 18 April 2026.'
-                    : isAfterLiveDay
-                      ? 'Live tracking is available only on 18 April 2026.'
-                      : eventFinished
-                        ? 'The event has ended. Results will be announced soon.'
-                        : currentItem
-                          ? `${currentItem.start} - ${currentItem.end}`
-                          : nextItem
-                            ? `Next slot starts at ${nextItem.start}`
-                            : 'No more slots remaining.'}
-                </p>
-              </div>
-
-              {/* HIDE: Event Flow — structure preserved for reuse */}
-              <div className="rounded-3xl border border-[#7B2FBE]/30 bg-[#0A0014]/85 p-5 backdrop-blur-md hidden">
-                <div className="mb-4 flex items-center justify-between">
-                  <h4 className="text-sm font-bold uppercase tracking-[0.18em] text-zinc-200">Event flow</h4>
-                  <span className="text-[10px] uppercase tracking-[0.15em] text-zinc-500">Schedule</span>
+            {/* Sidebar Column: Timeline & Notices */}
+            <div className="space-y-6">
+              {/* Timeline (Schedule) Section */}
+              <div className="rounded-3xl border border-[#05B1DE]/20 bg-white/[0.01] p-6 backdrop-blur-md">
+                <div className="mb-5 flex items-center justify-between border-b border-white/5 pb-4">
+                  <h4 className="text-sm font-black uppercase tracking-[0.18em] text-white eureka-heading">Event Timeline</h4>
+                  <span className="text-[10px] uppercase tracking-[0.15em] text-[#05B1DE] eureka-mono">Milestones</span>
                 </div>
-                <div className="space-y-3">
-                  {timeline.map((item) => {
-                    const isLive = isLiveDay && now >= item.startAt && now < item.endAt;
-                    const isDone = (isLiveDay && now >= item.endAt) || isAfterLiveDay;
+                <div className="space-y-4">
+                  {milestones.map((item, idx) => {
+                    const isLive = nextMilestone && item.title === nextMilestone.title;
+                    const isDone = new Date(item.date) <= now;
                     const status = isLive ? 'live' : isDone ? 'done' : 'upcoming';
+
                     return (
-                      <div key={`${item.title}-${item.start}`} className="flex items-start gap-3">
-                        <div className={`mt-1 h-3 w-3 rounded-full border ${isLive ? 'border-[#D776FF] bg-[#D776FF] shadow-[0_0_8px_rgba(215,118,255,0.95)]' : isDone ? 'border-[#3B1657] bg-[#3B1657]' : 'border-[#7B2FBE] bg-transparent'}`} />
-                        <div className={`w-full rounded-xl border px-3 py-2 ${phaseTone(status)}`}>
-                          <div className="flex items-center justify-between gap-2">
-                            <p className="text-xs font-semibold uppercase tracking-[0.12em]">{item.title}</p>
-                            <span className="text-[10px] uppercase tracking-[0.14em]">{status}</span>
+                      <div key={item.title} className="flex items-start gap-4">
+                        <div className="relative flex items-center justify-center mt-1">
+                          <div className={`h-4 w-4 rounded-full border-2 transition-all duration-300 ${
+                            isLive 
+                              ? 'border-[#05B1DE] bg-[#020008] shadow-[0_0_12px_#05B1DE]' 
+                              : isDone 
+                                ? 'border-[#05B1DE]/50 bg-[#05B1DE]' 
+                                : 'border-zinc-800 bg-transparent'
+                          }`}>
+                            {isLive && <div className="h-1.5 w-1.5 rounded-full bg-[#05B1DE] animate-ping" />}
                           </div>
-                          <p className="mt-1 text-[11px] text-zinc-400">{item.start} - {item.end}</p>
+                        </div>
+                        <div className={`w-full rounded-2xl border p-4 transition-all duration-300 ${phaseTone(status)}`}>
+                          <div className="flex items-center justify-between gap-2">
+                            <p className="text-xs font-bold uppercase tracking-[0.1em] eureka-heading">{item.title}</p>
+                            <span className="text-[9px] uppercase tracking-[0.15em] font-semibold eureka-mono">{status}</span>
+                          </div>
+                          <p className="mt-1.5 text-[10px] text-zinc-500 eureka-mono">{item.displayDate} • {item.note}</p>
                         </div>
                       </div>
                     );
@@ -300,12 +196,15 @@ export default function Live() {
                 </div>
               </div>
 
-              {/* HIDE: Important Notices — structure preserved for reuse */}
-              <div className="rounded-3xl border border-[#7B2FBE]/30 bg-[#0A0014]/85 p-5 backdrop-blur-md hidden">
-                <h4 className="text-sm font-bold uppercase tracking-[0.18em] text-zinc-200">Important notices</h4>
-                <div className="mt-3 space-y-2.5">
+              {/* Important Notices Section */}
+              <div className="rounded-3xl border border-[#05B1DE]/20 bg-white/[0.01] p-6 backdrop-blur-md">
+                <div className="mb-4 flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 text-[#05B1DE]" />
+                  <h4 className="text-sm font-black uppercase tracking-[0.18em] text-white eureka-heading">Important Notices</h4>
+                </div>
+                <div className="space-y-3">
                   {notices.map((notice, i) => (
-                    <div key={`${notice.level}-${i}`} className={`rounded-xl border p-3 text-xs leading-relaxed ${noticeTone(notice.level)}`}>
+                    <div key={i} className={`rounded-2xl border p-4 text-xs leading-relaxed eureka-mono ${noticeTone(notice.level)}`}>
                       {notice.text}
                     </div>
                   ))}
