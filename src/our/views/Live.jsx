@@ -4,7 +4,7 @@ import { Calendar, Info, Clock, Rocket, AlertCircle } from 'lucide-react';
 
 const milestones = [
   { title: 'Registration Opens', date: '2026-08-14T00:00:00', displayDate: '14 Aug 2026', note: 'Portal open for submissions' },
-  { title: 'Registration Deadline', date: '2026-08-18T23:59:59', displayDate: '18 Aug 2026', note: 'Last day to register' },
+  { title: 'Registration Deadline', date: '2026-08-18T23:59:59', displayDate: '20 Aug 2026', note: 'Last day to register' },
   { title: 'Round 1 — Online Pitch', date: '2026-08-20T09:00:00', displayDate: '20–22 Aug 2026', note: 'Pre-qualifier pitch' },
   { title: 'Round 1 Results', date: '2026-08-23T18:00:00', displayDate: '23 Aug 2026', note: 'Shortlist announced' },
   { title: 'Grand Finale — Offline Round', date: '2026-08-24T09:00:00', displayDate: '24 Aug 2026', note: 'JSS University, Noida' },
@@ -22,7 +22,7 @@ function formatDuration(ms) {
   const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600).toString().padStart(2, '0');
   const minutes = Math.floor((totalSeconds % 3600) / 60).toString().padStart(2, '0');
   const seconds = (totalSeconds % 60).toString().padStart(2, '0');
-  
+
   if (days > 0) {
     return `${days}d ${hours}h ${minutes}m ${seconds}s`;
   }
@@ -81,16 +81,16 @@ export default function Live() {
     return new Date(nextMilestone.date).getTime() - now.getTime();
   }, [nextMilestone, now]);
 
-  const phaseHeader = nextMilestone 
-    ? `Upcoming: ${nextMilestone.title}` 
+  const phaseHeader = nextMilestone
+    ? `Upcoming: ${nextMilestone.title}`
     : 'Event concluded';
 
-  const mainHeadline = nextMilestone 
-    ? nextMilestone.title.toUpperCase() 
+  const mainHeadline = nextMilestone
+    ? nextMilestone.title.toUpperCase()
     : 'CONCLUDED';
 
-  const subHeadline = nextMilestone 
-    ? `Scheduled for ${nextMilestone.displayDate}.` 
+  const subHeadline = nextMilestone
+    ? `Scheduled for ${nextMilestone.displayDate}.`
     : 'All milestones for Eureka! 2026 are completed.';
 
   return (
@@ -173,13 +173,12 @@ export default function Live() {
                     return (
                       <div key={item.title} className="flex items-start gap-4">
                         <div className="relative flex items-center justify-center mt-1">
-                          <div className={`h-4 w-4 rounded-full border-2 transition-all duration-300 ${
-                            isLive 
-                              ? 'border-[#05B1DE] bg-[#020008] shadow-[0_0_12px_#05B1DE]' 
-                              : isDone 
-                                ? 'border-[#05B1DE]/50 bg-[#05B1DE]' 
+                          <div className={`h-4 w-4 rounded-full border-2 transition-all duration-300 ${isLive
+                              ? 'border-[#05B1DE] bg-[#020008] shadow-[0_0_12px_#05B1DE]'
+                              : isDone
+                                ? 'border-[#05B1DE]/50 bg-[#05B1DE]'
                                 : 'border-zinc-800 bg-transparent'
-                          }`}>
+                            }`}>
                             {isLive && <div className="h-1.5 w-1.5 rounded-full bg-[#05B1DE] animate-ping" />}
                           </div>
                         </div>

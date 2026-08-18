@@ -260,7 +260,7 @@ const EurekaCountdown = () => {
   useEffect(() => {
     // Target Date: August 18, 2026 23:59:59 (Registration Deadline)
     const targetDate = new Date('2026-08-18T23:59:59').getTime();
-    
+
     const interval = setInterval(() => {
       const now = new Date().getTime();
       const distance = targetDate - now;
@@ -931,7 +931,7 @@ const Eureka2026 = () => {
               <div className="flex justify-between">
                 {[
                   { label: 'Registration Opens', date: '14 Aug', year: '2026', note: 'Open Now', active: true },
-                  { label: 'Registration Deadline', date: '18 Aug', year: '2026', note: 'Last day to register', active: false },
+                  { label: 'Registration Deadline', date: '20 Aug', year: '2026', note: 'Last day to register', active: false },
                   { label: 'Round 1 — Online Pitch', date: '20–22 Aug', year: '2026', note: 'Pre-qualifier', active: false },
                   { label: 'Round 1 Results', date: '23 Aug', year: '2026', note: 'Shortlist announced', active: false },
                   { label: 'Round 2 - Institutional Finale', date: '24 Aug', year: '2026', note: 'JSS University, Noida', active: false },
