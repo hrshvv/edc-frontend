@@ -258,8 +258,8 @@ const EurekaCountdown = () => {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    // Target Date: August 18, 2026 23:59:59 (Registration Deadline)
-    const targetDate = new Date('2026-08-18T23:59:59').getTime();
+    // Target Date: August 20, 2026 23:59:59 (Registration Deadline)
+    const targetDate = new Date('2026-08-20T23:59:59').getTime();
 
     const interval = setInterval(() => {
       const now = new Date().getTime();
@@ -866,11 +866,11 @@ const Eureka2026 = () => {
                 </div>
                 <div className="p-8 space-y-7 bg-white/[0.02]">
                   {[
-                    { label: 'Final Date', value: '24 August 2026', icon: Calendar, highlight: false },
+                    { label: 'Final Date', value: '25 August 2026', icon: Calendar, highlight: false },
                     { label: 'Venue', value: 'Room 113, AB-3, JSS University Noida', icon: MapPin, highlight: false },
                     { label: 'Finalists', value: '20 Teams', icon: Users, highlight: false },
                     { label: 'Industry Jury', value: '4 Experts', icon: Star, highlight: false },
-                    { label: 'Prize Pool', value: '₹6,000', icon: Award, highlight: true },
+                    { label: 'Prize Pool', value: '₹6,000+', icon: Award, highlight: true },
                   ].map((item, i) => (
                     <div key={i}>
                       <p className="text-[10px] text-neutral-600 uppercase tracking-[0.2em] mb-1 font-bold flex items-center gap-1.5 eureka-mono">
@@ -932,9 +932,9 @@ const Eureka2026 = () => {
                 {[
                   { label: 'Registration Opens', date: '14 Aug', year: '2026', note: 'Open Now', active: true },
                   { label: 'Registration Deadline', date: '20 Aug', year: '2026', note: 'Last day to register', active: false },
-                  { label: 'Round 1 — Online Pitch', date: '20–22 Aug', year: '2026', note: 'Pre-qualifier', active: false },
-                  { label: 'Round 1 Results', date: '23 Aug', year: '2026', note: 'Shortlist announced', active: false },
-                  { label: 'Round 2 - Institutional Finale', date: '24 Aug', year: '2026', note: 'JSS University, Noida', active: false },
+                  { label: 'Round 1 — Online Pitch', date: '21–23 Aug', year: '2026', note: 'Pre-qualifier', active: false },
+                  { label: 'Round 1 Results', date: '24 Aug', year: '2026', note: 'Shortlist announced', active: false },
+                  { label: 'Round 2 - Institutional Finale', date: '25 Aug', year: '2026', note: 'JSS University, Noida', active: false },
                 ].map((item, i) => (
                   <div key={i} className="flex flex-col items-center w-[18%] group">
                     <div
@@ -959,10 +959,10 @@ const Eureka2026 = () => {
             <div className="lg:hidden space-y-3 mb-8">
               {[
                 { label: 'Registration Opens', date: '14 August 2026', note: 'Open Now', active: true },
-                { label: 'Registration Deadline', date: '18 August 2026', note: 'Last day to register', active: false },
-                { label: 'Round 1 — Online Pitch', date: '20–22 August 2026', note: 'Pre-qualifier round', active: false },
-                { label: 'Round 1 Results', date: '23 August 2026', note: 'Shortlist announced', active: false },
-                { label: 'Grand Finale — Offline Round', date: '24 August 2026', note: 'JSS University, Noida', active: false },
+                { label: 'Registration Deadline', date: '20 August 2026', note: 'Last day to register', active: false },
+                { label: 'Round 1 — Online Pitch', date: '21–23 August 2026', note: 'Pre-qualifier round', active: false },
+                { label: 'Round 1 Results', date: '24 August 2026', note: 'Shortlist announced', active: false },
+                { label: 'Grand Finale — Offline Round', date: '25 August 2026', note: 'JSS University, Noida', active: false },
               ].map((item, i) => (
                 <motion.div key={i} variants={fadeInUp}>
                   <div

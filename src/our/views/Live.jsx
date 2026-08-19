@@ -4,16 +4,16 @@ import { Calendar, Info, Clock, Rocket, AlertCircle } from 'lucide-react';
 
 const milestones = [
   { title: 'Registration Opens', date: '2026-08-14T00:00:00', displayDate: '14 Aug 2026', note: 'Portal open for submissions' },
-  { title: 'Registration Deadline', date: '2026-08-18T23:59:59', displayDate: '20 Aug 2026', note: 'Last day to register' },
-  { title: 'Round 1 — Online Pitch', date: '2026-08-20T09:00:00', displayDate: '20–22 Aug 2026', note: 'Pre-qualifier pitch' },
-  { title: 'Round 1 Results', date: '2026-08-23T18:00:00', displayDate: '23 Aug 2026', note: 'Shortlist announced' },
-  { title: 'Grand Finale — Offline Round', date: '2026-08-24T09:00:00', displayDate: '24 Aug 2026', note: 'JSS University, Noida' },
+  { title: 'Registration Deadline', date: '2026-08-20T23:59:59', displayDate: '20 Aug 2026', note: 'Last day to register' },
+  { title: 'Round 1 — Online Pitch', date: '2026-08-21T09:00:00', displayDate: '21–23 Aug 2026', note: 'Round 1: Pre-qualifier pitch' },
+  { title: 'Round 1 Results', date: '2026-08-24T18:00:00', displayDate: '24 Aug 2026', note: 'Round 1 results announced' },
+  { title: 'Grand Finale — Offline Round', date: '2026-08-25T09:00:00', displayDate: '25 Aug 2026', note: 'JSS University, Noida' },
 ];
 
 const notices = [
-  { level: 'priority', text: 'Registration deadline is strict. Make sure to complete your team registration before August 18.' },
+  { level: 'priority', text: 'Registration deadline is strict. Make sure to complete your team registration before August 20th.' },
   { level: 'info', text: 'Institutional Round winners will advance to the Zonal Round under NEC (IIT Bombay).' },
-  { level: 'update', text: 'Offline Grand Finale will be hosted at JSS University, Noida on August 24, 2026.' },
+  { level: 'update', text: 'Offline Round 2: Institutional round will be hosted at JSS University, Noida on August 25, 2026.' },
 ];
 
 function formatDuration(ms) {
