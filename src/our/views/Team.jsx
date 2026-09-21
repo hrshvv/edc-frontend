@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import TeamCard from '../components/TeamCard';
 import Footer from '../components/Footer';
 import teamData from '../data/teamData';
+import { teamPhotoUrl } from '@/lib/teamPhoto';
 
 // ============================================================
 // TEAM PAGE — EDC JSSUN
@@ -242,9 +243,12 @@ const Team = () => {
       {/* Photo with purple ring + badge */}
       <div className="relative flex-shrink-0">
         <img
-          src={image}
+          src={teamPhotoUrl(image, { aspect: '1:1', width: 256 })}
           alt={name}
           loading="lazy"
+          decoding="async"
+          width={128}
+          height={128}
           className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full object-cover border-2 border-purple-400/60 p-[3px] bg-black"
         />
         <div className="absolute -bottom-1 -right-1 bg-purple-400 text-black text-[9px] font-extrabold tracking-widest px-2 py-0.5 rounded-full border-2 border-black">

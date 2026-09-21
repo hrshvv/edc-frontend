@@ -19,7 +19,8 @@
 //   - quote:       The text shown on the back of the flip card
 //
 // MANUAL ENTRIES PENDING:
-//   - 6 members ke photos chahiye (search 'PLACEHOLDER:' in image field)
+//   - 2 members ke photos chahiye (search 'PLACEHOLDER:' in image field)
+//     (card shows an initials avatar until the URL is filled in)
 //   - 16 members ki branch missing hai (search 'BRANCH_TBD' in branch field)
 // ============================================================
 
@@ -618,7 +619,9 @@ const teamData = [
     department: 'Events and Training Team',
     year: 1,
     branch: 'CSE',
-    image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/q_auto/f_auto/v1775581917/Screenshot_20240612_190043_Drive_-_Aayushi_Pandey_oqj6v3.jpg',
+    // Source is a screenshot with a white bar along the bottom 24px —
+    // c_crop,g_north trims it before the card crop is applied
+    image: 'https://res.cloudinary.com/dh8cqlngr/image/upload/q_auto/f_auto/c_crop,g_north,h_1080/v1775581917/Screenshot_20240612_190043_Drive_-_Aayushi_Pandey_oqj6v3.jpg',
     linkedin: 'https://www.linkedin.com/in/aayushi-pandey-7251bb376/',
     github: '',
     instagram: 'https://www.instagram.com/aayyushiii_01',
