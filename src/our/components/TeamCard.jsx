@@ -5,6 +5,12 @@ import {
   IoLogoInstagram,
 } from 'react-icons/io5';
 import { FiArrowUpRight, FiArrowLeft } from 'react-icons/fi';
+import {
+  hasPhoto,
+  initialsOf,
+  teamPhotoSrcSet,
+  teamPhotoUrl,
+} from '@/lib/teamPhoto';
 
 // ============================================================
 // TEAM CARD COMPONENT — with 3D FLIP ANIMATION
@@ -16,7 +22,9 @@ import { FiArrowUpRight, FiArrowLeft } from 'react-icons/fi';
 // Props (Team.jsx se aate hain):
 //   - name:       Member ka naam
 //   - role:       Role like 'Technical Team Head', 'Marketing Team Member'
-//   - image:      Cloudinary photo URL
+//   - image:      Cloudinary photo URL. Delivered through
+//                 lib/teamPhoto (face-aware crop + right size per
+//                 breakpoint). Missing/placeholder → initials avatar.
 //   - linkedin:   LinkedIn URL (optional)
 //   - github:     GitHub URL (optional)
 //   - instagram:  Instagram URL (optional)
@@ -25,6 +33,55 @@ import { FiArrowUpRight, FiArrowLeft } from 'react-icons/fi';
 //   - branch:     Branch like 'CSE', 'CSE-DS', 'IT', 'ECE' etc.
 //                 Card pe display hota hai. 'BRANCH_TBD' = placeholder
 // ============================================================
+// ──────────────────────────────────────────────────────
+// MemberPhoto — the front-face photo.
+// Two server-side crops: 4:5 for phones (< 640px), 1:1 above.
+// `sizes` mirrors the Team.jsx grids (2 / 3 / 4 columns inside a
+// max-w-7xl container) so the browser picks a sensibly sized file.
+// Photo missing (placeholder string) or failing to load → initials
+// avatar instead of a broken-image icon.
+// ──────────────────────────────────────────────────────
+const PHOTO_SIZES = '(min-width: 1280px) 300px, (min-width: 1024px) 24vw, (min-width: 768px) 31vw, 48vw';
+
+const MemberPhoto = ({ name, image }) => {
+  const [failed, setFailed] = useState(false);
+
+  if (!hasPhoto(image) || failed) {
+    return (
+      <div
+        role="img"
+        aria-label={`${name} (photo coming soon)`}
+        className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#05B1DE]/15 via-neutral-900 to-[#B585F0]/15"
+      >
+        <span className="text-4xl sm:text-5xl font-bold tracking-tight text-white/40 select-none">
+          {initialsOf(name)}
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <picture>
+      <source
+        media="(min-width: 640px)"
+        srcSet={teamPhotoSrcSet(image, '1:1')}
+        sizes={PHOTO_SIZES}
+      />
+      <img
+        src={teamPhotoUrl(image, { aspect: '4:5', width: 640 })}
+        srcSet={teamPhotoSrcSet(image, '4:5')}
+        sizes={PHOTO_SIZES}
+        alt={name}
+        loading="lazy"
+        decoding="async"
+        onError={() => setFailed(true)}
+        className="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
+        style={{ filter: 'saturate(0.95) contrast(1.02)' }}
+      />
+    </picture>
+  );
+};
+
 const TeamCard = ({ name, role, image, linkedin, github, instagram, quote, _year, branch }) => {
   // ──────────────────────────────────────────────────────
   // STATE: flip karne ke liye boolean
@@ -131,13 +188,16 @@ const TeamCard = ({ name, role, image, linkedin, github, instagram, quote, _year
   return (
     // ──────────────────────────────────────────────────────
     // OUTER CARD WRAPPER
-    // perspective property 3D effect ke liye zaroori hai
-    // aspect-ratio 1 / 1.35 — photo (square = 1.0) + info section
-    // ka tight space (~0.35) = no extra empty space jaisa mockup me hai
+    // perspective property 3D effect ke liye zaroori hai.
+    // Height is content-driven (no fixed aspect ratio): the FRONT
+    // face sits in normal flow and defines the box, the BACK face is
+    // absolutely positioned over it. A fixed aspect ratio used to
+    // clip the socials/flip row whenever the role wrapped to an
+    // extra line (all cards at 768–1023px, 4-col members at 1280px,
+    // long roles at 360–390px phones). `h-full` lets the parent grid
+    // stretch every card in a row to the tallest one.
     // ──────────────────────────────────────────────────────
-    <div
-      className="w-full [perspective:1200px] group aspect-[1/2.05] sm:aspect-[1/1.5] md:aspect-[1/1.35]"
-    >
+    <div className="w-full h-full [perspective:1200px] group">
       {/* ────────────────────────────────────────────────
           INNER CARD — yeh actually flip hota hai
           transform-style: preserve-3d zaroori hai for 3D
@@ -149,20 +209,17 @@ const TeamCard = ({ name, role, image, linkedin, github, instagram, quote, _year
         }`}
       >
         {/* ════════════════════════════════════════════════
-            FRONT FACE
+            FRONT FACE — in normal flow, so it sizes the whole card
             backface-visibility:hidden — when flipped, yeh hide ho jata hai
             ════════════════════════════════════════════════ */}
-        <div className="absolute inset-0 [backface-visibility:hidden] rounded-2xl overflow-hidden border border-white/10 bg-[#0a0a0a] flex flex-col transition-all duration-300 group-hover:border-[#05B1DE]/40 group-hover:shadow-[0_20px_60px_-20px_rgba(5,177,222,0.25)]">
+        <div className="relative h-full [backface-visibility:hidden] rounded-2xl overflow-hidden border border-white/10 bg-[#0a0a0a] flex flex-col transition-all duration-300 group-hover:border-[#05B1DE]/40 group-hover:shadow-[0_20px_60px_-20px_rgba(5,177,222,0.25)]">
 
-          {/* PHOTO SECTION — taller aspect ratio on mobile so member image is fully visible */}
+          {/* PHOTO SECTION — 4:5 on phones (2-col grid, faces need
+              the extra height), 1:1 from `sm` up. Both shapes are cut
+              server-side around the face, so nothing is cropped blindly
+              here; `object-cover` only absorbs sub-pixel rounding. */}
           <div className="relative aspect-[4/5] sm:aspect-square shrink-0 overflow-hidden bg-neutral-900">
-            <img
-              src={image}
-              alt={name}
-              loading="lazy"
-              className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
-              style={{ filter: 'saturate(0.95) contrast(1.02)' }}
-            />
+            <MemberPhoto name={name} image={image} />
 
             {/* Gradient overlay — top aur bottom dono pe so tags readable rahein */}
             <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40 pointer-events-none" />
@@ -288,9 +345,9 @@ const TeamCard = ({ name, role, image, linkedin, github, instagram, quote, _year
       </div>
 
         {/* ════════════════════════════════════════════════
-            BACK FACE
-            Yeh initially 180deg rotated hai so jab parent flip
-            karega tab yeh seedha dikhega
+            BACK FACE — absolute over the front, so it always matches
+            the front's size. Yeh initially 180deg rotated hai so jab
+            parent flip karega tab yeh seedha dikhega
             ════════════════════════════════════════════════ */}
         <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-2xl overflow-hidden border border-white/10 flex flex-col bg-[#0a0a0a] transition-all duration-300 group-hover:border-[#05B1DE]/40">
 
@@ -321,12 +378,24 @@ const TeamCard = ({ name, role, image, linkedin, github, instagram, quote, _year
 
           {/* Back HEADER — mini photo + name + year tag */}
           <div className="relative z-10 flex items-center gap-2.5 px-4 py-3 border-b border-white/10 bg-black/25">
-            <img
-              src={image}
-              alt={name}
-              loading="lazy"
-              className="w-9 h-9 rounded-full object-cover border-[1.5px] border-[#05B1DE]/50 p-[2px] bg-black flex-shrink-0"
-            />
+            {hasPhoto(image) ? (
+              <img
+                src={teamPhotoUrl(image, { aspect: '1:1', width: 96 })}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                width={36}
+                height={36}
+                className="w-9 h-9 rounded-full object-cover border-[1.5px] border-[#05B1DE]/50 p-[2px] bg-black flex-shrink-0"
+              />
+            ) : (
+              <span
+                aria-hidden="true"
+                className="w-9 h-9 rounded-full border-[1.5px] border-[#05B1DE]/50 bg-[#05B1DE]/10 text-[#7EE4F5] text-[11px] font-bold flex items-center justify-center flex-shrink-0"
+              >
+                {initialsOf(name)}
+              </span>
+            )}
             <div className="flex-1 min-w-0">
               <div className="text-[13px] font-bold text-white tracking-tight leading-tight truncate">
                 {name}
