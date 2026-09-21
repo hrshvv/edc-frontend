@@ -25,7 +25,7 @@ import { FiArrowUpRight, FiArrowLeft } from 'react-icons/fi';
 //   - branch:     Branch like 'CSE', 'CSE-DS', 'IT', 'ECE' etc.
 //                 Card pe display hota hai. 'BRANCH_TBD' = placeholder
 // ============================================================
-const TeamCard = ({ name, role, image, linkedin, github, instagram, quote, year, branch }) => {
+const TeamCard = ({ name, role, image, linkedin, github, instagram, quote, _year, branch }) => {
   // ──────────────────────────────────────────────────────
   // STATE: flip karne ke liye boolean
   // true = back side dikh rahi hai, false = front side
@@ -136,8 +136,7 @@ const TeamCard = ({ name, role, image, linkedin, github, instagram, quote, year,
     // ka tight space (~0.35) = no extra empty space jaisa mockup me hai
     // ──────────────────────────────────────────────────────
     <div
-      className="w-full [perspective:1200px] group"
-      style={{ aspectRatio: '1 / 1.35' }}
+      className="w-full [perspective:1200px] group aspect-[1/2.05] sm:aspect-[1/1.5] md:aspect-[1/1.35]"
     >
       {/* ────────────────────────────────────────────────
           INNER CARD — yeh actually flip hota hai
@@ -155,13 +154,13 @@ const TeamCard = ({ name, role, image, linkedin, github, instagram, quote, year,
             ════════════════════════════════════════════════ */}
         <div className="absolute inset-0 [backface-visibility:hidden] rounded-2xl overflow-hidden border border-white/10 bg-[#0a0a0a] flex flex-col transition-all duration-300 group-hover:border-[#05B1DE]/40 group-hover:shadow-[0_20px_60px_-20px_rgba(5,177,222,0.25)]">
 
-          {/* PHOTO SECTION */}
-          <div className="relative aspect-square overflow-hidden bg-neutral-900">
+          {/* PHOTO SECTION — taller aspect ratio on mobile so member image is fully visible */}
+          <div className="relative aspect-[4/5] sm:aspect-square shrink-0 overflow-hidden bg-neutral-900">
             <img
               src={image}
               alt={name}
               loading="lazy"
-              className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+              className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
               style={{ filter: 'saturate(0.95) contrast(1.02)' }}
             />
 
@@ -169,31 +168,32 @@ const TeamCard = ({ name, role, image, linkedin, github, instagram, quote, year,
             <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40 pointer-events-none" />
 
             {/* Role tag — top-left corner */}
-            <div className={`absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider font-mono border backdrop-blur-md ${roleTag.className}`}>
+            <div className={`absolute top-2.5 sm:top-3 left-2.5 sm:left-3 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[9px] sm:text-[10px] font-bold uppercase tracking-wider font-mono border backdrop-blur-md ${roleTag.className}`}>
               {roleTag.label}
             </div>
 
             {/* Branch tag — bottom-right corner */}
-            <div className="absolute bottom-3 right-3 px-2 py-0.5 rounded-md text-[10px] font-semibold font-mono bg-black/60 backdrop-blur-md text-white/85">
+            <div className="absolute bottom-2.5 sm:bottom-3 right-2.5 sm:right-3 px-2 py-0.5 rounded-md text-[9px] sm:text-[10px] font-semibold font-mono bg-black/60 backdrop-blur-md text-white/85">
               {branchLabel}
             </div>
           </div>
 
-          {/* INFO SECTION — name, role, socials, flip arrow
-              tightly stacked (no mt-auto) so content sits compactly
-              like the mockup — koi empty gap nahi name aur socials ke beech */}
-          <div className="flex flex-col p-3.5 sm:p-4">
-            {/* Name */}
-            <h3 className="text-sm sm:text-base font-bold text-white tracking-tight leading-tight">
-              {name}
-            </h3>
-            {/* Role (smaller, muted) */}
-            <p className="text-xs sm:text-[13px] text-white/65 mt-1 leading-snug">
-              {role}
-            </p>
+          {/* INFO SECTION — name, role, socials, flip arrow */}
+          <div className="flex flex-col flex-1 justify-between p-3 sm:p-4">
+            <div>
+              {/* Name */}
+              <h3 className="text-sm sm:text-base font-bold text-white tracking-tight leading-tight">
+                {name}
+              </h3>
+              {/* Role (smaller, muted) */}
+              <p className="text-xs sm:text-[13px] text-white/65 mt-1 leading-snug">
+                {role}
+              </p>
+            </div>
 
-            {/* Thin divider line */}
-            <div className="h-px bg-white/10 my-3" />
+            <div>
+              {/* Thin divider line */}
+              <div className="h-px bg-white/10 my-2.5 sm:my-3" />
 
             {/* Footer: socials on left, flip arrow on right
                 NO mt-auto — taaki socials seedhe divider ke neeche aaye,
@@ -285,6 +285,7 @@ const TeamCard = ({ name, role, image, linkedin, github, instagram, quote, year,
             </div>
           </div>
         </div>
+      </div>
 
         {/* ════════════════════════════════════════════════
             BACK FACE
