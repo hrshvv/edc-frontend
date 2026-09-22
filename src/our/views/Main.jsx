@@ -809,6 +809,25 @@ const Main = () => {
               />
             </div>
 
+            {/* 7. EDCxEureka! Road to Enterprise 2026 */}
+            <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
+              <TiltedCard
+                imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1786714728/Gemini_Generated_Image_ebw319ebw319ebw3_1_npzxi9.png"
+                altText="Eureka! 2.0 - 2026"
+                captionText="Eureka! 2.0 - 2026"
+                containerHeight="400px"
+                containerWidth="100%"
+                imageHeight="400px"
+                imageWidth="100%"
+                rotateAmplitude={8}
+                scaleOnHover={1.1}
+                showMobileWarning={false}
+                showTooltip={true}
+                displayOverlayContent={true}
+                onClick={() => navigate('/events/eureka-2026')}
+              />
+            </div>
+
             {/* 7. Orientation Programme 2025 */}
             <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
               <TiltedCard
