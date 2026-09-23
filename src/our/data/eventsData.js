@@ -252,6 +252,29 @@ export const eventsData = [
       },
     ],
   },
+    {
+    id: 9,
+    slug: 'eureka-road-to-enterprise-2026',
+    title: 'Eureka! 2026 – Road to Enterprise',
+    shortDescription:
+      'A two-round startup ideation and pitching competition by EDC JSS University Noida, in association with E-Cell IIT Bombay under NEC 2026.',
+    description:
+      'Eureka! 2026 – Road to Enterprise, the Institutional Round organized by EDC JSS University Noida in association with E-Cell IIT Bombay under the National Entrepreneurship Challenge 2026, brought together aspiring student founders for a structured, high-impact startup pitching experience. Teams submitted ideas online before the top 20 advanced to a live offline pitching round before industry experts at JSS University, Noida.',
+    poster:
+      'https://res.cloudinary.com/dh8cqlngr/image/upload/v1786714728/Gemini_Generated_Image_ebw319ebw319ebw3_1_npzxi9.png',
+    date: '2026-08-25',
+    location: 'Room 113, AB-3, JSS University Noida',
+    attendees: '20 Teams',
+    category: 'Competition',
+    winner: '🥇 Team NeuroMechanics <br/>🥈 Team Juriswin <br/>🥉 Team Sentinel',
+    highlights: [
+      'Two-round format: online idea submission followed by live offline pitching.',
+      'Top 21 teams shortlisted from online submissions to pitch live.',
+      'Finalists pitched before 3 invited industry experts.',
+      'Conducted under NEC 2026 in association with E-Cell IIT Bombay.',
+    ],
+    gallery: [],
+  },
   {
     id: 2,
     slug: 'orientation-programme-2025',

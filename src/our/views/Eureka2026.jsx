@@ -396,7 +396,9 @@ const Eureka2026 = () => {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <a
+            
+            {/* ARCHIVED — Registration closed, event has concluded. Restore this <a> block if the event reopens.
+
               href="https://events.edcjssun.com/events/eureka-2026"
               target="_blank"
               rel="noreferrer"
@@ -408,6 +410,7 @@ const Eureka2026 = () => {
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
               </span>
             </a>
+            */}
             <a
               href="#about"
               onClick={scrollToAbout}
@@ -1350,18 +1353,19 @@ const Eureka2026 = () => {
 
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }} variants={staggerContainer}>
-            <SectionLabel>Don't Wait</SectionLabel>
+            <SectionLabel>EUREKA! 2026</SectionLabel>
             <motion.h2 variants={fadeInUp} className="text-5xl md:text-7xl font-black text-white mb-6 tracking-tight eureka-heading">
-              READY TO <br /><span className="text-[#05B1DE]">PITCH?</span>
+              Ideas were pitched. <br /><span className="text-[#05B1DE]">Possibilities were explored.</span>
             </motion.h2>
             <motion.p variants={fadeInUp} className="text-xl text-neutral-300 font-light mb-3">
-              Your idea could be the next big thing.
+              Thank you for being a part of EUREKA!
             </motion.p>
             <motion.p variants={fadeInUp} className="text-base text-neutral-500 mb-12 font-light">
-              Register for Eureka! 2026 and take your first step from idea → pitch → enterprise.
+              Eureka! 2026 has concluded — stay tuned for the next edition
             </motion.p>
+            {/* ARCHIVED — Registration closed, event has concluded. Restore this block if the event reopens.
             <motion.div variants={scaleIn}>
-              <a
+              
                 href="https://events.edcjssun.com/events/eureka-2026"
                 target="_blank"
                 rel="noreferrer"
@@ -1373,6 +1377,7 @@ const Eureka2026 = () => {
                 <ArrowRight className="w-6 h-6 relative group-hover:translate-x-1.5 transition-transform duration-300" />
               </a>
             </motion.div>
+            */}
           </motion.div>
         </div>
       </section>

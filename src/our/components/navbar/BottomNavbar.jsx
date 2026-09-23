@@ -15,7 +15,6 @@ const navItems = [
   { label: 'Team', href: '/team', icon: FiUsers },
   { label: 'Events', href: '/events', icon: FiCalendar },
   { label: 'About', href: '/about', icon: FiInfo },
-  { label: 'Eureka', href: '/eureka-2026', icon: FiZap, special: true },
   { label: 'Live', href: '/live', icon: FiRadio, live: true },
 ];
 
