@@ -695,7 +695,26 @@ const Main = () => {
 
           {/* Events Cards */}
           <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-6 xl:gap-8 max-w-7xl mx-auto">
-            {/* 1. Founders Pit */}
+            {/* 1. Eureka! 2026 – Road to Enterprise */}
+            <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
+              <TiltedCard
+                imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1790239072/Eureka_4_lwydhk.png"
+                altText="Eureka! 2026 – Road to Enterprise"
+                captionText="Eureka! 2026"
+                containerHeight="400px"
+                containerWidth="100%"
+                imageHeight="400px"
+                imageWidth="100%"
+                rotateAmplitude={8}
+                scaleOnHover={1.1}
+                showMobileWarning={false}
+                showTooltip={true}
+                displayOverlayContent={true}
+                onClick={() => navigate('/eureka-2026')}
+              />
+            </div>
+
+            {/* 2. Founders Pit */}
             <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
               <TiltedCard
                 imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1779975031/Untitled_design_20260408_000754_0000_w6hkgu.png"
@@ -809,24 +828,6 @@ const Main = () => {
               />
             </div>
 
-            {/* 7. EDCxEureka! Road to Enterprise 2026 */}
-            <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">
-              <TiltedCard
-                imageSrc="https://res.cloudinary.com/dh8cqlngr/image/upload/v1786714728/Gemini_Generated_Image_ebw319ebw319ebw3_1_npzxi9.png"
-                altText="Eureka! 2.0 - 2026"
-                captionText="Eureka! 2.0 - 2026"
-                containerHeight="400px"
-                containerWidth="100%"
-                imageHeight="400px"
-                imageWidth="100%"
-                rotateAmplitude={8}
-                scaleOnHover={1.1}
-                showMobileWarning={false}
-                showTooltip={true}
-                displayOverlayContent={true}
-                onClick={() => navigate('/events/eureka-2026')}
-              />
-            </div>
 
             {/* 7. Orientation Programme 2025 */}
             <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[280px]">

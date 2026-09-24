@@ -13,12 +13,14 @@ const EventCard = ({ event, index }) => {
   const colors = getCategoryColor(event.category);
 
   const handleClick = () => {
-  if (event.slug === 'founders-pit-2026') {
-    navigate('/founders-pit-event');
-  } else {
-    navigate(`/events/${event.slug}`);
-  }
-};
+    if (event.slug === 'founders-pit-2026') {
+      navigate('/founders-pit-event');
+    } else if (event.slug === 'eureka-road-to-enterprise-2026' || event.slug === 'eureka-2026') {
+      navigate('/eureka-2026');
+    } else {
+      navigate(`/events/${event.slug}`);
+    }
+  };
   return (
     <motion.div
       ref={cardRef}
