@@ -59,12 +59,18 @@ body {
   --primary-brand: #05B1DE;
   --primary-brand-hover: #04a0c7;
   --primary-brand-rgb: 5, 177, 222;
+  --ns-muted: #4d4d4d;
+  --ns-accent: #006bff;
 }
 
 .founders-pit-theme {
   --primary-brand: #7B2FBE;
   --primary-brand-hover: #5E0C9F;
   --primary-brand-rgb: 123, 47, 190;
+}
+
+.dark {
+  --ns-muted: #8f8f8f;
 }
 
 /* Base styles */
