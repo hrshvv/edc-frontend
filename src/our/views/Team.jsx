@@ -344,32 +344,40 @@ const Team = () => {
         </div>
       </section>
 
-      {/* ════════ FILTER CHIPS BAR ════════ */}
-      {/* Sticky — scroll karne pe top pe rahega.
-          Chips center-aligned hain aur wrap hote hain (flex-wrap +
-          justify-center) taaki saare screens pe balanced dikhe.
-          Mobile pe bhi wrap, koi chip chhupega nahi, koi awkward
-          single-chip-line nahi banegi kyunki center pe distribute hota hai. */}
-      <div className="sticky top-[4.5rem] md:top-20 z-30 bg-black/85 backdrop-blur-xl border-y border-white/10">
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-3.5 flex flex-wrap items-center justify-center gap-2">
-          {/* "Jump to" label */}
-          <span className="text-[10px] text-white/45 font-bold uppercase tracking-widest whitespace-nowrap pr-3 border-r border-white/10 mr-1 hidden md:inline-block">
-            Jump to
-          </span>
-          {/* Filter chips */}
-          {filters.map(({ label, value }) => (
-            <button
-              key={value}
-              onClick={() => setActiveFilter(value)}
-              className={`px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold whitespace-nowrap transition-all border ${
-                activeFilter === value
-                  ? 'bg-[#05B1DE] border-[#05B1DE] text-black shadow-[0_0_20px_rgba(5,177,222,0.3)]'
-                  : 'bg-transparent border-white/15 text-white/70 hover:border-white/40 hover:text-white hover:bg-white/5'
-              }`}
-            >
-              {label}
-            </button>
-          ))}
+
+
+      {/* ════════ MINIMAL FILTER BAR ════════ */}
+      <div className="relative z-20 border-b border-white/5 py-4 mb-10 md:mb-14">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          {/* Scrollable container for mobile */}
+          <div 
+            className="flex overflow-x-auto items-center gap-6 pb-2 -mb-2"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {filters.map(({ label, value }) => (
+              <button
+                key={value}
+                onClick={() => setActiveFilter(value)}
+                className={`relative whitespace-nowrap text-[13px] font-medium transition-colors pb-1 ${
+                  activeFilter === value
+                    ? 'text-white'
+                    : 'text-white/40 hover:text-white/70'
+                }`}
+              >
+                {label}
+                {/* Active indicator line */}
+                {activeFilter === value && (
+                  <span className="absolute left-0 right-0 bottom-0 h-px bg-white" />
+                )}
+              </button>
+            ))}
+          </div>
+          <style>{`
+            /* Hide scrollbar for Chrome, Safari and Opera */
+            .overflow-x-auto::-webkit-scrollbar {
+              display: none;
+            }
+          `}</style>
         </div>
       </div>
 
