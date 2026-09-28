@@ -889,7 +889,7 @@ const Main = () => {
         href="https://chat.whatsapp.com/GSDFcDbB2ms6UYhkUsmeRv?s=cl&p=a&ilr=1"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 flex items-center justify-center bg-transparent text-[#25D366] drop-shadow-[0_0_15px_rgba(37,211,102,0.4)] hover:drop-shadow-[0_0_25px_rgba(37,211,102,0.6)] hover:scale-110 transition-all duration-300 group"
+        className="fixed bottom-24 md:bottom-8 right-4 md:right-8 z-50 flex items-center justify-center bg-transparent text-[#25D366] drop-shadow-[0_0_15px_rgba(37,211,102,0.4)] hover:drop-shadow-[0_0_25px_rgba(37,211,102,0.6)] hover:scale-110 transition-all duration-300 group"
         aria-label="Join our WhatsApp Group"
       >
         <svg

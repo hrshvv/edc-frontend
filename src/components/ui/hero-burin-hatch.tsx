@@ -445,9 +445,9 @@ export function BurinHatch({
       className={`relative isolate flex items-center overflow-hidden bg-transparent ${className}`}
     >
       <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-10 px-6 py-16 lg:grid-cols-2 lg:gap-14 lg:py-24">
-        <div className="order-2 lg:order-1 flex flex-col items-start lg:pr-10">
+        <div className="order-2 lg:order-1 flex flex-col items-start text-left lg:pr-10">
           {eyebrow ? (
-            <div className="animate-fade-up-delay-1 mb-6">
+            <div className="animate-fade-up-delay-1 mb-4 lg:mb-6 px-4 lg:px-0">
               <div className="hero-shimmer inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#05B1DE]/30 bg-[#05B1DE]/5 backdrop-blur-sm overflow-hidden">
                 <svg className="w-4 h-4 text-[#05B1DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
@@ -459,7 +459,7 @@ export function BurinHatch({
             </div>
           ) : null}
           <h1
-            className="font-bold tracking-tight text-white animate-fade-up-delay-2"
+            className="font-bold tracking-tight text-white animate-fade-up-delay-2 px-4 lg:px-0"
             style={{
               fontSize: "clamp(2.75rem, 5vw, 4.5rem)",
               lineHeight: 1.05,
@@ -473,11 +473,11 @@ export function BurinHatch({
             ))}
           </h1>
           {subcopy ? (
-            <p className="mt-8 max-w-lg text-lg sm:text-xl leading-relaxed text-gray-400 animate-fade-up-delay-3">
+            <p className="mt-6 lg:mt-8 max-w-lg text-base sm:text-lg lg:text-xl leading-relaxed text-gray-400 animate-fade-up-delay-3 px-4 lg:px-0">
               {subcopy}
             </p>
           ) : null}
-          <div className="mt-10 flex flex-wrap items-center gap-4 animate-fade-up-delay-4">
+          <div className="mt-8 lg:mt-10 flex flex-wrap items-center justify-start gap-4 animate-fade-up-delay-4 px-4 lg:px-0">
             {primaryCta.href ? (
               <a
                 href={primaryCta.href}
@@ -525,7 +525,7 @@ export function BurinHatch({
 
         <div
           data-burin-stage
-          className="order-1 h-[min(56vh,420px)] w-full lg:order-2 lg:h-[min(72vh,620px)]"
+          className="order-1 h-[min(40vh,320px)] sm:h-[min(50vh,400px)] w-full lg:order-2 lg:h-[min(72vh,620px)] mt-12 lg:mt-0"
         >
           <canvas
             ref={canvasRef}
