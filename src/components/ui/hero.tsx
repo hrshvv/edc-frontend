@@ -32,7 +32,7 @@ const ArrowBlack2 = () => (
 );
 
 const CircularBadge = () => (
-  <div className="relative w-28 h-28 md:w-36 md:h-36 bg-[#CCFF00] rounded-full flex items-center justify-center shadow-xl rotate-12 hover:scale-105 transition-transform cursor-pointer border-[3px] border-black/5">
+  <div className="relative w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 bg-[#CCFF00] rounded-full flex items-center justify-center shadow-xl rotate-12 hover:scale-105 transition-transform cursor-pointer border-[3px] border-black/5">
     <div className="absolute inset-1 animate-[spin_10s_linear_infinite]">
       <svg viewBox="0 0 100 100" className="w-full h-full">
         <path id="circlePath" d="M 50, 50 m -36, 0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" fill="none" />
@@ -44,7 +44,7 @@ const CircularBadge = () => (
       </svg>
     </div>
     <div className="absolute inset-0 flex items-center justify-center">
-      <svg viewBox="0 0 100 100" className="w-10 h-10 text-black stroke-current overflow-visible" fill="none" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 100 100" className="w-7 h-7 sm:w-10 sm:h-10 text-black stroke-current overflow-visible" fill="none" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M20,80 Q 40,50 30,30 T 80,20" />
         <path d="M60,10 L80,20 L70,40" />
       </svg>
@@ -57,10 +57,10 @@ export const HeroTextVisual = ({
   line1 = "EDC's",
   line2 = 'RECRUITMENTS',
   line3 = '2026',
-  card1Name = 'baseclub.eth',
-  card1Points = '23 422 points',
-  card2Name = 'pearl.eth',
-  card2Points = '293 582 points',
+  card1Name = 'Tech & Design',
+  card1Points = 'Batch of 2026',
+  card2Name = 'Ops & Media',
+  card2Points = '4 Elite Domains',
   card1Image = 'https://cdn.21st.dev/assets/mirror/a9/a9ba4bfede6313e1469d3a9f805603867503389824f1daedfd5ed293c3a8156c.svg',
   card2Image = 'https://cdn.21st.dev/assets/mirror/0e/0eb34959afb0ef3df22405b23720146876e98b56ebf8e59f9d7fdeec5752d082.svg',
   shadowColor = '#001A99',
@@ -79,15 +79,16 @@ export const HeroTextVisual = ({
   const textShadow3D = `1px 1px 0 ${shadowColor}, 2px 2px 0 ${shadowColor}, 3px 3px 0 ${shadowColor}, 4px 4px 0 ${shadowColor}, 5px 5px 0 ${shadowColor}, 6px 6px 0 ${shadowColor}, 7px 7px 0 ${shadowColor}, 8px 8px 0 ${shadowColor}, 9px 9px 0 ${shadowColor}, 10px 10px 0 ${shadowColor}, 11px 11px 0 ${shadowColor}, 12px 12px 0 ${shadowColor}, 13px 13px 0 ${shadowColor}, 14px 14px 0 ${shadowColor}`;
 
   return (
-    <div className="relative w-full max-w-5xl mx-auto flex flex-col items-center justify-center text-center z-10 py-6">
+    <div className="relative w-full max-w-5xl mx-auto flex flex-col items-center justify-center text-center z-10 px-2 sm:px-4 py-4 sm:py-6">
       {/* Text Stack */}
-      <div className="w-full flex flex-col items-center relative z-10 space-y-2 md:space-y-4">
-        {/* Line 1 */}
-        <div className="w-full flex justify-start pl-[10%] md:pl-[25%] relative z-30">
+      <div className="w-full flex flex-col items-center relative z-10 space-y-1 sm:space-y-2 md:space-y-4">
+        {/* Line 1 — EDC's */}
+        <div className="w-full flex justify-center sm:justify-start sm:pl-[10%] md:pl-[25%] relative z-30">
           <h1
-            className="text-[clamp(4.5rem,12vw,160px)] font-black leading-[0.85] tracking-tighter text-[#CCFF00] m-0 p-0 uppercase select-none"
+            className="font-black leading-[0.85] tracking-tighter text-[#CCFF00] m-0 p-0 uppercase select-none"
             style={{
               fontFamily: '"Arial Black", Impact, sans-serif',
+              fontSize: 'clamp(3rem, 13vw, 160px)',
               textShadow: textShadow3D,
             }}
           >
@@ -95,12 +96,13 @@ export const HeroTextVisual = ({
           </h1>
         </div>
 
-        {/* Line 2 */}
+        {/* Line 2 — RECRUITMENTS */}
         <div className="w-full flex justify-center relative z-20">
           <h1
-            className="text-[clamp(3.5rem,10vw,150px)] font-black leading-[0.85] tracking-tighter text-white m-0 p-0 uppercase select-none"
+            className="font-black leading-[0.85] tracking-tighter text-white m-0 p-0 uppercase select-none"
             style={{
               fontFamily: '"Arial Black", Impact, sans-serif',
+              fontSize: 'clamp(1.75rem, 8.5vw, 150px)',
               textShadow: textShadow3D,
             }}
           >
@@ -108,12 +110,13 @@ export const HeroTextVisual = ({
           </h1>
         </div>
 
-        {/* Line 3 */}
-        <div className="w-full flex justify-start pl-[15%] md:pl-[30%] relative z-10">
+        {/* Line 3 — 2026 */}
+        <div className="w-full flex justify-center sm:justify-start sm:pl-[15%] md:pl-[30%] relative z-10">
           <h1
-            className="text-[clamp(4.5rem,12vw,160px)] font-black leading-[0.85] tracking-tighter text-white m-0 p-0 uppercase select-none"
+            className="font-black leading-[0.85] tracking-tighter text-white m-0 p-0 uppercase select-none"
             style={{
               fontFamily: '"Arial Black", Impact, sans-serif',
+              fontSize: 'clamp(3rem, 13vw, 160px)',
               textShadow: textShadow3D,
             }}
           >
@@ -124,54 +127,82 @@ export const HeroTextVisual = ({
 
       {/* Absolute Overlays (Cards, Arrows, Badge) */}
       <div className="absolute inset-0 w-full h-full pointer-events-none">
-        {/* Floating Glass Card 1 (Bottom Left) */}
+        {/* Floating Glass Card 1 — hidden on xs/sm (overlap risk), shown md+ */}
         <motion.div
           animate={{ y: [0, -15, 0] }}
           transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute bottom-[10%] left-[5%] md:left-[20%] z-30 pointer-events-auto"
+          className="absolute hidden md:flex bottom-[10%] left-[18%] z-30 pointer-events-auto"
         >
-          <div className="w-40 md:w-52 aspect-[3/3.5] bg-white/20 backdrop-blur-md border border-white/40 rounded-[2rem] p-5 flex flex-col items-center justify-center rotate-[-12deg] shadow-2xl hover:rotate-0 transition-transform duration-500">
-            <div className="w-16 h-16 md:w-24 md:h-24 bg-[#D2B48C] rounded-full flex items-center justify-center mb-4 shadow-inner border-[3px] border-white/50 overflow-hidden">
+          <div className="w-44 lg:w-52 aspect-[3/3.5] bg-white/20 backdrop-blur-md border border-white/40 rounded-[2rem] p-5 flex flex-col items-center justify-center rotate-[-12deg] shadow-2xl hover:rotate-0 transition-transform duration-500">
+            <div className="w-20 h-20 lg:w-24 lg:h-24 bg-[#D2B48C] rounded-full flex items-center justify-center mb-4 shadow-inner border-[3px] border-white/50 overflow-hidden">
               <img src={card1Image} alt="Avatar" className="w-full h-full object-cover" />
             </div>
             <div className="text-center mt-2">
-              <p className="font-bold text-sm md:text-lg text-white">{card1Name}</p>
-              <p className="text-[10px] md:text-xs text-white/80 mt-1">{card1Points}</p>
+              <p className="font-bold text-sm lg:text-lg text-white">{card1Name}</p>
+              <p className="text-[10px] lg:text-xs text-white/80 mt-1">{card1Points}</p>
             </div>
           </div>
         </motion.div>
 
-        {/* Floating Glass Card 2 (Top Right) */}
+        {/* Floating Glass Card 2 — hidden on xs/sm, shown md+ */}
         <motion.div
           animate={{ y: [0, -20, 0] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-          className="absolute top-[15%] right-[5%] md:right-[22%] z-30 pointer-events-auto"
+          className="absolute hidden md:flex top-[12%] right-[18%] z-30 pointer-events-auto"
         >
-          <div className="w-40 md:w-52 aspect-[3/3.5] bg-white/20 backdrop-blur-md border border-white/40 rounded-[2rem] p-5 flex flex-col items-center justify-center rotate-[12deg] shadow-2xl hover:rotate-0 transition-transform duration-500">
-            <div className="w-16 h-16 md:w-24 md:h-24 bg-[#2C3E50] rounded-full flex items-center justify-center mb-4 shadow-inner border-[3px] border-white/50 overflow-hidden">
+          <div className="w-44 lg:w-52 aspect-[3/3.5] bg-white/20 backdrop-blur-md border border-white/40 rounded-[2rem] p-5 flex flex-col items-center justify-center rotate-[12deg] shadow-2xl hover:rotate-0 transition-transform duration-500">
+            <div className="w-20 h-20 lg:w-24 lg:h-24 bg-[#2C3E50] rounded-full flex items-center justify-center mb-4 shadow-inner border-[3px] border-white/50 overflow-hidden">
               <img src={card2Image} alt="Avatar" className="w-full h-full object-cover scale-150" />
             </div>
             <div className="text-center mt-2">
-              <p className="font-bold text-sm md:text-lg text-white">{card2Name}</p>
-              <p className="text-[10px] md:text-xs text-white/80 mt-1">{card2Points}</p>
+              <p className="font-bold text-sm lg:text-lg text-white">{card2Name}</p>
+              <p className="text-[10px] lg:text-xs text-white/80 mt-1">{card2Points}</p>
             </div>
           </div>
         </motion.div>
 
-        {/* Decorative Arrow Left */}
-        <div className="absolute bottom-[0%] left-[0%] md:left-[10%] w-24 h-24 md:w-32 md:h-32 z-20">
+        {/* Decorative Arrow Left — smaller on mobile */}
+        <div className="absolute bottom-[-2%] left-[0%] sm:left-[2%] md:left-[8%] w-14 h-14 sm:w-20 sm:h-20 md:w-32 md:h-32 z-20 opacity-75">
           <ArrowGreenLeft />
         </div>
 
-        {/* Decorative Arrow Right */}
-        <div className="absolute top-[5%] right-[0%] md:right-[10%] w-24 h-24 md:w-32 md:h-32 z-20">
+        {/* Decorative Arrow Right — smaller on mobile */}
+        <div className="absolute top-[2%] right-[0%] sm:right-[2%] md:right-[8%] w-14 h-14 sm:w-20 sm:h-20 md:w-32 md:h-32 z-20 opacity-75">
           <ArrowGreenRight />
         </div>
 
-        {/* Circular Badge */}
-        <div className="absolute bottom-[-10%] right-[0%] md:right-[15%] z-40 pointer-events-auto">
+        {/* Circular Badge — scaled down & repositioned on mobile */}
+        <div className="absolute bottom-[-6%] sm:bottom-[-10%] right-[1%] sm:right-[3%] md:right-[15%] z-40 pointer-events-auto">
           <CircularBadge />
         </div>
+      </div>
+
+      {/* Mobile Mini Cards — visible xs/sm only, below the text block */}
+      <div className="flex md:hidden items-center justify-center gap-4 sm:gap-6 mt-8 sm:mt-10 pointer-events-auto relative z-30">
+        {/* Mini card 1 */}
+        <motion.div
+          animate={{ y: [0, -6, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+          className="w-28 sm:w-36 bg-white/20 backdrop-blur-md border border-white/40 rounded-2xl p-3 sm:p-4 flex flex-col items-center rotate-[-8deg] shadow-xl"
+        >
+          <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#D2B48C] rounded-full flex items-center justify-center mb-2 border-2 border-white/50 overflow-hidden">
+            <img src={card1Image} alt="Avatar" className="w-full h-full object-cover" />
+          </div>
+          <p className="font-bold text-xs sm:text-sm text-white text-center">{card1Name}</p>
+          <p className="text-[9px] sm:text-[10px] text-white/70 mt-0.5">{card1Points}</p>
+        </motion.div>
+        {/* Mini card 2 */}
+        <motion.div
+          animate={{ y: [0, -8, 0] }}
+          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 0.7 }}
+          className="w-28 sm:w-36 bg-white/20 backdrop-blur-md border border-white/40 rounded-2xl p-3 sm:p-4 flex flex-col items-center rotate-[8deg] shadow-xl"
+        >
+          <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#2C3E50] rounded-full flex items-center justify-center mb-2 border-2 border-white/50 overflow-hidden">
+            <img src={card2Image} alt="Avatar" className="w-full h-full object-cover scale-150" />
+          </div>
+          <p className="font-bold text-xs sm:text-sm text-white text-center">{card2Name}</p>
+          <p className="text-[9px] sm:text-[10px] text-white/70 mt-0.5">{card2Points}</p>
+        </motion.div>
       </div>
     </div>
   );
