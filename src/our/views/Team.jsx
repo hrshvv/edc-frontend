@@ -152,7 +152,7 @@ const Team = () => {
                 Team Heads
               </span>
               <span className="px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider font-mono bg-purple-500/15 text-purple-300 border border-purple-400/25">
-                2ND YEAR
+                3RD YEAR
               </span>
               <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-transparent" />
             </div>
@@ -188,7 +188,7 @@ const Team = () => {
                 Associate Members
               </span>
               <span className="px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider font-mono bg-green-500/15 text-green-300 border border-green-400/25">
-                1ST YEAR
+                2ND YEAR
               </span>
               <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-transparent" />
             </div>
