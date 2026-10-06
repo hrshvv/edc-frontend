@@ -411,13 +411,21 @@ export default function Recruitment2026() {
           <FloatingParticle delay={3} size={5} x={80} duration={10} />
 
           {/* Hero Visual Element from hero.tsx */}
-          <HeroTextVisual />
+          <HeroTextVisual
+            onScrollDown={() => {
+              const el = document.getElementById('recruitment-overview');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }}
+          />
         </div>
 
         {/* ════════════════════════════════════════════════════════
            2. RECRUITMENT OVERVIEW (Two Pipelines)
            ════════════════════════════════════════════════════════ */}
-        <section className="relative py-20 sm:py-28 px-4 sm:px-6 bg-gradient-to-b from-[#0038FF] to-[#0026C8] border-t border-white/15">
+        <section
+          id="recruitment-overview"
+          className="relative py-20 sm:py-28 px-4 sm:px-6 bg-gradient-to-b from-[#0038FF] to-[#0026C8] border-t border-white/15"
+        >
           <div className="absolute inset-0 rct-grid-bg opacity-20 pointer-events-none" />
           <div className="max-w-6xl mx-auto relative z-10">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer} className="text-center mb-16">
@@ -575,76 +583,152 @@ export default function Recruitment2026() {
             </motion.div>
 
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="grid md:grid-cols-3 gap-6">
-              {/* Task Round Card */}
+              {/* Card 1: Task Round */}
               <motion.div variants={fadeInUp} className="md:col-span-1">
-                <div className="rct-card p-7 sm:p-8 rounded-3xl h-full relative overflow-hidden group">
+                <div className="rct-card p-7 sm:p-8 rounded-3xl h-full flex flex-col relative overflow-hidden group">
                   <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0038FF] via-[#CCFF00] to-[#0038FF]" />
                   <div className="absolute -top-10 -right-10 w-44 h-44 bg-[radial-gradient(circle,rgba(204,255,0,0.18)_0%,transparent_70%)] blur-2xl pointer-events-none" />
-                  <div className="absolute top-4 right-4">
-                    <span className="text-[10px] uppercase tracking-widest bg-[#CCFF00] text-black px-3 py-1 rounded-full font-black shadow-sm">Online</span>
-                  </div>
-                  <div className="size-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[#0038FF] to-[#001D99] text-[#CCFF00] shadow-[0_4px_16px_rgba(0,56,255,0.35)] mb-5 group-hover:scale-105 transition-transform">
-                    <Zap className="size-7 text-[#CCFF00]" />
-                  </div>
-                  <h3 className="text-2xl font-black text-neutral-900 mb-3 uppercase group-hover:text-[#0038FF] transition-colors">Task Round</h3>
-                  <p className="text-neutral-600 text-sm mb-5 leading-relaxed">Conducted online on <span className="text-[#0038FF] font-bold">14–15 October</span>. Each candidate receives a task based on their preferred team.</p>
-                  <div className="p-3.5 rounded-2xl bg-gradient-to-br from-white to-[#F4F7FF] border border-[#0038FF]/15 shadow-xs">
-                    <p className="text-neutral-900 text-xs font-black uppercase tracking-wider flex items-center gap-2">
-                      <span className="size-2 rounded-full bg-[#CCFF00] border border-[#0038FF]" />
-                      Assesses: execution, creativity, problem-solving
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
 
-              {/* GD Card */}
-              <motion.div variants={fadeInUp} className="md:col-span-1">
-                <div className="rct-card p-7 sm:p-8 rounded-3xl h-full relative overflow-hidden group">
-                  <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0038FF] via-[#CCFF00] to-[#0038FF]" />
-                  <div className="absolute -top-10 -right-10 w-44 h-44 bg-[radial-gradient(circle,rgba(204,255,0,0.18)_0%,transparent_70%)] blur-2xl pointer-events-none" />
-                  <div className="absolute top-4 right-4">
-                    <span className="text-[10px] uppercase tracking-widest bg-[#0038FF] text-white px-3 py-1 rounded-full font-black shadow-sm">Offline</span>
-                  </div>
-                  <div className="size-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[#0038FF] to-[#001D99] text-[#CCFF00] shadow-[0_4px_16px_rgba(0,56,255,0.35)] mb-5 group-hover:scale-105 transition-transform">
-                    <Users className="size-7 text-[#CCFF00]" />
-                  </div>
-                  <h3 className="text-2xl font-black text-neutral-900 mb-3 uppercase group-hover:text-[#0038FF] transition-colors">GD Round</h3>
-                  <p className="text-neutral-600 text-sm mb-5 leading-relaxed">Offline on <span className="text-[#0038FF] font-bold">27–28 October</span>. Assessing how you think, communicate, and collaborate.</p>
-                  <div className="flex flex-wrap gap-2">
-                    {['Communication', 'Teamwork', 'Reasoning', 'Listening', 'Confidence', 'Leadership'].map((skill) => (
-                      <span key={skill} className="text-[10px] font-bold text-neutral-800 uppercase tracking-wider bg-white/90 px-3 py-1.5 rounded-xl border border-neutral-200/90 shadow-xs hover:border-[#0038FF]/40 transition-colors">{skill}</span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* PI Card */}
-              <motion.div variants={fadeInUp} className="md:col-span-1">
-                <div className="rct-card p-7 sm:p-8 rounded-3xl h-full relative overflow-hidden group">
-                  <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0038FF] via-[#CCFF00] to-[#0038FF]" />
-                  <div className="absolute -top-10 -right-10 w-44 h-44 bg-[radial-gradient(circle,rgba(204,255,0,0.18)_0%,transparent_70%)] blur-2xl pointer-events-none" />
-                  <div className="absolute top-4 right-4">
-                    <span className="text-[10px] uppercase tracking-widest bg-[#CCFF00] text-black px-3 py-1 rounded-full font-black shadow-sm">Offline</span>
-                  </div>
-                  <div className="size-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[#0038FF] to-[#001D99] text-[#CCFF00] shadow-[0_4px_16px_rgba(0,56,255,0.35)] mb-5 group-hover:scale-105 transition-transform">
-                    <Eye className="size-7 text-[#CCFF00]" />
-                  </div>
-                  <h3 className="text-2xl font-black text-neutral-900 mb-3 uppercase group-hover:text-[#0038FF] transition-colors">PI Round</h3>
-                  <p className="text-neutral-600 text-sm mb-4 leading-relaxed">Two interview components running in parallel with GD.</p>
-                  <div className="space-y-3">
-                    <div className="p-3.5 rounded-2xl bg-gradient-to-br from-white to-[#F4F7FF] border border-[#0038FF]/15 shadow-xs">
-                      <h4 className="text-[#0038FF] font-black text-xs uppercase tracking-wider mb-1 flex items-center justify-between">
-                        <span>Team-Specific PI</span>
-                        <span className="text-[10px] text-neutral-400 font-mono">01</span>
-                      </h4>
-                      <p className="text-neutral-600 text-xs leading-relaxed">Role-specific skills, projects, problem-solving, learning ability</p>
+                  {/* Top Meta Bar */}
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="size-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[#0038FF] to-[#001D99] text-[#CCFF00] shadow-[0_4px_16px_rgba(0,56,255,0.35)] group-hover:scale-105 transition-transform">
+                      <Zap className="size-7 text-[#CCFF00]" />
                     </div>
-                    <div className="p-3.5 rounded-2xl bg-gradient-to-br from-white to-[#F4F7FF] border border-[#0038FF]/15 shadow-xs">
-                      <h4 className="text-neutral-900 font-black text-xs uppercase tracking-wider mb-1 flex items-center justify-between">
-                        <span>HR / EDC PI</span>
-                        <span className="text-[10px] text-neutral-400 font-mono">02</span>
-                      </h4>
-                      <p className="text-neutral-600 text-xs leading-relaxed">Motivation, commitment, teamwork, understanding of EDC</p>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-mono font-black text-[#0038FF] uppercase tracking-widest bg-[#0038FF]/10 px-2.5 py-1 rounded-md">Stage 01</span>
+                      <span className="text-[10px] uppercase tracking-widest bg-[#CCFF00] text-black px-3 py-1 rounded-full font-black shadow-xs">Online</span>
+                    </div>
+                  </div>
+
+                  {/* Title & Schedule */}
+                  <h3 className="text-2xl font-black text-neutral-900 mb-2 uppercase group-hover:text-[#0038FF] transition-colors">Task Round</h3>
+                  <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0038FF] bg-[#0038FF]/10 px-3 py-1 rounded-full mb-3 self-start">
+                    <Calendar className="size-3.5 text-[#0038FF]" />
+                    <span>14–15 October • 48h Window</span>
+                  </div>
+
+                  {/* Narrative Body */}
+                  <p className="text-neutral-600 text-sm mb-6 leading-relaxed">
+                    Practical, hands-on domain challenge tailored to your chosen wing. Demonstrates your real-world execution, craftsmanship, and problem-solving under realistic constraints.
+                  </p>
+
+                  {/* Structured Evaluation Criteria */}
+                  <div className="space-y-2.5 mt-auto">
+                    <div className="p-3 rounded-2xl bg-gradient-to-br from-white to-[#F4F7FF] border border-[#0038FF]/15 shadow-xs flex items-start gap-2.5">
+                      <span className="size-2 rounded-full bg-[#CCFF00] border border-[#0038FF] mt-1.5 flex-shrink-0" />
+                      <div>
+                        <p className="text-neutral-900 text-xs font-black uppercase tracking-wider">Execution Quality</p>
+                        <p className="text-neutral-500 text-[11px] leading-snug mt-0.5">Deliverable polish, technical accuracy, and domain fundamentals</p>
+                      </div>
+                    </div>
+                    <div className="p-3 rounded-2xl bg-gradient-to-br from-white to-[#F4F7FF] border border-[#0038FF]/15 shadow-xs flex items-start gap-2.5">
+                      <span className="size-2 rounded-full bg-[#0038FF] mt-1.5 flex-shrink-0" />
+                      <div>
+                        <p className="text-neutral-900 text-xs font-black uppercase tracking-wider">Creative Problem-Solving</p>
+                        <p className="text-neutral-500 text-[11px] leading-snug mt-0.5">Originality in ideation and ability to handle edge cases</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Card 2: GD Round */}
+              <motion.div variants={fadeInUp} className="md:col-span-1">
+                <div className="rct-card p-7 sm:p-8 rounded-3xl h-full flex flex-col relative overflow-hidden group">
+                  <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0038FF] via-[#CCFF00] to-[#0038FF]" />
+                  <div className="absolute -top-10 -right-10 w-44 h-44 bg-[radial-gradient(circle,rgba(204,255,0,0.18)_0%,transparent_70%)] blur-2xl pointer-events-none" />
+
+                  {/* Top Meta Bar */}
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="size-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[#0038FF] to-[#001D99] text-[#CCFF00] shadow-[0_4px_16px_rgba(0,56,255,0.35)] group-hover:scale-105 transition-transform">
+                      <Users className="size-7 text-[#CCFF00]" />
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-mono font-black text-[#0038FF] uppercase tracking-widest bg-[#0038FF]/10 px-2.5 py-1 rounded-md">Stage 02</span>
+                      <span className="text-[10px] uppercase tracking-widest bg-[#0038FF] text-white px-3 py-1 rounded-full font-black shadow-xs">Offline</span>
+                    </div>
+                  </div>
+
+                  {/* Title & Schedule */}
+                  <h3 className="text-2xl font-black text-neutral-900 mb-2 uppercase group-hover:text-[#0038FF] transition-colors">GD Round</h3>
+                  <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0038FF] bg-[#0038FF]/10 px-3 py-1 rounded-full mb-3 self-start">
+                    <Calendar className="size-3.5 text-[#0038FF]" />
+                    <span>27–28 October • Campus Panels</span>
+                  </div>
+
+                  {/* Narrative Body */}
+                  <p className="text-neutral-600 text-sm mb-6 leading-relaxed">
+                    Interactive group discourse on modern startup and tech trends. Evaluates your ability to articulate logical perspectives, listen attentively, and drive collaborative consensus.
+                  </p>
+
+                  {/* Structured Evaluation Criteria */}
+                  <div className="space-y-2.5 mt-auto">
+                    <div className="p-3 rounded-2xl bg-gradient-to-br from-white to-[#F4F7FF] border border-[#0038FF]/15 shadow-xs flex items-start gap-2.5">
+                      <span className="size-2 rounded-full bg-[#CCFF00] border border-[#0038FF] mt-1.5 flex-shrink-0" />
+                      <div>
+                        <p className="text-neutral-900 text-xs font-black uppercase tracking-wider">Articulation & Reasoning</p>
+                        <p className="text-neutral-500 text-[11px] leading-snug mt-0.5">Expressing structured arguments with clarity and composure</p>
+                      </div>
+                    </div>
+                    <div className="p-3 rounded-2xl bg-gradient-to-br from-white to-[#F4F7FF] border border-[#0038FF]/15 shadow-xs flex items-start gap-2.5">
+                      <span className="size-2 rounded-full bg-[#0038FF] mt-1.5 flex-shrink-0" />
+                      <div>
+                        <p className="text-neutral-900 text-xs font-black uppercase tracking-wider">Collaborative Leadership</p>
+                        <p className="text-neutral-500 text-[11px] leading-snug mt-0.5">Active listening, respectful discourse, and synthesizing viewpoints</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Card 3: PI Round */}
+              <motion.div variants={fadeInUp} className="md:col-span-1">
+                <div className="rct-card p-7 sm:p-8 rounded-3xl h-full flex flex-col relative overflow-hidden group">
+                  <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0038FF] via-[#CCFF00] to-[#0038FF]" />
+                  <div className="absolute -top-10 -right-10 w-44 h-44 bg-[radial-gradient(circle,rgba(204,255,0,0.18)_0%,transparent_70%)] blur-2xl pointer-events-none" />
+
+                  {/* Top Meta Bar */}
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="size-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[#0038FF] to-[#001D99] text-[#CCFF00] shadow-[0_4px_16px_rgba(0,56,255,0.35)] group-hover:scale-105 transition-transform">
+                      <Eye className="size-7 text-[#CCFF00]" />
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-mono font-black text-[#0038FF] uppercase tracking-widest bg-[#0038FF]/10 px-2.5 py-1 rounded-md">Stage 03</span>
+                      <span className="text-[10px] uppercase tracking-widest bg-[#CCFF00] text-black px-3 py-1 rounded-full font-black shadow-xs">Offline</span>
+                    </div>
+                  </div>
+
+                  {/* Title & Schedule */}
+                  <h3 className="text-2xl font-black text-neutral-900 mb-2 uppercase group-hover:text-[#0038FF] transition-colors">PI Round</h3>
+                  <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0038FF] bg-[#0038FF]/10 px-3 py-1 rounded-full mb-3 self-start">
+                    <Calendar className="size-3.5 text-[#0038FF]" />
+                    <span>27–28 October • Dual In-Person Panels</span>
+                  </div>
+
+                  {/* Narrative Body */}
+                  <p className="text-neutral-600 text-sm mb-6 leading-relaxed">
+                    Two focused interview panels conducted in parallel with GD. Evaluates deep technical competency alongside cultural fit, motivation, and entrepreneurial ownership.
+                  </p>
+
+                  {/* Structured Evaluation Criteria */}
+                  <div className="space-y-2.5 mt-auto">
+                    <div className="p-3 rounded-2xl bg-gradient-to-br from-white to-[#F4F7FF] border border-[#0038FF]/15 shadow-xs flex items-start gap-2.5">
+                      <span className="size-2 rounded-full bg-[#CCFF00] border border-[#0038FF] mt-1.5 flex-shrink-0" />
+                      <div>
+                        <div className="flex items-center justify-between">
+                          <p className="text-neutral-900 text-xs font-black uppercase tracking-wider">01 • Team-Specific PI</p>
+                        </div>
+                        <p className="text-neutral-500 text-[11px] leading-snug mt-0.5">Portfolio review, domain depth, past projects & learning agility</p>
+                      </div>
+                    </div>
+                    <div className="p-3 rounded-2xl bg-gradient-to-br from-white to-[#F4F7FF] border border-[#0038FF]/15 shadow-xs flex items-start gap-2.5">
+                      <span className="size-2 rounded-full bg-[#0038FF] mt-1.5 flex-shrink-0" />
+                      <div>
+                        <div className="flex items-center justify-between">
+                          <p className="text-neutral-900 text-xs font-black uppercase tracking-wider">02 • HR & Leadership PI</p>
+                        </div>
+                        <p className="text-neutral-500 text-[11px] leading-snug mt-0.5">Commitment, dedication, team ethics & alignment with EDC</p>
+                      </div>
                     </div>
                   </div>
                 </div>

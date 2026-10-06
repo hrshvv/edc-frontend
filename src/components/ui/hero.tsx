@@ -31,26 +31,50 @@ const ArrowBlack2 = () => (
   </svg>
 );
 
-const CircularBadge = () => (
-  <div className="relative w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 bg-[#CCFF00] rounded-full flex items-center justify-center shadow-xl rotate-12 hover:scale-105 transition-transform cursor-pointer border-[3px] border-black/5">
-    <div className="absolute inset-1 animate-[spin_10s_linear_infinite]">
-      <svg viewBox="0 0 100 100" className="w-full h-full">
-        <path id="circlePath" d="M 50, 50 m -36, 0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" fill="none" />
-        <text className="text-[11px] font-black tracking-[0.18em] uppercase" fill="black">
-          <textPath href="#circlePath" startOffset="0%">
-            GET STARTED OF FREE • GET STARTED OF FREE • 
-          </textPath>
-        </text>
-      </svg>
-    </div>
-    <div className="absolute inset-0 flex items-center justify-center">
-      <svg viewBox="0 0 100 100" className="w-7 h-7 sm:w-10 sm:h-10 text-black stroke-current overflow-visible" fill="none" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M20,80 Q 40,50 30,30 T 80,20" />
-        <path d="M60,10 L80,20 L70,40" />
-      </svg>
-    </div>
-  </div>
-);
+const CircularBadge = ({ onClick }: { onClick?: () => void }) => {
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onClick) {
+      onClick();
+      return;
+    }
+    const target = document.getElementById('recruitment-overview') || document.querySelector('section:not(:first-of-type)');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.scrollBy({ top: window.innerHeight * 0.85, behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={handleClick}
+      aria-label="Scroll down to explore recruitment"
+      className="group relative w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 bg-[#CCFF00] rounded-full flex items-center justify-center shadow-2xl rotate-12 hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer border-[3px] border-black/10 select-none focus:outline-none focus:ring-4 focus:ring-[#CCFF00]/50"
+    >
+      {/* Rotating Circular Text */}
+      <div className="absolute inset-1 animate-[spin_12s_linear_infinite] group-hover:[animation-duration:5s] transition-all">
+        <svg viewBox="0 0 100 100" className="w-full h-full">
+          <path id="circlePath" d="M 50, 50 m -36, 0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" fill="none" />
+          <text className="text-[10px] sm:text-[11px] font-black tracking-[0.16em] uppercase" fill="black">
+            <textPath href="#circlePath" startOffset="0%">
+              SCROLL DOWN • EXPLORE RECRUITMENT • 
+            </textPath>
+          </text>
+        </svg>
+      </div>
+
+      {/* Center Arrow pointing down */}
+      <div className="absolute inset-0 flex items-center justify-center group-hover:translate-y-1.5 transition-transform duration-300">
+        <svg viewBox="0 0 100 100" className="w-7 h-7 sm:w-10 sm:h-10 text-black stroke-current overflow-visible rotate-90" fill="none" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M20,80 Q 40,50 30,30 T 80,20" />
+          <path d="M60,10 L80,20 L70,40" />
+        </svg>
+      </div>
+    </button>
+  );
+};
 
 // Standalone Hero Text Element (as shown in user image)
 export const HeroTextVisual = ({
@@ -64,6 +88,7 @@ export const HeroTextVisual = ({
   card1Image = 'https://cdn.21st.dev/assets/mirror/a9/a9ba4bfede6313e1469d3a9f805603867503389824f1daedfd5ed293c3a8156c.svg',
   card2Image = 'https://cdn.21st.dev/assets/mirror/0e/0eb34959afb0ef3df22405b23720146876e98b56ebf8e59f9d7fdeec5752d082.svg',
   shadowColor = '#001A99',
+  onScrollDown,
 }: {
   line1?: string;
   line2?: string;
@@ -75,6 +100,7 @@ export const HeroTextVisual = ({
   card1Image?: string;
   card2Image?: string;
   shadowColor?: string;
+  onScrollDown?: () => void;
 }) => {
   const textShadow3D = `1px 1px 0 ${shadowColor}, 2px 2px 0 ${shadowColor}, 3px 3px 0 ${shadowColor}, 4px 4px 0 ${shadowColor}, 5px 5px 0 ${shadowColor}, 6px 6px 0 ${shadowColor}, 7px 7px 0 ${shadowColor}, 8px 8px 0 ${shadowColor}, 9px 9px 0 ${shadowColor}, 10px 10px 0 ${shadowColor}, 11px 11px 0 ${shadowColor}, 12px 12px 0 ${shadowColor}, 13px 13px 0 ${shadowColor}, 14px 14px 0 ${shadowColor}`;
 
@@ -173,7 +199,7 @@ export const HeroTextVisual = ({
 
         {/* Circular Badge — scaled down & repositioned on mobile */}
         <div className="absolute bottom-[-6%] sm:bottom-[-10%] right-[1%] sm:right-[3%] md:right-[15%] z-40 pointer-events-auto">
-          <CircularBadge />
+          <CircularBadge onClick={onScrollDown} />
         </div>
       </div>
 
