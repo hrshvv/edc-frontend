@@ -20,10 +20,11 @@ const navItems = [
 
 export default function BottomNavbar() {
   const { pathname } = useLocation();
+  const isRecruitmentPage = pathname.startsWith('/recruitment-2026');
 
   return (
     <div className="bottom-navbar-wrapper" role="navigation" aria-label="Mobile navigation">
-      <nav className="bottom-navbar">
+      <nav className={`bottom-navbar ${isRecruitmentPage ? 'recruitment-theme' : ''}`}>
         {navItems.map((item) => {
           const isActive =
             item.href === '/'

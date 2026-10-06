@@ -12,6 +12,7 @@ import Live from './our/views/Live';
 import ScrollToTop from './components/ScrollToTop';
 import Orientation from './our/views/Orientation';
 import Eureka2026 from './our/views/Eureka2026';
+import Recruitment2026 from './our/views/Recruitment2026';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/orientation" element={<Orientation />} />
           <Route path="/eureka-2026" element={<Eureka2026 />} />
+          <Route path="/recruitment-2026" element={<Recruitment2026 />} />
         </Routes>
       </div>
       <BottomNavbar />
