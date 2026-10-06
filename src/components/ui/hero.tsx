@@ -159,7 +159,7 @@ export const HeroTextVisual = ({
           transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
           className="absolute hidden md:flex bottom-[10%] left-[18%] z-30 pointer-events-auto"
         >
-          <div className="w-44 lg:w-52 aspect-[3/3.5] bg-white/20 backdrop-blur-md border border-white/40 rounded-[2rem] p-5 flex flex-col items-center justify-center rotate-[-12deg] shadow-2xl hover:rotate-0 transition-transform duration-500">
+          <div className="w-44 lg:w-52 aspect-[3/3.5] bg-white/10 backdrop-blur-sm border border-white/25 rounded-[2rem] p-5 flex flex-col items-center justify-center rotate-[-12deg] shadow-xl hover:rotate-0 transition-transform duration-500">
             <div className="w-20 h-20 lg:w-24 lg:h-24 bg-[#D2B48C] rounded-full flex items-center justify-center mb-4 shadow-inner border-[3px] border-white/50 overflow-hidden">
               <img src={card1Image} alt="Avatar" className="w-full h-full object-cover" />
             </div>
@@ -176,7 +176,7 @@ export const HeroTextVisual = ({
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
           className="absolute hidden md:flex top-[12%] right-[18%] z-30 pointer-events-auto"
         >
-          <div className="w-44 lg:w-52 aspect-[3/3.5] bg-white/20 backdrop-blur-md border border-white/40 rounded-[2rem] p-5 flex flex-col items-center justify-center rotate-[12deg] shadow-2xl hover:rotate-0 transition-transform duration-500">
+          <div className="w-44 lg:w-52 aspect-[3/3.5] bg-white/10 backdrop-blur-sm border border-white/25 rounded-[2rem] p-5 flex flex-col items-center justify-center rotate-[12deg] shadow-xl hover:rotate-0 transition-transform duration-500">
             <div className="w-20 h-20 lg:w-24 lg:h-24 bg-[#2C3E50] rounded-full flex items-center justify-center mb-4 shadow-inner border-[3px] border-white/50 overflow-hidden">
               <img src={card2Image} alt="Avatar" className="w-full h-full object-cover scale-150" />
             </div>
@@ -209,7 +209,7 @@ export const HeroTextVisual = ({
         <motion.div
           animate={{ y: [0, -6, 0] }}
           transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-          className="w-28 sm:w-36 bg-white/20 backdrop-blur-md border border-white/40 rounded-2xl p-3 sm:p-4 flex flex-col items-center rotate-[-8deg] shadow-xl"
+          className="w-28 sm:w-36 bg-white/10 backdrop-blur-sm border border-white/25 rounded-2xl p-3 sm:p-4 flex flex-col items-center rotate-[-8deg] shadow-lg"
         >
           <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#D2B48C] rounded-full flex items-center justify-center mb-2 border-2 border-white/50 overflow-hidden">
             <img src={card1Image} alt="Avatar" className="w-full h-full object-cover" />
@@ -221,7 +221,7 @@ export const HeroTextVisual = ({
         <motion.div
           animate={{ y: [0, -8, 0] }}
           transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 0.7 }}
-          className="w-28 sm:w-36 bg-white/20 backdrop-blur-md border border-white/40 rounded-2xl p-3 sm:p-4 flex flex-col items-center rotate-[8deg] shadow-xl"
+          className="w-28 sm:w-36 bg-white/10 backdrop-blur-sm border border-white/25 rounded-2xl p-3 sm:p-4 flex flex-col items-center rotate-[8deg] shadow-lg"
         >
           <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#2C3E50] rounded-full flex items-center justify-center mb-2 border-2 border-white/50 overflow-hidden">
             <img src={card2Image} alt="Avatar" className="w-full h-full object-cover scale-150" />

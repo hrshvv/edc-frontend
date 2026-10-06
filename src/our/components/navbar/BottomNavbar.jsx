@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FiHome, FiUsers, FiCalendar, FiInfo, FiZap, FiRadio } from 'react-icons/fi';
+import { FiHome, FiUsers, FiCalendar, FiInfo, FiZap, FiRadio, FiUserPlus } from 'react-icons/fi';
 import './BottomNavbar.css';
 
 /**
@@ -14,6 +14,7 @@ const navItems = [
   { label: 'Home', href: '/', icon: FiHome },
   { label: 'Team', href: '/team', icon: FiUsers },
   { label: 'Events', href: '/events', icon: FiCalendar },
+  { label: 'Recruitment', href: '/recruitment-2026', icon: FiUserPlus, isRecruitment: true },
   { label: 'About', href: '/about', icon: FiInfo },
   { label: 'Live', href: '/live', icon: FiRadio, live: true },
 ];
@@ -42,6 +43,9 @@ export default function BottomNavbar() {
                 <item.icon />
                 {item.live && (
                   <span className="absolute top-0.5 right-0.5 h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
+                )}
+                {item.isRecruitment && !isRecruitmentPage && (
+                  <span className="absolute top-0.5 right-0.5 h-1.5 w-1.5 rounded-full bg-[#CCFF00] shadow-[0_0_6px_#CCFF00] animate-pulse" />
                 )}
               </span>
               <span className="bottom-navbar-label">{item.label}</span>

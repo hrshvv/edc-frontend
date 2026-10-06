@@ -6,9 +6,9 @@ import LightRays from '../../components/LightRays';
 import { HeroTextVisual } from '../../components/ui/hero';
 import {
   Terminal, PenTool, Share2, Settings, Calendar, CheckCircle2, Target,
-  Users, Clock, ChevronRight, ChevronDown, Zap, ArrowRight, Sparkles,
+  Users, Clock, ChevronRight, ChevronLeft, ChevronDown, Zap, ArrowRight, Sparkles,
   Shield, Eye, Brain, MessageCircle, Award, FileText, Cpu, Palette,
-  Video, Megaphone
+  Video, Megaphone, Camera, X, Maximize2, Heart
 } from 'lucide-react';
 
 /* ══════════════════════════════════════════════════════════════
@@ -247,17 +247,111 @@ const FAQ_DATA = [
 ];
 
 /* ══════════════════════════════════════════════════════════════
+   PEOPLE MEMORIES OF EDC DATA
+   ══════════════════════════════════════════════════════════════ */
+const MEMORY_CATEGORIES = ['All', 'Team', 'Events', 'Culture', 'Workshops'];
+
+const EDC_MEMORIES = [
+  {
+    id: 1,
+    title: 'The Official EDC Family Cohort',
+    subtitle: '50+ Innovators, Mentors & Faculty Coordinators',
+    category: 'Team',
+    tag: 'Annual Portrait',
+    image: '/images/1.jpg',
+    caption: 'Faculty coordinators, student leads, and members gathered for the annual university portrait outside campus.',
+  },
+  {
+    id: 2,
+    title: "Founder's Pit '26 Finale",
+    subtitle: 'Flagship Startup Simulation',
+    category: 'Events',
+    tag: 'Flagship Finale',
+    image: "/images/Founder_s%20Pit.jpeg",
+    caption: 'Post-event euphoria: orchestrating a campus-wide startup simulation across 5 high-stakes rounds with 100+ students.',
+  },
+  {
+    id: 3,
+    title: 'The Blue Brigade',
+    subtitle: 'Campus Steps Gathering',
+    category: 'Culture',
+    tag: 'Squad Spirit',
+    image: '/images/2.png',
+    caption: 'Squad on the campus steps in iconic navy EDC polos, gearing up for recruitment season.',
+  },
+  {
+    id: 4,
+    title: 'UI/UX Design Studio',
+    subtitle: 'Hands-on Skill Sprint',
+    category: 'Workshops',
+    tag: 'Design Lab',
+    image: '/images/UI-UX_workshop.jpg',
+    caption: 'Hands-on design sprints where aspiring builders master user experience, wireframing, and product craft.',
+  },
+  {
+    id: 5,
+    title: 'Auditorium Keynote Energy',
+    subtitle: 'National Entrepreneurship Challenge',
+    category: 'Events',
+    tag: 'Eureka! Stage',
+    image: '/images/eureka%20(2).jpeg',
+    caption: 'A packed lecture hall hanging onto every word during keynote sessions and collegiate startup pitches.',
+  },
+  {
+    id: 6,
+    title: 'Distinguished Dignitaries & Mentors',
+    subtitle: 'Inaugural Summit Ceremony',
+    category: 'Team',
+    tag: 'Leadership',
+    image: "/images/Founder_s%20Pit%20image%202.jpeg",
+    caption: 'Academic deans, faculty advisors, and keynote guests inaugurating the flagship cell summit.',
+  },
+];
+
+/* ══════════════════════════════════════════════════════════════
    MAIN PAGE COMPONENT
    ══════════════════════════════════════════════════════════════ */
 export default function Recruitment2026() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [activeFaq, setActiveFaq] = useState(null);
   const [activeTab, setActiveTab] = useState('1st');
+  const [selectedMemory, setSelectedMemory] = useState(null);
+  const [activeMemoryFilter, setActiveMemoryFilter] = useState('All');
   const heroRef = useRef(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handlePrevMemory = (e) => {
+    e?.stopPropagation?.();
+    if (!selectedMemory) return;
+    const currentIndex = EDC_MEMORIES.findIndex((m) => m.id === selectedMemory.id);
+    const prevIndex = (currentIndex - 1 + EDC_MEMORIES.length) % EDC_MEMORIES.length;
+    setSelectedMemory(EDC_MEMORIES[prevIndex]);
+  };
+
+  const handleNextMemory = (e) => {
+    e?.stopPropagation?.();
+    if (!selectedMemory) return;
+    const currentIndex = EDC_MEMORIES.findIndex((m) => m.id === selectedMemory.id);
+    const nextIndex = (currentIndex + 1) % EDC_MEMORIES.length;
+    setSelectedMemory(EDC_MEMORIES[nextIndex]);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setSelectedMemory(null);
+      if (e.key === 'ArrowLeft') handlePrevMemory();
+      if (e.key === 'ArrowRight') handleNextMemory();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedMemory]);
+
+  const filteredMemories = activeMemoryFilter === 'All'
+    ? EDC_MEMORIES
+    : EDC_MEMORIES.filter((m) => m.category === activeMemoryFilter);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -788,9 +882,252 @@ export default function Recruitment2026() {
         </section>
 
         {/* ════════════════════════════════════════════════════════
-           7. FAQ ACCORDION
+           7. PEOPLE MEMORIES OF EDC
            ════════════════════════════════════════════════════════ */}
-        <section className="py-20 px-4 sm:px-6 bg-gradient-to-b from-[#0022AA] to-[#002BBF] border-t border-white/15">
+        <section className="py-20 sm:py-28 px-4 sm:px-6 bg-gradient-to-b from-[#0022AA] to-[#00188C] border-t border-white/15 relative overflow-hidden">
+          <div className="absolute inset-0 rct-grid-bg opacity-15 pointer-events-none" />
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-[radial-gradient(circle,rgba(204,255,0,0.12)_0%,transparent_70%)] blur-3xl pointer-events-none" />
+
+          <div className="max-w-6xl mx-auto relative z-10">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={staggerContainer}>
+              <div className="text-center mb-10">
+                <SectionLabel>Life Inside The Cell</SectionLabel>
+                <motion.h2 variants={fadeInUp} className="text-3xl sm:text-5xl font-black text-white mt-3">
+                  The People. The <span className="rct-subtitle">Memories.</span>
+                </motion.h2>
+                <motion.p variants={fadeInUp} className="text-white/70 max-w-2xl mx-auto mt-4 text-base sm:text-lg leading-relaxed">
+                  Beyond tasks and rounds — it’s the late nights, high-stakes pitches, auditorium cheers, and a family that builds together.
+                </motion.p>
+
+                {/* Cultural Highlights Ticker */}
+                <motion.div variants={fadeInUp} className="flex flex-wrap items-center justify-center gap-3 mt-6">
+                  <span className="px-4 py-1.5 rounded-full text-xs font-bold bg-white/10 text-[#CCFF00] border border-[#CCFF00]/30 backdrop-blur-md flex items-center gap-2">
+                    <Users className="size-3.5" /> 50+ Passionate Members
+                  </span>
+                  <span className="px-4 py-1.5 rounded-full text-xs font-bold bg-white/10 text-white border border-white/20 backdrop-blur-md flex items-center gap-2">
+                    <Sparkles className="size-3.5 text-[#CCFF00]" /> 10+ Flagship Initiatives
+                  </span>
+                  <span className="px-4 py-1.5 rounded-full text-xs font-bold bg-white/10 text-white border border-white/20 backdrop-blur-md flex items-center gap-2">
+                    <Camera className="size-3.5 text-[#CCFF00]" /> Countless Moments
+                  </span>
+                </motion.div>
+
+                {/* Category Filter Pills */}
+                <motion.div variants={fadeInUp} className="flex flex-wrap items-center justify-center gap-2 mt-8">
+                  {MEMORY_CATEGORIES.map((cat) => (
+                    <button
+                      key={cat}
+                      type="button"
+                      onClick={() => setActiveMemoryFilter(cat)}
+                      className={cn(
+                        "px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer select-none",
+                        activeMemoryFilter === cat
+                          ? "bg-[#CCFF00] text-black shadow-[0_0_20px_rgba(204,255,0,0.4)] scale-105"
+                          : "bg-white/10 text-white/80 hover:bg-white/20 hover:text-white border border-white/15"
+                      )}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </motion.div>
+              </div>
+
+              {/* Editorial Memories Layout */}
+              {activeMemoryFilter === 'All' ? (
+                <div className="space-y-6">
+                  {/* 1. HERO PANORAMIC CARD (Full Widescreen View for Annual Group Photo) */}
+                  <motion.div
+                    layout
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    onClick={() => setSelectedMemory(EDC_MEMORIES[0])}
+                    className="group relative w-full aspect-[16/9] sm:aspect-[21/9] lg:aspect-[2.6/1] min-h-[260px] sm:min-h-[360px] rounded-3xl overflow-hidden cursor-pointer border border-white/25 shadow-2xl hover:shadow-[0_25px_60px_rgba(0,56,255,0.45)] hover:border-[#CCFF00]/80 transition-all duration-500 bg-black/40"
+                  >
+                    <img
+                      src={EDC_MEMORIES[0].image}
+                      alt={EDC_MEMORIES[0].title}
+                      loading="lazy"
+                      className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+
+                    {/* Top Floating Badge */}
+                    <div className="absolute top-4 sm:top-6 left-4 sm:left-6 right-4 sm:right-6 flex items-center justify-between z-20 pointer-events-none">
+                      <span className="px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider bg-black/75 backdrop-blur-md text-[#CCFF00] border border-[#CCFF00]/50 flex items-center gap-2 shadow-lg">
+                        <Sparkles className="size-3.5 text-[#CCFF00]" />
+                        Featured Cohort • 2025–2026
+                      </span>
+                      <div className="size-10 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110 shadow-lg">
+                        <Maximize2 className="size-5" />
+                      </div>
+                    </div>
+
+                    {/* Glass Gradient Scrim */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent opacity-85 group-hover:opacity-95 transition-opacity duration-300" />
+
+                    {/* Bottom Caption Bar */}
+                    <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 z-20 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                      <div>
+                        <span className="text-[#CCFF00] text-xs font-mono font-bold tracking-widest uppercase block mb-1">
+                          // {EDC_MEMORIES[0].category} • Annual University Portrait
+                        </span>
+                        <h3 className="text-xl sm:text-3xl font-black text-white group-hover:text-[#CCFF00] transition-colors">
+                          {EDC_MEMORIES[0].title}
+                        </h3>
+                        <p className="text-white/80 text-xs sm:text-base mt-1.5 max-w-2xl leading-relaxed">
+                          {EDC_MEMORIES[0].caption}
+                        </p>
+                      </div>
+                      <span className="hidden sm:inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-black bg-[#CCFF00] px-4 py-2 rounded-full shadow-[0_0_15px_rgba(204,255,0,0.4)] group-hover:scale-105 transition-transform flex-shrink-0 select-none">
+                        Expand Photo <ArrowRight className="size-3.5" />
+                      </span>
+                    </div>
+                  </motion.div>
+
+                  {/* 2. THE MOMENTS TRIPLE (3 Symmetrical Cards) */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {[EDC_MEMORIES[1], EDC_MEMORIES[2], EDC_MEMORIES[3]].map((mem) => (
+                      <motion.div
+                        layout
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4 }}
+                        key={mem.id}
+                        onClick={() => setSelectedMemory(mem)}
+                        className="group relative rounded-3xl overflow-hidden cursor-pointer border border-white/20 shadow-xl hover:shadow-[0_20px_50px_rgba(0,56,255,0.4)] hover:border-[#CCFF00]/70 transition-all duration-500 bg-black/40 aspect-[4/3]"
+                      >
+                        <img
+                          src={mem.image}
+                          alt={mem.title}
+                          loading="lazy"
+                          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+                        />
+                        <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20 pointer-events-none">
+                          <span className="px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider bg-black/70 backdrop-blur-md text-[#CCFF00] border border-[#CCFF00]/40 flex items-center gap-1.5 shadow-md">
+                            <Sparkles className="size-3 text-[#CCFF00]" />
+                            {mem.tag}
+                          </span>
+                          <div className="size-9 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-105 shadow-md">
+                            <Maximize2 className="size-4" />
+                          </div>
+                        </div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-transparent opacity-85 group-hover:opacity-95 transition-opacity duration-300" />
+                        <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 z-20 transform group-hover:translate-y-[-2px] transition-transform duration-300">
+                          <span className="text-[#CCFF00] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase block mb-1">
+                            // {mem.category}
+                          </span>
+                          <h3 className="text-lg sm:text-xl font-black text-white group-hover:text-[#CCFF00] transition-colors">
+                            {mem.title}
+                          </h3>
+                          <p className="text-white/80 text-xs sm:text-sm mt-1 line-clamp-2 leading-relaxed">
+                            {mem.caption}
+                          </p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {/* 3. THE AUDITORIUM DUAL (2 Symmetrical Wide Cards) */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {[EDC_MEMORIES[4], EDC_MEMORIES[5]].map((mem) => (
+                      <motion.div
+                        layout
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4 }}
+                        key={mem.id}
+                        onClick={() => setSelectedMemory(mem)}
+                        className="group relative rounded-3xl overflow-hidden cursor-pointer border border-white/20 shadow-xl hover:shadow-[0_20px_50px_rgba(0,56,255,0.4)] hover:border-[#CCFF00]/70 transition-all duration-500 bg-black/40 aspect-[16/9]"
+                      >
+                        <img
+                          src={mem.image}
+                          alt={mem.title}
+                          loading="lazy"
+                          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+                        />
+                        <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20 pointer-events-none">
+                          <span className="px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider bg-black/70 backdrop-blur-md text-[#CCFF00] border border-[#CCFF00]/40 flex items-center gap-1.5 shadow-md">
+                            <Sparkles className="size-3 text-[#CCFF00]" />
+                            {mem.tag}
+                          </span>
+                          <div className="size-9 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-105 shadow-md">
+                            <Maximize2 className="size-4" />
+                          </div>
+                        </div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-transparent opacity-85 group-hover:opacity-95 transition-opacity duration-300" />
+                        <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 z-20 transform group-hover:translate-y-[-2px] transition-transform duration-300">
+                          <span className="text-[#CCFF00] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase block mb-1">
+                            // {mem.category}
+                          </span>
+                          <h3 className="text-lg sm:text-xl font-black text-white group-hover:text-[#CCFF00] transition-colors">
+                            {mem.title}
+                          </h3>
+                          <p className="text-white/80 text-xs sm:text-sm mt-1 line-clamp-2 leading-relaxed">
+                            {mem.caption}
+                          </p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                /* Filtered Uniform Grid */
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <AnimatePresence>
+                    {filteredMemories.map((mem) => (
+                      <motion.div
+                        layout
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        transition={{ duration: 0.35 }}
+                        key={mem.id}
+                        onClick={() => setSelectedMemory(mem)}
+                        className="group relative rounded-3xl overflow-hidden cursor-pointer border border-white/20 shadow-xl hover:shadow-[0_20px_50px_rgba(0,56,255,0.4)] hover:border-[#CCFF00]/70 transition-all duration-500 bg-black/40 aspect-[4/3]"
+                      >
+                        <img
+                          src={mem.image}
+                          alt={mem.title}
+                          loading="lazy"
+                          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+                        />
+                        <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20 pointer-events-none">
+                          <span className="px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider bg-black/70 backdrop-blur-md text-[#CCFF00] border border-[#CCFF00]/40 flex items-center gap-1.5 shadow-md">
+                            <Sparkles className="size-3 text-[#CCFF00]" />
+                            {mem.tag}
+                          </span>
+                          <div className="size-9 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-105 shadow-md">
+                            <Maximize2 className="size-4" />
+                          </div>
+                        </div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-transparent opacity-85 group-hover:opacity-95 transition-opacity duration-300" />
+                        <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 z-20 transform group-hover:translate-y-[-2px] transition-transform duration-300">
+                          <span className="text-[#CCFF00] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase block mb-1">
+                            // {mem.category}
+                          </span>
+                          <h3 className="text-lg sm:text-xl font-black text-white group-hover:text-[#CCFF00] transition-colors">
+                            {mem.title}
+                          </h3>
+                          <p className="text-white/80 text-xs sm:text-sm mt-1 line-clamp-2 leading-relaxed">
+                            {mem.caption}
+                          </p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
+                </div>
+              )}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ════════════════════════════════════════════════════════
+           8. FAQ ACCORDION
+           ════════════════════════════════════════════════════════ */}
+        <section className="py-20 px-4 sm:px-6 bg-gradient-to-b from-[#00188C] to-[#0025B5] border-t border-white/15">
           <div className="max-w-3xl mx-auto">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer} className="text-center mb-12">
               <SectionLabel>Got Questions?</SectionLabel>
@@ -878,6 +1215,94 @@ export default function Recruitment2026() {
 
         <Footer />
       </div>
+
+      {/* LIGHTBOX MODAL WITH CAROUSEL CONTROLS */}
+      <AnimatePresence>
+        {selectedMemory && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedMemory(null)}
+            className="fixed inset-0 z-50 bg-black/92 backdrop-blur-2xl flex items-center justify-center p-3 sm:p-6 md:p-8 cursor-pointer select-none"
+          >
+            {/* Modal Box */}
+            <motion.div
+              initial={{ scale: 0.92, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.92, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-5xl w-full bg-[#00147A] border border-white/25 rounded-3xl overflow-hidden shadow-[0_25px_80px_rgba(0,0,0,0.8)] cursor-default flex flex-col"
+            >
+              {/* Header Bar with Counter & Close */}
+              <div className="p-4 sm:p-5 bg-gradient-to-r from-[#00188C] to-[#00105C] border-b border-white/15 flex items-center justify-between z-20">
+                <div className="flex items-center gap-2">
+                  <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-[#CCFF00] text-black shadow-sm">
+                    {selectedMemory.tag}
+                  </span>
+                  <span className="text-white/60 text-xs font-mono hidden sm:inline">
+                    // {selectedMemory.category}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <span className="text-white/70 text-xs font-mono tracking-widest bg-white/10 px-3 py-1 rounded-full border border-white/15">
+                    {EDC_MEMORIES.findIndex((m) => m.id === selectedMemory.id) + 1} / {EDC_MEMORIES.length}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedMemory(null)}
+                    className="size-9 rounded-full bg-white/10 hover:bg-[#CCFF00] text-white hover:text-black border border-white/20 flex items-center justify-center transition-all cursor-pointer shadow-sm"
+                    aria-label="Close photo preview"
+                  >
+                    <X className="size-4" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Main Image Viewport with Carousel Navigation */}
+              <div className="relative w-full max-h-[65vh] bg-black/60 flex items-center justify-center overflow-hidden">
+                <img
+                  src={selectedMemory.image}
+                  alt={selectedMemory.title}
+                  className="w-full h-auto max-h-[65vh] object-contain transition-all duration-300"
+                />
+
+                {/* Left Arrow Button */}
+                <button
+                  type="button"
+                  onClick={handlePrevMemory}
+                  className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 size-11 sm:size-12 rounded-full bg-black/65 hover:bg-[#CCFF00] text-white hover:text-black border border-white/30 flex items-center justify-center transition-all cursor-pointer shadow-2xl hover:scale-110 active:scale-95"
+                  aria-label="Previous photo"
+                >
+                  <ChevronLeft className="size-6" />
+                </button>
+
+                {/* Right Arrow Button */}
+                <button
+                  type="button"
+                  onClick={handleNextMemory}
+                  className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 size-11 sm:size-12 rounded-full bg-black/65 hover:bg-[#CCFF00] text-white hover:text-black border border-white/30 flex items-center justify-center transition-all cursor-pointer shadow-2xl hover:scale-110 active:scale-95"
+                  aria-label="Next photo"
+                >
+                  <ChevronRight className="size-6" />
+                </button>
+              </div>
+
+              {/* Footer Details */}
+              <div className="p-5 sm:p-6 bg-gradient-to-r from-[#001A99] to-[#00126B] border-t border-white/15">
+                <h3 className="text-xl sm:text-2xl font-black text-white">
+                  {selectedMemory.title}
+                </h3>
+                <p className="text-white/80 text-xs sm:text-sm mt-1 max-w-2xl leading-relaxed">
+                  {selectedMemory.caption}
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
