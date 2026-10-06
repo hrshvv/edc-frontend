@@ -355,6 +355,7 @@ export default function Recruitment2026() {
           border: 1px solid #CCFF00;
           box-shadow: 0 4px 25px rgba(204, 255, 0, 0.4);
           transition: all 0.3s ease;
+          text-decoration: none;
         }
         .rct-btn-primary:hover {
           background: #FFFFFF;
@@ -362,6 +363,7 @@ export default function Recruitment2026() {
           color: #0038FF;
           box-shadow: 0 8px 35px rgba(255, 255, 255, 0.5), 0 0 25px rgba(204, 255, 0, 0.3);
           transform: scale(1.03);
+          text-decoration: none;
         }
         .rct-grid-bg {
           background-image:
@@ -859,10 +861,15 @@ export default function Recruitment2026() {
                   <p className="text-neutral-600 mb-8 max-w-md mx-auto text-base sm:text-lg leading-relaxed">
                     Registration opens <span className="text-[#0038FF] font-black">7th October</span>. Prepare your best. The Cell awaits.
                   </p>
-                  <button className="rct-btn-primary font-black py-4 sm:py-5 px-10 sm:px-12 rounded-full text-base sm:text-lg uppercase tracking-widest inline-flex items-center gap-3 cursor-pointer">
+                  <a
+                    href="https://events.edcjssun.com/events/edc-recruitment-2026"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rct-btn-primary font-black py-4 sm:py-5 px-10 sm:px-12 rounded-full text-base sm:text-lg uppercase tracking-widest inline-flex items-center gap-3 cursor-pointer select-none no-underline"
+                  >
                     Apply Now
                     <ArrowRight className="size-5" />
-                  </button>
+                  </a>
                 </motion.div>
               </div>
             </motion.div>
