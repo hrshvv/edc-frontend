@@ -88,13 +88,13 @@ const SectionLabel = ({ children }) => (
    ══════════════════════════════════════════════════════════════ */
 const TIMELINE_DATA = [
   { date: '7–12 Oct', activity: 'Registration', mode: 'Online', icon: FileText, desc: 'Sign up online, choose your preferred team and submit relevant details.' },
-  { date: '13 Oct', activity: 'Aptitude / Resume Shortlisting', mode: 'Online', icon: Brain, desc: '1st Years: Aptitude test to screen volume. 2nd Years: Resume-based shortlisting.' },
-  { date: '14–15 Oct', activity: 'Team-Specific Task Round', mode: 'Online', icon: Cpu, desc: 'Complete a task based on your preferred team — technical, design, social media, or operations.' },
-  { date: '16–21 Oct', activity: 'Evaluation + College Break', mode: 'Internal', icon: Clock, desc: 'Internal evaluation of all task submissions during the college break period.' },
-  { date: '22 Oct', activity: 'Final GD Shortlist Released', mode: 'Internal/Online', icon: CheckCircle2, desc: 'Shortlisted candidates are announced for the final offline rounds.' },
-  { date: '23–26 Oct', activity: 'Candidate Coordination & Prep', mode: '—', icon: MessageCircle, desc: 'Shortlisted candidates coordinate timing and prepare for offline stage.' },
-  { date: '27–28 Oct', activity: 'GD + PI (Final Stage)', mode: 'OFFLINE', icon: Target, desc: 'The final stage. GD and PI running in parallel on campus. This is where it all counts.' },
-  { date: 'After 28 Oct', activity: 'Final Selection & Onboarding', mode: 'Internal', icon: Award, desc: 'Final results are out. Welcome to EDC — your journey begins.' },
+  { date: 'TBA', activity: 'Aptitude / Resume Shortlisting', mode: 'Online', icon: Brain, desc: '1st Years: Aptitude test to screen volume. 2nd Years: Resume-based shortlisting.' },
+  { date: 'TBA', activity: 'Team-Specific Task Round', mode: 'Online', icon: Cpu, desc: 'Complete a task based on your preferred team — technical, design, social media, or operations.' },
+  { date: 'TBA', activity: 'Evaluation + College Break', mode: 'Internal', icon: Clock, desc: 'Internal evaluation of all task submissions during the college break period.' },
+  { date: 'TBA', activity: 'Final GD Shortlist Released', mode: 'Internal/Online', icon: CheckCircle2, desc: 'Shortlisted candidates are announced for the final offline rounds.' },
+  { date: 'TBA', activity: 'Candidate Coordination & Prep', mode: '—', icon: MessageCircle, desc: 'Shortlisted candidates coordinate timing and prepare for offline stage.' },
+  { date: 'TBA', activity: 'GD + PI (Final Stage)', mode: 'OFFLINE', icon: Target, desc: 'The final stage. GD and PI running in parallel on campus. This is where it all counts.' },
+  { date: 'TBA', activity: 'Final Selection & Onboarding', mode: 'Internal', icon: Award, desc: 'Final results are out. Welcome to EDC — your journey begins.' },
 ];
 
 const HugeTimeline = () => {
@@ -242,7 +242,7 @@ const FAQ_DATA = [
   { q: 'Is the recruitment process the same for 1st and 2nd year students?', a: 'No. 1st years go through an Aptitude round after registration, while 2nd years go through Resume Shortlisting. The rest of the pipeline is similar — Task Round → GD → PI → Final Selection.' },
   { q: 'Can I apply for more than one team?', a: 'You will indicate your team preference during registration. The task round will be based on your preferred team.' },
   { q: 'What does the Task Round assess?', a: 'Execution, creativity, role-specific skills, problem-solving, and attention to detail. Each team has a different task format.' },
-  { q: 'When and where does the GD + PI happen?', a: 'The final stage is conducted offline on 27–28 October on campus, with GD and PI running in parallel.' },
+  { q: 'When and where does the GD + PI happen?', a: 'The final stage is conducted offline (Dates TBA) on campus, with GD and PI running in parallel.' },
   { q: 'How is the final selection decided?', a: 'For 1st Years: Aptitude + Task + GD + Team PI + HR/EDC PI. For 2nd Years: Resume + Task + GD + Team PI + HR/EDC PI. The recruitment committee consolidates performance across all rounds.' },
 ];
 
@@ -513,6 +513,23 @@ export default function Recruitment2026() {
               if (el) el.scrollIntoView({ behavior: 'smooth' });
             }}
           />
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="relative z-50 mt-12 sm:mt-16 pointer-events-auto"
+          >
+            <a
+              href="https://events.edcjssun.com/events/edc-recruitment-2026"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rct-btn-primary font-black py-4 sm:py-5 px-10 sm:px-12 rounded-full text-base sm:text-lg uppercase tracking-widest inline-flex items-center gap-3 cursor-pointer select-none no-underline shadow-[0_0_35px_rgba(204,255,0,0.4)] hover:scale-105 transition-transform"
+            >
+              Apply Now
+              <ArrowRight className="size-5" />
+            </a>
+          </motion.div>
         </div>
 
         {/* ════════════════════════════════════════════════════════
@@ -700,7 +717,7 @@ export default function Recruitment2026() {
                   <h3 className="text-2xl font-black text-neutral-900 mb-2 uppercase group-hover:text-[#0038FF] transition-colors">Task Round</h3>
                   <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0038FF] bg-[#0038FF]/10 px-3 py-1 rounded-full mb-3 self-start">
                     <Calendar className="size-3.5 text-[#0038FF]" />
-                    <span>14–15 October • 48h Window</span>
+                    <span>TBA • 48h Window</span>
                   </div>
 
                   {/* Narrative Body */}
@@ -749,7 +766,7 @@ export default function Recruitment2026() {
                   <h3 className="text-2xl font-black text-neutral-900 mb-2 uppercase group-hover:text-[#0038FF] transition-colors">GD Round</h3>
                   <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0038FF] bg-[#0038FF]/10 px-3 py-1 rounded-full mb-3 self-start">
                     <Calendar className="size-3.5 text-[#0038FF]" />
-                    <span>27–28 October • Campus Panels</span>
+                    <span>TBA • Campus Panels</span>
                   </div>
 
                   {/* Narrative Body */}
@@ -798,7 +815,7 @@ export default function Recruitment2026() {
                   <h3 className="text-2xl font-black text-neutral-900 mb-2 uppercase group-hover:text-[#0038FF] transition-colors">PI Round</h3>
                   <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0038FF] bg-[#0038FF]/10 px-3 py-1 rounded-full mb-3 self-start">
                     <Calendar className="size-3.5 text-[#0038FF]" />
-                    <span>27–28 October • Dual In-Person Panels</span>
+                    <span>TBA • Dual In-Person Panels</span>
                   </div>
 
                   {/* Narrative Body */}
