@@ -63,7 +63,7 @@ function noticeTone(level) {
 
 export default function Live() {
   useEffect(() => {
-    document.title = 'Live – EDC JSSUN';
+    document.title = 'EDC JSS';
   }, []);
 
   return (

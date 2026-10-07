@@ -325,6 +325,9 @@ const Eureka2026 = () => {
     link.href = 'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap';
     link.rel = 'stylesheet';
     document.head.appendChild(link);
+    return () => {
+      document.title = 'EDC JSS';
+    };
   }, []);
 
   const scrollToAbout = (e) => {
