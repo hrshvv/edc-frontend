@@ -231,7 +231,7 @@ const teamData = [
   },
   {
     name: 'Daarim',
-    role: 'Design Team Executive Member',
+    role: 'Design Team Co-Lead',
     department: 'Design Team',
     year: 2,
     branch: 'CSE-DS',
