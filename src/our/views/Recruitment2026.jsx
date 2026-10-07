@@ -53,7 +53,7 @@ const scaleIn = {
    ══════════════════════════════════════════════════════════════ */
 const FloatingParticle = ({ delay, size, x, duration }) => (
   <div
-    className="absolute rounded-full pointer-events-none"
+    className="absolute rounded-full pointer-events-none will-change-transform"
     style={{
       width: size, height: size,
       left: `${x}%`, bottom: '-5%',
@@ -62,6 +62,70 @@ const FloatingParticle = ({ delay, size, x, duration }) => (
     }}
   />
 );
+
+const HeroMouseOrb = ({ containerRef }) => {
+  const orbRef = useRef(null);
+
+  useEffect(() => {
+    let animationFrameId = null;
+    let targetX = -1000;
+    let targetY = -1000;
+    let currentX = -1000;
+    let currentY = -1000;
+    let rect = null;
+
+    const updateRect = () => {
+      if (containerRef.current) {
+        rect = containerRef.current.getBoundingClientRect();
+      }
+    };
+    updateRect();
+
+    const handleMouseMove = (e) => {
+      if (!rect) updateRect();
+      if (!rect) return;
+      targetX = e.clientX - rect.left;
+      targetY = e.clientY - rect.top;
+      if (currentX === -1000) {
+        currentX = targetX;
+        currentY = targetY;
+      }
+    };
+
+    const updateLoop = () => {
+      if (currentX !== -1000) {
+        currentX += (targetX - currentX) * 0.08;
+        currentY += (targetY - currentY) * 0.08;
+        if (orbRef.current) {
+          orbRef.current.style.transform = `translate3d(${currentX - 300}px, ${currentY - 300}px, 0)`;
+        }
+      }
+      animationFrameId = requestAnimationFrame(updateLoop);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener('resize', updateRect, { passive: true });
+    window.addEventListener('scroll', updateRect, { passive: true });
+    animationFrameId = requestAnimationFrame(updateLoop);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('resize', updateRect);
+      window.removeEventListener('scroll', updateRect);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    };
+  }, [containerRef]);
+
+  return (
+    <div
+      ref={orbRef}
+      className="absolute top-0 left-0 w-[600px] h-[600px] rounded-full pointer-events-none z-0 will-change-transform"
+      style={{
+        background: 'radial-gradient(circle, rgba(204,255,0,0.12) 0%, rgba(255,255,255,0.04) 40%, transparent 70%)',
+      }}
+    />
+  );
+};
 
 const LimeCurtain = ({ left, opacity, width, delay, className }) => (
   <div
@@ -103,7 +167,7 @@ const HugeTimeline = () => {
     target: containerRef,
     offset: ["start center", "end center"]
   });
-  const height = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
     <section id="recruitment-timeline" ref={containerRef} className="py-24 sm:py-32 px-4 sm:px-6 relative overflow-hidden bg-gradient-to-b from-[#001D99] to-[#0025B8] border-t border-white/15">
@@ -124,8 +188,8 @@ const HugeTimeline = () => {
           <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-1 bg-white/20 rounded-full hidden md:block" />
           {/* Animated glowing line */}
           <motion.div
-            className="absolute left-1/2 -translate-x-1/2 top-0 w-1 bg-gradient-to-b from-[#CCFF00] via-white to-[#CCFF00] rounded-full hidden md:block"
-            style={{ height, filter: 'drop-shadow(0 0 15px #CCFF00)' }}
+            className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-[#CCFF00] via-white to-[#CCFF00] rounded-full hidden md:block origin-top will-change-transform"
+            style={{ scaleY, filter: 'drop-shadow(0 0 15px #CCFF00)' }}
           />
 
           <div className="space-y-20 sm:space-y-24">
@@ -312,7 +376,6 @@ const EDC_MEMORIES = [
    MAIN PAGE COMPONENT
    ══════════════════════════════════════════════════════════════ */
 export default function Recruitment2026() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [activeFaq, setActiveFaq] = useState(null);
   const [activeTab, setActiveTab] = useState('1st');
   const [selectedMemory, setSelectedMemory] = useState(null);
@@ -353,19 +416,6 @@ export default function Recruitment2026() {
     ? EDC_MEMORIES
     : EDC_MEMORIES.filter((m) => m.category === activeMemoryFilter);
 
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (!heroRef.current) return;
-      const rect = heroRef.current.getBoundingClientRect();
-      setMousePos({
-        x: (e.clientX - rect.left) / rect.width,
-        y: (e.clientY - rect.top) / rect.height,
-      });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   return (
     <>
       <style>{`
@@ -386,8 +436,8 @@ export default function Recruitment2026() {
           50%      { border-color: rgba(204, 255, 0, 0.4); }
         }
         @keyframes rct-textGlow {
-          0%, 100% { text-shadow: 0 0 20px rgba(204,255,0,0.3), 0 0 40px rgba(0,26,153,0.4); }
-          50%      { text-shadow: 0 0 30px rgba(204,255,0,0.5), 0 0 60px rgba(0,26,153,0.6); }
+          0%, 100% { filter: drop-shadow(0 0 10px rgba(204,255,0,0.3)); }
+          50%      { filter: drop-shadow(0 0 20px rgba(204,255,0,0.5)); }
         }
         @keyframes rct-gridMove {
           0%   { background-position: 0 0; }
@@ -402,7 +452,6 @@ export default function Recruitment2026() {
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
-          animation: rct-textGlow 3s ease-in-out infinite;
         }
         .rct-subtitle {
           background: linear-gradient(90deg, #FFFFFF, #CCFF00, #FFFFFF);
@@ -429,8 +478,8 @@ export default function Recruitment2026() {
             inset 0 -2px 6px rgba(0, 56, 255, 0.04);
           color: #0f172a;
           position: relative;
-          backdrop-filter: blur(12px);
-          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+          will-change: transform;
         }
         .rct-card:hover {
           border-color: rgba(204, 255, 0, 0.95);
@@ -486,15 +535,7 @@ export default function Recruitment2026() {
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none z-0" />
 
           {/* Mouse-following orb */}
-          <div
-            className="absolute w-[600px] h-[600px] rounded-full pointer-events-none z-0"
-            style={{
-              left: `calc(${mousePos.x * 100}% - 300px)`,
-              top: `calc(${mousePos.y * 100}% - 300px)`,
-              background: 'radial-gradient(circle, rgba(204,255,0,0.12) 0%, rgba(255,255,255,0.04) 40%, transparent 70%)',
-              transition: 'left 0.8s ease-out, top 0.8s ease-out',
-            }}
-          />
+          <HeroMouseOrb containerRef={heroRef} />
 
           {/* Ambient Lighting */}
           <div className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-40">
@@ -965,7 +1006,6 @@ export default function Recruitment2026() {
                 <div className="space-y-6">
                   {/* 1. HERO PANORAMIC CARD (Full Widescreen View for Annual Group Photo) */}
                   <motion.div
-                    layout
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -977,6 +1017,7 @@ export default function Recruitment2026() {
                       src={EDC_MEMORIES[0].image}
                       alt={EDC_MEMORIES[0].title}
                       loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                     />
 
@@ -1017,7 +1058,6 @@ export default function Recruitment2026() {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {[EDC_MEMORIES[1], EDC_MEMORIES[2], EDC_MEMORIES[3]].map((mem) => (
                       <motion.div
-                        layout
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -1030,6 +1070,7 @@ export default function Recruitment2026() {
                           src={mem.image}
                           alt={mem.title}
                           loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
                         />
                         <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20 pointer-events-none">
@@ -1061,7 +1102,6 @@ export default function Recruitment2026() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {[EDC_MEMORIES[4], EDC_MEMORIES[5]].map((mem) => (
                       <motion.div
-                        layout
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -1074,6 +1114,7 @@ export default function Recruitment2026() {
                           src={mem.image}
                           alt={mem.title}
                           loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
                         />
                         <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20 pointer-events-none">
@@ -1107,7 +1148,6 @@ export default function Recruitment2026() {
                   <AnimatePresence>
                     {filteredMemories.map((mem) => (
                       <motion.div
-                        layout
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.95 }}
@@ -1120,6 +1160,7 @@ export default function Recruitment2026() {
                           src={mem.image}
                           alt={mem.title}
                           loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
                         />
                         <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20 pointer-events-none">

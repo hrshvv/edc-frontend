@@ -157,7 +157,7 @@ export const HeroTextVisual = ({
         <motion.div
           animate={{ y: [0, -15, 0] }}
           transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute hidden md:flex bottom-[10%] left-[18%] z-30 pointer-events-auto"
+          className="absolute hidden md:flex bottom-[10%] left-[18%] z-30 pointer-events-auto will-change-transform"
         >
           <div className="w-44 lg:w-52 aspect-[3/3.5] bg-white/10 backdrop-blur-sm border border-white/25 rounded-[2rem] p-5 flex flex-col items-center justify-center rotate-[-12deg] shadow-xl hover:rotate-0 transition-transform duration-500">
             <div className="w-20 h-20 lg:w-24 lg:h-24 bg-[#D2B48C] rounded-full flex items-center justify-center mb-4 shadow-inner border-[3px] border-white/50 overflow-hidden">
@@ -174,7 +174,7 @@ export const HeroTextVisual = ({
         <motion.div
           animate={{ y: [0, -20, 0] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-          className="absolute hidden md:flex top-[12%] right-[18%] z-30 pointer-events-auto"
+          className="absolute hidden md:flex top-[12%] right-[18%] z-30 pointer-events-auto will-change-transform"
         >
           <div className="w-44 lg:w-52 aspect-[3/3.5] bg-white/10 backdrop-blur-sm border border-white/25 rounded-[2rem] p-5 flex flex-col items-center justify-center rotate-[12deg] shadow-xl hover:rotate-0 transition-transform duration-500">
             <div className="w-20 h-20 lg:w-24 lg:h-24 bg-[#2C3E50] rounded-full flex items-center justify-center mb-4 shadow-inner border-[3px] border-white/50 overflow-hidden">

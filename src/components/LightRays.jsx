@@ -49,13 +49,16 @@ const LightRays = ({
   const containerRef = useRef(null);
   const uniformsRef = useRef(null);
   const rendererRef = useRef(null);
+  const meshRef = useRef(null);
+  const cleanupFunctionRef = useRef(null);
+  const observerRef = useRef(null);
   const mouseRef = useRef({ x: 0.5, y: 0.5 });
   const smoothMouseRef = useRef({ x: 0.5, y: 0.5 });
   const animationIdRef = useRef(null);
-  const meshRef = useRef(null);
-  const cleanupFunctionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
-  const observerRef = useRef(null);
+  const isVisibleRef = useRef(false);
+  isVisibleRef.current = isVisible;
+  const rectRef = useRef(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -65,7 +68,7 @@ const LightRays = ({
         const entry = entries[0];
         setIsVisible(entry.isIntersecting);
       },
-      { threshold: 0.1 }
+      { threshold: 0.05 }
     );
 
     observerRef.current.observe(containerRef.current);
@@ -78,23 +81,17 @@ const LightRays = ({
     };
   }, []);
 
+  // WebGL Initialization & Lifecycle
   useEffect(() => {
-    if (!isVisible || !containerRef.current) return;
+    if (!containerRef.current) return;
 
-    if (cleanupFunctionRef.current) {
-      cleanupFunctionRef.current();
-      cleanupFunctionRef.current = null;
-    }
+    let isDestroyed = false;
 
     const initializeWebGL = async () => {
-      if (!containerRef.current) return;
-
-      await new Promise(resolve => setTimeout(resolve, 10));
-
-      if (!containerRef.current) return;
+      if (!containerRef.current || isDestroyed) return;
 
       const renderer = new Renderer({
-        dpr: Math.min(window.devicePixelRatio, 2),
+        dpr: Math.min(window.devicePixelRatio, 1.5),
         alpha: true
       });
       rendererRef.current = renderer;
@@ -116,7 +113,7 @@ void main() {
   gl_Position = vec4(position, 0.0, 1.0);
 }`;
 
-      const frag = `precision highp float;
+      const frag = `precision mediump float;
 
 uniform float iTime;
 uniform vec2  iResolution;
@@ -137,10 +134,6 @@ uniform float distortion;
 
 varying vec2 vUv;
 
-float noise(vec2 st) {
-  return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
-}
-
 float rayStrength(vec2 raySource, vec2 rayRefDirection, vec2 coord,
                   float seedA, float seedB, float speed) {
   vec2 sourceToCoord = coord - raySource;
@@ -148,7 +141,6 @@ float rayStrength(vec2 raySource, vec2 rayRefDirection, vec2 coord,
   float cosAngle = dot(dirNorm, rayRefDirection);
 
   float distortedAngle = cosAngle + distortion * sin(iTime * 2.0 + length(sourceToCoord) * 0.01) * 0.2;
-  
   float spreadFactor = pow(max(distortedAngle, 0.0), 1.0 / max(lightSpread, 0.001));
 
   float distance = length(sourceToCoord);
@@ -186,11 +178,6 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 
   fragColor = rays1 * 0.5 + rays2 * 0.4;
 
-  if (noiseAmount > 0.0) {
-    float n = noise(coord * 0.01 + iTime * 0.1);
-    fragColor.rgb *= (1.0 - noiseAmount + noiseAmount * n);
-  }
-
   float brightness = 1.0 - (coord.y / iResolution.y);
   fragColor.x *= 0.1 + brightness * 0.8;
   fragColor.y *= 0.3 + brightness * 0.6;
@@ -213,10 +200,8 @@ void main() {
       const uniforms = {
         iTime: { value: 0 },
         iResolution: { value: [1, 1] },
-
         rayPos: { value: [0, 0] },
         rayDir: { value: [0, 1] },
-
         raysColor: { value: hexToRgb(raysColor) },
         raysSpeed: { value: raysSpeed },
         lightSpread: { value: lightSpread },
@@ -243,7 +228,8 @@ void main() {
       const updatePlacement = () => {
         if (!containerRef.current || !renderer) return;
 
-        renderer.dpr = Math.min(window.devicePixelRatio, 2);
+        renderer.dpr = Math.min(window.devicePixelRatio, 1.5);
+        rectRef.current = containerRef.current.getBoundingClientRect();
 
         const { clientWidth: wCSS, clientHeight: hCSS } = containerRef.current;
         renderer.setSize(wCSS, hCSS);
@@ -260,6 +246,11 @@ void main() {
       };
 
       const loop = t => {
+        if (!isVisibleRef.current) {
+          animationIdRef.current = null;
+          return;
+        }
+
         if (!rendererRef.current || !uniformsRef.current || !meshRef.current) {
           return;
         }
@@ -268,10 +259,8 @@ void main() {
 
         if (followMouse && mouseInfluence > 0.0) {
           const smoothing = 0.92;
-
           smoothMouseRef.current.x = smoothMouseRef.current.x * smoothing + mouseRef.current.x * (1 - smoothing);
           smoothMouseRef.current.y = smoothMouseRef.current.y * smoothing + mouseRef.current.y * (1 - smoothing);
-
           uniforms.mousePos.value = [smoothMouseRef.current.x, smoothMouseRef.current.y];
         }
 
@@ -280,15 +269,18 @@ void main() {
           animationIdRef.current = requestAnimationFrame(loop);
         } catch (error) {
           console.warn('WebGL rendering error:', error);
-          return;
         }
       };
 
-      window.addEventListener('resize', updatePlacement);
+      window.addEventListener('resize', updatePlacement, { passive: true });
       updatePlacement();
-      animationIdRef.current = requestAnimationFrame(loop);
+
+      if (isVisibleRef.current) {
+        animationIdRef.current = requestAnimationFrame(loop);
+      }
 
       cleanupFunctionRef.current = () => {
+        isDestroyed = true;
         if (animationIdRef.current) {
           cancelAnimationFrame(animationIdRef.current);
           animationIdRef.current = null;
@@ -303,7 +295,6 @@ void main() {
             if (loseContextExt) {
               loseContextExt.loseContext();
             }
-
             if (canvas && canvas.parentNode) {
               canvas.parentNode.removeChild(canvas);
             }
@@ -326,21 +317,37 @@ void main() {
         cleanupFunctionRef.current = null;
       }
     };
-  }, [
-    isVisible,
-    raysOrigin,
-    raysColor,
-    raysSpeed,
-    lightSpread,
-    rayLength,
-    pulsating,
-    fadeDistance,
-    saturation,
-    followMouse,
-    mouseInfluence,
-    noiseAmount,
-    distortion
-  ]);
+  }, []);
+
+  // Pause / Resume RAF loop based on visibility without recreating WebGL context
+  useEffect(() => {
+    if (isVisible && !animationIdRef.current && rendererRef.current && meshRef.current) {
+      const loop = t => {
+        if (!isVisibleRef.current) {
+          animationIdRef.current = null;
+          return;
+        }
+        if (!rendererRef.current || !uniformsRef.current || !meshRef.current) return;
+
+        uniformsRef.current.iTime.value = t * 0.001;
+
+        if (followMouse && mouseInfluence > 0.0) {
+          const smoothing = 0.92;
+          smoothMouseRef.current.x = smoothMouseRef.current.x * smoothing + mouseRef.current.x * (1 - smoothing);
+          smoothMouseRef.current.y = smoothMouseRef.current.y * smoothing + mouseRef.current.y * (1 - smoothing);
+          uniformsRef.current.mousePos.value = [smoothMouseRef.current.x, smoothMouseRef.current.y];
+        }
+
+        try {
+          rendererRef.current.render({ scene: meshRef.current });
+          animationIdRef.current = requestAnimationFrame(loop);
+        } catch {
+          // ignore
+        }
+      };
+      animationIdRef.current = requestAnimationFrame(loop);
+    }
+  }, [isVisible, followMouse, mouseInfluence]);
 
   useEffect(() => {
     if (!uniformsRef.current || !containerRef.current || !rendererRef.current) return;
@@ -380,16 +387,31 @@ void main() {
 
   useEffect(() => {
     const handleMouseMove = e => {
-      if (!containerRef.current || !rendererRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width;
-      const y = (e.clientY - rect.top) / rect.height;
+      if (!isVisibleRef.current || !containerRef.current) return;
+      if (!rectRef.current) {
+        rectRef.current = containerRef.current.getBoundingClientRect();
+      }
+      const rect = rectRef.current;
+      const x = (e.clientX - rect.left) / (rect.width || 1);
+      const y = (e.clientY - rect.top) / (rect.height || 1);
       mouseRef.current = { x, y };
     };
 
+    const handleScrollOrResize = () => {
+      if (containerRef.current && isVisibleRef.current) {
+        rectRef.current = containerRef.current.getBoundingClientRect();
+      }
+    };
+
     if (followMouse) {
-      window.addEventListener('mousemove', handleMouseMove);
-      return () => window.removeEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mousemove', handleMouseMove, { passive: true });
+      window.addEventListener('scroll', handleScrollOrResize, { passive: true });
+      window.addEventListener('resize', handleScrollOrResize, { passive: true });
+      return () => {
+        window.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener('scroll', handleScrollOrResize);
+        window.removeEventListener('resize', handleScrollOrResize);
+      };
     }
   }, [followMouse]);
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './our/components/navbar/Navbar';
 import BottomNavbar from './our/components/navbar/BottomNavbar';
 import Team from './our/views/Team';
@@ -34,6 +34,12 @@ function App() {
           <Route path="/orientation" element={<Orientation />} />
           <Route path="/eureka-2026" element={<Eureka2026 />} />
           <Route path="/recruitment-2026" element={<Recruitment2026 />} />
+          <Route path="/recruitment 2026" element={<Navigate to="/recruitment-2026" replace />} />
+          <Route path="/recruitment%202026" element={<Navigate to="/recruitment-2026" replace />} />
+          <Route path="/recruitment" element={<Navigate to="/recruitment-2026" replace />} />
+          <Route path="/recruitments" element={<Navigate to="/recruitment-2026" replace />} />
+          <Route path="/recruitment2026" element={<Navigate to="/recruitment-2026" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
       <BottomNavbar />
