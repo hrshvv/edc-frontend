@@ -119,7 +119,7 @@ const HeroMouseOrb = ({ containerRef }) => {
   return (
     <div
       ref={orbRef}
-      className="absolute top-0 left-0 w-[600px] h-[600px] rounded-full pointer-events-none z-0 will-change-transform"
+      className="hidden md:block absolute top-0 left-0 w-[600px] h-[600px] rounded-full pointer-events-none z-0 will-change-transform"
       style={{
         background: 'radial-gradient(circle, rgba(204,255,0,0.12) 0%, rgba(255,255,255,0.04) 40%, transparent 70%)',
       }}
@@ -153,7 +153,7 @@ const SectionLabel = ({ children }) => (
 const TIMELINE_DATA_1ST = [
   {
     stage: 'Application Stage',
-    date: '7–12 Oct',
+    date: '7-12 Oct',
     activity: 'REGISTRATION (Application Stage)',
     mode: 'Online',
     icon: FileText,
@@ -162,7 +162,7 @@ const TIMELINE_DATA_1ST = [
   {
     stage: 'Round 1',
     date: 'TBA',
-    activity: 'ROUND 1 — APTITUDE',
+    activity: 'ROUND 1: APTITUDE',
     mode: 'Online',
     icon: Brain,
     desc: 'Basic assessment of logical thinking and problem-solving.',
@@ -170,7 +170,7 @@ const TIMELINE_DATA_1ST = [
   {
     stage: 'Round 2',
     date: 'TBA',
-    activity: 'ROUND 2 — TASK',
+    activity: 'ROUND 2: TASK',
     mode: 'Online',
     icon: Cpu,
     desc: 'Complete a team-specific task to showcase creativity, initiative, and practical thinking.',
@@ -178,7 +178,7 @@ const TIMELINE_DATA_1ST = [
   {
     stage: 'Round 3',
     date: 'TBA',
-    activity: 'ROUND 3 — GD + PI',
+    activity: 'ROUND 3: GD + PI',
     mode: 'OFFLINE',
     icon: Target,
     desc: 'Demonstrate communication, confidence, teamwork, and willingness to contribute.',
@@ -189,14 +189,14 @@ const TIMELINE_DATA_1ST = [
     activity: 'FINAL SELECTION & ONBOARDING',
     mode: 'Internal',
     icon: Award,
-    desc: 'Consolidated performance results announced. Welcome to EDC — your journey begins.',
+    desc: 'Consolidated performance results announced. Welcome to EDC, your journey begins.',
   },
 ];
 
 const TIMELINE_DATA_2ND = [
   {
     stage: 'Application Stage',
-    date: '7–12 Oct',
+    date: '7-12 Oct',
     activity: 'REGISTRATION (Application Stage)',
     mode: 'Online',
     icon: FileText,
@@ -205,7 +205,7 @@ const TIMELINE_DATA_2ND = [
   {
     stage: 'Round 1',
     date: 'TBA',
-    activity: 'ROUND 1 — RESUME SHORTLISTING',
+    activity: 'ROUND 1: RESUME SHORTLISTING',
     mode: 'Online',
     icon: Brain,
     desc: 'Applications reviewed based on experience, projects, interests, and potential.',
@@ -213,7 +213,7 @@ const TIMELINE_DATA_2ND = [
   {
     stage: 'Round 2',
     date: 'TBA',
-    activity: 'ROUND 2 — TASK',
+    activity: 'ROUND 2: TASK',
     mode: 'Online',
     icon: Cpu,
     desc: 'Showcase your skills, creativity, and ability to turn ideas into action.',
@@ -221,7 +221,7 @@ const TIMELINE_DATA_2ND = [
   {
     stage: 'Round 3',
     date: 'TBA',
-    activity: 'ROUND 3 — GD + PI',
+    activity: 'ROUND 3: GD + PI',
     mode: 'OFFLINE',
     icon: Target,
     desc: 'Demonstrate communication, role suitability, teamwork, and commitment.',
@@ -232,7 +232,7 @@ const TIMELINE_DATA_2ND = [
     activity: 'FINAL SELECTION & ONBOARDING',
     mode: 'Internal',
     icon: Award,
-    desc: 'Consolidated performance results announced. Welcome to EDC — your journey begins.',
+    desc: 'Consolidated performance results announced. Welcome to EDC, your journey begins.',
   },
 ];
 
@@ -390,7 +390,7 @@ const TEAMS = [
     title: 'Operations',
     icon: Megaphone,
     color: '#CCFF00',
-    desc: 'Liaisoning, Outreach, T&E, C&D & Marketing — event planning, logistics, coordination.',
+    desc: 'Liaisoning, Outreach, T&E, C&D & Marketing: event planning, logistics, coordination.',
   },
 ];
 
@@ -665,7 +665,7 @@ export default function Recruitment2026() {
           <HeroMouseOrb containerRef={heroRef} />
 
           {/* Ambient Lighting */}
-          <div className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-40">
+          <div className="hidden md:block absolute inset-0 w-full h-full pointer-events-none z-0 opacity-40">
             <LightRays raysColor="#CCFF00" raysSpeed={0.5} lightSpread={0.5} rayLength={2.5} followMouse={true} mouseInfluence={0.08} />
           </div>
 
@@ -732,7 +732,7 @@ export default function Recruitment2026() {
                 Who Can Join <span className="rct-subtitle">EDC?</span>
               </motion.h2>
               <motion.p variants={fadeInUp} className="text-white/75 mt-3 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
-                If you have the curiosity to learn, the drive to create, and the hunger to make things happen — you belong here.
+                If you have the curiosity to learn, the drive to create, and the hunger to make things happen, you belong here.
               </motion.p>
             </motion.div>
 
@@ -755,7 +755,7 @@ export default function Recruitment2026() {
                   icon: Target,
                   tag: 'Skillsets',
                   title: 'Builders, Creators & Leads',
-                  desc: 'Whether you write code, design visuals, produce videos, write copy, or manage events — there is a place for you.',
+                  desc: 'Whether you write code, design visuals, produce videos, write copy, or manage events, there is a place for you.',
                 },
                 {
                   icon: Sparkles,
@@ -816,7 +816,7 @@ export default function Recruitment2026() {
                         "Do I already need very high or expert skills to join EDC?"
                       </h4>
                       <p className="text-white/80 text-xs sm:text-sm mt-1.5 leading-relaxed max-w-2xl">
-                        <span className="text-[#CCFF00] font-bold">Not at all!</span> A huge misconception is that only experts can apply. You do <span className="underline decoration-[#CCFF00] font-bold">not</span> need advanced prior skills or pre-existing projects to join. EDC is where you <span className="text-white font-bold">learn by doing</span> — working on real initiatives, high-impact events, and real-world products together with seniors and mentors.
+                        <span className="text-[#CCFF00] font-bold">Not at all!</span> A huge misconception is that only experts can apply. You do <span className="underline decoration-[#CCFF00] font-bold">not</span> need advanced prior skills or pre-existing projects to join. EDC is where you <span className="text-white font-bold">learn by doing</span>: working on real initiatives, high-impact events, and real-world products together with seniors and mentors.
                       </p>
                     </div>
                   </div>
@@ -914,19 +914,19 @@ export default function Recruitment2026() {
                       <PipelineStep
                         number="01"
                         stageBadge="Round 1"
-                        title="ROUND 1 — APTITUDE"
+                        title="ROUND 1: APTITUDE"
                         content="Basic assessment of logical thinking and problem-solving."
                       />
                       <PipelineStep
                         number="02"
                         stageBadge="Round 2"
-                        title="ROUND 2 — TASK"
+                        title="ROUND 2: TASK"
                         content="Complete a team-specific task to showcase creativity, initiative, and practical thinking."
                       />
                       <PipelineStep
                         number="03"
                         stageBadge="Round 3"
-                        title="ROUND 3 — GD + PI"
+                        title="ROUND 3: GD + PI"
                         content="Demonstrate communication, confidence, teamwork, and willingness to contribute."
                         isLast
                       />
@@ -942,19 +942,19 @@ export default function Recruitment2026() {
                       <PipelineStep
                         number="01"
                         stageBadge="Round 1"
-                        title="ROUND 1 — RESUME SHORTLISTING"
+                        title="ROUND 1: RESUME SHORTLISTING"
                         content="Applications reviewed based on experience, projects, interests, and potential."
                       />
                       <PipelineStep
                         number="02"
                         stageBadge="Round 2"
-                        title="ROUND 2 — TASK"
+                        title="ROUND 2: TASK"
                         content="Showcase your skills, creativity, and ability to turn ideas into action."
                       />
                       <PipelineStep
                         number="03"
                         stageBadge="Round 3"
-                        title="ROUND 3 — GD + PI"
+                        title="ROUND 3: GD + PI"
                         content="Demonstrate communication, role suitability, teamwork, and commitment."
                         isLast
                       />
@@ -1254,7 +1254,7 @@ export default function Recruitment2026() {
                   The People. The <span className="rct-subtitle">Memories.</span>
                 </motion.h2>
                 <motion.p variants={fadeInUp} className="text-white/70 max-w-2xl mx-auto mt-4 text-base sm:text-lg leading-relaxed">
-                  Beyond tasks and rounds — it’s the late nights, high-stakes pitches, auditorium cheers, and a family that builds together.
+                  Beyond tasks and rounds, it’s the late nights, high-stakes pitches, auditorium cheers, and a family that builds together.
                 </motion.p>
 
                 {/* Cultural Highlights Ticker */}
@@ -1314,7 +1314,7 @@ export default function Recruitment2026() {
                     <div className="absolute top-4 sm:top-6 left-4 sm:left-6 right-4 sm:right-6 flex items-center justify-between z-20 pointer-events-none">
                       <span className="px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider bg-black/75 backdrop-blur-md text-[#CCFF00] border border-[#CCFF00]/50 flex items-center gap-2 shadow-lg">
                         <Sparkles className="size-3.5 text-[#CCFF00]" />
-                        Featured Cohort • 2025–2026
+                        Featured Cohort • 2025-2026
                       </span>
                       <div className="size-10 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110 shadow-lg">
                         <Maximize2 className="size-5" />

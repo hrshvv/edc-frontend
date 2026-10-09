@@ -227,13 +227,13 @@
    Frosted Glassmorphism with #CCFF00 Lime Accent
    ============================================= */
 .bottom-navbar.recruitment-theme {
-  background: rgba(204, 255, 0, 0.12) !important;
+  background: rgba(0, 18, 90, 0.82) !important;
   backdrop-filter: blur(24px) saturate(1.8) !important;
   -webkit-backdrop-filter: blur(24px) saturate(1.8) !important;
-  border: 1.5px solid rgba(204, 255, 0, 0.45) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.5),
-    0 0 20px rgba(204, 255, 0, 0.2),
+    0 0 16px rgba(0, 56, 255, 0.25),
     inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
 }
 

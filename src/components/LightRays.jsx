@@ -89,6 +89,7 @@ const LightRays = ({
 
     const initializeWebGL = async () => {
       if (!containerRef.current || isDestroyed) return;
+      if (typeof window !== 'undefined' && window.innerWidth < 768) return;
 
       const renderer = new Renderer({
         dpr: Math.min(window.devicePixelRatio, 1.5),
