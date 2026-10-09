@@ -150,30 +150,111 @@ const SectionLabel = ({ children }) => (
 /* ══════════════════════════════════════════════════════════════
    SCROLL-DRIVEN TIMELINE DATA & COMPONENT
    ══════════════════════════════════════════════════════════════ */
-const TIMELINE_DATA = [
-  { date: '7–12 Oct', activity: 'Registration', mode: 'Online', icon: FileText, desc: 'Sign up online, choose your preferred team and submit relevant details.' },
-  { date: 'TBA', activity: 'Aptitude / Resume Shortlisting', mode: 'Online', icon: Brain, desc: '1st Years: Aptitude test to screen volume. 2nd Years: Resume-based shortlisting.' },
-  { date: 'TBA', activity: 'Team-Specific Task Round', mode: 'Online', icon: Cpu, desc: 'Complete a task based on your preferred team — technical, design, social media, or operations.' },
-  { date: 'TBA', activity: 'Evaluation + College Break', mode: 'Internal', icon: Clock, desc: 'Internal evaluation of all task submissions during the college break period.' },
-  { date: 'TBA', activity: 'Final GD Shortlist Released', mode: 'Internal/Online', icon: CheckCircle2, desc: 'Shortlisted candidates are announced for the final offline rounds.' },
-  { date: 'TBA', activity: 'Candidate Coordination & Prep', mode: '—', icon: MessageCircle, desc: 'Shortlisted candidates coordinate timing and prepare for offline stage.' },
-  { date: 'TBA', activity: 'GD + PI (Final Stage)', mode: 'OFFLINE', icon: Target, desc: 'The final stage. GD and PI running in parallel on campus. This is where it all counts.' },
-  { date: 'TBA', activity: 'Final Selection & Onboarding', mode: 'Internal', icon: Award, desc: 'Final results are out. Welcome to EDC — your journey begins.' },
+const TIMELINE_DATA_1ST = [
+  {
+    stage: 'Application Stage',
+    date: '7–12 Oct',
+    activity: 'REGISTRATION (Application Stage)',
+    mode: 'Online',
+    icon: FileText,
+    desc: 'Fill out the registration form.',
+  },
+  {
+    stage: 'Round 1',
+    date: 'TBA',
+    activity: 'ROUND 1 — APTITUDE',
+    mode: 'Online',
+    icon: Brain,
+    desc: 'Basic assessment of logical thinking and problem-solving.',
+  },
+  {
+    stage: 'Round 2',
+    date: 'TBA',
+    activity: 'ROUND 2 — TASK',
+    mode: 'Online',
+    icon: Cpu,
+    desc: 'Complete a team-specific task to showcase creativity, initiative, and practical thinking.',
+  },
+  {
+    stage: 'Round 3',
+    date: 'TBA',
+    activity: 'ROUND 3 — GD + PI',
+    mode: 'OFFLINE',
+    icon: Target,
+    desc: 'Demonstrate communication, confidence, teamwork, and willingness to contribute.',
+  },
+  {
+    stage: 'Final Stage',
+    date: 'TBA',
+    activity: 'FINAL SELECTION & ONBOARDING',
+    mode: 'Internal',
+    icon: Award,
+    desc: 'Consolidated performance results announced. Welcome to EDC — your journey begins.',
+  },
 ];
 
-const HugeTimeline = () => {
+const TIMELINE_DATA_2ND = [
+  {
+    stage: 'Application Stage',
+    date: '7–12 Oct',
+    activity: 'REGISTRATION (Application Stage)',
+    mode: 'Online',
+    icon: FileText,
+    desc: 'Submit the registration form and required details.',
+  },
+  {
+    stage: 'Round 1',
+    date: 'TBA',
+    activity: 'ROUND 1 — RESUME SHORTLISTING',
+    mode: 'Online',
+    icon: Brain,
+    desc: 'Applications reviewed based on experience, projects, interests, and potential.',
+  },
+  {
+    stage: 'Round 2',
+    date: 'TBA',
+    activity: 'ROUND 2 — TASK',
+    mode: 'Online',
+    icon: Cpu,
+    desc: 'Showcase your skills, creativity, and ability to turn ideas into action.',
+  },
+  {
+    stage: 'Round 3',
+    date: 'TBA',
+    activity: 'ROUND 3 — GD + PI',
+    mode: 'OFFLINE',
+    icon: Target,
+    desc: 'Demonstrate communication, role suitability, teamwork, and commitment.',
+  },
+  {
+    stage: 'Final Stage',
+    date: 'TBA',
+    activity: 'FINAL SELECTION & ONBOARDING',
+    mode: 'Internal',
+    icon: Award,
+    desc: 'Consolidated performance results announced. Welcome to EDC — your journey begins.',
+  },
+];
+
+const HugeTimeline = ({ activeTab = '1st', setActiveTab }) => {
   const containerRef = useRef(null);
+  const [localTab, setLocalTab] = useState('1st');
+  const currentTab = setActiveTab ? activeTab : localTab;
+  const handleTabChange = setActiveTab ? setActiveTab : setLocalTab;
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start center", "end center"]
   });
   const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
+  const timelineData = currentTab === '1st' ? TIMELINE_DATA_1ST : TIMELINE_DATA_2ND;
+
   return (
     <section id="recruitment-timeline" ref={containerRef} className="py-24 sm:py-32 px-4 sm:px-6 relative overflow-hidden bg-gradient-to-b from-[#001D99] to-[#0025B8] border-t border-white/15">
       <div className="absolute inset-0 rct-grid-bg opacity-20 pointer-events-none" />
       <div className="max-w-5xl mx-auto relative z-10">
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer} className="text-center mb-20">
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer} className="text-center mb-16">
           <SectionLabel>Battle Timeline</SectionLabel>
           <motion.h2 variants={fadeInUp} className="text-4xl sm:text-6xl font-black text-white mt-3">
             Register. Compete. <span className="rct-subtitle">Join.</span>
@@ -181,6 +262,27 @@ const HugeTimeline = () => {
           <motion.p variants={fadeInUp} className="text-white/70 mt-4 max-w-2xl mx-auto text-base sm:text-lg">
             Track every critical deadline. Every milestone is a step closer to becoming part of EDC.
           </motion.p>
+
+          {/* Tab Switcher inside Timeline */}
+          <div className="flex justify-center mt-8">
+            <div className="inline-flex rounded-full p-1.5 bg-white/10 border border-white/25 backdrop-blur-md shadow-xl">
+              {['1st', '2nd'].map((yr) => (
+                <button
+                  key={yr}
+                  type="button"
+                  onClick={() => handleTabChange(yr)}
+                  className={cn(
+                    'px-6 sm:px-10 py-2.5 rounded-full font-black text-xs sm:text-sm uppercase tracking-widest transition-all duration-300 cursor-pointer',
+                    currentTab === yr
+                      ? 'bg-[#CCFF00] text-black shadow-[0_0_25px_rgba(204,255,0,0.4)]'
+                      : 'text-white/70 hover:text-white'
+                  )}
+                >
+                  {yr === '1st' ? 'First Year' : 'Second Year'}
+                </button>
+              ))}
+            </div>
+          </div>
         </motion.div>
 
         <div className="relative">
@@ -192,52 +294,70 @@ const HugeTimeline = () => {
             style={{ scaleY, filter: 'drop-shadow(0 0 15px #CCFF00)' }}
           />
 
-          <div className="space-y-20 sm:space-y-24">
-            {TIMELINE_DATA.map((item, index) => (
-              <motion.div
-                key={index}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                variants={index % 2 === 0 ? fadeInLeft : fadeInRight}
-                className={`relative flex flex-col md:flex-row items-center gap-8 md:gap-20 ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
-              >
-                {/* Content Card */}
-                <div className={`w-full md:w-1/2 flex ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
-                  <div className="rct-card p-7 sm:p-9 rounded-3xl w-full max-w-lg hover:-translate-y-2 transition-transform duration-500 group relative overflow-hidden text-left">
-                    {/* Top gradient accent line */}
-                    <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0038FF] via-[#CCFF00] to-transparent opacity-80" />
-                    {/* Subtle ambient light reflection */}
-                    <div className="absolute -top-10 -right-10 w-44 h-44 bg-[radial-gradient(circle,rgba(204,255,0,0.15)_0%,transparent_70%)] blur-2xl pointer-events-none" />
-                    <div className="absolute -top-10 -right-10 p-3 opacity-5 group-hover:opacity-15 transition-opacity duration-700 blur-2xl pointer-events-none">
-                      <item.icon className="h-64 w-64 text-[#0038FF]" />
-                    </div>
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#CCFF00] text-black font-black text-[10px] tracking-widest shadow-sm">
-                        {item.date}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentTab}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.35 }}
+              className="space-y-20 sm:space-y-24"
+            >
+              {timelineData.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.3 }}
+                  variants={index % 2 === 0 ? fadeInLeft : fadeInRight}
+                  className={`relative flex flex-col md:flex-row items-center gap-8 md:gap-20 ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
+                >
+                  {/* Content Card */}
+                  <div className={`w-full md:w-1/2 flex ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
+                    <div className="rct-card p-7 sm:p-9 rounded-3xl w-full max-w-lg hover:-translate-y-2 transition-transform duration-500 group relative overflow-hidden text-left">
+                      {/* Top gradient accent line */}
+                      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0038FF] via-[#CCFF00] to-transparent opacity-80" />
+                      {/* Subtle ambient light reflection */}
+                      <div className="absolute -top-10 -right-10 w-44 h-44 bg-[radial-gradient(circle,rgba(204,255,0,0.15)_0%,transparent_70%)] blur-2xl pointer-events-none" />
+                      <div className="absolute -top-10 -right-10 p-3 opacity-5 group-hover:opacity-15 transition-opacity duration-700 blur-2xl pointer-events-none">
+                        <item.icon className="h-64 w-64 text-[#0038FF]" />
                       </div>
-                      <span className={cn(
-                        "text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full font-bold border",
-                        item.mode === 'OFFLINE' ? 'bg-[#0038FF] text-white border-[#0038FF]' : 'bg-neutral-100 text-neutral-800 border-neutral-300'
-                      )}>
-                        {item.mode}
-                      </span>
+                      <div className="flex items-center gap-2.5 mb-4 flex-wrap">
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#CCFF00] text-black font-black text-[10px] tracking-widest shadow-sm">
+                          {item.date}
+                        </div>
+                        <span className={cn(
+                          "text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full font-bold border",
+                          item.mode === 'OFFLINE' ? 'bg-[#0038FF] text-white border-[#0038FF]' : 'bg-neutral-100 text-neutral-800 border-neutral-300'
+                        )}>
+                          {item.mode}
+                        </span>
+                        {item.stage && (
+                          <span className="text-[10px] uppercase tracking-wider font-mono font-bold px-2.5 py-1 rounded-full bg-[#0038FF]/10 text-[#0038FF] border border-[#0038FF]/20">
+                            {item.stage}
+                          </span>
+                        )}
+                      </div>
+                      <h3 className="text-2xl sm:text-3xl font-black text-neutral-900 mb-3 relative z-10 group-hover:text-[#0038FF] transition-colors duration-300">
+                        {item.activity}
+                      </h3>
+                      <p className="text-neutral-600 text-sm sm:text-base leading-relaxed relative z-10">
+                        {item.desc}
+                      </p>
                     </div>
-                    <h3 className="text-2xl sm:text-3xl font-black text-neutral-900 mb-3 relative z-10 group-hover:text-[#0038FF] transition-colors duration-300">{item.activity}</h3>
-                    <p className="text-neutral-600 text-sm sm:text-base leading-relaxed relative z-10">{item.desc}</p>
                   </div>
-                </div>
 
-                {/* Center Node */}
-                <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center size-16 sm:size-20 rounded-full border-4 border-[#0038FF] bg-[#001A99] shadow-[0_0_30px_rgba(204,255,0,0.4)] z-10 hidden md:flex transition-transform hover:scale-110 duration-300">
-                  <item.icon className="size-7 sm:size-8 text-[#CCFF00]" />
-                </div>
+                  {/* Center Node */}
+                  <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center size-16 sm:size-20 rounded-full border-4 border-[#0038FF] bg-[#001A99] shadow-[0_0_30px_rgba(204,255,0,0.4)] z-10 hidden md:flex transition-transform hover:scale-110 duration-300">
+                    <item.icon className="size-7 sm:size-8 text-[#CCFF00]" />
+                  </div>
 
-                {/* Empty space for alternating layout */}
-                <div className="hidden md:block w-1/2" />
-              </motion.div>
-            ))}
-          </div>
+                  {/* Empty space for alternating layout */}
+                  <div className="hidden md:block w-1/2" />
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </section>
@@ -277,24 +397,31 @@ const TEAMS = [
 /* ══════════════════════════════════════════════════════════════
    PROCESS PIPELINE COMPONENT
    ══════════════════════════════════════════════════════════════ */
-const PipelineStep = ({ number, title, content, isLast }) => (
-  <div className="flex gap-4 sm:gap-5 items-start relative group">
+const PipelineStep = ({ number, stageBadge, title, content, isLast }) => (
+  <div className="flex gap-4 sm:gap-6 items-start relative group">
     <div className="flex flex-col items-center">
       <div
-        className="flex-shrink-0 w-11 h-11 bg-gradient-to-br from-[#0038FF] to-[#001D99] text-white font-black rounded-xl flex items-center justify-center shadow-[0_4px_14px_rgba(0,56,255,0.35)] text-sm group-hover:scale-105 transition-all border border-white/20"
+        className="flex-shrink-0 size-11 sm:size-12 bg-gradient-to-br from-[#0038FF] to-[#001D99] text-[#CCFF00] font-black rounded-2xl flex items-center justify-center shadow-[0_4px_16px_rgba(0,56,255,0.35)] text-xs sm:text-sm group-hover:scale-105 group-hover:border-[#CCFF00] transition-all border border-white/20"
         style={{ fontFamily: 'IBM Plex Mono, monospace' }}
       >
         {number}
       </div>
       {!isLast && (
-        <div className="w-0.5 h-full bg-gradient-to-b from-[#0038FF]/40 via-[#CCFF00]/60 to-neutral-200 mt-2.5 min-h-[45px]" />
+        <div className="w-0.5 h-full bg-gradient-to-b from-[#0038FF]/40 via-[#CCFF00]/60 to-neutral-200 mt-2.5 min-h-[50px]" />
       )}
     </div>
-    <div className="pb-8 flex-1">
-      <h4 className="text-xl font-black text-neutral-900 mb-1.5 group-hover:text-[#0038FF] transition-colors flex items-center gap-2">
-        {title}
-      </h4>
-      <p className="text-neutral-600 text-sm leading-relaxed">{content}</p>
+    <div className={cn("flex-1", !isLast ? "pb-8 sm:pb-9" : "pb-2")}>
+      <div className="flex items-center gap-2.5 flex-wrap mb-1.5">
+        <h4 className="text-lg sm:text-2xl font-black text-neutral-900 group-hover:text-[#0038FF] transition-colors tracking-wide">
+          {title}
+        </h4>
+        {stageBadge && (
+          <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#0038FF]/10 text-[#0038FF] border border-[#0038FF]/20">
+            {stageBadge}
+          </span>
+        )}
+      </div>
+      <p className="text-neutral-600 text-sm sm:text-base leading-relaxed">{content}</p>
     </div>
   </div>
 );
@@ -303,11 +430,11 @@ const PipelineStep = ({ number, title, content, isLast }) => (
    FAQ ACCORDION DATA
    ══════════════════════════════════════════════════════════════ */
 const FAQ_DATA = [
-  { q: 'Is the recruitment process the same for 1st and 2nd year students?', a: 'No. 1st years go through an Aptitude round after registration, while 2nd years go through Resume Shortlisting. The rest of the pipeline is similar — Task Round → GD → PI → Final Selection.' },
+  { q: 'Is the recruitment process the same for 1st and 2nd year students?', a: 'No. 1st years go through Round 1 (Aptitude test), while 2nd years go through Round 1 (Resume Shortlisting). Both cohorts then advance to Round 2 (Team Task) and Round 3 (Offline GD + PI).' },
   { q: 'Can I apply for more than one team?', a: 'You will indicate your team preference during registration. The task round will be based on your preferred team.' },
   { q: 'What does the Task Round assess?', a: 'Execution, creativity, role-specific skills, problem-solving, and attention to detail. Each team has a different task format.' },
-  { q: 'When and where does the GD + PI happen?', a: 'The final stage is conducted offline (Dates TBA) on campus, with GD and PI running in parallel.' },
-  { q: 'How is the final selection decided?', a: 'For 1st Years: Aptitude + Task + GD + Team PI + HR/EDC PI. For 2nd Years: Resume + Task + GD + Team PI + HR/EDC PI. The recruitment committee consolidates performance across all rounds.' },
+  { q: 'When and where does the GD + PI happen?', a: 'Round 3 (GD + PI) is conducted offline (Dates TBA) on campus, with GD and PI running in parallel.' },
+  { q: 'How is the final selection decided?', a: 'For 1st Years: Round 1 (Aptitude) + Round 2 (Task) + Round 3 (GD + PI). For 2nd Years: Round 1 (Resume Shortlisting) + Round 2 (Task) + Round 3 (GD + PI). The recruitment committee consolidates performance across all rounds.' },
 ];
 
 /* ══════════════════════════════════════════════════════════════
@@ -550,7 +677,7 @@ export default function Recruitment2026() {
           {/* Hero Visual Element from hero.tsx */}
           <HeroTextVisual
             onScrollDown={() => {
-              const el = document.getElementById('recruitment-overview');
+              const el = document.getElementById('who-can-join') || document.getElementById('recruitment-overview');
               if (el) el.scrollIntoView({ behavior: 'smooth' });
             }}
           />
@@ -585,7 +712,129 @@ export default function Recruitment2026() {
         </div>
 
         {/* ════════════════════════════════════════════════════════
-           2. RECRUITMENT OVERVIEW (Two Pipelines)
+           1.5 WHO CAN JOIN EDC
+           ════════════════════════════════════════════════════════ */}
+        <section
+          id="who-can-join"
+          className="relative py-14 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-[#0038FF] via-[#002FB8] to-[#0038FF] border-t border-white/15 overflow-hidden"
+        >
+          <div className="absolute inset-0 rct-grid-bg opacity-15 pointer-events-none" />
+          <div className="max-w-5xl mx-auto relative z-10">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={staggerContainer}
+              className="text-center mb-10 sm:mb-12"
+            >
+              <SectionLabel>Eligibility & Fit</SectionLabel>
+              <motion.h2 variants={fadeInUp} className="text-3xl sm:text-5xl font-black text-white mt-2">
+                Who Can Join <span className="rct-subtitle">EDC?</span>
+              </motion.h2>
+              <motion.p variants={fadeInUp} className="text-white/75 mt-3 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
+                If you have the curiosity to learn, the drive to create, and the hunger to make things happen — you belong here.
+              </motion.p>
+            </motion.div>
+
+            {/* Quick Criteria Cards */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={staggerContainer}
+              className="grid sm:grid-cols-3 gap-5"
+            >
+              {[
+                {
+                  icon: Users,
+                  tag: 'Eligibility',
+                  title: '1st & 2nd Year Students',
+                  desc: 'Open to all 1st and 2nd year students from any branch or course. No branch restrictions.',
+                },
+                {
+                  icon: Target,
+                  tag: 'Skillsets',
+                  title: 'Builders, Creators & Leads',
+                  desc: 'Whether you write code, design visuals, produce videos, write copy, or manage events — there is a place for you.',
+                },
+                {
+                  icon: Sparkles,
+                  tag: 'Mindset',
+                  title: 'Passion Over Prior Skills',
+                  desc: 'You do not need heavy prior skills. Eagerness to learn, initiative, and problem-solving matter far more.',
+                },
+              ].map((item, i) => (
+                <motion.div key={i} variants={fadeInUp}>
+                  <div className="rct-card p-6 sm:p-7 rounded-3xl h-full flex flex-col justify-between group hover:-translate-y-1.5 transition-all duration-300">
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0038FF] via-[#CCFF00] to-transparent opacity-80" />
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="size-11 rounded-xl flex items-center justify-center bg-gradient-to-br from-[#0038FF] to-[#001D99] text-[#CCFF00] shadow-[0_4px_14px_rgba(0,56,255,0.3)] group-hover:scale-105 transition-transform">
+                          <item.icon className="size-5 text-[#CCFF00]" />
+                        </div>
+                        <span className="text-[10px] font-mono font-bold tracking-wider uppercase px-2.5 py-1 rounded-full bg-[#0038FF]/10 text-[#0038FF] border border-[#0038FF]/15">
+                          {item.tag}
+                        </span>
+                      </div>
+                      <h3 className="text-xl font-black text-neutral-900 mb-2 group-hover:text-[#0038FF] transition-colors">
+                        {item.title}
+                      </h3>
+                      <p className="text-neutral-600 text-xs sm:text-sm leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* Misconception Buster Callout */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={fadeInUp}
+              className="mt-6 sm:mt-7"
+            >
+              <div className="relative rounded-3xl p-6 sm:p-8 bg-white/10 backdrop-blur-xl border border-white/25 overflow-hidden shadow-2xl">
+                {/* Glow accent */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#CCFF00] via-white to-[#CCFF00]" />
+                <div className="absolute -top-12 -right-12 w-44 h-44 bg-[radial-gradient(circle,rgba(204,255,0,0.2)_0%,transparent_70%)] blur-2xl pointer-events-none" />
+
+                <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-5 sm:gap-6">
+                  <div className="flex items-start gap-4">
+                    <div className="size-11 sm:size-12 rounded-2xl bg-[#CCFF00] text-black font-black flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(204,255,0,0.4)] mt-0.5">
+                      <Sparkles className="size-6 text-black" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2 flex-wrap mb-1">
+                        <span className="text-[10px] font-mono font-bold tracking-widest uppercase px-2.5 py-0.5 rounded-full bg-white/15 text-[#CCFF00] border border-[#CCFF00]/30">
+                          // Common Misconception Busted
+                        </span>
+                      </div>
+                      <h4 className="text-lg sm:text-xl font-black text-white">
+                        "Do I already need very high or expert skills to join EDC?"
+                      </h4>
+                      <p className="text-white/80 text-xs sm:text-sm mt-1.5 leading-relaxed max-w-2xl">
+                        <span className="text-[#CCFF00] font-bold">Not at all!</span> A huge misconception is that only experts can apply. You do <span className="underline decoration-[#CCFF00] font-bold">not</span> need advanced prior skills or pre-existing projects to join. EDC is where you <span className="text-white font-bold">learn by doing</span> — working on real initiatives, high-impact events, and real-world products together with seniors and mentors.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex-shrink-0 self-stretch md:self-auto flex items-center">
+                    <div className="px-4 py-2.5 rounded-2xl bg-white/10 border border-white/20 text-center w-full md:w-auto">
+                      <p className="text-[#CCFF00] text-[10px] font-mono font-bold uppercase tracking-wider">What We Value Most</p>
+                      <p className="text-white text-xs sm:text-sm font-black mt-0.5">Curiosity • Willingness to Learn • Drive</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ════════════════════════════════════════════════════════
+           2. ROUND STRUCTURE & GUIDELINES
            ════════════════════════════════════════════════════════ */}
         <section
           id="recruitment-overview"
@@ -594,12 +843,12 @@ export default function Recruitment2026() {
           <div className="absolute inset-0 rct-grid-bg opacity-20 pointer-events-none" />
           <div className="max-w-6xl mx-auto relative z-10">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer} className="text-center mb-16">
-              <SectionLabel>Recruitment Process</SectionLabel>
+              <SectionLabel>Round Structure & Guidelines</SectionLabel>
               <motion.h2 variants={fadeInUp} className="text-3xl sm:text-5xl font-black text-white mt-3">
-                Two Parallel <span className="rct-subtitle">Pipelines</span>
+                Round Structure & <span className="rct-subtitle">Guidelines</span>
               </motion.h2>
               <motion.p variants={fadeInUp} className="text-white/75 mt-4 max-w-2xl mx-auto text-base sm:text-lg">
-                Conducted separately for 1st-year and 2nd-year students. Same goal, tailored process.
+                Structured process conducted separately for 1st-year and 2nd-year applicants.
               </motion.p>
             </motion.div>
 
@@ -617,7 +866,7 @@ export default function Recruitment2026() {
                         : 'text-white/70 hover:text-white'
                     )}
                   >
-                    {yr} Year
+                    {yr === '1st' ? 'First Year' : 'Second Year'}
                   </button>
                 ))}
               </div>
@@ -634,13 +883,15 @@ export default function Recruitment2026() {
                 className="max-w-2xl mx-auto"
               >
                 {/* Flow Indicator */}
-                <div className="flex items-center justify-center gap-1 sm:gap-2 flex-wrap mb-12 px-2">
+                <div className="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap mb-12 px-2">
                   {(activeTab === '1st'
-                    ? ['Registration', 'Aptitude', 'Task', 'GD', 'PI', 'Selection']
-                    : ['Registration', 'Resume', 'Task', 'GD', 'PI', 'Selection']
+                    ? ['Registration', 'Round 1: Aptitude', 'Round 2: Task', 'Round 3: GD + PI']
+                    : ['Registration', 'Round 1: Resume Shortlisting', 'Round 2: Task', 'Round 3: GD + PI']
                   ).map((step, i, arr) => (
                     <React.Fragment key={i}>
-                      <span className="text-[10px] sm:text-xs font-black text-[#CCFF00] uppercase tracking-wider bg-white/15 px-3 py-1.5 rounded-full border border-white/25 whitespace-nowrap shadow-sm">{step}</span>
+                      <span className="text-[10px] sm:text-xs font-black text-[#CCFF00] uppercase tracking-wider bg-white/15 px-3.5 py-1.5 rounded-full border border-white/25 whitespace-nowrap shadow-sm">
+                        {step}
+                      </span>
                       {i < arr.length - 1 && <ChevronRight className="size-3 sm:size-4 text-white/50 flex-shrink-0" />}
                     </React.Fragment>
                   ))}
@@ -654,21 +905,59 @@ export default function Recruitment2026() {
                   <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-[radial-gradient(circle,rgba(0,56,255,0.07)_0%,transparent_70%)] blur-2xl pointer-events-none" />
                   {activeTab === '1st' ? (
                     <>
-                      <PipelineStep number="01" title="Registration" content="Online registration and team preference." />
-                      <PipelineStep number="02" title="Aptitude" content="Screening round to manage high registration volume and shortlist active/interested candidates." />
-                      <PipelineStep number="03" title="Task Round" content="Team-specific online task to evaluate domain skills." />
-                      <PipelineStep number="04" title="Group Discussion" content="Offline group discussion to assess communication, teamwork, reasoning, and participation." />
-                      <PipelineStep number="05" title="Personal Interview" content="Two components: Team-Specific PI and HR/EDC PI." />
-                      <PipelineStep number="06" title="Final Selection" content="Based on overall performance: Aptitude + Task + GD + Team PI + HR/EDC PI." isLast />
+                      <PipelineStep
+                        number="00"
+                        stageBadge="Application Stage"
+                        title="REGISTRATION"
+                        content="Fill out the registration form."
+                      />
+                      <PipelineStep
+                        number="01"
+                        stageBadge="Round 1"
+                        title="ROUND 1 — APTITUDE"
+                        content="Basic assessment of logical thinking and problem-solving."
+                      />
+                      <PipelineStep
+                        number="02"
+                        stageBadge="Round 2"
+                        title="ROUND 2 — TASK"
+                        content="Complete a team-specific task to showcase creativity, initiative, and practical thinking."
+                      />
+                      <PipelineStep
+                        number="03"
+                        stageBadge="Round 3"
+                        title="ROUND 3 — GD + PI"
+                        content="Demonstrate communication, confidence, teamwork, and willingness to contribute."
+                        isLast
+                      />
                     </>
                   ) : (
                     <>
-                      <PipelineStep number="01" title="Registration" content="Online registration with resume and relevant details." />
-                      <PipelineStep number="02" title="Resume Shortlisting" content="Candidates shortlisted based on relevant skills, experience, projects, achievements, and involvement." />
-                      <PipelineStep number="03" title="Task Round" content="Team-specific online task." />
-                      <PipelineStep number="04" title="Group Discussion" content="Offline group discussion." />
-                      <PipelineStep number="05" title="Personal Interview" content="Team-Specific PI + HR/EDC PI." />
-                      <PipelineStep number="06" title="Final Selection" content="Based on overall performance: Resume + Task + GD + Team PI + HR/EDC PI." isLast />
+                      <PipelineStep
+                        number="00"
+                        stageBadge="Application Stage"
+                        title="REGISTRATION"
+                        content="Submit the registration form and required details."
+                      />
+                      <PipelineStep
+                        number="01"
+                        stageBadge="Round 1"
+                        title="ROUND 1 — RESUME SHORTLISTING"
+                        content="Applications reviewed based on experience, projects, interests, and potential."
+                      />
+                      <PipelineStep
+                        number="02"
+                        stageBadge="Round 2"
+                        title="ROUND 2 — TASK"
+                        content="Showcase your skills, creativity, and ability to turn ideas into action."
+                      />
+                      <PipelineStep
+                        number="03"
+                        stageBadge="Round 3"
+                        title="ROUND 3 — GD + PI"
+                        content="Demonstrate communication, role suitability, teamwork, and commitment."
+                        isLast
+                      />
                     </>
                   )}
                 </div>
@@ -728,7 +1017,7 @@ export default function Recruitment2026() {
            4. SCROLL-DRIVEN TIMELINE
            ════════════════════════════════════════════════════════ */}
         <div id="recruitment-timeline">
-          <HugeTimeline />
+          <HugeTimeline activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
 
         {/* ════════════════════════════════════════════════════════
@@ -760,7 +1049,7 @@ export default function Recruitment2026() {
                       <Zap className="size-7 text-[#CCFF00]" />
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono font-black text-[#0038FF] uppercase tracking-widest bg-[#0038FF]/10 px-2.5 py-1 rounded-md">Stage 01</span>
+                      <span className="text-[10px] font-mono font-black text-[#0038FF] uppercase tracking-widest bg-[#0038FF]/10 px-2.5 py-1 rounded-md">Round 02</span>
                       <span className="text-[10px] uppercase tracking-widest bg-[#CCFF00] text-black px-3 py-1 rounded-full font-black shadow-xs">Online</span>
                     </div>
                   </div>
@@ -809,7 +1098,7 @@ export default function Recruitment2026() {
                       <Users className="size-7 text-[#CCFF00]" />
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono font-black text-[#0038FF] uppercase tracking-widest bg-[#0038FF]/10 px-2.5 py-1 rounded-md">Stage 02</span>
+                      <span className="text-[10px] font-mono font-black text-[#0038FF] uppercase tracking-widest bg-[#0038FF]/10 px-2.5 py-1 rounded-md">Round 03</span>
                       <span className="text-[10px] uppercase tracking-widest bg-[#0038FF] text-white px-3 py-1 rounded-full font-black shadow-xs">Offline</span>
                     </div>
                   </div>
@@ -858,7 +1147,7 @@ export default function Recruitment2026() {
                       <Eye className="size-7 text-[#CCFF00]" />
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono font-black text-[#0038FF] uppercase tracking-widest bg-[#0038FF]/10 px-2.5 py-1 rounded-md">Stage 03</span>
+                      <span className="text-[10px] font-mono font-black text-[#0038FF] uppercase tracking-widest bg-[#0038FF]/10 px-2.5 py-1 rounded-md">Round 03</span>
                       <span className="text-[10px] uppercase tracking-widest bg-[#CCFF00] text-black px-3 py-1 rounded-full font-black shadow-xs">Offline</span>
                     </div>
                   </div>
@@ -919,9 +1208,9 @@ export default function Recruitment2026() {
                 <div className="rct-card rounded-3xl p-7 sm:p-9 text-center shadow-xl relative overflow-hidden group">
                   <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0038FF] via-[#CCFF00] to-[#0038FF]" />
                   <div className="absolute -top-10 -right-10 w-44 h-44 bg-[radial-gradient(circle,rgba(204,255,0,0.18)_0%,transparent_70%)] blur-2xl pointer-events-none" />
-                  <span className="text-[#0038FF] text-xs font-black uppercase tracking-[0.25em] block mb-5" style={{ fontFamily: 'IBM Plex Mono, monospace' }}>// 1st Year Formula</span>
+                  <span className="text-[#0038FF] text-xs font-black uppercase tracking-[0.25em] block mb-5" style={{ fontFamily: 'IBM Plex Mono, monospace' }}>// 1st Year Evaluation</span>
                   <div className="flex items-center justify-center gap-2 flex-wrap">
-                    {['Aptitude', 'Task', 'GD', 'Team PI', 'HR/EDC PI'].map((item, i, arr) => (
+                    {['R1: Aptitude', 'R2: Task', 'R3: GD + PI'].map((item, i, arr) => (
                       <React.Fragment key={i}>
                         <span className="text-neutral-900 font-bold text-sm sm:text-base bg-white shadow-xs px-3.5 py-2 rounded-xl border border-neutral-200/90 hover:border-[#0038FF]/40 transition-colors">{item}</span>
                         {i < arr.length - 1 && <span className="text-[#0038FF] font-black text-lg">+</span>}
@@ -932,9 +1221,9 @@ export default function Recruitment2026() {
                 <div className="rct-card rounded-3xl p-7 sm:p-9 text-center shadow-xl relative overflow-hidden group">
                   <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0038FF] via-[#CCFF00] to-[#0038FF]" />
                   <div className="absolute -top-10 -right-10 w-44 h-44 bg-[radial-gradient(circle,rgba(204,255,0,0.18)_0%,transparent_70%)] blur-2xl pointer-events-none" />
-                  <span className="text-[#0038FF] text-xs font-black uppercase tracking-[0.25em] block mb-5" style={{ fontFamily: 'IBM Plex Mono, monospace' }}>// 2nd Year Formula</span>
+                  <span className="text-[#0038FF] text-xs font-black uppercase tracking-[0.25em] block mb-5" style={{ fontFamily: 'IBM Plex Mono, monospace' }}>// 2nd Year Evaluation</span>
                   <div className="flex items-center justify-center gap-2 flex-wrap">
-                    {['Resume', 'Task', 'GD', 'Team PI', 'HR/EDC PI'].map((item, i, arr) => (
+                    {['R1: Resume', 'R2: Task', 'R3: GD + PI'].map((item, i, arr) => (
                       <React.Fragment key={i}>
                         <span className="text-neutral-900 font-bold text-sm sm:text-base bg-white shadow-xs px-3.5 py-2 rounded-xl border border-neutral-200/90 hover:border-[#0038FF]/40 transition-colors">{item}</span>
                         {i < arr.length - 1 && <span className="text-[#0038FF] font-black text-lg">+</span>}
