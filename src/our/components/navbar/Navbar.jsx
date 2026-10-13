@@ -6,8 +6,7 @@ import { useScroll } from '@/components/use-scroll';
 import Logo from './Logo';
 
 // Icons
-import { FiHome, FiUsers, FiCalendar, FiInfo } from 'react-icons/fi';
-
+import { FiHome, FiUsers, FiCalendar, FiInfo, FiBookOpen } from 'react-icons/fi';
 
 export default function Navbar() {
 	const scrolled = useScroll(10);
@@ -22,6 +21,7 @@ export default function Navbar() {
 		{ label: 'Team', href: '/team', icon: FiUsers },
 		{ label: 'Events', href: '/events', icon: FiCalendar },
 		{ label: 'Recruitment', href: '/recruitment-2026' },
+		{ label: 'Blog', href: '/blog', icon: FiBookOpen },
 		{ label: 'About', href: '/about', icon: FiInfo },
 		{ label: 'Live', href: '/live', icon: null, isLive: true },
 	];
@@ -65,7 +65,10 @@ export default function Navbar() {
 					{/* Desktop Center Links (Absolutely Centered) */}
 					<div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 xl:gap-3 z-10 w-max">
 						{links.map((link, i) => {
-							const isActive = location.pathname === link.href;
+							const isActive =
+							link.href === '/blog'
+							    ? location.pathname.startsWith('/blog')
+							    : location.pathname === link.href;
 
 							if (link.isLive) {
 								return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FiHome, FiUsers, FiCalendar, FiInfo, FiZap, FiRadio, FiUserPlus } from 'react-icons/fi';
+import { FiHome, FiUsers, FiCalendar, FiInfo, FiRadio, FiUserPlus, FiBookOpen } from 'react-icons/fi';
 import './BottomNavbar.css';
 
 /**
@@ -15,6 +15,7 @@ const navItems = [
   { label: 'Team', href: '/team', icon: FiUsers },
   { label: 'Events', href: '/events', icon: FiCalendar },
   { label: 'Recruitment', href: '/recruitment-2026', icon: FiUserPlus, isRecruitment: true },
+  { label: 'Blog', href: '/blog', icon: FiBookOpen },
   { label: 'About', href: '/about', icon: FiInfo },
   { label: 'Live', href: '/live', icon: FiRadio, live: true },
 ];

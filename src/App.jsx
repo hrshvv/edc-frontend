@@ -13,6 +13,8 @@ import ScrollToTop from './components/ScrollToTop';
 import Orientation from './our/views/Orientation';
 import Eureka2026 from './our/views/Eureka2026';
 import Recruitment2026 from './our/views/Recruitment2026';
+import Blog from './our/views/Blog';
+import BlogPost from './our/views/BlogPost';
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
           <Route path="/live" element={<Live />} />
           <Route path="/founders-pit-event" element={<FP_EventFlow />} />
           <Route path="/about" element={<About />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/orientation" element={<Orientation />} />
           <Route path="/eureka-2026" element={<Eureka2026 />} />
           <Route path="/recruitment-2026" element={<Recruitment2026 />} />

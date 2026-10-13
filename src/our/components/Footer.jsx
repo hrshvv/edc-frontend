@@ -178,6 +178,14 @@ const Footer = () => {
                   <span className="group-hover:font-medium">About Us</span>
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/blog"
+                  className={`${bodyTextClass} ${hoverTextClass} transition-all duration-300 text-base block py-2 hover:translate-x-2 group`}
+                >
+                  <span className="group-hover:font-medium">Blog</span>
+                </Link>
+              </li>
             </ul>
           </div>
 
